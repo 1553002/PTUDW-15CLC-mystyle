@@ -455,6 +455,26 @@ div.required .control-label:not(span):before, td.required:before {
 .tab-pane .table-responsive{
 
 }
+
+/*---------------------------------
+        Product-image
+-----------------------------------*/
+#i-product-images img{
+    width: 100%;
+}
+
+#i-product-images .btn{
+    width: 100%;
+}
+#i-product-images .col-md-3{
+    border-right: 1px solid #ededed;
+}
+
+#i-product-images .col-md-3:last-child{
+    border-right: none;
+}
+
+
 /*---------------------------------
         Logo Styles
 -----------------------------------*/

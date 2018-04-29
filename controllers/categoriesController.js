@@ -3,8 +3,7 @@ var controller = {};
 var models = require('../models');
 
 controller.getAll = function (callback) {
-    models.Category
-        .findAll()
+    models.Category.findAll()
         .then(function (categories) {
             callback(categories);
         })

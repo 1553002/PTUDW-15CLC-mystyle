@@ -3,9 +3,11 @@ var router = express.Router();
 
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var models = require('../models');
+var db = require('../models');
 var breadcrumbs = require('express-breadcrumbs');
 var productsController = require('../controllers/productsController');
+var categoriesController = require('../controllers/categoriesController');
+var suppliersController = require('../controllers/suppliersController');
 
 router.use(breadcrumbs.init());
 // Set Breadcrumbs home information 
@@ -62,11 +64,24 @@ router.get('/sanpham', (req, res)=>{
     });
 })
 
+
+//1553002
+//Note: Nho gọi hàm lồng nhau, bởi nó dùng callback nên ko thể gọi hàm này xong mới tới hàm kia
 router.get('/sanpham/them', (req, res)=>{
     req.breadcrumbs('Tất cả sản phẩm', '/admin/sanpham');
-    res.render('them-san-pham', { 
-        breadcrumbs: req.breadcrumbs(),
-        title: 'Chi tiết sản phẩm'
+
+    //Lay toan bo danh muc san pham
+    categoriesController.getAll((categories)=>{
+  
+        //Lay toan bo danh sach nha cung cap
+        suppliersController.getAll((suppliers)=>{
+            res.render('them-san-pham', { 
+                breadcrumbs: req.breadcrumbs(),
+                title: 'Chi tiết sản phẩm',
+                categories: categories,
+                suppliers : suppliers
+            });
+        })
     });
 });
 

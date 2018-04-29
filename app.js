@@ -16,6 +16,7 @@ var expressValidator = require('express-validator'); //Dung de kiem tra dieu kie
 var paginateHelper = require('express-handlebars-paginate');
 var models = require('./models');
 var errorHandler = require('express-error-handler');
+var http = require("http");
 
 var app = express();
 
@@ -99,11 +100,11 @@ var adminRouter = require("./routes/admin");
 app.use("/admin", adminRouter);
 
 
-models.sequelize.sync().then(function() {
-  http.createServer(app).listen(app.get('port'), function(){
-    console.log('Express server listening on port ' + app.get('port'));
-  });
-});
+// models.sequelize.sync().then(function() {
+//   http.createServer(app).listen(app.get('port'), function(){
+//     console.log('Express server listening on port ' + app.get('port'));
+//   });
+// });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
