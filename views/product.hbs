@@ -31,7 +31,7 @@
             <ul class="module-body">
                 {{#each categories}}
                 <li>
-                    <a href="/product/{{id}}">{{CategoryName}}</a>
+                    <a href="/product/{{id}}">{{categoryName}}</a>
                 </li>
                 {{/each}}
             </ul>
@@ -43,7 +43,7 @@
     <div class="pannel right-pannel product-main" style="width: 850px;">
         <div class="module-heading">
             <h2 class="module-title">
-                {{category.CategoryName}}
+                {{category.categoryName}}
             </h2>
         </div>
         <div class="module-body" onload="">
@@ -53,17 +53,17 @@
                     <div class="product-wrapper">
                         <div class="product-img">
                             <a class="img-change" href="/product/ao-thun-co-tron/{{id}}">
-                                <img src={{ProductImage1}} data-alt-src={{ProductImage3}} class="bell mx-auto" col="g">
+                                <img src={{image1}} data-alt-src={{image3}} class="bell mx-auto" col="g">
                                 {{!-- <img src={{ProductImage2}} class="bell" style="display:none" col="b"> --}}
-                                <span class="product-badge sale">{{ProductDiscount}}%</span>
+                                <span class="product-badge sale">{{discount}}%</span>
                             </a>
                         </div>
                         <div class="product-info">
-                            <a class="product-name" href="/product">{{ProductName}}</a>
+                            <a class="product-name" href="/product">{{name}}</a>
                             <div class="product-price">
-                                <span class="money money-sale">{{ProductPrice}}</span>
+                                <span class="money money-sale">{{price}}</span>
                                 <span class="money-text">còn</span>
-                                <span class="money">{{ProductDiscountPrice}}</span>
+                                <span class="money">{{discountPrice}}</span>
                             </div>
                         </div>
                     </div>

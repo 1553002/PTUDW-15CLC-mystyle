@@ -26,25 +26,25 @@
             <div class="gallary-wrap">
                 <div class="thumbnail-main">
                     <div class="thumbnail-item">
-                        <img class="" src={{product.ProductImage1}}>
+                        <img class="" src={{product.image1}}>
                     </div>
                     <div class="thumbnail-item">
-                        <img class="" src={{product.ProductImage3}}>
+                        <img class="" src={{product.image3}}>
                     </div>
                     <div class="thumbnail-item">
-                        <img class="" src={{product.ProductImage2}}>
+                        <img class="" src={{product.image2}}>
                     </div>
                     <div class="thumbnail-item">
-                        <img class="" src={{product.ProductImage4}}>
+                        <img class="" src={{product.image4}}>
                     </div>
                 </div>
                 <div class="preview-main">
-                    <img src={{product.ProductImage1}}>
+                    <img src={{product.image1}}>
                 </div>
             </div>
             <div class="detail-wrap">
                 <div class="detail-header">
-                    <h1 class="i-name">{{product.ProductName}}</h1>
+                    <h1 class="i-name">{{product.name}}</h1>
                 </div>
                 <div class="i-price-area">
                     <div class="i-price-main">
@@ -52,9 +52,9 @@
                             <div class="i-del-price">
                                 <span class="i-detail-title">Giá: </span>
                                 <del class="i-del-content">
-                                    <span id="i-price">{{product.ProductPrice}}</span>
+                                    <span id="i-price">{{product.price}}</span>
                                     <span id="i-symbol">VNĐ</span>
-                                    <span id="i-unit">/{{product.ProductUnit}}</span>
+                                    <span id="i-unit">/{{product.unit}}</span>
                                 </del>
                             </div>
                         </div>
@@ -63,12 +63,12 @@
                             <span class="i-detail-title">Giá hiện tại: </span>
                             <div class="i-special-price">
                                 <span id="i-price">
-                                    <strong>{{product.ProductDiscountPrice}}</strong>
+                                    <strong>{{product.discountPrice}}</strong>
                                 </span>
                                 <span id="i-symbol">
                                     <strong>₫ </strong>
                                 </span>
-                                <span id="i-unit">/ {{product.ProductUnit}}</span>
+                                <span id="i-unit">/ {{product.unit}}</span>
                             </div>
                         </div>
 
@@ -97,16 +97,6 @@
                                 </dd>
                             </dl>
                             <dl class="i-detail-wrapper">
-                                <dt class="i-detail-title">Màu áo: </dt>
-                                <dd class="i-detail-main">
-                                    <ul class="i-select-color" data-type="select">
-                                        {{#each product.ProductDetails}}
-                                        <li><div class="square-color" style="background-color:{{color}};"></div></li>
-                                        {{/each}}
-                                    </ul>
-                                </dd>
-                            </dl>
-                            <dl class="i-detail-wrapper">
                                 <dt class="i-detail-title">Số lượng: </dt>
                                 <div class="number-input">
                                     <div class="input-group">
@@ -121,8 +111,8 @@
                                 </div>
                                 <div class="availability">
                                     <span>(Có sẵn: </span>
-                                    <span id="availability-number">{{product.ProductStock}}</span>
-                                    <span>{{product.ProductUnit}})</span>
+                                    <span id="availability-number"></span>
+                                    <span>{{product.unit}})</span>
                                 </div>
                             </dl>
                         </div>
@@ -157,31 +147,19 @@
                                 <td rel="brand">Thương hiệu</td>
                                 <td class="last">
                                     {{!-- <a href="">Pioneer Camp</a> --}}
-                                    {{product.Supplier.CompanyName}}
+                                    {{product.Supplier.companyName}}
                                 </td>
                             </tr>
                             <tr>
                                 <td rel="origin">Sản xuất tại</td>
                                 <td class="last">
-                                    {{product.Supplier.madein}}
+                                    {{product.Supplier.madeIn}}
                                 </td>
                             </tr>
                             <tr>
                                 <td rel="item_model_number">Model</td>
                                 <td class="last">
                                     {{product.id}}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td rel="chat_lieu">Chất liệu</td>
-                                <td class="last">
-                                    {{product.fabric}}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td rel="hd_baoquan_giatui">Hướng dẫn bảo quản/ Giặt ủi</td>
-                                <td class="last">
-                                    <pre>{{product.ProductNote}}</pre>
                                 </td>
                             </tr>
                             <tr>

@@ -21,7 +21,7 @@ controller.getProductDetailById = function (id, callback) {
         where: {
             id : id
         },
-        include: [models.ProductDetail, models.Supplier]
+        include: [models.Supplier]
         
     })
     .then(function (product) {
