@@ -111,11 +111,11 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(user, done) {
-    // models.Customer.findById(email).then(function(user){
-	// 	done(null, user.name);
-	// }).catch(function (err){
-	// 	console.log(err);
-	// })
+    models.Customer.findById(email).then(function(user){
+		done(null, user.name);
+	}).catch(function (err){
+		console.log(err);
+	})
 	done(null, user);
 });
 

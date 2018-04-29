@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     id: {
       allowNull: false,
       primaryKey: true,
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      defaultValue: sequelize.literal('random_string(5)')
     },
     name: DataTypes.STRING,
     price: DataTypes.STRING,
@@ -15,9 +16,13 @@ module.exports = (sequelize, DataTypes) => {
     unit: DataTypes.STRING,
     available: DataTypes.BOOLEAN,
     discountPrice: DataTypes.STRING,
-    discount: DataTypes.FLOAT,
+    discount: DataTypes.INTEGER,
     discountAvailable: DataTypes.BOOLEAN,
     saleoffExpDate: DataTypes.DATE,
+    s: DataTypes.INTEGER,
+    m: DataTypes.INTEGER,
+    l: DataTypes.INTEGER,
+    xl: DataTypes.INTEGER,
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE,

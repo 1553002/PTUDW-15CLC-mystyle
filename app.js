@@ -14,6 +14,7 @@ var passport = require('passport'); //Ho tro dang nhap
 var breadcrumbs = require('express-breadcrumbs');
 var expressValidator = require('express-validator'); //Dung de kiem tra dieu kien
 var paginateHelper = require('express-handlebars-paginate');
+var models = require('./models');
 
 var app = express();
 
@@ -41,10 +42,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // app.use('/', indexRouter);
 // app.use('/users', usersRouter);
-
-
-
-
 
 app.use(breadcrumbs.init());
 // Set Breadcrumbs home information 
@@ -112,6 +109,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
 
 module.exports = app;
