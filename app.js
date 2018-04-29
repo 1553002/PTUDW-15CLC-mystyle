@@ -7,6 +7,12 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+//1553002
+var session = require('express-session');
+var passport = require('passport');
+var breadcrumbs = require('express-breadcrumbs');
+
+
 var app = express();
 
 // view engine setup
