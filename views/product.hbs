@@ -1,0 +1,77 @@
+<head>
+    <link rel="stylesheet" href="/my_css/item-style.css">
+</head>
+<div class="breadcrumb-area">
+    <div class="container" style="padding: 0">
+        <ul class="breadcrumb">
+            {{#each breadcrumbs}}
+                {{#unless @last}}
+                    <li>
+                        <a href={{this.url}}>{{name}}</a>
+                    </li>
+                {{else}}
+                    <li>
+                         <a href={{this.url}}>{{name}}</a>
+                    </li>
+                {{/unless}}
+            {{/each}}
+        </ul>
+    </div>
+</div>
+
+<div class="container">
+    <div class="pannel left-pannel" style="width: 253px">
+        <div class="pannel-module">
+            <div class="module-heading">
+                <h4 class="module-title">
+                    <a>Danh mục sản phẩm</a>
+                </h4>
+            </div>
+
+            <ul class="module-body">
+                {{#each categories}}
+                <li>
+                    <a href="/product/{{id}}">{{CategoryName}}</a>
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+
+
+    </div>
+
+    <div class="pannel right-pannel product-main" style="width: 850px;">
+        <div class="module-heading">
+            <h2 class="module-title">
+                {{category.CategoryName}}
+            </h2>
+        </div>
+        <div class="module-body" onload="">
+            <div class="row clearfix">
+                {{#each category.Products}}
+                <div class="product-item col-md-4">
+                    <div class="product-wrapper">
+                        <div class="product-img">
+                            <a class="img-change" href="/product/ao-thun-co-tron/{{id}}">
+                                <img src={{ProductImage1}} data-alt-src={{ProductImage3}} class="bell mx-auto" col="g">
+                                {{!-- <img src={{ProductImage2}} class="bell" style="display:none" col="b"> --}}
+                                <span class="product-badge sale">{{ProductDiscount}}%</span>
+                            </a>
+                        </div>
+                        <div class="product-info">
+                            <a class="product-name" href="/product">{{ProductName}}</a>
+                            <div class="product-price">
+                                <span class="money money-sale">{{ProductPrice}}</span>
+                                <span class="money-text">còn</span>
+                                <span class="money">{{ProductDiscountPrice}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+
+            </div>
+        </div>
+
+    </div>
+</div>

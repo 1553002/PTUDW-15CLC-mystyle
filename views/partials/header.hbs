@@ -1,0 +1,152 @@
+<div id="top-header" class="d-none d-md-flex">
+    <div class="container">
+        <div class="row no-gutters">
+            <div class="col-md-5">
+                <a href="">Giảm giá từ 5%-70% cho hơn 1,50,000 mẫu áo</a>
+            </div>
+            <div class="col-md-7 right-top-header">
+                <a href="">Hỗ trợ</a>
+                <span>|</span>
+                <a href="">Theo dõi đơn hàng</a>
+                <span>|</span>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<div id="main-header" style="position: relative;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-10">
+                <nav class="navbar navbar-expand-md navbar-light">
+
+                    <a class="navbar-brand top-head-logo" href="#"></a>
+                    <button class="navbar-toggler" type="button" onclick="openNav()">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="d-none d-md-flex">
+                        <ul class="navbar-nav mr-auto upper">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/">Trang chủ
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/product">Sản phẩm</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">mẫu áo</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/design">Tự thiết kế</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+
+
+
+            <!--Tạo dialog cho giỏ hàng-->
+            <div id="white-background">
+            </div>
+            <div id="dlgbox">
+                <div id="dlg-header">Giỏ hàng
+                    <span class="close" style="color:white;" onclick="dlgLogin()">&times;</span>
+                </div>
+                <div id="dlg-body">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Tên sản phẩm</th>
+                                <th>Số lượng</th>
+                                <th>Thành tiền</th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <td style="background-color: white;">Áo thun Gucci</td>
+                            <td>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-secondary btn-touchspin-down" type="button">-</button>
+                                    </div>
+                                    <input type="tel" min="1" value="1" id="quantity" class="form-control" name="quantity">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary btn-touchspin-up" type="button">+</button>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>2100000</td>
+                        </tr>
+
+                    </table>
+                </div>
+                <div id="dlg-footer">
+                    <button onclick="dlgLogin()">Thanh toán</button>
+                </div>
+            </div>
+
+
+            <div class="col-md-4 col-2 d-flex align-items-center justify-content-end">
+                <div class="top-head-user float-right">
+                    <div class="shopping-cart-wrapper">
+                        <a onclick="showDialog()" id="bag-shopping-cart" title="View bag">
+                            <span class="fas fa-shopping-bag"></span>
+                            <span id="cart-count">0</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<nav id="sidebar">
+    <div class="sidebar-header">
+        <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</div>
+    <div class="container">
+        <ul>
+            <li>
+                <a href="index.html">Trang chủ</a>
+            </li>
+            <li>
+                <a href="#">Mẫu áo</a>
+            </li>
+            <li>
+                <a href="design.html">Tự thiết kế</a>
+            </li>
+            <li>
+                <a href="design.html">Theo dõi đơn hàng</a>
+            </li>
+            <li>
+                <a href="design.html">Hỗ trợ</a>
+            </li>
+        </ul>
+        <div class="user-info">
+            <div class="js-header-customer-info">
+                <span class="user-account "></span>
+                <div class="user-panel">
+                    <h3 class="is-mobile mobile-user-title">Đăng nhập / Đăng ký</h3>
+                    <div class="user-links">
+                        <a class="user-link-item" href="https://www.boohoo.com/myaccount" title="Log In">Đăng nhập</a>
+                        <a class="user-link-item" href="register.html" title="Register">Đăng ký</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+{{#if user}}
+<script>
+    $(".right-top-header").append("<div class='user-profile'><a class='user-name'>chào {{user}} </a>" +
+        "<div class='box'><ul class='user-ajax-customer'><li><a href='' title='Thông tin tài khoản' rel='nofollow'>Thông tin tài khoản</a></li><li><a href='' title='Đơn hàng của tôi' rel='nofollow'>Đơn hàng của tôi</a></li>"
+        + "<li><a href='/customer/account/logout' title='Đăng xuất' rel='nofollow'>Đăng xuất</a></li></ul></div></div>");
+</script> {{else}}
+<script>
+    $(".right-top-header").append(
+        "<a href='/customer/account/login'>Đăng nhập </a><span>|</span><a href='/customer/account/login'> Đăng ký </a>"
+    )
+</script> {{/if}}

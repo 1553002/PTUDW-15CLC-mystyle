@@ -1,0 +1,219 @@
+<head>
+    <link rel="stylesheet" href="/my_css/register.css">
+</head>
+
+{{#if anchor}}
+    <script>
+        window.onload = window.location.hash = '{{anchor}}';
+    </script>
+{{/if}}
+<div id="main" role="main" class="container clearfix">
+    <div class="container">
+        <div class="row panel">
+            <div class="content-left col-md-4">
+
+                <h2>Tạo tài khoản</h2>
+                <p>Tạo tài khoản để theo dõi đơn hàng, lưu
+                    <br> danh sách sản phẩm yêu thích, nhận
+                    <br>nhiều ưu đãi hấp dẫn.</p>
+
+            </div>
+            <div class="content-right col-md-8">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Đăng nhập</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Tạo tài khoản</a>
+                    </li>
+                </ul>
+                
+                {{!-- Dang nhap --}}
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="create-account-wrapper">
+                            <div class="form-wrapper">
+                                <form action="/customer/login" method="post" id="login-form">
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label" for="email">Email/ SĐT:</label>
+                                        <div class="col-sm-10">
+                                            <input type="email" class="form-control" placeholder="Nhập Email hoặc số điện thoại" id="email" name="email">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label" for="email">Mật khẩu:</label>
+                                        <div class="col-sm-10">
+                                            <input type="password" class="form-control" placeholder="Mật khẩu bao gồm từ 8 đến 32 ký tự" id="password"  name="password">
+                                        </div>
+                                    </div>
+                                    <div class="form-row form-row-button">
+                                        <button type="submit" value="Login" name="dwfrm_profile_confirm">
+                                            Đăng nhập
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{!-- Tao tai khoan --}}
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        {{!-- Neu su dung (novalidate="novalidate") trong tag form thi required mat gia tri --}}
+                        <form method="post" id="register-form" class="js-register-form" action="/customer/register">
+                            <h3 class="section-header">Thông tin tài khoản</h3>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label" for="full-name">Tên</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" placeholder="Họ tên" id="full-name" name="name" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label" for="gender">Giới tính</label>
+                                <div class="col-sm-10">
+                                    <select class="custom-select my-1 mr-sm-2" id="gender" name="gender">
+                                        <option selected>Chọn...</option>
+                                        <option>Nam</option>
+                                        <option>Nữ</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">Ngày sinh</label>
+                                <div class="col-sm-10">
+                                    <div class="form-row align-items-center">
+                                        <div class="col-md-4">
+                                            <select class="custom-select my-1 mr-sm-2" id="day" name="day"></select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <select class="custom-select my-1 mr-sm-2" id="month" name="month"></select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <select class="custom-select my-1 mr-sm-2" id="year" name="year"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3 class="section-header">Thông tin đăng nhập</h3>
+                            <fieldset>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" for="email">Email/ SĐT:</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" placeholder="Vui lòng nhập email của bạn" id="email" name="email" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" for="password">Mật khẩu:</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" placeholder="Mật khẩu bao gồm từ 8 đến 32 ký tự" id="password" name="password"
+                                            required>
+                                    </div>
+                                </div>
+                                <span id="result"></span>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" for="password-again">Nhập lại mật khẩu:</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" placeholder="Vui lòng nhập lại mật khảu" id="password-again" name="cfm_pwd" required>
+                                    </div>
+                                </div>
+                                <span class="form-divider"></span>
+
+                                <div class="form-row isemailsubscribed label-inline form-indent">
+                                    <div class="field-wrapper input-checkbox-wrapper checkbox-is-checked">
+                                        <input class="input-checkbox isemailsubscribed" type="checkbox" checked="checked" id="dwfrm_profile_customer_isemailsubscribed"
+                                            name="dwfrm_profile_customer_isemailsubscribed" value="true">
+                                    </div>
+                                    <label for="dwfrm_profile_customer_isemailsubscribed">
+                                        <span class="js-label-value">Nhận thông tin và chương trình khuyến mãi của MyStyle thông qua email.</span>
+                                    </label>
+                                    <div class="form-caption"></div>
+                                </div>
+
+                                <div class="privacy-agreement">
+                                    <span>Khi bạn nhấn Đăng ký, bạn đã đồng ý thực hiện mọi giao dịch mua bán theo</span>
+                                    <a href="" target="_blank" class="privacy-policy" title="Terms &amp; Conditions">điều kiện sử dụng và chính sách của MyStyle.</a>
+                                </div>
+
+                                <div class="form-row form-row-button">
+                                    <button type="submit" value="Register" name="dwfrm_profile_confirm">
+                                        Đăng ký
+                                    </button>
+                                </div>
+                            </fieldset>
+
+                        </form>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer-distributed">
+    <div class="footer-left">
+        <a class="top-head-logo" style="background-image: url('public/image/logo_dark.svg');"></a>
+
+        <p class="footer-links">
+            <a href="#">Trang chủ</a>
+            ·
+            <a href="#">Blog</a>
+            ·
+            <a href="#">Bảng giá</a>
+            ·
+            <a href="#">Hỗ trợ</a>
+            ·
+            <a href="#">Liên hệ</a>
+        </p>
+        <p class="footer-company-name">MyStyle &copy; 2018</p>
+    </div>
+
+    <div class="footer-center">
+        <div>
+            <i class="fa fa-map-marker"></i>
+            <p>
+                <span>227 Nguyễn Văn Cừ, Q.5</span> Hồ Chí Minh, Việt Nam</p>
+        </div>
+
+        <div>
+            <i class="fa fa-phone"></i>
+            <p>+1 555 123456</p>
+        </div>
+
+        <div>
+            <i class="fa fa-envelope"></i>
+            <p>
+                <a href="mailto:support@company.com">support@company.com</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="footer-right">
+        <p class="footer-company-about">
+            <span>About the company</span>
+            Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+        </p>
+
+        <div class="footer-icons">
+            <a href="#">
+                <i class="fab fa-facebook"></i>
+            </a>
+            <a href="#">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="#">
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+    </div>
+</footer>
+
+<script type="text/javascript" src="/js/customer.js"></script>

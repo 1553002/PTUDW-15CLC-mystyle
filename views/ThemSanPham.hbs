@@ -1,0 +1,57 @@
+
+
+<head>
+
+  {{>ad_head}}
+  <link href="/my_css/sb-admin.css" rel="stylesheet">
+</head>
+
+<body class="bg-dark">
+  <div class="container">
+    <div class="card card-login mx-auto mt-5">
+      <div class="card-header">
+        <b>THÊM SẢN PHẨM</b>
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Tên sản phẩm</label>
+            <input class="form-control" id="Nhaptensp" type="email" placeholder="Nhập tên sản phẩm">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Danh mục</label> 
+            <br>
+            <select>
+              <option value="ao-thun-co-tron">Áo thun cổ tròn</option>
+              <option value="ao-thun-co-tron-tay-dai">Áo thun cổ tròn tay dài
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail1">Đơn giá</label> 
+             <input class="form-control" id="Nhapdongia" type="email" placeholder="Nhập giá tiền sản phẩm">
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail1">Số lượng</label> 
+             <input class="form-control" id="Nhapsoluong" type="email" placeholder="Nhập số lượng">
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail1">Hình ảnh minh họa</label>
+            <input type="file" name="pic" accept="image/*" style="margin: 5px;">
+            <input type="file" name="pic" accept="image/*" style="margin: 5px;">
+            <input type="file" name="pic" accept="image/*" style="margin: 5px;">
+            <input type="file" name="pic" accept="image/*" style="margin: 5px;">
+          </div>
+
+        </form>
+          <a class="btn btn-primary btn-block" href="KhoHang">Hoàn tất</a>
+        <div class="text-center">
+          <a class="d-block small" href="KhoHang"> ❮❮ Quay lại</a>
+      </div>
+    </div>
+  </div>
+</body>
+
+

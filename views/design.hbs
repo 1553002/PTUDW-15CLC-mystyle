@@ -1,0 +1,290 @@
+<head>
+    <link rel="stylesheet" href="/my_css/design_page.css">
+</head>
+
+<div id="content">
+    <div class="container-fluid">
+        <div id="tool-top" class="row">
+            <div class="tool-top-nav">
+                <a href="#">
+                    <img src="\image\icon-rotate.png">
+                    <p>Xoay </p>
+                </a>
+                <a href="#" width="80px" onclick="Zoom()">
+                    <img src="\image\icon-zoom+.png">
+                    <p>Phóng to </p>
+                </a>
+                <a href="#" onclick="Smaller()">
+                    <img src="\image\icon-zoom-.png">
+                    <p>Thu nhỏ </p>
+                </a>
+                <a href="#" onclick="ResetAll()">
+                    <img src="\image\icon-trash.png">
+                    <p>Tạo lại </p>
+                </a>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="tab nav nav-tabs">
+
+                    <a class="active" style="padding-left: 0;padding-top:10px" data-toggle="tab" href="#list-shirt">
+                        <img src="\image\icon-shirt.png">
+                        <p>Chọn áo </p>
+                    </a>
+                    <a data-toggle="tab" href="#list-text">
+                        <img src="\image\icon-text.png">
+                        <p>Thêm chữ </p>
+                    </a>
+                    <a data-toggle="tab" href="#list-image">
+                        <img src="\image\icon-image.png">
+                        <p>Thêm ảnh </p>
+                    </a>
+                    <a data-toggle="tab" href="#Upload">
+                        <img src="\image\icon-upload.png">
+                        <p>Tải ảnh </p>
+                    </a>
+                    <a data-toggle="tab" href="#Save_as_png" onclick="load_design()">
+                        <img src="\image\icon-save.png">
+                        <p>Lưu áo </p>
+                    </a>
+
+                </div>
+
+
+
+                <div class="tab-content tabcontent">
+                    <div id="tab-title">Nội dung</div>
+                    <div id="list-shirt" class="tab-pane fade show active">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="thumbnail">
+                                    <img src="https://image.ibb.co/hfJKfS/shirt_1.png" alt="NONE" style="width:120px ; height:120px" onclick="Choose_shirt(this.src)">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="thumbnail">
+
+                                    <img src="https://image.ibb.co/no6Qn7/shirt_2.png" alt="NONE" style="width:120px ; height:120px" onclick="Choose_shirt(this.src)">
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="thumbnail">
+                                    <img src="https://image.ibb.co/eVmx0S/shirt_3.png" alt="NONE" style="width:120px ; height:120px" onclick="Choose_shirt(this.src)">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="thumbnail">
+
+                                    <img src="https://image.ibb.co/cqm0n7/shirt_4.png" alt="NONE" style="width:120px ; height:120px" onclick="Choose_shirt(this.src)">
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div id="list-text" class="tab-pane fade">
+                        <form style="text-align:left" name="text_form" id="text_form" onsubmit="return addtext()">
+                            <input type="text" id="text_box" name="text_box" required placeholder="Nhập chữ vào đây">
+
+
+                            <label>Chọn kiểu chữ:</label>
+                            <select id="select" name="text_font" value="1" onChange="return fontChange();">
+                            </select>
+                            <label>Chọn màu chữ:</label>
+
+
+                            <input type='text' id="text_color" />
+                            <div style="height:40px">
+
+                            </div>
+                            <input id="submit_text" type="submit" class="inputfile" />
+                            <label for="submit_text">Thêm vào áo!</label>
+                        </form>
+                    </div>
+                    <div id="list-image" class="tab-pane fade">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="thumbnail">
+                                    <img src="https://preview.ibb.co/i3dkLS/image_1.png" alt="NONE" style="width:100px ; height:100px" onclick="Choose_Img(this.src)">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="thumbnail">
+
+                                    <img src="https://image.ibb.co/mTQRS7/image_2.png" alt="NONE" style="width:100px ; height:100px" onclick="Choose_Img(this.src)">
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="thumbnail">
+
+                                    <img src="https://image.ibb.co/k6Ft77/image_4.png" alt="NONE" style="width:100px ; height:100px" onclick="Choose_Img(this.src)">
+
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="thumbnail">
+                                    <img src="https://preview.ibb.co/dywx0S/image_3.png" alt="NONE" style="width:100px ; height:100px" onclick="Choose_Img(this.src)">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="thumbnail">
+                                    <img src="https://preview.ibb.co/hFMi77/image_5.png" alt="NONE" style="width:100px ; height:100px" onclick="Choose_Img(this.src)">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="thumbnail">
+                                    <img src="https://image.ibb.co/kRYPEn/image_6.png" alt="NONE" style="width:100px ; height:100px" onclick="Choose_Img(this.src)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Upload" class="tab-pane fade">
+                        <div id="image_upload_zone_border">
+
+                            <div id="image_upload_zone">
+                                Ảnh của bạn
+                            </div>
+                            <img onclick="Choose_Img(this.src)" style="display:none" id="image_upload" src="" alt="ảnh của bạn">
+
+                        </div>
+                        <p id="Upload_title"></p>
+                        <input type="file" name="file" id="file" class="inputfile" />
+                        <label for="file">Chọn ảnh từ máy</label>
+
+                    </div>
+                    <div id="Save_as_png" class="tab-pane fade">
+                        <div id="image_save_zone_border">
+
+
+                            <img src="\image\icon-refresh.png" class="refesh" onclick="load_design()">
+
+                        </div>
+
+                        <input id="btn_save_as" class="inputfile" onclick="return save_as()" />
+                        <label for="btn_save_as">Lưu dưới dạng .PNG!</label>
+
+
+
+                    </div>
+                </div>
+            </div>
+            <div id="shirt" class="col-md-5">
+
+                <div id="shirt-area">
+
+                    <img id="design-shirt" src="https://image.ibb.co/hfJKfS/shirt_1.png" alt="Shirt image">
+                    <div id="design-area">
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div id="order-box">
+
+
+                <form action="" style="width:100%">
+
+                    <h4 id="shirt-title" style="text-align:center">Sản phẩm</h4>
+                    <p>
+                        Tên sản phẩm: Áo Trọng Nhân
+                    </p>
+
+                    <div id="shirt-color" style="width:200px">
+                        <p>Màu áo: </p>
+
+                        <div class="foo white"></div>
+                        <div class="foo black"></div>
+                        <div class="foo red"></div>
+                        <div class="foo blue"></div>
+                        <div class="foo yellow"></div>
+                        <div class="foo green"></div>
+                        <div class="foo orange"></div>
+                        <div class="foo purple"></div>
+                        <div class="foo brown"></div>
+                        <div class="foo pink"></div>
+                        <div class="foo violet"></div>
+                        <div class="foo gray"></div>
+
+
+                    </div>
+                    <!--
+                        <div id="shirt-size" style="width:100% ">
+                                Số lượng: 
+                                <input style="width:80%" class="size" type="number" name="so_luong"> 
+                                <br/>
+                                Cỡ áo: <br/>
+                                <p style="margin:5px; text-align:left">
+                                        XS <input class="size" type="number" name="XS" >
+                                        S
+                                        <input class="size" type="number" name="S">
+                                        <br/>
+                                        M<input  style="margin:0 10px" class="size" type="number" name="M">
+                                            L <input class="size" type="number" name="L">
+                                        <br/>
+                                        XL<input class="size" type="number" name="XL">
+                                        XXL<input class="size" type="number" name="XXL">
+                                </p>
+
+                        </div>
+                    -->
+                    <div style="text-align:center">
+                        <input id="btn-order" type="submit" value="Đặt hàng">
+                    </div>
+
+
+                </form>
+
+
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+</div>
+
+</div>
+
+
+{{>footer}}
+
+{{!-- 1553023 - javascript --}}
+<script src="/my_js/nhan_js.js"></script>
+<script src="/my_js/spectrum.js"></script>

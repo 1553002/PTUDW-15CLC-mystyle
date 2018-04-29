@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {{>general_head}}
+        {{!-- <link rel="stylesheet" href="/my_css/general-style.css"> --}}
+        <link rel="stylesheet" href="/my_css/admin_style.css">
+        <link rel="stylesheet" href="/my_css/spectrum.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    </head>
+<body>
+    <header id="header">
+    {{>ad_header}}  
+    </header>
+
+    {{>left_menu_admin}}
+
+    <div id="content">
+        {{{body}}}
+    </div>
+    
+    <script type="text/javascript" src="/my_js/main.js"></script>
+    <script src="/my_js/data.js"></script>
+</body>
+</html>

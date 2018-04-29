@@ -1,0 +1,23 @@
+.left-col .profiles .image {
+    width: 45px;
+    height: 45px;
+    overflow: hidden;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 0;
+}
+
+
+
+#main h1.have-margin {
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    color: #242424;
+}
+
+.right-col .table{
+    background: #fff;
+}

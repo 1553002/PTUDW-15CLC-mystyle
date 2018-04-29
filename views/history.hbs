@@ -1,0 +1,159 @@
+
+
+
+<head>
+    {{>cus_head}}
+</head>
+
+    <header>
+        <div id="top-header" class="d-none d-md-flex">
+            <div class="container">
+                <div class="row no-gutters">
+                    <div class="col-md-5">
+                        <a href="">Giảm giá từ 5%-70% cho hơn 1,50,000 mẫu áo</a>
+                    </div>
+                    <div class="col-md-7 right-top-header">
+                        <a href="">Hỗ trợ</a>
+                        <span>|</span>
+                        <a href="">Theo dõi đơn hàng</a>
+                        <span>|</span>
+                        <div class="user-profile">
+                            <span>Chào</span>
+                            <span>Lê Công Cảnh</span>
+                            <div class="box">
+                                <ul class="user-ajax-customer">
+                                    <li><a href="../account/edit" title="Thông tin tài khoản" rel="nofollow">Thông tin tài khoản</a></li>
+                                    <li><a href="../order/history" title="Đơn hàng của tôi" rel="nofollow">Đơn hàng của tôi</a></li>
+                                    <li><a href="index" title="Đăng xuất" rel="nofollow">Đăng xuất</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="main-header" style="position: relative;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-10">
+                        <nav class="navbar navbar-expand-md navbar-light">
+
+                            <a class="navbar-brand top-head-logo" href="#"></a>
+                            <button class="navbar-toggler" type="button" onclick="openNav()">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+
+                            <div class="d-none d-md-flex">
+                                <ul class="navbar-nav mr-auto upper">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="../../index">Trang chủ
+                                            <span class="sr-only">(current)</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Sản phẩm</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">mẫu áo</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="../../design">Tự thiết kế</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+
+                    <div class="col-md-4 col-2 d-flex align-items-center justify-content-end">
+                        <div class="top-head-user float-right">
+                            <div class="shopping-cart-wrapper">
+                                <a href="#" class="bag-shopping-cart" title="View bag">
+                                    <span class="fas fa-shopping-bag"></span>
+                                    <span class="cart-count">0</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <div class="breadcrumb-area">
+        <div class="container" style="padding: 0">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="">Trang chủ</a>
+                <li>
+                    <a href="">Thông tin tài khoản</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="container" id="main">
+        <div class="row">
+            <div class="col-md-3 left-col">
+                <div class="profiles">
+                    <!-- <p class="image">
+                        <img src="" height="45" width="45" alt="avatar">
+                    </p> -->
+                    <p class="name">Tài khoản của</p>
+                    <h6>Lê Công Cảnh</h6>
+                </div>
+                <div class="menu">
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                    <li class="">
+                        <a href="../edit">
+                            <i class="fas fa-user"></i>
+                            <span>Thông tin tài khoản</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="../order/history">
+                            <i class="fas fa-shopping-basket"></i>
+                            <span>Quản lý đơn hàng</span>
+                        </a>
+                    </li>
+                </ul>
+                </div>
+                
+            </div>
+            <div class="col-md-9 right-col">
+                <h1 class="have-margin">Đơn hàng của tôi</h1>
+                <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Mã đơn hàng</th>
+                            <th scope="col">Ngày mua</th>
+                            <th scope="col">Tổng tiền</th>
+                            <th scope="col">Trạng thái đơn hàng</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">80781646</th>
+                            <td>21/09/2017</td>
+                            <td>355.808 ₫</td>
+                            <td>Giao hàng thành công</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">69988462</th>
+                            <td>19/09/2017</td>
+                            <td>843.820 ₫</td>
+                            <td>Đã hủy</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">48796064</th>
+                            <td>15/06/2017</td>
+                            <td>299.000 ₫</td>
+                            <td>Giao hàng thành công</td>
+                          </tr>
+                        </tbody>
+                      </table>
+            </div>
+        </div>
+    </div>
+  {{>footer}}

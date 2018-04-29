@@ -1,0 +1,148 @@
+
+
+/* Panel */
+.panel{
+    background-color: #fff;
+    padding: 30px;
+}
+
+.panel-left{
+    border-radius: 6px 0 0 6px;
+}
+
+.panel-right{
+    
+    border-radius: 0px 6px 6px 0px;
+}
+
+/* Left panel */
+
+
+/* Right panel */
+.section-header {
+    font-weight: 700;
+    border: 0;
+    font-size: 12px;
+    line-height: 12px;
+    text-align: left;
+    padding: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: #fafafa;
+}
+
+.form-divider{
+    display: block;
+    border-top: 1px solid #eee;
+    margin: 0 -30px 30px;
+}
+
+.input-checkbox-wrapper+label, .input-radio-wrapper+label, input[type=checkbox]+label, input[type=radio]+label {
+    position: relative;
+    display: inline-block;
+    min-width: 20px;
+    padding-left: 30px;
+    font-weight: 400;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+input[type="checkbox"]{
+    display: inline;
+    position: absolute;
+    margin: 0;
+    opacity: 0;
+}
+
+.input-checkbox-wrapper+label::before, .input-radio-wrapper+label::before, input[type=checkbox]+label::before, input[type=radio]+label::before {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #000;
+    background-color: #fff;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.checkbox-is-checked+label::after, input[type=checkbox]:checked+label::after {
+    content: "";
+    background: #000;
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+}
+
+.privacy-agreement {
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.privacy-agreement .privacy-policy {
+    color: #aaa;
+    text-decoration: underline;
+}
+
+.button, .buttonstyle, .product-variations .size-chart-link a, button, input[type=button] {
+    font-weight: 700;
+    background-color: #000;
+    border: 1px solid #000;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 12px;
+    line-height: normal;
+    letter-spacing: .6px;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 12px;
+}
+
+.button,  .form-row-button button {
+    float: right;
+    width: 280px;
+}
+
+.form-row-button button {
+    height: 40px;
+    padding: 0 12px;
+}   
+
+.form-wrapper .form-row {
+    margin-bottom: 30px;
+}
+
+.form-row-button {
+    clear: both;
+}
+
+.nav-tabs{
+    margin-bottom: 30px;
+}
+
+.nav-link.active{
+    border: none;
+    border-bottom: 2px solid #000!important;
+}
+
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover{
+    border: none;
+    border-bottom: 2px solid #000!important;
+}
+
+/* Override */
+.form-control, .custom-select{
+    border-radius: 0;
+    font-size: 14px;
+}
+
+.form-control:focus, .custom-select:focus{
+    outline: 0;
+    box-shadow: 0 0 0 0;
+    border-color: #000;
+}
+
+#main{
+    margin-top: 30px;
+}

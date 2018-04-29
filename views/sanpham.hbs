@@ -1,0 +1,73 @@
+<head>
+  {{#if title}}
+      <title>{{title}}</title>
+  {{/if}}
+</head>
+
+<div class="page-header">
+  <div class="container-fluid">
+    <div class="float-right">
+      <a href="/admin/sanpham/them" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="Add New">
+        <i class="fa fa-plus"></i>
+      </a>
+    </div>
+    {{#if title}}
+      <h1>{{title}}</h1>
+    {{/if}}
+    <ul class="breadcrumb">
+      {{#each breadcrumbs}}
+      <li>
+        <a href={{this.url}}>{{name}}</a>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+</div>
+
+<div class="container-fluid">
+    <div class="panel">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-table"></i> Danh sách sản phẩm</h3>
+      </div>
+      <div class="panel-body bg-light">
+        <form method="POST" id="form-product">
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                <td class="text-center">Hình mẫu</td>
+                <td class="text-left"> <a href="" class="asc">Tên sản phẩm</a> </td>
+                <td class="text-left"> <a href="">Thuộc danh mục</a> </td>
+                <td class="text-right"> <a href="">Giá gốc</a> </td>
+                <td class="text-center"> <a href="">Sale-off</a></td>
+                <td class="text-right"> <a href="">Giá giảm</a> </td>
+                <td class="text-center"> <a href="">Tình trạng</a></td>
+                <td class="text-right">Action</td>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each products}}
+                <tr>
+                  <td class="text-center"><img src={{ProductImage1}} alt="" class="img-thumbnail"> </td>
+                  <td class="text-left">{{ProductName}} </td>
+                  <td class="text-left"> {{Category.CategoryName}}</td>
+                  <td class="text-right">{{ProductPrice}}</td>
+                  <td class="text-center">{{ProductDiscountAvailable}}</td>
+                  <td class="text-right">{{ProductDiscountPrice}}</td>
+                  <td class="text-center">{{ProductAvailable}}</td>
+                  <td class="text-center">
+                    <ul>
+                      <li><a href="" data-toggle="tooltip" title="" data-original-title="Edit">Sửa</a></li>
+                      <li><a href="" data-toggle="tooltip" title="" data-original-title="Delete">Xóa</a></li>
+                    </ul>
+                    
+                  </td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
+        </form>
+      </div>
+    </div>
+</div>

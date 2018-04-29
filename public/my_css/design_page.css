@@ -1,0 +1,1021 @@
+
+
+ #content div .tab
+ {                        
+     margin-left: 25px;
+     float: left;
+     width: 65px;
+     height: 400px;
+     background-color: rgb(68, 67, 67);
+     overflow: hidden;
+  
+ }
+ #content div .tab a
+ {
+     display: block;
+     text-align: center;
+     transition: all 0.3s ease;
+    
+    
+ }
+ #content div .tab a.active
+ {
+ 
+     
+     background-color: rgb(94, 94, 94);
+ }
+ #content div .tab a img{
+
+     padding-bottom: 2px;
+     position: relative;
+     height: 52px;
+ }
+ #content div .tab a p{
+     padding:0;
+     margin: 0;
+     color:rgb(223, 217, 217);
+     font-size: 12px;
+     font-weight: bold;
+ }
+ #content div .tab a:hover{
+     background-color: rgb(94, 94, 94);
+ }
+#content div .tabcontent
+ {
+     float: left;
+     text-align: center;
+     display: block;
+     background-color: rgb(245, 245, 245);
+     
+     width: 320px;
+     height: 400px;
+     overflow-y:auto;
+     overflow-x: hidden;
+     border-style: solid;
+     border-color: gray;
+     border-width: 1px;
+
+ }
+ #tool-top
+ {
+     text-align: center;
+    
+ }
+ .tool-top-nav
+ {   margin: 10px 0;
+     margin-left: 44%;
+     text-align: center;
+     height: 50px;
+     width: 300px;
+ }
+
+ .tool-top-nav a {
+     float: left;
+     text-align: center;
+     width: 60px;
+     height: 50px;
+     background-color: rgb(248, 248, 239);
+     margin: 1px;
+     border-radius: 2px;
+   
+ }
+ .tool-top-nav a img{
+     padding:3px 11px;
+     width: 50px;
+     height: 30px;
+     position: center;
+     
+ }
+ .tool-top-nav a p
+ {
+     margin: 0;
+     padding: 0;
+     font-size: 12px;
+     font-weight: bold;
+     color: rgb(102, 101, 101)
+ }
+ .tool-top-nav a:hover {
+     background-color: rgb(216, 216, 214);
+ }
+
+ #order-box
+ {   width: 200px;
+     height: 300px;
+     border-style: solid;
+     border-width: 1px;
+     border-radius: 20px;
+     border-color: gray;
+     margin: 0;
+     padding: 0;
+     font-size: 13px;
+     background-color: white;
+ }
+ .foo {
+ float: left;
+ width: 20px;
+ height: 20px;
+ margin: 5px;
+ border: 1px solid rgba(0, 0, 0, .2);
+ }
+
+ .blue {
+ background:blue;
+ }
+
+ .purple {
+ background: purple;
+ }
+
+ .red {
+ background: red;
+ }
+ .white
+ {
+ background: white;
+ }
+ .black{
+     background: black;
+ }
+ .gray
+ {
+     background: gray;
+ }
+ .orange
+ {
+     background: orange;
+ }
+ .green
+ {
+     background: green;
+ }
+ .yellow
+ {
+     background: yellow;
+ }
+ .brown
+ {
+     background: brown;
+ }
+ .pink
+ {
+     background: pink;
+ }
+ .violet
+ {
+     background:violet
+ }
+ #shirt-color 
+ {
+     width: 100%;
+ }
+ .size
+ {
+     width: 50px;
+     margin: 5px; 
+ }  
+ #btn-order
+ {
+     margin: 20px 0;
+     height: 60px;
+     font-size: 25px;
+     font-weight: bold;
+     font-family: Arial, Helvetica, sans-serif;
+     color: white;
+     width: 150px;
+     border-radius: 20px;
+     background:orangered;
+ }
+ #shirt-title
+ {
+     border-bottom-style: dashed;
+     border-bottom-width: 1px;
+     border-bottom-color: gray;
+     padding: 5px;
+ }
+ #tab-title
+ {   
+     
+     margin-bottom: 5px;
+     padding: 0;
+     background: rgb(219, 218, 218);
+     color: rgb(160, 154, 154);
+     font-weight: bold;
+     
+ }
+
+
+
+#design{
+    /*background-color: #d8d8d8; */
+    height: 100%;
+    margin-top:20px;
+    
+
+   
+}
+#shirt
+{
+    margin:10px;
+
+    width: 100%;
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+    
+}
+#shirt-area
+{
+    height: 500px;
+    width: 500px;
+    display: block;
+}
+#design-shirt
+{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: block;
+   
+}
+
+#design-area
+{
+
+
+    width: 260px;
+    height: 77%;
+    margin-left: 24%;
+    margin-top: -85%;
+    position: relative;;
+    border-style: none;
+    border-width: 2px;
+    overflow:hidden ;
+    border-color: rgb(173, 172, 172);
+    padding: 0;
+    z-index: 0;
+   
+ 
+}
+
+#tool
+{
+    margin-left: 70px;
+}
+#tool-tab
+{
+    width: 419px;
+    font-size: 22px; 
+    
+    border-radius: 5px;
+
+}
+#tool-box
+{
+    margin: 10px;
+    margin-left: 20px;
+    margin-top: 10px;    
+}
+
+#tab-content{
+    
+    width: 417px;
+    height: 470px;
+    position: absolute;
+    background-color: white;
+    overflow: auto;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(212, 210, 210);
+    
+    border-radius: 5px;
+    border-top-style: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    
+    
+    
+   
+    
+}
+.nhan_image
+{
+    
+    cursor: move; 
+    z-index: 0;
+    position: absolute;
+    width: 100px;
+    height: 60px;
+    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+ 
+}
+
+
+.tab-content .row .col-md-6
+{   
+    text-align: center;
+}
+.tab-content .row .col-md-6 .thumbnail{
+   margin: 10px 5px;
+
+  
+  
+}
+.tab-content .row .col-md-6 .thumbnail:hover{
+    border-style: solid;
+    border-width: 1px;
+    border-color: gray;
+}
+
+#list-shirt, #list-image{
+    padding: 3px 6px;
+    text-align: center;
+}
+
+.anchor{
+    width: 20px;
+    height: 20px;
+   background-image: url("https://cdn1.iconfinder.com/data/icons/basic-elements-round-corner/614/798_-_Fullscreen-512.png");
+
+    border-radius: 100%;
+    cursor: se-resize;
+
+    background-size: 100%;
+    background-position: center;
+
+    
+}
+.anchor_delete{
+    width: 20px;
+    height: 20px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 100%;
+    cursor: pointer;
+    border-color: rgb(202, 201, 201);
+
+
+}
+
+.anchor_rotate{
+    width: 20px;
+    height: 20px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 100%;
+    cursor: pointer;
+    border-color: rgb(202, 201, 201);
+
+
+}
+
+.refesh{
+
+    width: 28px;
+    height: 28px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 100%;
+    cursor: pointer;
+    border-color: rgb(202, 201, 201);
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}   
+#text_form
+{
+    padding: 5px 10px;
+    margin: 0;
+
+}
+input[type=text]{
+    width: 96%;
+    height: 60px;
+    padding: 20px 20px;
+    margin: 10px 4px;
+    margin-top: 20px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 20px;
+    
+}
+input[type=text]:focus
+{
+    border-color: rgb(148, 139, 139);
+    border-width: 3px;
+}
+select 
+{
+
+    width: 60%;
+    margin: 10px 0;
+    padding: 3px 20px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: gray;
+    border-radius: 4px;
+    background-color: white;
+    
+ 
+
+}
+
+
+#Upload
+{
+    margin: 5% 5%;
+    padding: 0;
+    text-align: center;
+}
+#Upload_title
+{
+    font-size: 15px;
+    color: gray;
+    margin: 3px;
+    padding: 0;
+}
+
+#Save_as_png
+{
+    margin: 5% 5%;
+    padding: 0;
+    text-align: center;
+}
+#image_save_zone_border
+{
+    text-align: center;
+    width: 100%;
+    height: 65%;
+    border-style:  dotted;
+    border-width: 2px;
+    border-color: rgb(92, 91, 91);
+    margin-bottom: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: rgb(138, 137, 137);
+    padding: 5px;
+    display: inline-block;
+    border-radius: 10px;
+    margin: 0;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: rgb(122, 122, 122);
+}
+.inputfile + label {
+	cursor: pointer; 
+}
+.inputfile:focus + label {
+    border-style:dotted;
+    border-width: 1px;
+    border-color: rgb(202, 201, 201);
+}
+
+#content div .tab
+{                        
+    margin-left: 25px;
+    float: left;
+    width: 65px;
+    height: 400px;
+    background-color: rgb(68, 67, 67);
+}
+#content div .tab a
+{
+    display: block;
+    text-align: center;
+    transition: all 0.3s ease;
+    
+   
+}
+#content div .tab a.active
+{
+  
+    
+    background-color: rgb(94, 94, 94);
+}
+#content div .tab a img{
+    padding:15px;
+    padding-bottom: 2px;
+}
+#content div .tab a p{
+    padding:0;
+    margin: 0;
+    color:rgb(223, 217, 217);
+    font-size: 12px;
+    font-weight: bold;
+}
+#content div .tab a:hover{
+    background-color: rgb(94, 94, 94);
+}
+#content div .tabcontent
+{
+    float: left;
+    text-align: center;
+    display: block;
+ 
+    
+    width: 320px;
+    height: 400px;
+    overflow-y:auto;
+    overflow-x: hidden;
+    border-style: solid;
+    border-color: gray;
+    border-width: 1px;
+
+}
+#tool-top
+{
+    text-align: center;
+   
+}
+.tool-top-nav
+{   margin: 10px 0;
+    margin-left: 44%;
+    text-align: center;
+    height: 50px;
+    width: 300px;
+}
+
+.tool-top-nav a {
+    float: left;
+    text-align: center;
+    width: 60px;
+    height: 50px;
+    background-color: rgb(248, 248, 239);
+    margin: 1px;
+    border-radius: 2px;
+  
+}
+.tool-top-nav a img{
+    padding:2 11px;
+    width: 50px;
+    height: 30px;
+    position: center;
+    
+}
+.tool-top-nav a p
+{
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    font-weight: bold;
+    color: rgb(102, 101, 101)
+}
+.tool-top-nav a:hover {
+    background-color: rgb(216, 216, 214);
+}
+
+#order-box
+{   width: 200px;
+    height: 300px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 20px;
+    border-color: gray;
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+}
+.foo {
+float: left;
+width: 20px;
+height: 20px;
+margin: 5px;
+border: 1px solid rgba(0, 0, 0, .2);
+}
+
+.blue {
+background:blue;
+}
+
+.purple {
+background: purple;
+}
+
+.red {
+background: red;
+}
+.white
+{
+background: white;
+}
+.black{
+    background: black;
+}
+.gray
+{
+    background: gray;
+}
+.orange
+{
+    background: orange;
+}
+.green
+{
+    background: green;
+}
+.yellow
+{
+    background: yellow;
+}
+.brown
+{
+    background: brown;
+}
+.pink
+{
+    background: pink;
+}
+.violet
+{
+    background:violet
+}
+#shirt-color 
+{
+    width: 100%;
+}
+.size
+{
+    width: 50px;
+    margin: 5px; 
+}  
+#btn-order
+{
+    margin: 20px 0;
+    height: 60px;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    width: 150px;
+    border-radius: 20px;
+    background:orangered;
+}
+#shirt-title
+{
+    border-bottom-style: dashed;
+    border-bottom-width: 1px;
+    border-bottom-color: gray;
+    padding: 5px;
+}
+#tab-title
+{   
+    
+    margin-bottom: 5px;
+    padding: 0;
+    background: rgb(219, 218, 218);
+    color: rgb(160, 154, 154);
+    font-weight: bold;
+    
+}
+
+
+
+#content
+
+{
+   border-top-style: solid;
+   border-top-width: 1px;
+   border-color: gray;
+
+   background-color: #f1f1f1;
+  
+}
+#design{
+   /*background-color: #d8d8d8; */
+   height: 100%;
+   margin-top:20px;
+   
+
+  
+}
+#shirt
+{
+   margin:10px;
+
+   width: 100%;
+   height: 100%;
+   display: flex;
+   overflow: hidden;
+   
+}
+#shirt-area
+{
+   height: 500px;
+   width: 500px;
+   display: block;
+}
+#design-shirt
+{
+   width: 100%;
+   height: 100%;
+   position: relative;
+   display: block;
+  
+}
+
+#design-area
+{
+
+
+   width: 260px;
+   height: 77%;
+   margin-left: 24%;
+   margin-top: -85%;
+   position: relative;;
+   border-style: none;
+   border-width: 2px;
+   overflow:hidden ;
+   border-color: rgb(173, 172, 172);
+   padding: 0;
+   z-index: 0;
+  
+
+}
+
+#tool
+{
+   margin-left: 70px;
+}
+#tool-tab
+{
+   width: 419px;
+   font-size: 22px; 
+   
+   border-radius: 5px;
+
+}
+#tool-box
+{
+   margin: 10px;
+   margin-left: 20px;
+   margin-top: 10px;    
+}
+
+#tab-content{
+   
+   width: 417px;
+   height: 470px;
+   position: absolute;
+   background-color: white;
+   overflow: auto;
+   border-style: solid;
+   border-width: 1px;
+   border-color: rgb(212, 210, 210);
+   
+   border-radius: 5px;
+   border-top-style: none;
+   border-top-left-radius: 0;
+   border-top-right-radius: 0;
+   
+   
+   
+  
+   
+}
+.nhan_image
+{
+   
+   cursor: move; 
+   z-index: 0;
+   position: absolute;
+   width: 100px;
+   height: 60px;
+   display: block;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   overflow: hidden;
+
+}
+
+
+.tab-content .row .col-md-6
+{   
+   text-align: center;
+}
+.tab-content .row .col-md-6 .thumbnail{
+  margin: 10px 5px;
+
+ 
+ 
+}
+.tab-content .row .col-md-6 .thumbnail:hover{
+   border-style: solid;
+   border-width: 1px;
+   border-color: gray;
+}
+
+#list-shirt, #list-image{
+   padding: 3px 6px;
+   text-align: center;
+}
+
+.anchor{
+   width: 20px;
+   height: 20px;
+  background-image: url("https://cdn1.iconfinder.com/data/icons/basic-elements-round-corner/614/798_-_Fullscreen-512.png");
+
+   border-radius: 100%;
+   cursor: se-resize;
+
+   background-size: 100%;
+   background-position: center;
+
+   
+}
+.anchor_delete{
+   width: 20px;
+   height: 20px;
+   border-style: solid;
+   border-width: 1px;
+   border-radius: 100%;
+   cursor: pointer;
+   border-color: rgb(202, 201, 201);
+
+
+}
+
+.anchor_rotate{
+   width: 20px;
+   height: 20px;
+   border-style: solid;
+   border-width: 1px;
+   border-radius: 100%;
+   cursor: pointer;
+   border-color: rgb(202, 201, 201);
+
+
+}
+
+.refesh{
+
+   width: 28px;
+   height: 28px;
+   border-style: solid;
+   border-width: 1px;
+   border-radius: 100%;
+   cursor: pointer;
+   border-color: rgb(202, 201, 201);
+   position: absolute;
+   right: 0;
+   bottom: 0;
+}   
+#text_form
+{
+   padding: 5px 10px;
+   margin: 0;
+
+}
+input[type=text]{
+   width: 96%;
+   height: 60px;
+   padding: 20px 20px;
+   margin: 10px 4px;
+   margin-top: 20px;
+   display: inline-block;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+   box-sizing: border-box;
+   font-size: 20px;
+   
+}
+input[type=text]:focus
+{
+   border-color: rgb(148, 139, 139);
+   border-width: 3px;
+}
+select 
+{
+
+   width: 60%;
+   margin: 10px 0;
+   padding: 3px 20px;
+   border-style: solid;
+   border-width: 1px;
+   border-color: gray;
+   border-radius: 4px;
+   background-color: white;
+   
+
+
+}
+
+
+#Upload
+{
+   margin: 5% 5%;
+   padding: 0;
+   text-align: center;
+}
+#Upload_title
+{
+   font-size: 15px;
+   color: gray;
+   margin: 3px;
+   padding: 0;
+}
+#image_upload_zone_border
+{   
+   
+   text-align: center;
+   width: 100%;
+   height: 100%;
+   border-style:  dotted;
+   border-width: 2px;
+   border-color: rgb(92, 91, 91);
+   margin-bottom: 10px;
+   overflow: hidden;
+position: relative;
+}
+#Save_as_png
+{
+   margin: 5% 5%;
+   padding: 0;
+   text-align: center;
+}
+#image_save_zone_border
+{
+   text-align: center;
+   width: 100%;
+   height: 65%;
+   border-style:  dotted;
+   border-width: 2px;
+   border-color: rgb(92, 91, 91);
+   margin-bottom: 10px;
+   overflow: hidden;
+   
+   
+}
+#image_upload_zone
+{   
+ 
+   margin: 5%;
+   width: 90%;
+   height: 230px;
+   border-width: 2px;
+   border-style:  dotted;
+   border-color: rgb(92, 92, 92);
+   text-align: center;
+   font-size: 28px;
+   color: gray;
+   padding-top: 30%;
+   vertical-align: middle;
+}
+#image_upload
+{   
+    margin: 2px 5%;
+   width: 90%;
+   height: 230px;
+}
+.inputfile {
+   width: 0.1px;
+   height: 0.1px;
+   opacity: 0;
+   overflow: hidden;
+   position: absolute;
+   z-index: -1;
+}
+.inputfile + label {
+   font-size: 1.25em;
+   font-weight: 700;
+   color: white;
+   background-color: rgb(138, 137, 137);
+   padding: 5px;
+   display: inline-block;
+   border-radius: 10px;
+   margin: 0;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+   background-color: rgb(122, 122, 122);
+}
+.inputfile + label {
+   cursor: pointer; 
+}
+.inputfile:focus + label {
+   border-style:dotted;
+   border-width: 1px;
+   border-color: rgb(202, 201, 201);
+}

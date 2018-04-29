@@ -1,0 +1,43 @@
+'use strict';
+module.exports = (sequelize, DataTypes) => {
+  var Product = sequelize.define('Product', {
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.STRING
+    },
+    name: DataTypes.STRING,
+    price: DataTypes.STRING,
+    image1: DataTypes.STRING,
+    image2: DataTypes.STRING,
+    image3: DataTypes.STRING,
+    image4: DataTypes.STRING,
+    unit: DataTypes.STRING,
+    available: DataTypes.BOOLEAN,
+    discountPrice: DataTypes.STRING,
+    discount: DataTypes.FLOAT,
+    discountAvailable: DataTypes.BOOLEAN,
+    saleoffExpDate: DataTypes.DATE,
+    createdAt: {
+      allowNull: false,
+      type: DataTypes.DATE,
+      defaultValue: sequelize.literal('NOW()')
+    },
+    updatedAt: {
+      allowNull: true,
+      type: DataTypes.DATE
+    }
+    
+  }, {});
+  Product.associate = function(models) {
+    // associations can be defined here
+    Product.belongsTo(models.Supplier);
+    Product.belongsTo(models.Category);
+    //Product.hasOne(models.CartDetail);
+    Product.belongsToMany(models.Cart, {
+      through: models.CartDetail,
+      foreignKey: 'productId'
+    });
+  };
+  return Product;
+};

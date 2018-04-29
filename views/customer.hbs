@@ -1,0 +1,335 @@
+
+<head>
+
+  {{>ad_head}}
+</head>
+
+  <body class="fixed-nav sticky-footer bg-dark" id="page-top">
+      {{>ad_header}}
+
+    <div class="container-fluid">
+        <div class="row">
+          <nav class="col-md-2 d-1 d-md-1 bg-drank sidebar" style = "position: fixed">
+            <div class="sidebar-sticky">
+              <ul class="nav flex-column" style = "margin-top:4em;">
+                  <li class="nav-item">
+                      <a class="nav-link" href="admin">
+                      <i class="fas fa-file-alt"></i>
+                      <span data-feather="nav-link-text"></span>
+                      Đơn hàng
+                    </a>
+                  </li>
+       
+                  <li class="nav-item">
+                    <a class="nav-link" style="color:rgb(224, 221, 221);" href="TaiKhoanKhachHang">
+                    <i class="fas fa-user"></i>
+                    <span data-feather="nav-link-text"></span>
+                    Tài khoản khách hàng
+                  </a>
+                </li>
+
+                  <li class="nav-item">
+                      <a class="nav-link" href="KhoHang">
+                      <i class="fas fa-warehouse"></i>
+                      <span data-feather="nav-link-text"></span>
+                      Sản phẩm
+                    </a>
+                  </li>
+
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="DoanhThu">
+                      <i class="fas fa-chart-line"></i>
+                    <span data-feather="nav-link-text"></span>
+                    Doanh thu
+                  </a>
+                </li>
+
+              </ul>
+            </div>
+          </nav>
+  
+          <div class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4 bg-white" style="margin-top:3.8em;">
+
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fa fa-table"></i> Danh sách đơn hàng</div>
+            <br>
+            <form class="form-inline my-2 my-lg-0 mr-lg-2" style="justify-content: flex-end; display: flex; margin-right: 500px;">
+                <div class="input-group">
+                  <input class="form-control" type="text" placeholder="Search for...">
+                  <span class="input-group-append">
+                    <button class="btn btn-primary" type="button">
+                      <i class="fa fa-search"></i>
+                    </button>
+                  </span>
+                </div>
+            </form>
+
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Họ tên khách hàng</th>
+                        <th>Tài khoản</th>
+                        <th>Họ tên khách hàng</th>
+                        <th>Địa chỉ giao hàng</th>
+                        <th>Điện thoại</th>
+                        <th>Trạng thái</th>
+                      </tr>
+                    </thead>
+                      <tr>
+                        <td>KH001</td>
+                        <td>TieuPhong0197</td>
+                        <td>Tiêu Vĩnh Phong</td>
+                        <td>Trường Chinh, quận 12, Tp.HCM</td>
+                        <td>0968132142</td>
+                        <td>
+                          <select>
+                            <option value="Enabl">Enable</option>
+                            <option value="Disable">Disable</option>
+                          </select>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>KH002</td>
+                        <td>CongCanh97</td>
+                        <td>Lê Công Cảnh</td>
+                        <td>Dương Bá Trạc, quận 8, Tp.HCM</td>
+                        <td>29/04/2018</td>
+                        
+                        <td>   </td>
+                      </tr>
+                      <tr>
+                        <td>KH003</td>
+                        <td>TrongNhan97</td>
+                        <td>Trần Gia Trọng Nhân</td>
+                        <td>Nguyễn Trãi, quận 1, Tp.HCM</td>
+                        <td>25/04/2018</td>
+                        
+                        <td>   </td>
+                      </tr>
+                      <tr>
+                        <td>KH004</td>
+                        <td>DucHieu96</td>
+                        <td>Trần Đức Hiếu</td>
+                        <td>Dương Bá Trạc, quận 8, Tp.HCM</td>
+                        <td>05/04/2018</td>
+                        
+                        <td>   </td>
+                      </tr>
+                      <tr>
+                        <td>KH005</td>
+                        <td>CongHau</td>
+                        <td>Trần Công Hậu</td>
+                        <td>Lê Quang Định, quận Bình Thạnh, Tp.HCM</td>
+                        <td>09/04/2018</td>
+                       
+                        <td>   </td>
+                      </tr>
+                      <tr>
+                        <td>KH006</td>
+                        <td>TrungTin</td>
+                        <td>Nguyễn Trung Tín</td>
+                        <td>Quốc lộ 1A, quận Thủ Đức, Tp.HCM</td>
+                        <td>25/04/2018</td>
+                       
+                        <td>   </td>
+                      </tr>
+                      <tr>
+                        <td>KH007</td>
+                        <td>ThaiTrieu</td>
+                        <td>Trần Quốc Thái Triều</td>
+                        <td>Dương Bá Trạc, quận 8, Tp.HCM</td>
+                        <td>23/02/2018</td>
+                       
+                        <td>   </td>
+                      </tr>
+                      <tr>
+                        <td>KH007</td>
+                        <td>KhoaGa</td>
+                        <td>Nguyễn Đăng Khoa</td>
+                        <td>Phạm Văn Chiêu, Gò Vấp, Tp.HCM</td>
+                        <td>09/04/2018</td>
+                        
+                        <td>   </td>
+                      </tr>
+                      <tr>
+                        <td>KH009</td>
+                        <td>NgocNhan</td>
+                        <td>Nguyễn Ngọc Nhân</td>
+                        <td>Tây Thạnh, quận Tân Phú, Tp.HCM</td>
+                        <td>06/07/2018</td>
+                        
+                        <td>   </td>
+                      </tr>
+                      <tr>
+                        <td>KH010</td>
+                        <td>TrungNhan</td>
+                        <td>Nguyễn Trung Nhân</td>
+                        <td>Trần Bình Trọng, quận 1, Tp.HCM</td>
+                        <td>01/04/2018</td>
+                       
+                        <td>   </td>
+                      </tr>
+                      <tr>
+                        <td>KH011</td>
+                        <td>SiNhan</td>
+                        <td>Nguyễn Sĩ Nhân</td>
+                        <td>Nguyễn Trãi, quận 5, Tp.HCM</td>
+                        <td>07/04/2018</td>
+                       
+                        <td>   </td>
+                      </tr>
+                      <tr>
+                        <td>KH012</td>
+                        <td>ThanhDat</td>
+                        <td>Nguyễn Thành Đạt</td>
+                        <td>Hồng Bàng, Quận 5, Tp.HCM</td>
+                        <td>03/04/2018</td>
+                        
+                        <td>   </td>
+                      </tr>
+                      <tr>
+                        <td>KH013</td>
+                        <td>ThanhDu</td>
+                        <td>Nguyễn Thanh Dư</td>
+                        <td>Phạm Văn Hai, quận Tân Bình, Tp.HCM</td>
+                        <td>15/04/2018</td>
+                       
+                        <td>   </td>
+                      </tr>
+                      <tr>
+                        <td>KH014</td>
+                        <td>DinhKhoa</td>
+                        <td>Trần Đình Khoa</td>
+                        <td>Xóm Chiếu, quận 4, Tp.HCM</td>
+                        <td>12/05/2018</td>
+                        
+                        <td>   </td>
+                      </tr>
+                      <tr>
+                        <td>KH015</td>
+                        <td>HyChanh</td>
+                        <td>Liêu Hy Chánh</td>
+                        <td>Tạ Uyên, quận 5, Tp.HCM</td>
+                        <td>25/06/2018</td>
+                       
+                        <td>   </td>
+                      </tr>
+                      <tr>
+                        <td>KH016</td>
+                        <td>XuanCuong</td>
+                        <td>Ngô Xuân Cường</td>
+                        <td>Lê Trọng Tấn, quận Tân Phú, Tp.HCM</td>
+                        <td>09/04/2018</td>
+                       
+                        <td>   </td>
+                      </tr>
+                      <tr>
+                        <td>KH017</td>
+                        <td>HanThanh</td>
+                        <td>Huỳnh Hán Thành</td>
+                        <td>An Dương Vương, quận 8, Tp.HCM</td>
+                        <td>15/08/2018</td>
+                       
+                        <td>   </td>
+                      </tr>
+                      <tr>
+                        <td>KH018</td>
+                        <td>VanTrieu</td>
+                        <td>Đăng Văn Triển</td>
+                        <td>Bến Vân Đồn, quận 4, Tp.HCM</td>
+                        <td>28/03/2018</td>
+                        
+                        <td>   </td>
+                      </tr>
+                      <tr>
+                        <td>KH019</td>
+                        <td>QuocBao</td>
+                        <td>Nguyễn Quốc Bảo</td>
+                        <td>Trần Huy Liệu, quận Phú Nhuận, Tp.HCM</td>
+                        <td>15/04/2018</td>
+                      
+                        <td>   </td>
+                      </tr>
+                      <tr>
+                        <td>KH020</td>
+                        <td>HuuKhoi</td>
+                        <td>Nguyễn Hữu Khôi</td>
+                        <td>Lê Trọng Tấn, quận Tân Phú, Tp.HCM</td>
+                        <td>11/04/2018</td>
+                        
+                        <td>   </td>
+                      </tr>
+                      <tr>
+                        <td>KH021</td>
+                        <td>HoangChuong</td>
+                        <td>Võ Hoàng Chương</td>
+                        <td>Hau Giang, quận 6, Tp.HCM</td>
+                        <td>09/04/2018</td>
+                        
+                        <td>   </td>
+                      </tr>
+                      <tr>
+                        <td>KH022</td>
+                        <td>HuyenTrang</td>
+                        <td>Nguyễn Thị Huyền Trang</td>
+                        <td>Cộng Hòa, quận Tân Bình, Tp.HCM</td>
+                        <td>25/02/2018</td>
+                       
+                        <td>   </td>
+                      </tr>
+                      <tr>
+                        <td>KH023</td>
+                        <td>ThanhHai</td>
+                        <td>Nguyễn Thanh Hải</td>
+                        <td>Nguyễn Xí, quận Bình Thạnh, Tp.HCM</td>
+                        <td>24/04/2018</td>
+                       
+                        <td>   </td>
+                      </tr>
+                      <tr>
+                        <td>KH024</td>
+                        <td>QuangMinh</td>
+                        <td>Vũ Quang Minh</td>
+                        <td>Huỳnh Văn Bánh, quận Phú Nhuận, Tp.HCM</td>
+                        <td>26/04/2018</td>
+                        <td>   </td>
+                      </tr>
+                      <tr>
+                        <td>KH025</td>
+                        <td>KhanhLinh</td>
+                        <td>Nguyễn Khánh Linh</td>
+                        <td>Hai Bà Trưng, quận 1, Tp.HCM</td>
+                        <td>17/04/2018</td>
+                        
+                        <td>   </td>
+                      </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+
+
+
+  {{>ad_footer}}
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery-3.3.1.slim.min.js"></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/my_js/data.js"></script>
+
+
+  </body>

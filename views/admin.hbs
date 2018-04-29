@@ -1,0 +1,556 @@
+{{!--
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+  <div class="container-fluid">
+    <div class="row">
+      <nav class="col-md-2 d-1 d-md-1 bg-drank sidebar" style="position: fixed">
+        <div class="sidebar-sticky">
+          <ul class="nav flex-column" style="margin-top:4em;">
+            <li class="nav-item">
+              <a class="nav-link" style="color:rgb(224, 221, 221);" href="admin">
+                <i class="fas fa-file-alt"></i>
+                <span data-feather="nav-link-text"></span>
+                Đơn hàng
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="TaiKhoanKhachHang">
+                <i class="fas fa-user"></i>
+                <span data-feather="nav-link-text"></span>
+                Tài khoản khách hàng
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/sanpham">
+                <i class="fas fa-warehouse"></i>
+                <span data-feather="nav-link-text"></span>
+                Sản phẩm
+              </a>
+            </li>
+
+
+            <li class="nav-item">
+              <a class="nav-link" href="DoanhThu">
+                <i class="fas fa-chart-line"></i>
+                <span data-feather="nav-link-text"></span>
+                Doanh thu
+              </a>
+            </li>
+
+          </ul>
+        </div>
+      </nav>
+
+      <div class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4 bg-white" style="margin-top:3.8em;">
+
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fa fa-table"></i> Danh sách đơn hàng</div>
+          <br>
+          <form class="form-inline my-2 my-lg-0 mr-lg-2" style="justify-content: flex-end; display: flex; margin-right: 500px;">
+            <div class="input-group">
+              <input class="form-control" type="text" placeholder="Search for...">
+              <span class="input-group-append">
+                <button class="btn btn-primary" type="button">
+                  <i class="fa fa-search"></i>
+                </button>
+              </span>
+            </div>
+          </form>
+
+          <div id="white-background">
+          </div>
+          <div id="dlgbox">
+            <div id="dlg-header">Chi tiết đơn hàng</div>
+            <div id="dlg-body">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>Tên sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Thành tiền</th>
+                  </tr>
+                </thead>
+                <tr>
+                  <td>Áo thun Gucci</td>
+                  <td>10</td>
+                  <td>2100000</td>
+                </tr>
+
+              </table>
+            </div>
+            <div id="dlg-footer">
+              <button onclick="dlgLogin()">Đóng</button>
+            </div>
+          </div>
+
+
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>Mã đơn hàng</th>
+                    <th>Tên khách hàng</th>
+                    <th>Địa chỉ giao hàng</th>
+                    <th>Ngày giao</th>
+                    <th>Tổng tiền</th>
+                    <th>Tình trang đơn hàng</th>
+                  </tr>
+                </thead>
+                <tr>
+                  <td>
+                    <a class="btn" onclick="showDialog()">
+                      MS001
+                    </a>
+                  </td>
+                  <td>TieuPhong0197</td>
+                  <td>Trường Chinh, quận 12, Tp.HCM</td>
+                  <td>30/03/2018</td>
+                  <td>350000</td>
+                  <td>
+                    <select>
+                      <option value="Datiepnhan">Đã tiếp nhận</option>
+                      <option value="Dangxuly">Đang xử lý</option>
+                      <option value="Danggiaohang">Đang giao hàng</option>
+                      <option value="Hoantat">Hoàn tất</option>
+                    </select>
+                  </td>
+
+                </tr>
+                <tr>
+                  <td>MS002</td>
+                  <td>CongCanh97</td>
+                  <td>Dương Bá Trạc, quận 8, Tp.HCM</td>
+                  <td>29/04/2018</td>
+                  <td>250000</td>
+                  <td>Đã giao</td>
+
+                </tr>
+                <tr>
+                  <td>MS003</td>
+                  <td>TrongNhan97</td>
+                  <td>Nguyễn Trãi, quận 1, Tp.HCM</td>
+                  <td>25/04/2018</td>
+                  <td>385000</td>
+                  <td>Đã giao</td>
+
+                </tr>
+                <tr>
+                  <td>MS004</td>
+                  <td>DucHieu96</td>
+                  <td>Dương Bá Trạc, quận 8, Tp.HCM</td>
+                  <td>05/04/2018</td>
+                  <td>400000</td>
+                  <td>Đã giao</td>
+
+                </tr>
+                <tr>
+                  <td>MS005</td>
+                  <td>CongHau</td>
+                  <td>Lê Quang Định, quận Bình Thạnh, Tp.HCM</td>
+                  <td>09/04/2018</td>
+                  <td>400000</td>
+                  <td>Đang xử lý</td>
+
+                </tr>
+                <tr>
+                  <td>MS006</td>
+                  <td>TrungTin</td>
+                  <td>Quốc lộ 1A, quận Thủ Đức, Tp.HCM</td>
+                  <td>25/04/2018</td>
+                  <td>500000</td>
+                  <td>Đang xử lý</td>
+
+                </tr>
+                <tr>
+                  <td>MS007</td>
+                  <td>ThaiTrieu</td>
+                  <td>Dương Bá Trạc, quận 8, Tp.HCM</td>
+                  <td>23/02/2018</td>
+                  <td>1000000</td>
+                  <td>Đã giao</td>
+
+                </tr>
+                <tr>
+                  <td>MS007</td>
+                  <td>KhoaGa/td>
+                    <td>Phạm Văn Chiêu, Gò Vấp, Tp.HCM</td>
+                    <td>09/04/2018</td>
+                    <td>400000</td>
+                    <td>Đang xử lý</td>
+
+                </tr>
+                <tr>
+                  <td>MS009</td>
+                  <td>NgocNhan</td>
+                  <td>Tây Thạnh, quận Tân Phú, Tp.HCM</td>
+                  <td>06/07/2018</td>
+                  <td>550000</td>
+                  <td>Đang xử lý</td>
+
+                </tr>
+                <tr>
+                  <td>MS010</td>
+                  <td>TrungNhan</td>
+                  <td>Trần Bình Trọng, quận 1, Tp.HCM</td>
+                  <td>01/04/2018</td>
+                  <td>350000</td>
+                  <td>Đã giao</td>
+
+                </tr>
+                <tr>
+                  <td>MS011</td>
+                  <td>SiNhan</td>
+                  <td>Nguyễn Trãi, quận 5, Tp.HCM</td>
+                  <td>07/04/2018</td>
+                  <td>380000</td>
+                  <td>Đã giao</td>
+
+                </tr>
+                <tr>
+                  <td>MS012</td>
+                  <td>ThanhDat</td>
+                  <td>Hồng Bàng, Quận 5, Tp.HCM</td>
+                  <td>03/04/2018</td>
+                  <td>280000</td>
+                  <td>Đã giao</td>
+
+                </tr>
+                <tr>
+                  <td>MS013</td>
+                  <td>ThanhDu</td>
+                  <td>Phạm Văn Hai, quận Tân Bình, Tp.HCM</td>
+                  <td>15/04/2018</td>
+                  <td>480000</td>
+                  <td>Đang xử lý</td>
+                </tr>
+                <tr>
+                  <td>MS014</td>
+                  <td>DinhKhoa</td>
+                  <td>Xóm Chiếu, quận 4, Tp.HCM</td>
+                  <td>12/05/2018</td>
+                  <td>680000</td>
+                  <td>Đang xử lý</td>
+                </tr>
+                <tr>
+                  <td>MS015</td>
+                  <td>HyChanh</td>
+                  <td>Tạ Uyên, quận 5, Tp.HCM</td>
+                  <td>25/06/2018</td>
+                  <td>530000</td>
+                  <td>Đang xử lý</td>
+                </tr>
+                <tr>
+                  <td>MS016</td>
+                  <td>XuanCuong</td>
+                  <td>Lê Trọng Tấn, quận Tân Phú, Tp.HCM</td>
+                  <td>09/04/2018</td>
+                  <td>400000</td>
+                  <td>Đang xử lý</td>
+                </tr>
+                <tr>
+                  <td>MS017</td>
+                  <td>HanThanh</td>
+                  <td>An Dương Vương, quận 8, Tp.HCM</td>
+                  <td>15/08/2018</td>
+                  <td>256000</td>
+                  <td>Đã giao</td>
+
+                </tr>
+                <tr>
+                  <td>MS018</td>
+                  <td>VanTrieu</td>
+                  <td>Bến Vân Đồn, quận 4, Tp.HCM</td>
+                  <td>28/03/2018</td>
+                  <td>360000</td>
+                  <td>Đang xử lý</td>
+                </tr>
+                <tr>
+                  <td>MS019</td>
+                  <td>QuocBao</td>
+                  <td>Trần Huy Liệu, quận Phú Nhuận, Tp.HCM</td>
+                  <td>15/04/2018</td>
+                  <td>300000</td>
+                  <td>Đang xử lý</td>
+                </tr>
+                <tr>
+                  <td>MS020</td>
+                  <td>HuuKhoi</td>
+                  <td>Lê Trọng Tấn, quận Tân Phú, Tp.HCM</td>
+                  <td>11/04/2018</td>
+                  <td>350000</td>
+                  <td>Đã giao</td>
+
+                </tr>
+                <tr>
+                  <td>MS021</td>
+                  <td>HoangChuong</td>
+                  <td>Hau Giang, quận 6, Tp.HCM</td>
+                  <td>09/04/2018</td>
+                  <td>630000</td>
+                  <td>Đang xử lý</td>
+                </tr>
+                <tr>
+                  <td>MS022</td>
+                  <td>HuyenTrang</td>
+                  <td>Cộng Hòa, quận Tân Bình, Tp.HCM</td>
+                  <td>25/02/2018</td>
+                  <td>550000</td>
+                  <td>Đã giao</td>
+
+                </tr>
+                <tr>
+                  <td>MS023</td>
+                  <td>ThanhHai</td>
+                  <td>Nguyễn Xí, quận Bình Thạnh, Tp.HCM</td>
+                  <td>24/04/2018</td>
+                  <td>260000</td>
+                  <td>Đang xử lý</td>
+                </tr>
+                <tr>
+                  <td>MS024</td>
+                  <td>QuangMinh</td>
+                  <td>Huỳnh Văn Bánh, quận Phú Nhuận, Tp.HCM</td>
+                  <td>26/04/2018</td>
+                  <td>620000</td>
+                  <td>Đang xử lý</td>
+                </tr>
+                <tr>
+                  <td>MS025</td>
+                  <td>KhanhLinh</td>
+                  <td>Hai Bà Trưng, quận 1, Tp.HCM</td>
+                  <td>17/04/2018</td>
+                  <td>230000</td>
+                  <td>Đã giao</td>
+
+                </tr>
+                <tr>
+                  <td>MS026</td>
+                  <td>TieuPhong0197</td>
+                  <td>Trường Chinh, quận 12, Tp.HCM</td>
+                  <td>30/03/2018</td>
+                  <td>350000</td>
+                  <td>Đang xử lý</td>
+                </tr>
+                <tr>
+                  <td>MS027</td>
+                  <td>CongCanh97</td>
+                  <td>Dương Bá Trạc, quận 8, Tp.HCM</td>
+                  <td>29/04/2018</td>
+                  <td>250000</td>
+                  <td>Đã giao</td>
+
+                </tr>
+                <tr>
+                  <td>MS028</td>
+                  <td>TrongNhan97</td>
+                  <td>Nguyễn Trãi, quận 1, Tp.HCM</td>
+                  <td>25/04/2018</td>
+                  <td>385000</td>
+                  <td>Đang xử lý</td>
+                </tr>
+                <tr>
+                  <td>MS029</td>
+                  <td>DucHieu96</td>
+                  <td>Dương Bá Trạc, quận 8, Tp.HCM</td>
+                  <td>05/04/2018</td>
+                  <td>400000</td>
+                  <td>Đang xử lý</td>
+                </tr>
+                <tr>
+                  <td>MS030</td>
+                  <td>CongHau</td>
+                  <td>Lê Quang Định, quận Bình Thạnh, Tp.HCM</td>
+                  <td>09/04/2018</td>
+                  <td>400000</td>
+                  <td>Đang xử lý</td>
+                </tr>
+                <tr>
+                  <td>MS031</td>
+                  <td>TrungTin</td>
+                  <td>Quốc lộ 1A, quận Thủ Đức, Tp.HCM</td>
+                  <td>25/04/2018</td>
+                  <td>500000</td>
+                  <td>Đã giao</td>
+
+                </tr>
+                <tr>
+                  <td>MS032</td>
+                  <td>ThaiTrieu</td>
+                  <td>Dương Bá Trạc, quận 8, Tp.HCM</td>
+                  <td>23/02/2018</td>
+                  <td>1000000</td>
+                  <td>Đang xử lý</td>
+                </tr>
+                <tr>
+                  <td>MS033</td>
+                  <td>KhoaGa/td>
+                    <td>Phạm Văn Chiêu, Gò Vấp, Tp.HCM</td>
+                    <td>09/04/2018</td>
+                    <td>400000</td>
+                    <td>Đang xử lý</td>
+                </tr>
+                <tr>
+                  <td>MS034</td>
+                  <td>NgocNhan</td>
+                  <td>Tây Thạnh, quận Tân Phú, Tp.HCM</td>
+                  <td>06/07/2018</td>
+                  <td>550000</td>
+                  <td>Đã giao</td>
+
+                </tr>
+                <tr>
+                  <td>MS035</td>
+                  <td>TrungNhan</td>
+                  <td>Trần Bình Trọng, quận 1, Tp.HCM</td>
+                  <td>01/04/2018</td>
+                  <td>350000</td>
+                  <td>Đang xử lý</td>
+                </tr>
+                <tr>
+                  <td>MS036</td>
+                  <td>SiNhan</td>
+                  <td>Nguyễn Trãi, quận 5, Tp.HCM</td>
+                  <td>07/04/2018</td>
+                  <td>380000</td>
+                  <td>Đã giao</td>
+
+                </tr>
+                <tr>
+                  <td>MS037</td>
+                  <td>ThanhDat</td>
+                  <td>Hồng Bàng, Quận 5, Tp.HCM</td>
+                  <td>03/04/2018</td>
+                  <td>280000</td>
+                  <td>Đang xử lý</td>
+                </tr>
+                <tr>
+                  <td>MS038</td>
+                  <td>ThanhDu</td>
+                  <td>Phạm Văn Hai, quận Tân Bình, Tp.HCM</td>
+                  <td>15/04/2018</td>
+                  <td>480000</td>
+                  <td>Đã giao</td>
+
+                </tr>
+                <tr>
+                  <td>MS039</td>
+                  <td>DinhKhoa</td>
+                  <td>Xóm Chiếu, quận 4, Tp.HCM</td>
+                  <td>12/05/2018</td>
+                  <td>680000</td>
+                  <td>Đang xử lý</td>
+                </tr>
+                <tr>
+                  <td>MS040</td>
+                  <td>HyChanh</td>
+                  <td>Tạ Uyên, quận 5, Tp.HCM</td>
+                  <td>25/06/2018</td>
+                  <td>530000</td>
+                  <td>Đã giao</td>
+
+                </tr>
+                <tr>
+                  <td>MS041</td>
+                  <td>XuanCuong</td>
+                  <td>Lê Trọng Tấn, quận Tân Phú, Tp.HCM</td>
+                  <td>09/04/2018</td>
+                  <td>400000</td>
+                  <td>Đang xử lý</td>
+                </tr>
+                <tr>
+                  <td>MS042</td>
+                  <td>HanThanh</td>
+                  <td>An Dương Vương, quận 8, Tp.HCM</td>
+                  <td>15/08/2018</td>
+                  <td>256000</td>
+                  <td>Đã giao</td>
+
+                </tr>
+                <tr>
+                  <td>MS043</td>
+                  <td>VanTrieu</td>
+                  <td>Bến Vân Đồn, quận 4, Tp.HCM</td>
+                  <td>28/03/2018</td>
+                  <td>360000</td>
+                  <td>Đang xử lý</td>
+                </tr>
+                <tr>
+                  <td>MS044</td>
+                  <td>QuocBao</td>
+                  <td>Trần Huy Liệu, quận Phú Nhuận, Tp.HCM</td>
+                  <td>15/04/2018</td>
+                  <td>300000</td>
+                  <td>Đã giao</td>
+
+                </tr>
+                <tr>
+                  <td>MS045</td>
+                  <td>HuuKhoi</td>
+                  <td>Lê Trọng Tấn, quận Tân Phú, Tp.HCM</td>
+                  <td>11/04/2018</td>
+                  <td>350000</td>
+                  <td>Đang xử lý</td>
+                </tr>
+                <tr>
+                  <td>MS046</td>
+                  <td>HoangChuong</td>
+                  <td>Hau Giang, quận 6, Tp.HCM</td>
+                  <td>09/04/2018</td>
+                  <td>630000</td>
+                  <td>Đã giao</td>
+
+                </tr>
+                <tr>
+                  <td>MS047</td>
+                  <td>HuyenTrang</td>
+                  <td>Cộng Hòa, quận Tân Bình, Tp.HCM</td>
+                  <td>25/02/2018</td>
+                  <td>550000</td>
+                  <td>Đang xử lý</td>
+                </tr>
+                <tr>
+                  <td>MS048</td>
+                  <td>ThanhHai</td>
+                  <td>Nguyễn Xí, quận Bình Thạnh, Tp.HCM</td>
+                  <td>24/04/2018</td>
+                  <td>260000</td>
+                  <td>Đang xử lý</td>
+                </tr>
+                <tr>
+                  <td>MS049</td>
+                  <td>QuangMinh</td>
+                  <td>Huỳnh Văn Bánh, quận Phú Nhuận, Tp.HCM</td>
+                  <td>26/04/2018</td>
+                  <td>620000</td>
+                  <td>Đã giao</td>
+
+                </tr>
+                <tr>
+                  <td>MS050</td>
+                  <td>KhanhLinh</td>
+                  <td>Hai Bà Trưng, quận 1, Tp.HCM</td>
+                  <td>17/04/2018</td>
+                  <td>230000</td>
+                  <td>Đã giao</td>
+
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+
+
+
+</body> --}}

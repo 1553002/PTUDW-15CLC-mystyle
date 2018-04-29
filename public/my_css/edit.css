@@ -1,0 +1,70 @@
+.left-col .profiles .image {
+    width: 45px;
+    height: 45px;
+    overflow: hidden;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 0;
+}
+
+#main h1.have-margin {
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    color: #242424;
+}
+
+
+
+.register-form .form-group .control-label {
+    font-weight: 400;
+    line-height: 34px;
+    width: 100px;
+    float: left;
+    margin-bottom: 0;
+}
+
+.form-group .input-wrap {
+    float: left;
+    width: 70%;
+}
+
+.account-profile .form-group .input-wrap label {
+    display: inline-block;
+    cursor: pointer;
+    font-weight: 400;
+}
+
+#main .group-title{
+    font-size: 16px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.form-row{
+    justify-content: center;
+}
+
+.button,  .form-row-button button {
+    float: right;
+    width: 100px;
+}
+
+.form-row-button button {
+    height: 40px;
+    padding: 0 12px;
+    font-weight: 700;
+    background-color: #000;
+    border: 1px solid #000;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 12px;
+    line-height: normal;
+    letter-spacing: .6px;
+    text-align: center;
+    text-transform: uppercase;
+}   
+
