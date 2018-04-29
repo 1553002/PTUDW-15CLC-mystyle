@@ -15,6 +15,7 @@ var breadcrumbs = require('express-breadcrumbs');
 var expressValidator = require('express-validator'); //Dung de kiem tra dieu kien
 var paginateHelper = require('express-handlebars-paginate');
 var models = require('./models');
+var errorHandler = require('express-error-handler');
 
 var app = express();
 
@@ -59,6 +60,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+if ('development' === app.get('env')) {
+  app.use(errorHandler());
+}
+
 /*------------------------------
                Router
  -----------------------------*/
@@ -93,6 +98,12 @@ app.get('/product-detail', (req, res)=>{
 var adminRouter = require("./routes/admin");
 app.use("/admin", adminRouter);
 
+
+models.sequelize.sync().then(function() {
+  http.createServer(app).listen(app.get('port'), function(){
+    console.log('Express server listening on port ' + app.get('port'));
+  });
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

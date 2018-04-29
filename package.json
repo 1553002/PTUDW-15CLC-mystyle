@@ -12,6 +12,7 @@
     "debug": "^2.6.9",
     "express": "~4.16.0",
     "express-breadcrumbs": "0.0.2",
+    "express-error-handler": "^1.1.0",
     "express-handlebars": "^3.0.0",
     "express-handlebars-paginate": "^1.0.3",
     "express-session": "^1.15.6",
