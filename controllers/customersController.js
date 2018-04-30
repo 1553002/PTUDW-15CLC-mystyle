@@ -17,7 +17,10 @@ controller.createUser = function(user,callback){
 
 controller.getUserByEmail = function(email,callback){
     let Obj = {email : email}
-    models.Customer.findOne({where: Obj})
+    models.Customer
+    .findOne({
+        where: Obj
+    })
     .then(function(user){
         callback(false,user);
     })
