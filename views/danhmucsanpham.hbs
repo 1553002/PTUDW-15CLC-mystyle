@@ -27,7 +27,7 @@
 <div class="container-fluid">
     <div class="panel">
       <div class="panel-heading">
-        <h3 class="panel-title"><i class="fa fa-table"></i> Danh sách sản phẩm</h3>
+        <h3 class="panel-title"><i class="fa fa-table"></i> Danh sách các danh mục sản phẩm</h3>
       </div>
       <div class="panel-body bg-light">
         <form method="POST" id="form-product">
@@ -35,26 +35,18 @@
             <table class="table table-bordered table-hover">
               <thead>
                 <tr>
-                <td class="text-center">Hình mẫu</td>
-                <td class="text-center">Tên sản phẩm</a> </td>
-                <td class="text-center">Thuộc danh mục</a> </td>
-                <td class="text-center">Giá gốc</a> </td>
-                <td class="text-center">Sale-off</a></td>
-                <td class="text-center">Giá giảm</a> </td>
-                <td class="text-center">Tình trạng</a></td>
+                <td class="text-left">Mã danh mục</td>
+                <td class="text-left"> Tên danh mục</td>
+                <td class="text-center">Ngày tạo</td>
                 <td class="text-center">Action</td>
                 </tr>
               </thead>
               <tbody>
-                {{#each products}}
+                {{#each categories}}
                 <tr>
-                  <td class="text-center"><img src={{image1}} alt="" class="img-thumbnail"> </td>
-                  <td class="text-left">{{name}} </td>
-                  <td class="text-left"> {{Category.categoryName}}</td>
-                  <td class="text-right">{{price}}</td>
-                  <td class="text-center">{{discountAvailable}}</td>
-                  <td class="text-right">{{discountPrice}}</td>
-                  <td class="text-center">{{available}}</td>
+                  <td class="text-left">{{id}} </td>
+                  <td class="text-left"> {{categoryName}}</td>
+                  <td class="text-center">{{createdAt}}</td>
                   <td class="text-center">
                     <ul>
                       <li><a href="" data-toggle="tooltip" title="" data-original-title="Edit">Sửa</a></li>
