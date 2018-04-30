@@ -1,0 +1,95 @@
+<div class="modal fade bd-example-modal-lg" id="filemanager">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Chọn hình ...</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="row">
+          <button type="button" data-toggle="tooltip" title="" id="button-upload" class="btn btn-primary" data-original-title="Upload">
+            <i class="fa fa-upload"></i>
+          </button>
+          <button type="button" data-toggle="tooltip" title="" id="button-delete" class="btn btn-danger" data-original-title="Delete">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </div>
+        <div class="col-sm-7">
+          <div class="input-group">
+            <input type="text" name="search" value="" placeholder="Search.." class="form-control">
+            <span class="input-group-btn">
+              <button type="button" data-toggle="tooltip" title="" id="button-search" class="btn btn-primary" data-original-title="Search">
+                <i class="fa fa-search"></i>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <hr>
+        <div class="row">
+
+        </div>
+      </div>
+
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  $(function () {
+    
+    $('#button-upload').on('click', function (evt) {
+      //evt.preventDefault();
+      //$('#form-upload').remove();
+
+      //$('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" id="myfile" name="file[]" value="" multiple="multiple" /></form>');
+
+      //$('#myFile').trigger('click');
+
+      
+    });
+
+    $('#myFile').on('change', function(evt){
+          //evt.preventDefault();
+      
+            var formData = new FormData();
+        
+            var file = evt.target.files[0];
+            console.log(evt.target.files[0]);
+            formData.append('myFile', file);
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('post', '/admin/', true);
+
+            xhr.upload.onprogress = function(e) {
+              console.log("onprogress");
+              //$('#button-upload i').replaceWith('<i class="fa fa-circle-o-notch fa-spin"></i>');
+					    //$('#button-upload').prop('disabled', true);
+            };
+
+            xhr.onerror = function(e) {
+                //showInfo('An error occurred while submitting the form. Maybe your file is too big');
+                console.log("error");
+            };
+            xhr.onload = function(){
+              console.log("onload");
+              //$('#button-upload i').replaceWith('<i class="fa fa-upload"></i>');
+					    //$('#button-upload').prop('disabled', false);
+            };
+            //console.log(formData);
+            xhr.send(formData);
+    })
+  });
+</script>
+
+

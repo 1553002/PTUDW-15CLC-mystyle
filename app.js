@@ -16,7 +16,11 @@ var expressValidator = require('express-validator'); //Dung de kiem tra dieu kie
 var paginateHelper = require('express-handlebars-paginate');
 var models = require('./models');
 var errorHandler = require('express-error-handler');
-var http = require("http");
+var http = require("http"), path = require('path');
+var methodOverride = require('method-override');
+var bodyParser = require('body-parser');
+var multer = require('multer');
+var errorHandler = require('errorhandler');
 
 var app = express();
 
@@ -37,13 +41,22 @@ app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+//app.use(express.json());
+// app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({
+  keepExtensions: true, 
+    extended: false,
+    uploadDir: __dirname + '/tmp',
+    limit: '2mb'
+}));
+
+//app.use(methodOverride());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use('/', indexRouter);
-// app.use('/users', usersRouter);
+
+
 
 app.use(breadcrumbs.init());
 // Set Breadcrumbs home information 
@@ -60,14 +73,13 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-if ('development' === app.get('env')) {
-  app.use(errorHandler());
-}
+app.use(expressValidator());
 
 /*------------------------------
                Router
  -----------------------------*/
+ 
+
 app.get('/sync', function(req, res){
 	models.sequelize.sync().then(function(){
 		res.send('database sync completed!');

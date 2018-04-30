@@ -85,5 +85,10 @@ router.get('/sanpham/them', (req, res)=>{
     });
 });
 
+router.post('/', (req, res)=>{
+    console.log("HELLO");
+    res.end();
+});
+
 
 module.exports = router;

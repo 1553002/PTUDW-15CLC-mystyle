@@ -7,7 +7,6 @@ function closeNav() {
 }
 
 var sourceSwap = function () {
-    console.log("CALL1");
     var $this = $(this);
     var newSource = $this.data('alt-src');
     $this.data('alt-src', $this.attr('src'));

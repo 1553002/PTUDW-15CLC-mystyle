@@ -4,6 +4,14 @@
   {{/if}}
 </head>
 
+<form method="post" action="/">
+    <input type="file" name="myFile" id="myFile" >
+</form>
+
+{{!-- <form enctype="multipart/form-data" id="form-upload" style="display: none;">
+   
+</form> --}}
+
 <div class="page-header">
   <div class="container-fluid">
     <div class="float-right">
@@ -143,6 +151,9 @@
     </div>
 </div>
 
+{{>select-image-modal}}
+{{!-- <label class="btn btn-danger" style="display: block;">'+
+            'Chọn ảnh<input type="file" id="file_'+(i+1)+'" style="display: none;"></label> --}}
 <script>
     $(function(){
         var num_of_loops = 4;
@@ -150,8 +161,8 @@
         for (var i = 0; i < num_of_loops; i++){
             $("#i-product-images").append('<div class="col-md-3" id="product_image_'+(i+1)+'" data-tag="select-image"></div>');
             $("#i-product-images #product_image_"+(i+1)).html('<div class="image-view" id="imgTag_'+(i+1)+'"> <img  src="/image/405038_1_500x500.jpg" atl="Hình mẫu"></div>'+
-            '<label class="btn btn-danger" style="display: block;">'+
-            'Tải ảnh lên<input type="file" id="file_'+(i+1)+'" style="display: none;"></label>');
+            '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filemanager">Open modal</button>'+
+            '<button class="btn btn-warming" style="display: none;">Lưu ảnh</button>');
         }
 
         var selectedImage_1;
@@ -167,7 +178,6 @@
            
             var reader = new FileReader();
                 reader.onload = function(e){
-                 console.log(classTmp.children('img'));
                     $(classTmp.children('img')).attr('src', e.target.result);
                 }
                 reader.readAsDataURL(selectedImage);
@@ -175,8 +185,8 @@
         });
 
 
-       
-       
     });
+
+
     
 </script>

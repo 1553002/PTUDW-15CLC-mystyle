@@ -20,6 +20,7 @@ router.post('/login', passport.authenticate('local', {
 	failureRedirect: '/customer/account/login',
 	failureFlash: true
 }), 
+
 function(req, res){
 	// req.flash('success_message', 'You are now Logged in!!');
 	//   res.redirect('/');
@@ -43,7 +44,9 @@ router.post('/register', function(req, res){
     let dayOB = req.body.day;
 	let password = req.body.password;
 	let cfm_pwd = req.body.cfm_pwd;
-		
+	
+	//console.log(name, password, cfm_pwd);
+
 	req.checkBody('password', 'Mật khẩu bao gồm từ 8 đến 32 ký tự').len(8,32);
 	req.checkBody('cfm_pwd', 'Confirm Password is required').notEmpty();
 	req.checkBody('cfm_pwd', 'Confirm Password Must Matches With Password').equals(password);
@@ -51,6 +54,7 @@ router.post('/register', function(req, res){
 	let errors = req.validationErrors();
 	if(errors)
 	{
+		console.log(errors);
         res.render('login', {anchor:'#profile', errors: errors});
 	}
 	else
