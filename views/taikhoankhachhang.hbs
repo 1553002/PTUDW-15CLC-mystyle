@@ -38,23 +38,18 @@
                 <td class="text-left">Địa chỉ mail</td>
                 <td class="text-left">Họ tên</td>
                 <td class="text-center">Giới tính</td>
-                <td class="text-center">IsAdmin</td>
+                <td class="text-center">isAdmin</td>
                 <td class="text-center">Tình trạng</td>
                 </tr>
               </thead>
               <tbody>
-                {{#each categories}}
+                {{#each customers}}
                 <tr>
-                  <td class="text-left">{{id}} </td>
-                  <td class="text-left"> {{categoryName}}</td>
-                  <td class="text-center">{{createdAt}}</td>
-                  <td class="text-center">
-                    <ul>
-                      <li><a href="" data-toggle="tooltip" title="" data-original-title="Edit">Sửa</a></li>
-                      <li><a href="" data-toggle="tooltip" title="" data-original-title="Delete">Xóa</a></li>
-                    </ul>
-                    
-                  </td>
+                  <td class="text-left">{{email}} </td>
+                  <td class="text-left"> {{fullname}}</td>
+                  <td class="text-center">{{gender}}</td>
+                  <td class="text-center">{{isAdmin}}</td>
+                  <td class="text-center">{{active}}</td>
                 </tr>
                 {{/each}}
               </tbody>
