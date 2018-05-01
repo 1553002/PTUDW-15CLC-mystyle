@@ -47,7 +47,11 @@
                 <tr>
                   <td class="text-left">{{email}} </td>
                   <td class="text-left"> {{fullname}}</td>
-                  <td class="text-center">{{gender}}</td>
+                  {{#if gender}}
+                    <td class="text-center">Nam</td>
+                  {{else}}
+                    <td class="text-center">Nữ</td>
+                  {{/if}}
                   <td class="text-center">{{isAdmin}}</td>
                   <td class="text-center">{{active}}</td>
                 </tr>

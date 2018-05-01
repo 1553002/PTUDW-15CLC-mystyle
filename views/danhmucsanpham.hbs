@@ -49,10 +49,11 @@
                   <td class="text-center">{{createdAt}}</td>
                   <td class="text-center">
                     <ul>
-                      <li><a href="" data-toggle="tooltip" title="" data-original-title="Edit">Sửa</a></li>
-                      <li><a href="" data-toggle="tooltip" title="" data-original-title="Delete">Xóa</a></li>
+                      <li>
+                        <button type="button" class="btn btn-link delete" data-id={{id}}>Xóa</button>
+                        <button type="button" class="btn btn-link edit" data-id={{id}}>Sửa</button>
+                      </li>
                     </ul>
-                    
                   </td>
                 </tr>
                 {{/each}}
