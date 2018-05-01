@@ -112,26 +112,16 @@ router.get('/sanpham/them', (req, res)=>{
 });
 
 //1553025 - CRUD danh muc san pham
-router.post('/', function (req, res) {
-    categoriesController.create(req.body.id, req.body.category, function (categories) {
-        res.sendStatus(201);
-        res.end();
-    });
-});
-
 router.delete('/:id', function (req, res) {
     categoriesController.destroy(req.params.id, function (categories) {
         res.sendStatus(204);
         res.end();
     });
-});
 
-router.put('/:id', function(req, res){
-    categoriesController.update(req.params.id, req.body.category, function (categories) {
-        res.sendStatus(200);
+    productsController.destroy(req.params.id, function (products) {
+        res.sendStatus(204);
         res.end();
     });
 });
-
 
 module.exports = router;

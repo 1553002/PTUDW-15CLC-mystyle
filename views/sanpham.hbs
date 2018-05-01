@@ -52,13 +52,24 @@
                   <td class="text-left">{{name}} </td>
                   <td class="text-left"> {{Category.categoryName}}</td>
                   <td class="text-right">{{price}}</td>
-                  <td class="text-center">{{discountAvailable}}</td>
-                  <td class="text-right">{{discountPrice}}</td>
-                  <td class="text-center">{{available}}</td>
+
+                  {{#if discountAvailable}}
+                    <td class="text-center">{{discount}}%</td>
+                    <td class="text-right">{{discountPrice}}</td>
+                  {{else}}
+                    <td class="text-center">Không giảm giá</td>
+                    <td class="text-right">{{price}}</td>
+                  {{/if}}
+
+                  {{#if available}}
+                    <td class="text-center">Còn hàng</td>
+                  {{else}}
+                    <td class="text-center">Hết hàng</td>
+                  {{/if}}
                   <td class="text-center">
-                    <ul>
-                      <li><a href="" data-toggle="tooltip" title="" data-original-title="Edit">Sửa</a></li>
-                      <li><a href="" data-toggle="tooltip" title="" data-original-title="Delete">Xóa</a></li>
+                   <ul>
+                        <li><a href="" data-toggle="tooltip" title="Xóa sản phẩm này" data-original-title="Delete" class="delete" data-id={{id}}>Xóa</a></li>
+                        <li><a href="" data-toggle="tooltip" title="Sửa sản phẩm này" data-original-title="Edit" class="edit" data-id={{id}}>Sửa</a></li>
                     </ul>
                     
                   </td>
