@@ -30,11 +30,7 @@
         <h3 class="panel-title"><i class="fa fa-table"></i>Chi tiết</h3>
       </div>
       <div class="panel-body bg-light">
-        <form method="POST" id="form-product" class="form-horizontal" action="/admin/sanpham{{sua}}">
-        {{#if productId}}
-            <input type="text" name="product-id" style="display:none;" value="{{productId}}">
-        {{/if}}
-
+        <form method="POST" id="form-product" class="form-horizontal" action="/admin/sanpham">
           <ul class="nav nav-tabs">
               <li><a href="#tab-general" data-toggle="tab">Chung</a></li>
               <li><a href="#tab-attribute" data-toggle="tab">Thuộc tính riêng</a></li>
@@ -46,7 +42,7 @@
                 <div class="form-group row required">
                     <label for="input-product-name" class="col-2 col-form-label control-label">Tên sản phẩm</label>
                     <div class="col-10">
-                        <input class="form-control" name="product_description[1][name]" type="text" placeholder="Tên sản phẩm" id="input-product-name" value="{{productDetail.name}}">
+                        <input class="form-control" name="product_description[1][name]" type="text" placeholder="Tên sản phẩm" id="input-product-name">
                     </div>
                 </div>
                 <div class="form-group row required">
@@ -72,7 +68,7 @@
                 <div class="form-group row required">
                     <label for="input-product-price" class="col-2 col-form-label control-label">Giá gốc</label>
                     <div class="col-10">
-                        <input class="form-control" name="product_description[1][price]" type="text" placeholder="Giá bán của sản phẩm" id="input-product-price" value="{{productDetail.price}}">
+                        <input class="form-control" name="product_description[1][price]" type="text" placeholder="Giá bán của sản phẩm" id="input-product-price">
                     </div>
                 </div>
               </div>
@@ -115,19 +111,7 @@
                     </div>
               </div>
               <div class="tab-pane" id="tab-image">
-                <div id="i-product-images" class="form-group row">
-                    {{#if productDetail}}
-                    <div class="col-md-3" id="product_image_1" data-tag="select-image"><div class="image-view" id="imgTag_1"> <img src="{{productDetail.image1}}" atl="Hình mẫu"></div><input type="text" name="product_image[1][image]" value="{{productDetail.image1}}" style="display:none;"><button class="btn btn-primary" data-toggle="modal" data-target="#filemanager">Chọn ảnh</button></div>
-                    <div class="col-md-3" id="product_image_2" data-tag="select-image"><div class="image-view" id="imgTag_2"> <img src="{{productDetail.image2}}" atl="Hình mẫu"></div><input type="text" name="product_image[2][image]" value="{{productDetail.image2}}" style="display:none;"><button class="btn btn-primary" data-toggle="modal" data-target="#filemanager">Chọn ảnh</button></div>
-                    <div class="col-md-3" id="product_image_3" data-tag="select-image"><div class="image-view" id="imgTag_3"> <img src="{{productDetail.image3}}" atl="Hình mẫu"></div><input type="text" name="product_image[3][image]" value="{{productDetail.image3}}" style="display:none;"><button class="btn btn-primary" data-toggle="modal" data-target="#filemanager">Chọn ảnh</button></div>
-                    <div class="col-md-3" id="product_image_4" data-tag="select-image"><div class="image-view" id="imgTag_4"> <img src="{{productDetail.image4}}" atl="Hình mẫu"></div><input type="text" name="product_image[4][image]" value="{{productDetail.image4}}" style="display:none;"><button class="btn btn-primary" data-toggle="modal" data-target="#filemanager">Chọn ảnh</button></div>
-                    {{else}}
-                    <div class="col-md-3" id="product_image_1" data-tag="select-image"><div class="image-view" id="imgTag_1"> <img src="/image/405038_1_500x500.jpg" atl="Hình mẫu"></div><input type="text" name="product_image[1][image]" value="/image/405038_1_500x500.jpg" style="display:none;"><button class="btn btn-primary" data-toggle="modal" data-target="#filemanager">Chọn ảnh</button></div>
-                    <div class="col-md-3" id="product_image_2" data-tag="select-image"><div class="image-view" id="imgTag_2"> <img src="/image/405038_1_500x500.jpg" atl="Hình mẫu"></div><input type="text" name="product_image[2][image]" value="/image/405038_1_500x500.jpg" style="display:none;"><button class="btn btn-primary" data-toggle="modal" data-target="#filemanager">Chọn ảnh</button></div>
-                    <div class="col-md-3" id="product_image_3" data-tag="select-image"><div class="image-view" id="imgTag_3"> <img src="/image/405038_1_500x500.jpg" atl="Hình mẫu"></div><input type="text" name="product_image[3][image]" value="/image/405038_1_500x500.jpg" style="display:none;"><button class="btn btn-primary" data-toggle="modal" data-target="#filemanager">Chọn ảnh</button></div>
-                    <div class="col-md-3" id="product_image_4" data-tag="select-image"><div class="image-view" id="imgTag_4"> <img src="/image/405038_1_500x500.jpg" atl="Hình mẫu"></div><input type="text" name="product_image[4][image]" value="/image/405038_1_500x500.jpg" style="display:none;"><button class="btn btn-primary" data-toggle="modal" data-target="#filemanager">Chọn ảnh</button></div>
-                    {{/if}}
-                </div>
+                <div id="i-product-images" class="form-group row"></div>
               </div>
               <div class="tab-pane" id="tab-discount">
                 <div class="form-group row required">

@@ -17,10 +17,11 @@ controller.getAll = function (callback){
 controller.getProductDetailById = function (id, callback) {
     models.Product
     .findOne({
+        //attributes: ['color','s','m','l','xl','ProductId'],
         where: {
             id : id
         },
-        include: [models.Supplier, models.Category]
+        include: [models.Supplier]
         
     })
     .then(function (product) {
@@ -56,17 +57,6 @@ controller.destroy = function (id, callback) {
         }
     }).then(function (products) {
         callback(products);
-    });
-};
-
-controller.update = function (id, Obj, callback) {
-    console.log(Obj);
-    models.Product.update(Obj, {
-        where: {
-            id: id
-        }
-    }).then(function (product) {
-        callback(product);
     });
 };
 
