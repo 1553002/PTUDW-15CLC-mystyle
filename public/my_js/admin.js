@@ -20,7 +20,7 @@ function showDialog() {
 
 var index_of_upload_image;
 
-$(function(){
+$(function(){   
     var num_of_loops = 4;
 
     for (var i = 0; i < num_of_loops; i++){
@@ -118,17 +118,17 @@ $('#myFile').on('change', function (evt) {
     xhr.send(formData);
 });
 
-$(document).on('click', '#imagePreview img', function(){
-    alert();
-    var chosenFilename = $(this).attr("data-value");
+// $(document).on('click', '#imagePreview img', function(){
+//     alert();
+//     var chosenFilename = $(this).attr("data-value");
     
-    //Close modal
-    $("[data-dismiss='modal']").click();
-    $(index_of_upload_image).attr('src', '/upload/'+ chosenFilename);
-    console.log(index_of_upload_image.parent().parent().children('input'));
+//     //Close modal
+//     $("[data-dismiss='modal']").click();
+//     $(index_of_upload_image).attr('src', '/upload/'+ chosenFilename);
+//     console.log(index_of_upload_image.parent().parent().children('input'));
 
-    $(index_of_upload_image.parent().parent().children('input')).val('/upload/'+chosenFilename);
-});
+//     $(index_of_upload_image.parent().parent().children('input')).val('/upload/'+chosenFilename);
+// });
 
 $('#input-product-price').on('input', function(e){
     $(this).val(formatCurrency(this.value.replace(/[,VNĐ]/g,'')));
