@@ -18,6 +18,7 @@ function showDialog() {
     dlg.style.top = "150px";
 }
 
+<<<<<<< HEAD
 var index_of_upload_image;
 
 $(function(){
@@ -134,3 +135,19 @@ function formatCurrency(number){
     var n2 = n.replace(/\d\d\d(?!$)/g, "$&,");    
     return  n2.split('').reverse().join('');
 }
+=======
+
+$(document).ready(function () {
+    $('.delete').on('click', function (event) {
+        event.preventDefault();
+        var id = $(this).data('id');
+        $.ajax({
+            url: '/admin/' + id,
+            type: 'DELETE',
+            success: function () {
+                location.reload();
+            }
+        })
+    })
+})
+>>>>>>> dbdd672f60bcb490cdef8c22135118c0f8823542

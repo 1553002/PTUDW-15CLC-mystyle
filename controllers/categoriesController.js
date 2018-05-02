@@ -21,4 +21,15 @@ controller.getAllProductById = function (id, callback) {
             callback(categorie);
         });
 };
+
+controller.destroy = function (id, callback) {
+    models.Category.destroy({
+        where: {
+            id: id
+        }
+    }).then(function (categories) {
+        callback(categories);
+    });
+};
+
 module.exports = controller;
