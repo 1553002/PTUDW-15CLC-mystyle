@@ -7,7 +7,7 @@ var db = require('../models');
 var breadcrumbs = require('express-breadcrumbs');
 var productsController = require('../controllers/productsController');
 var categoriesController = require('../controllers/categoriesController');
-var customerController = require('../controllers/categoriesController');
+var customerController = require('../controllers/customersController');
 var suppliersController = require('../controllers/suppliersController');
 
 router.use(breadcrumbs.init());
@@ -111,10 +111,17 @@ router.get('/sanpham/them', (req, res)=>{
     });
 });
 
-router.post('/', (req, res)=>{
-    console.log("HELLO");
-    res.end();
-});
+//1553025 - CRUD danh muc san pham
+router.delete('/:id', function (req, res) {
+    categoriesController.destroy(req.params.id, function (categories) {
+        res.sendStatus(204);
+        res.end();
+    });
 
+    productsController.destroy(req.params.id, function (products) {
+        res.sendStatus(204);
+        res.end();
+    });
+});
 
 module.exports = router;

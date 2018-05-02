@@ -41,4 +41,16 @@ controller.getProductDetailById = function (id, callback) {
     //     });
 };
 
+
+//1553025 - Xóa sản phẩm
+controller.destroy = function (id, callback) {
+    models.Product.destroy({
+        where: {
+            id: id
+        }
+    }).then(function (products) {
+        callback(products);
+    });
+};
+
 module.exports = controller;

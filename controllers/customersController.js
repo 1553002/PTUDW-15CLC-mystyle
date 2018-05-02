@@ -37,4 +37,23 @@ controller.comparePassword = function(password, hash, callback){
     });
 };
 
+controller.getAll = function(callback){
+    models.Customer.findAll()
+    .then(function(customers){
+        callback(customers);
+    })
+};
+
+controller.getAllUserByEmail = function(email,callback){
+    models.Customer
+    .findOne({
+        where:{
+            email : email
+        },
+    })
+    .then(function (customer) {
+        callback(customer);
+    });
+};
+
 module.exports = controller;
