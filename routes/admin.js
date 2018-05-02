@@ -7,6 +7,7 @@ var db = require('../models');
 var breadcrumbs = require('express-breadcrumbs');
 var productsController = require('../controllers/productsController');
 var categoriesController = require('../controllers/categoriesController');
+var customerController = require('../controllers/categoriesController');
 var suppliersController = require('../controllers/suppliersController');
 
 router.use(breadcrumbs.init());
@@ -60,6 +61,31 @@ router.get('/sanpham', (req, res)=>{
             breadcrumbs: req.breadcrumbs(), 
             products : products,
             title: 'Tất cả sản phẩm'
+        });
+    });
+})
+
+router.get('/danhmucsanpham', (req, res)=>{
+    //Lay toan bo san pham hien co
+    categoriesController.getAll(function(categories){
+        req.breadcrumbs('Tất cả danh mục', '/admin/danhmucsanpham');
+        res.render('danhmucsanpham', { 
+            breadcrumbs: req.breadcrumbs(), 
+            categories : categories,
+            title: 'Tất cả danh mục'
+        });
+    });
+})
+
+
+router.get('/taikhoankhachhang', (req, res)=>{
+    //Lay toan bo san pham hien co
+    customerController.getAll(function(customers){
+        req.breadcrumbs('Tài khoản khách hàng', '/admin/taikhoankhachhang');
+        res.render('taikhoankhachhang', { 
+            breadcrumbs: req.breadcrumbs(), 
+            customers : customers,
+            title: 'Tài khoản khách hàng'
         });
     });
 })
