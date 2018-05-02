@@ -4,18 +4,10 @@
   {{/if}}
 </head>
 
-<form method="post" action="/">
-    <input type="file" name="myFile" id="myFile" >
-</form>
-
-{{!-- <form enctype="multipart/form-data" id="form-upload" style="display: none;">
-   
-</form> --}}
-
 <div class="page-header">
   <div class="container-fluid">
     <div class="float-right">
-      <a href="/admin/sanpham/them" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="Add New">
+      <button type="submit" form="form-product" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="Add New">
         <i class="fa fa-save"></i>
       </a>
     </div>
@@ -38,7 +30,7 @@
         <h3 class="panel-title"><i class="fa fa-table"></i>Chi tiết</h3>
       </div>
       <div class="panel-body bg-light">
-        <form method="POST" id="form-product" class="form-horizontal"   >
+        <form method="POST" id="form-product" class="form-horizontal" action="/admin/sanpham">
           <ul class="nav nav-tabs">
               <li><a href="#tab-general" data-toggle="tab">Chung</a></li>
               <li><a href="#tab-attribute" data-toggle="tab">Thuộc tính riêng</a></li>
@@ -58,7 +50,7 @@
                     <div class="col-10">
                         <select size="1" class="form-control" name="product_description[1][category]" id="input-product-category">
                             {{#each categories}}
-                                <option>{{categoryName}}</option>
+                                <option value="{{id}}">{{categoryName}}</option>
                             {{/each}}
                         </select>
                     </div>
@@ -68,7 +60,7 @@
                     <div class="col-10">
                         <select class="form-control" name="product_description[1][supplier]" id="input-product-supplier">
                             {{#each suppliers}}
-                                <option>{{companyName}}</option>
+                                <option value="{{id}}">{{companyName}}</option>
                             {{/each}}
                         </select>
                     </div>
@@ -120,15 +112,17 @@
                     </div>
               </div>
               <div class="tab-pane" id="tab-image">
-                <div id="i-product-images" class="form-group row"></div>
+                <div id="i-product-images" class="form-group row">
+                    
+                </div>
               </div>
               <div class="tab-pane" id="tab-discount">
                 <div class="form-group row required">
                     <label for="input-discount-status" class="col-2 col-form-label control-label">Trạng thái</label>
                     <div class="col-10">
-                        <select class="form-control" name="product_discount[0][quantity]" id="input-discount-status">
-                            <option>Giảm giá</option>
-                            <option>Không giảm giá</option>
+                        <select class="form-control" name="product_discount[0][status]" id="input-discount-status">
+                            <option value="true">Giảm giá</option>
+                            <option value="false">Không giảm giá</option>
                         </select>
                     </div>
                 </div>
@@ -141,7 +135,7 @@
                 <div class="form-group row required">
                     <label for="input-discount-date" class="col-2 col-form-label control-label">Ngày hết hạn</label>
                     <div class="col-10">
-                        <input class="form-control" name="product_discount[0][date]" type="date" placeholder="Nhập %" id="input-discount-date">
+                        <input class="form-control" name="product_discount[0][date]" type="date" id="input-discount-date">
                     </div>
                 </div>
               </div>
@@ -151,42 +145,11 @@
     </div>
 </div>
 
+<form method="POST" action="/admin/" enctype="multipart/form-data">
+    <input type="file" name="filename" id="myFile" accept="image/*" style="display: none;">
+</form>
+
+
 {{>select-image-modal}}
 {{!-- <label class="btn btn-danger" style="display: block;">'+
             'Chọn ảnh<input type="file" id="file_'+(i+1)+'" style="display: none;"></label> --}}
-<script>
-    $(function(){
-        var num_of_loops = 4;
-
-        for (var i = 0; i < num_of_loops; i++){
-            $("#i-product-images").append('<div class="col-md-3" id="product_image_'+(i+1)+'" data-tag="select-image"></div>');
-            $("#i-product-images #product_image_"+(i+1)).html('<div class="image-view" id="imgTag_'+(i+1)+'"> <img  src="/image/405038_1_500x500.jpg" atl="Hình mẫu"></div>'+
-            '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filemanager">Open modal</button>'+
-            '<button class="btn btn-warming" style="display: none;">Lưu ảnh</button>');
-        }
-
-        var selectedImage_1;
-        var input_1;
-        var selectedImageArray = [];
-
-        $("[data-tag=select-image]").each(function(){
-            $(this).children("label.btn").children(1).on('change', function(){
-                var selectedImage = event.target.files[0];
-                selectedImageArray.push(selectedImage);
-
-            var classTmp = $(this).parent().siblings(0);
-           
-            var reader = new FileReader();
-                reader.onload = function(e){
-                    $(classTmp.children('img')).attr('src', e.target.result);
-                }
-                reader.readAsDataURL(selectedImage);
-            });
-        });
-
-
-    });
-
-
-    
-</script>

@@ -9,6 +9,9 @@ var productsController = require('../controllers/productsController');
 var categoriesController = require('../controllers/categoriesController');
 var customerController = require('../controllers/categoriesController');
 var suppliersController = require('../controllers/suppliersController');
+var modelImageUploadController = require('../controllers/modelImageUploadController');
+
+var crypto = require("crypto");
 
 router.use(breadcrumbs.init());
 // Set Breadcrumbs home information 
@@ -101,20 +104,103 @@ router.get('/sanpham/them', (req, res)=>{
   
         //Lay toan bo danh sach nha cung cap
         suppliersController.getAll((suppliers)=>{
-            res.render('them-san-pham', { 
-                breadcrumbs: req.breadcrumbs(),
-                title: 'Chi tiết sản phẩm',
-                categories: categories,
-                suppliers : suppliers
-            });
+
+            modelImageUploadController.getAll((models)=>{
+
+                //console.log(models);
+                res.render('them-san-pham', { 
+                    breadcrumbs: req.breadcrumbs(),
+                    title: 'Chi tiết sản phẩm',
+                    categories: categories,
+                    suppliers : suppliers,
+                    modelImages : models
+                });
+            })
+           
         })
     });
 });
 
 router.post('/', (req, res)=>{
-    console.log("HELLO");
-    res.end();
+    
+    //console.log(req.body.nameFile);
+    if (req.files){
+        var file = req.files.myFile,
+        //id = crypto.randomBytes(20).toString('hex'),
+        //filename = "mystyle-model-"+id+'.png';
+        filename = req.body.nameFile;
+       // console.log(file);
+        
+        file.mv("./public/upload/"+filename, function(err){
+            if (err){
+              res.send("error occured");
+            }
+            else{
+                modelImageUploadController.create(filename,function(imageloads){
+                    console.log("modelImageUploadController");
+                    console.log('Image is uploaded');
+                });
+              res.end();
+            }
+        });
+    }
 });
 
+router.post('/sanpham', function(req, res){
+    //console.log(req.body);
+    var product_name = req.body['product_description[1][name]'];
+    var product_category = req.body['product_description[1][category]'];
+    var product_supplier = req.body["product_description[1][supplier]"];
+    var product_price = req.body["product_description[1][price]"];
+    var product_sizeS = req.body['product_attribute[0][product_attribute_description][1][s]'];
+    var product_sizeL = req.body['product_attribute[0][product_attribute_description][1][l]'];
+    var product_sizeM = req.body['product_attribute[0][product_attribute_description][1][m]'];
+    var product_sizeXL = req.body['product_attribute[0][product_attribute_description][1][xl]'];
+    var image1 = req.body['product_image[1][image]'];
+    var image2 = req.body['product_image[2][image]'];
+    var image3 = req.body['product_image[3][image]'];
+    var image4 = req.body['product_image[4][image]'];
+    var discount_status = req.body['product_discount[0][status]'];
+    var discount_percent = req.body['product_discount[0][percent]'];
+    var discount_exp = req.body['product_discount[0][date]'];
+    console.log(discount_exp);
+
+    //Note: chưa xử lý TH người dùng ko nhập discount_percent
+    function calDiscountPrice (gia_goc, muc_giam_gia){
+        //Xoa bo toan bo dau ','
+        gia_goc = gia_goc.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '');
+        gia_goc = parseInt(gia_goc);
+        muc_giam_gia = parseInt(muc_giam_gia);
+        return (gia_goc*muc_giam_gia)/100;
+    }
+
+    var discountPrice = calDiscountPrice(product_price, discount_percent);
+    console.log(product_price);
+    var Product = {
+        name:product_name, 
+        CategoryId : product_category, 
+        SupplierId: product_supplier, 
+        price : product_price, 
+        s:product_sizeS, 
+        l:product_sizeL,
+        m:product_sizeM, 
+        xl:product_sizeXL, 
+        image1:image1, 
+        image2:image2, 
+        image3:image3, 
+        image4:image4, 
+        discountPrice: discountPrice,
+        discountAvailable:discount_status, 
+        discount:discount_percent, 
+        salloffExpDate:discount_exp,
+        unit:'cái',
+        available:'true'};
+    
+    console.log(Product);
+    // productsController.create(Product, function(callback){
+    //     console.log(callback);
+    // });
+    res.redirect('/admin/sanpham');
+});
 
 module.exports = router;

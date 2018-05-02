@@ -19,8 +19,9 @@ var errorHandler = require('express-error-handler');
 var http = require("http"), path = require('path');
 var methodOverride = require('method-override');
 var bodyParser = require('body-parser');
-var multer = require('multer');
 var errorHandler = require('errorhandler');
+var upload = require("express-fileupload");
+var flash=require("connect-flash");
 
 var app = express();
 
@@ -42,22 +43,17 @@ app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
 //app.use(express.json());
-// app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json({
-  keepExtensions: true, 
-    extended: false,
-    uploadDir: __dirname + '/tmp',
-    limit: '2mb'
-}));
+//app.use(express.bodyParser());
+// app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-//app.use(methodOverride());
+app.use(methodOverride());
 app.use(cookieParser());
+
 app.use(express.static(path.join(__dirname, 'public')));
-
-
-
-
+console.log("HERRRRRRRRRR");
+console.log(path.join(__dirname, 'public'));
 app.use(breadcrumbs.init());
 // Set Breadcrumbs home information 
 app.use(breadcrumbs.setHome({
@@ -74,6 +70,9 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(expressValidator());
+app.use(upload());
+app.use(flash());
+
 
 /*------------------------------
                Router
@@ -91,6 +90,25 @@ app.all('/*', function (req, res, next) {
   next(); // pass control to the next handler
 });
 
+// app.post('/', (req, res)=>{
+//   //console.log("HHHHHHHHHHHHHHH")
+//   if (req.files){
+//     // console.log(req.files);
+//     var file = req.files.filename,
+//     filename = file.name;
+
+//     file.mv("./public/upload/"+filename, function(err){
+//       if (err){
+//         console.log(err);
+//         res.send("error occured");
+//       }
+//       else{
+//         res.send("done");
+//       }
+//     });
+//   }
+//     //res.send(req.files);
+// });
 var index = require("./routes/index");
 app.use('/', index);
 
@@ -105,7 +123,8 @@ var products = require('./routes/products');
 app.use('/product', products);
 
 app.get('/product-detail', (req, res)=>{
-    res.render('product-detail')
+  console.log(req);
+    //res.render('product-detail')
 })
 
 var adminRouter = require("./routes/admin");
@@ -120,7 +139,7 @@ app.use("/admin", adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+    next(createError(404));
 });
 
 // error handler

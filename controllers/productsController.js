@@ -41,4 +41,11 @@ controller.getProductDetailById = function (id, callback) {
     //     });
 };
 
+
+controller.create = function(Obj, callback){
+    models.Product.create(Obj).then(function(products){
+        callback(products);
+    })
+}
+
 module.exports = controller;

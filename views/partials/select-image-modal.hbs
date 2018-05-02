@@ -11,6 +11,7 @@
       <!-- Modal body -->
       <div class="modal-body">
         <div class="row">
+          <div class="col-sm-3">
           <button type="button" data-toggle="tooltip" title="" id="button-upload" class="btn btn-primary" data-original-title="Upload">
             <i class="fa fa-upload"></i>
           </button>
@@ -28,13 +29,16 @@
             </span>
           </div>
         </div>
-
+        </div>
         <hr>
-        <div class="row">
-
+        <div class="row" id="imagePreview">
+            {{#each modelImages}}
+            <div class="col-md-3">
+              <img src="/upload/{{url}}" style="width: 100%;" data-value="{{url}}">
+            </div>
+            {{/each}}
         </div>
       </div>
-
 
       <!-- Modal footer -->
       <div class="modal-footer">
@@ -45,51 +49,6 @@
   </div>
 </div>
 
-<script>
-  $(function () {
-    
-    $('#button-upload').on('click', function (evt) {
-      //evt.preventDefault();
-      //$('#form-upload').remove();
 
-      //$('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" id="myfile" name="file[]" value="" multiple="multiple" /></form>');
-
-      //$('#myFile').trigger('click');
-
-      
-    });
-
-    $('#myFile').on('change', function(evt){
-          //evt.preventDefault();
-      
-            var formData = new FormData();
-        
-            var file = evt.target.files[0];
-            console.log(evt.target.files[0]);
-            formData.append('myFile', file);
-            var xhr = new XMLHttpRequest();
-
-            xhr.open('post', '/admin/', true);
-
-            xhr.upload.onprogress = function(e) {
-              console.log("onprogress");
-              //$('#button-upload i').replaceWith('<i class="fa fa-circle-o-notch fa-spin"></i>');
-					    //$('#button-upload').prop('disabled', true);
-            };
-
-            xhr.onerror = function(e) {
-                //showInfo('An error occurred while submitting the form. Maybe your file is too big');
-                console.log("error");
-            };
-            xhr.onload = function(){
-              console.log("onload");
-              //$('#button-upload i').replaceWith('<i class="fa fa-upload"></i>');
-					    //$('#button-upload').prop('disabled', false);
-            };
-            //console.log(formData);
-            xhr.send(formData);
-    })
-  });
-</script>
 
 
