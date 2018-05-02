@@ -42,13 +42,13 @@ controller.getProductDetailById = function (id, callback) {
 };
 
 
-<<<<<<< HEAD
+
 controller.create = function(Obj, callback){
     models.Product.create(Obj).then(function(products){
         callback(products);
     })
 }
-=======
+
 //1553025 - Xóa sản phẩm
 controller.destroy = function (id, callback) {
     models.Product.destroy({
@@ -59,6 +59,6 @@ controller.destroy = function (id, callback) {
         callback(products);
     });
 };
->>>>>>> dbdd672f60bcb490cdef8c22135118c0f8823542
+
 
 module.exports = controller;

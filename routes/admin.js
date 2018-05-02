@@ -121,7 +121,7 @@ router.get('/sanpham/them', (req, res)=>{
     });
 });
 
-<<<<<<< HEAD
+
 router.post('/', (req, res)=>{
     
     //console.log(req.body.nameFile);
@@ -198,11 +198,12 @@ router.post('/sanpham', function(req, res){
         available:'true'};
     
     console.log(Product);
-    // productsController.create(Product, function(callback){
-    //     console.log(callback);
-    // });
+    productsController.create(Product, function(callback){
+        console.log(callback);
+    });
     res.redirect('/admin/sanpham');
-=======
+});
+
 //1553025 - CRUD danh muc san pham
 router.delete('/:id', function (req, res) {
     categoriesController.destroy(req.params.id, function (categories) {
@@ -214,7 +215,6 @@ router.delete('/:id', function (req, res) {
         res.sendStatus(204);
         res.end();
     });
->>>>>>> dbdd672f60bcb490cdef8c22135118c0f8823542
 });
 
 module.exports = router;
