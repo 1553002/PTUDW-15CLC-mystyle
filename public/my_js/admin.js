@@ -21,15 +21,15 @@ function showDialog() {
 var index_of_upload_image;
 
 $(function(){   
-    var num_of_loops = 4;
+    // var num_of_loops = 4;
 
-    for (var i = 0; i < num_of_loops; i++){
-        $("#i-product-images").append('<div class="col-md-3" id="product_image_'+(i+1)+'" data-tag="select-image"></div>');
-        $("#i-product-images #product_image_"+(i+1)).html('<div class="image-view" id="imgTag_'+(i+1)+'"> <img  src="/image/405038_1_500x500.jpg" atl="Hình mẫu"></div>'+
-        '<input type="text" name="product_image['+(i+1)+'][image]" value="/upload/405038_1_500x500.jpg" style="display:none;">'+
-        '<button class="btn btn-primary" data-toggle="modal" data-target="#filemanager" data-whatever="@mdo">Chọn ảnh</button>'+
-        '<button class="btn btn-warming" style="display: none;">Lưu ảnh</button>');
-    }
+    // for (var i = 0; i < num_of_loops; i++){
+    //     $("#i-product-images").append('<div class="col-md-3" id="product_image_'+(i+1)+'" data-tag="select-image"></div>');
+    //     $("#i-product-images #product_image_"+(i+1)).html('<div class="image-view" id="imgTag_'+(i+1)+'"> <img  src="/image/405038_1_500x500.jpg" atl="Hình mẫu"></div>'+
+    //     '<input type="text" name="product_image['+(i+1)+'][image]" value="/upload/405038_1_500x500.jpg" style="display:none;">'+
+    //     '<button class="btn btn-primary" data-toggle="modal" data-target="#filemanager" data-whatever="@mdo">Chọn ảnh</button>'+
+    //     '<button class="btn btn-warming" style="display: none;">Lưu ảnh</button>');
+    // }
 
     //Xu ly su kien nut "Chon anh" duoc click
     $("[data-tag=select-image] button.btn ").on('click', function(event){
@@ -106,8 +106,8 @@ $('#myFile').on('change', function (evt) {
 
         console.log("error");
     };
+
     xhr.onload = function () {
-        console.log("onload");
         $('#button-upload i').replaceWith('<i class="fa fa-upload"></i>');
         $('#button-upload').prop('disabled', false);
         $("#imagePreview").append('<div class="col-md-3">'+
@@ -118,17 +118,16 @@ $('#myFile').on('change', function (evt) {
     xhr.send(formData);
 });
 
-// $(document).on('click', '#imagePreview img', function(){
-//     alert();
-//     var chosenFilename = $(this).attr("data-value");
+$(document).on('click', '#imagePreview img', function(){
+    var chosenFilename = $(this).attr("data-value");
     
-//     //Close modal
-//     $("[data-dismiss='modal']").click();
-//     $(index_of_upload_image).attr('src', '/upload/'+ chosenFilename);
-//     console.log(index_of_upload_image.parent().parent().children('input'));
+    //Close modal
+    $("[data-dismiss='modal']").click();
+    $(index_of_upload_image).attr('src', '/upload/'+ chosenFilename);
+    console.log(index_of_upload_image.parent().parent().children('input'));
 
-//     $(index_of_upload_image.parent().parent().children('input')).val('/upload/'+chosenFilename);
-// });
+    $(index_of_upload_image.parent().parent().children('input')).val('/upload/'+chosenFilename);
+});
 
 $('#input-product-price').on('input', function(e){
     $(this).val(formatCurrency(this.value.replace(/[,VNĐ]/g,'')));
