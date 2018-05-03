@@ -1,12 +1,14 @@
 <head>
     <link rel="stylesheet" href="/my_css/design_page.css">
+    <link rel="stylesheet" href="/my_css/spectrum.css">
+
 </head>
 
 <div id="content">
     <div class="container-fluid">
         <div id="tool-top" class="row">
             <div class="tool-top-nav">
-                <a href="#">
+                <a href="#" onclick="Rotate()">
                     <img src="\image\icon-rotate.png">
                     <p>Xoay </p>
                 </a>
@@ -61,14 +63,16 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="thumbnail">
-                                    <img src="https://image.ibb.co/hfJKfS/shirt_1.png" alt="NONE" style="width:120px ; height:120px" onclick="Choose_shirt(this.src)">
+                                    <img src="https://image.ibb.co/hfJKfS/shirt_1.png" alt="https://image.ibb.co/gv8PYc/shirt_1_back.png " 
+                                                     
+                                    style="width:120px ; height:120px" onclick="Choose_shirt(this.src,this.alt)">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="thumbnail">
 
-                                    <img src="https://image.ibb.co/no6Qn7/shirt_2.png" alt="NONE" style="width:120px ; height:120px" onclick="Choose_shirt(this.src)">
-
+                                    <img src="https://image.ibb.co/no6Qn7/shirt_2.png" alt="https://image.ibb.co/kAsJtc/shirt_2_back.png" style="width:120px ; height:120px" onclick="Choose_shirt(this.src,this.alt)">
+                                    
 
                                 </div>
                             </div>
@@ -77,13 +81,13 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="thumbnail">
-                                    <img src="https://image.ibb.co/eVmx0S/shirt_3.png" alt="NONE" style="width:120px ; height:120px" onclick="Choose_shirt(this.src)">
+                                    <img src="https://image.ibb.co/eVmx0S/shirt_3.png" alt="NONE" style="width:120px ; height:120px" onclick="Choose_shirt(this.src,this.alt)">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="thumbnail">
 
-                                    <img src="https://image.ibb.co/cqm0n7/shirt_4.png" alt="NONE" style="width:120px ; height:120px" onclick="Choose_shirt(this.src)">
+                                    <img src="https://image.ibb.co/cqm0n7/shirt_4.png" alt="NONE" style="width:120px ; height:120px" onclick="Choose_shirt(this.src,this.alt)">
 
 
                                 </div>
@@ -177,11 +181,12 @@
                     <div id="Save_as_png" class="tab-pane fade">
                         <div id="image_save_zone_border">
 
-
-                            <img src="\image\icon-refresh.png" class="refesh" onclick="load_design()">
-
+                            
+                           
+                            
                         </div>
-
+                        <img src="\image\icon-refresh.png" class="refesh" onclick="load_design()">
+                        
                         <input id="btn_save_as" class="inputfile" onclick="return save_as()" />
                         <label for="btn_save_as">Lưu dưới dạng .PNG!</label>
 
@@ -192,10 +197,20 @@
             </div>
             <div id="shirt" class="col-md-5">
 
-                <div id="shirt-area">
+                <div id="shirt-area" >
 
-                    <img id="design-shirt" src="https://image.ibb.co/hfJKfS/shirt_1.png" alt="Shirt image">
+                    <img id="design-shirt" src="https://image.ibb.co/hfJKfS/shirt_1.png" alt="https://image.ibb.co/gv8PYc/shirt_1_back.png">
                     <div id="design-area">
+
+
+                    </div>
+
+                </div>
+
+                <div id="shirt-back-area" style="display:none" >
+
+                    <img id="design-back-shirt" src="https://image.ibb.co/gv8PYc/shirt_1_back.png" alt="Shirt image">
+                    <div id="design-back-area">
 
 
                     </div>
@@ -281,10 +296,27 @@
 </div>
 
 </div>
+    <form class="form-inline" post="/" id="addForm">
+        <div class="form-group mr-sm-1 mb-2">
+            <label for="inputComment" class="mr-sm-1">Add a new comment</label>
+            <input type="text" class="form-control" id="inputComment" placeholder="Enter your comment">
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">Sumbit</button>
+    </form>
 
+
+    <ul class="list-group" style="width:500px; overflow:auto">
+        {{#each cartdetails}}
+        <li >
+            author-{{image}}-[{{createdAt}}]
+        </li>
+        {{/each}}
+    </ul>
 
 {{>footer}}
 
 {{!-- 1553023 - javascript --}}
-<script src="/my_js/nhan_js.js"></script>
+<script src="/my_js/design_page.js"></script>
 <script src="/my_js/spectrum.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+<script src="https://superal.github.io/canvas2image/canvas2image.js"></script>

@@ -8,6 +8,8 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+
+
 //1553002
 var session = require('express-session');
 var passport = require('passport'); //Ho tro dang nhap
@@ -36,10 +38,14 @@ var hbs = expressHbs.create(
   }
 )
 
+
+
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
+
+
 
 app.use(logger('dev'));
 //app.use(express.json());
@@ -60,6 +66,7 @@ app.use(breadcrumbs.setHome({
     name: 'Trang chủ',
     url:'/'
 }));
+
 
 app.use(session({
 	secret: "secret",
@@ -85,10 +92,15 @@ app.get('/sync', function(req, res){
     });
 });
 
+
 app.all('/*', function (req, res, next) {
   req.app.locals.layout = 'layout'; // set your layout here
   next(); // pass control to the next handler
 });
+
+
+
+
 
 // app.post('/', (req, res)=>{
 //   //console.log("HHHHHHHHHHHHHHH")
@@ -112,10 +124,13 @@ app.all('/*', function (req, res, next) {
 var index = require("./routes/index");
 app.use('/', index);
 
-app.get('/design', function(req, res){
-  res.render('design');
-});
+var comments = require('./routes/comments');
+app.use('/comments', comments);
 
+
+app.get('/design', function(req, res){
+  res.redirect('/comments');
+});
 var customer = require('./routes/customer');
 app.use('/customer',customer);
 

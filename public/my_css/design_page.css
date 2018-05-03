@@ -229,6 +229,12 @@
     width: 500px;
     display: block;
 }
+#shirt-back-area
+{
+    height: 500px;
+    width: 500px;
+    display: block;
+}
 #design-shirt
 {
     width: 100%;
@@ -237,7 +243,14 @@
     display: block;
    
 }
-
+#design-back-shirt
+{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: block;
+   
+}
 #design-area
 {
 
@@ -257,6 +270,29 @@
  
 }
 
+.hide {
+    position: absolute !important;
+    top: -9999px !important;
+    left: -9999px !important;
+ }
+#design-back-area
+{
+
+
+    width: 260px;
+    height: 77%;
+    margin-left: 24%;
+    margin-top: -85%;
+    position: relative;;
+    border-style: none;
+    border-width: 2px;
+    overflow:hidden ;
+    border-color: rgb(173, 172, 172);
+    padding: 0;
+    z-index: 0;
+   
+ 
+}
 #tool
 {
     margin-left: 70px;
@@ -372,8 +408,7 @@
 
 }
 
-.refesh{
-
+.rotate{
     width: 28px;
     height: 28px;
     border-style: solid;
@@ -382,9 +417,10 @@
     cursor: pointer;
     border-color: rgb(202, 201, 201);
     position: absolute;
-    right: 0;
+    left: 0;
     bottom: 0;
-}   
+}
+
 #text_form
 {
     padding: 5px 10px;
@@ -446,18 +482,7 @@ select
     padding: 0;
     text-align: center;
 }
-#image_save_zone_border
-{
-    text-align: center;
-    width: 100%;
-    height: 65%;
-    border-style:  dotted;
-    border-width: 2px;
-    border-color: rgb(92, 91, 91);
-    margin-bottom: 10px;
-    overflow: hidden;
-    position: relative;
-}
+
 
 .inputfile {
 	width: 0.1px;
@@ -878,8 +903,8 @@ background: white;
    cursor: pointer;
    border-color: rgb(202, 201, 201);
    position: absolute;
-   right: 0;
-   bottom: 0;
+   right: 60px;
+   bottom: 200px;
 }   
 #text_form
 {
@@ -946,7 +971,7 @@ select
    border-color: rgb(92, 91, 91);
    margin-bottom: 10px;
    overflow: hidden;
-position: relative;
+  position: relative;
 }
 #Save_as_png
 {
@@ -956,14 +981,15 @@ position: relative;
 }
 #image_save_zone_border
 {
-   text-align: center;
-   width: 100%;
-   height: 65%;
-   border-style:  dotted;
-   border-width: 2px;
-   border-color: rgb(92, 91, 91);
-   margin-bottom: 10px;
-   overflow: hidden;
+    text-align: center;
+    width: 100%;
+    height: 280px;
+    border-style:  dotted;
+    border-width: 2px;
+    border-color: rgb(92, 91, 91);
+    margin-bottom: 10px;
+    overflow: auto;
+    position: relative;
    
    
 }
