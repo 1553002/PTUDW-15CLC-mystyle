@@ -7,15 +7,16 @@ $(function(){
     var animating = false;
     $(".number-input .btn-touchspin-first").click(function(){
         var cur_quantity = $("#quantity").val();
-        //alert(cur_quantity);
+  
         if (cur_quantity > 1)
             $("#quantity").val(--cur_quantity);
     });
 
     $(".number-input .btn-touchspin-secondary").click(function(){
-        var cur_quantity = $("#quantity").val();
+        var cur_quantity = $("#abc").val();
+        alert(cur_quantity);
         if (cur_quantity < 100)
-            $("#quantity").val(++cur_quantity);
+            $("#abc").val(++cur_quantity);
     });
 
     initCustomization(productCustomization);
@@ -63,21 +64,11 @@ $(function(){
         //Cập nhật lại thẻ mới
         $(this).addClass("selected");
 
-        checkConditionToEnableAddToCartButton();
-    });
-
-    //Xử lý sự kiện nhấn chọn màu áo
-    $(".i-select-color li").on('click', function(){
-        //Xóa thẻ hiện đang được chọn
-        $(".i-select-color li.selected").removeClass("selected");
-        //Cập nhật lại thẻ mới
-        $(this).addClass("selected");
-
-        checkConditionToEnableAddToCartButton();
+        $("#add-to-cart.btn-noradius").prop('disabled', false);
     });
 
     function checkConditionToEnableAddToCartButton(){
-        if ($(".i-select-size li").hasClass("selected") && $(".i-select-color li").hasClass("selected")){
+        if ($(".i-select-size li").hasClass("selected")){
             $("#add-to-cart.btn-noradius").prop('disabled', false);
         }
     }

@@ -59,3 +59,7 @@ function showDialog(){
     dlg.style.left = (winWidth/2) - 480/2 + "px";
     dlg.style.top = "150px";
 }
+
+function addToCart(id){
+    
+}

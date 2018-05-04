@@ -1,59 +1,57 @@
-var controller ={};
+var controller = {};
 var models = require('../models');
 var bcrypt = require('bcryptjs');
 
-controller.createUser = function(user,callback){
-    bcrypt.genSalt(10 , function(err,salt){
-        bcrypt.hash(user.password, salt, function(err,hash){
+controller.createUser = function (user, callback) {
+    bcrypt.genSalt(10, function (err, salt) {
+        bcrypt.hash(user.password, salt, function (err, hash) {
             user.password = hash;
             models.Customer
-            .create(user)
-            .then(function(){
-                callback(err);
-            });
+                .create(user)
+                .then(function () {
+                    callback(err);
+                });
         });
     });
 };
 
-controller.getUserByEmail = function(email,callback){
-    let Obj = {email : email}
+controller.getUserByEmail = function (email, callback) {
     models.Customer
-    .findOne({
-        where: Obj
-    })
-    .then(function(user){
-        callback(false,user);
-    })
-    .catch(function(err)
-    {
-        callback(err,null);   
+        .findById(email)
+        .then(function (user) {
+            callback(false, user);
+        })
+        .catch(function (err) {
+            callback(err, null);
+        });
+};
+
+controller.comparePassword = function (password, hash, cb) {
+    bcrypt.compare(password, hash, function (err, isMatch) {
+        if (err) {
+            return cb(err);
+        }
+        cb(null, isMatch);
     });
 };
 
-controller.comparePassword = function(password, hash, callback){
-    bcrypt.compare(password, hash, function(err,isMatch){
-        if(err) throw err;
-        callback(null, isMatch);
-    });
-};
-
-controller.getAll = function(callback){
+controller.getAll = function (callback) {
     models.Customer.findAll()
-    .then(function(customers){
-        callback(customers);
-    })
+        .then(function (customers) {
+            callback(customers);
+        })
 };
 
-controller.getAllUserByEmail = function(email,callback){
+controller.getAllUserByEmail = function (email, callback) {
     models.Customer
-    .findOne({
-        where:{
-            email : email
-        },
-    })
-    .then(function (customer) {
-        callback(customer);
-    });
+        .findOne({
+            where: {
+                email: email
+            },
+        })
+        .then(function (customer) {
+            callback(customer);
+        });
 };
 
 module.exports = controller;

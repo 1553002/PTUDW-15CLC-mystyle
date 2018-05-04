@@ -533,7 +533,7 @@ nav{
     height: 85px;
     line-height: 60px;
     text-align: center;
-    background: url(../../public/image/btn-special.png) no-repeat;
+    background: url(/image/btn-special.png) no-repeat;
     display: block;
     text-decoration: none;
     align-self: center;
@@ -564,10 +564,6 @@ a.btn-special:hover{
 /*---------------------------------
         Product
 -----------------------------------*/
-.panel .row{
-    margin: 0;
-}
-
 .featured-products .page-heading{
     padding-top: 76px;
     letter-spacing: 0.2em;
@@ -784,13 +780,14 @@ ul.breadcrumb li a::after, .breadcrumb li a::before{
 --------------------*/
 .panel {
     background-color: #ffffff;
-    float: left;
+    /* float: left; */
     overflow: hidden;
 }
 
 .left-panel {
     border-radius: 4px 0 0 4px;
     margin-right: 5px;
+    float: left;
 }
 
 .right-panel {

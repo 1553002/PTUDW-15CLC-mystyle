@@ -9,8 +9,20 @@
                 <span>|</span>
                 <a href="">Theo dõi đơn hàng</a>
                 <span>|</span>
-
-
+                {{#if user}}
+                    <div class='user-profile'>
+                        <a class='user-name'>chào {{user}} </a>
+                        <div class='box'>
+                            <ul class='user-ajax-customer'>
+                                <li><a href='/customer/account/edit' title='Thông tin tài khoản' rel='nofollow'>Thông tin tài khoản</a></li>
+                                <li><a href='' title='Đơn hàng của tôi' rel='nofollow'>Đơn hàng của tôi</a></li>
+                                <li><a href='/customer/account/logout' title='Đăng xuất' rel='nofollow'>Đăng xuất</a></li>
+                                </ul>
+                        </div>
+                    </div>
+                {{else}}
+                    <a href='/customer/account/login'>Đăng nhập </a><span>|</span><a href='/customer/account/login'> Đăng ký </a>
+                {{/if}}
             </div>
         </div>
     </div>
@@ -139,14 +151,14 @@
         </div>
     </div>
 </nav>
-{{#if user}}
+{{!-- {{#if username}}
 <script>
-    $(".right-top-header").append("<div class='user-profile'><a class='user-name'>chào {{user}} </a>" +
-        "<div class='box'><ul class='user-ajax-customer'><li><a href='' title='Thông tin tài khoản' rel='nofollow'>Thông tin tài khoản</a></li><li><a href='' title='Đơn hàng của tôi' rel='nofollow'>Đơn hàng của tôi</a></li>"
+    $(".right-top-header").append("<div class='user-profile'><a class='user-name'>chào {{username}} </a>" +
+        "<div class='box'><ul class='user-ajax-customer'><li><a href='/customer/account/edit' title='Thông tin tài khoản' rel='nofollow'>Thông tin tài khoản</a></li><li><a href='' title='Đơn hàng của tôi' rel='nofollow'>Đơn hàng của tôi</a></li>"
         + "<li><a href='/customer/account/logout' title='Đăng xuất' rel='nofollow'>Đăng xuất</a></li></ul></div></div>");
 </script> {{else}}
 <script>
     $(".right-top-header").append(
         "<a href='/customer/account/login'>Đăng nhập </a><span>|</span><a href='/customer/account/login'> Đăng ký </a>"
     )
-</script> {{/if}}
+</script> {{/if}} --}}

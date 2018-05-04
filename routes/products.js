@@ -15,6 +15,7 @@ var getAllCategories = (req, res) => {
     categoriesController.getAll(function (categories) {
         req.breadcrumbs('Sản phẩm', '/product');
         res.render('product', {
+            title: 'Sản phẩm',
             categories: categories,
             breadcrumbs: req.breadcrumbs(),
             user: username
@@ -47,8 +48,9 @@ router.get('/:id', function (req, res) {
         categoriesController.getAll(function (categories) {
             //res.send(category);
             req.breadcrumbs('Sản phẩm', '/product');
-            req.breadcrumbs(category.CategoryName, '/product/'+category.id);
+            req.breadcrumbs(category.categoryName, '/product/'+category.id);
             res.render('product', {
+                title: 'Sản phẩm-' + category.categoryName,
                 categories: categories,
                 category: category,
                 breadcrumbs: req.breadcrumbs()
@@ -69,7 +71,7 @@ router.get('/:id/:productID', function (req, res) {
       
         req.breadcrumbs('Sản phẩm', '/product');
         req.breadcrumbs(req.params.id, '/product/'+req.params.id);
-        req.breadcrumbs(product.ProductName);
+        req.breadcrumbs(product.name);
         function getDay(date){
             console.log(date);
             var tmp = new Date(date);
@@ -80,6 +82,7 @@ router.get('/:id/:productID', function (req, res) {
         
         console.log(product.ProductDetails);
         res.render('product_detail',{
+            title: 'Sản phẩm-' + product.name,
             product: product,
             breadcrumbs: req.breadcrumbs(),
             user: username

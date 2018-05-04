@@ -11,17 +11,19 @@ var usersRouter = require('./routes/users');
 //1553002
 var session = require('express-session');
 var passport = require('passport'); //Ho tro dang nhap
+var LocalStrategy = require('passport-local').Strategy;
 var breadcrumbs = require('express-breadcrumbs');
 var expressValidator = require('express-validator'); //Dung de kiem tra dieu kien
 var paginateHelper = require('express-handlebars-paginate');
-var models = require('./models');
 var errorHandler = require('express-error-handler');
 var http = require("http"), path = require('path');
 var methodOverride = require('method-override');
-var bodyParser = require('body-parser');
-var errorHandler = require('errorhandler');
-var upload = require("express-fileupload");
-var flash=require("connect-flash");
+var bodyParser    = require('body-parser');
+var errorHandler  = require('errorhandler');
+var upload        = require("express-fileupload");
+var flash         = require("express-flash");
+
+var models = require('./models');
 
 var app = express();
 
@@ -42,18 +44,13 @@ app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
-//app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-//app.use(express.bodyParser());
-// app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(methodOverride());
 app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
-console.log("HERRRRRRRRRR");
-console.log(path.join(__dirname, 'public'));
 app.use(breadcrumbs.init());
 // Set Breadcrumbs home information 
 app.use(breadcrumbs.setHome({
@@ -63,8 +60,12 @@ app.use(breadcrumbs.setHome({
 
 app.use(session({
 	secret: "secret",
-	resave: true,
-	saveUninitialized: true
+	resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 60*60*1000, //in milliseconds
+    httpOnly: true
+  }
 }));
 
 app.use(passport.initialize());
@@ -87,6 +88,7 @@ app.get('/sync', function(req, res){
 
 app.all('/*', function (req, res, next) {
   req.app.locals.layout = 'layout'; // set your layout here
+  res.locals.user = req.user || null;
   next(); // pass control to the next handler
 });
 
@@ -142,12 +144,13 @@ app.use(function(req, res, next) {
     next(createError(404));
 });
 
+
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
+  
   // render the error page
   res.status(err.status || 500);
   res.render('error');
