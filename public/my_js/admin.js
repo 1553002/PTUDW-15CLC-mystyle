@@ -77,7 +77,6 @@ $("#ThemDanhMuc").submit(function (e) {
             CategoryId: category_id
         },
         success: function (respone) {
-            console.log(respone);
             location.reload();
         }
     });
