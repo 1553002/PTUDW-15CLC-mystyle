@@ -32,4 +32,17 @@ controller.destroy = function (id, callback) {
     });
 };
 
+controller.create = function (categoryId, category, callback) {
+    models.Category
+        .create({
+            id: categoryId,
+            categoryName: category,
+            createdAt: new Date(),
+            updatedAt: new Date()
+
+        }).then(function (categories) {
+            callback(categories);
+        });
+};
+
 module.exports = controller;

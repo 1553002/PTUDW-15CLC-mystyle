@@ -27,7 +27,7 @@
 <div class="container-fluid">
     <div class="panel">
       <div class="panel-heading">
-        <h3 class="panel-title"><i class="fa fa-table"></i>Chi tiết</h3>
+        <h3 class="panel-title"><i class="fa fa-table"></i> Chi tiết</h3>
       </div>
       <div class="panel-body bg-light">
         <form method="POST" id="form-product" class="form-horizontal" action="/admin/sanpham{{sua}}">
@@ -90,16 +90,16 @@
                     <tbody>
                         <tr id="attribute-row0">
                             <td class="text-center">
-                                <input type="number" name="product_attribute[0][product_attribute_description][1][s]" placeholder="Số lượng" class="form-control" min='0' max='100'>
+                                <input type="number" name="product_attribute[0][product_attribute_description][1][s]" placeholder="Số lượng" class="form-control" min='0' max='100' value="{{productDetail.s}}">
                             </td>
                             <td class="text-center">
-                                <input type="number" name="product_attribute[0][product_attribute_description][1][m]" placeholder="Số lượng" class="form-control" min='0' max='100'>
+                                <input type="number" name="product_attribute[0][product_attribute_description][1][m]" placeholder="Số lượng" class="form-control" min='0' max='100' value="{{productDetail.m}}">
                             </td>
                             <td class="text-center">
-                                <input type="number" name="product_attribute[0][product_attribute_description][1][l]" placeholder="Số lượng" class="form-control" min='0' max='100'>
+                                <input type="number" name="product_attribute[0][product_attribute_description][1][l]" placeholder="Số lượng" class="form-control" min='0' max='100' value="{{productDetail.l}}">
                             </td>
                             <td class="text-center">
-                                <input type="number" name="product_attribute[0][product_attribute_description][1][xl]" placeholder="Số lượng" class="form-control" min='0' max='100'>
+                                <input type="number" name="product_attribute[0][product_attribute_description][1][xl]" placeholder="Số lượng" class="form-control" min='0' max='100' value="{{productDetail.xl}}">
                             </td>
                         </tr>
                     </tbody>
@@ -142,13 +142,13 @@
                 <div class="form-group row required">
                     <label for="input-discount-percent" class="col-2 col-form-label control-label">Phần trăm giảm giá</label>
                     <div class="col-10">
-                        <input class="form-control" name="product_discount[0][percent]" type="number" placeholder="Nhập %" id="input-discount-percent">
+                        <input class="form-control" name="product_discount[0][percent]" type="number" placeholder="Nhập %" id="input-discount-percent" value="{{productDetail.discount}}">
                     </div>
                 </div>
                 <div class="form-group row required">
                     <label for="input-discount-date" class="col-2 col-form-label control-label">Ngày hết hạn</label>
                     <div class="col-10">
-                        <input class="form-control" name="product_discount[0][date]" type="date" id="input-discount-date">
+                        <input class="form-control" name="product_discount[0][date]" type="date" id="input-discount-date" value="{{productDetail.saleoffExpDate}}">
                     </div>
                 </div>
               </div>

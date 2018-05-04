@@ -29,10 +29,10 @@
       <div class="panel-heading">
         <h3 class="panel-title"><i class="fa fa-table"></i> Danh sách tài khoản khách hàng</h3>
       </div>
-      <div class="panel-body bg-light">
+      <div class="panel-body bg-light card-body">
         <form method="POST" id="form-product">
-          <div class="table-responsive">
-            <table class="table table-bordered table-hover">
+          <div>
+            <table class="table table-bordered table-hover" id="dataTable">
               <thead>
                 <tr>
                 <td class="text-left">Địa chỉ mail</td>
@@ -52,8 +52,27 @@
                   {{else}}
                     <td class="text-center">Nữ</td>
                   {{/if}}
-                  <td class="text-center">{{isAdmin}}</td>
-                  <td class="text-center">{{active}}</td>
+
+                  <td class="text-center">
+                    <form>
+                      {{#if isAdmin}}
+                          <input type="checkbox" name="vehicle" value="true" checked = "checked">
+                      {{else}}
+                          <input type="checkbox" name="vehicle" value="true">
+                      {{/if}}
+                    </form>
+
+                  <td class="text-center">
+                    <form>
+                      {{#if active}}
+                        <input type="radio" name="gender" value="true" checked="checked">Active &emsp; &emsp;
+                        <input type="radio" name="gender" value="false">Inactive
+                      {{else}}
+                        <input type="radio" name="gender" value="true">Active &emsp; &emsp;
+                        <input type="radio" name="gender" value="false" checked="checked">Inactive
+                      {{/if}}
+                    </form>
+                  </td>
                 </tr>
                 {{/each}}
               </tbody>

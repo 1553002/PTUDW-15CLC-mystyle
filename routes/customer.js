@@ -223,8 +223,6 @@ passport.deserializeUser(function(email, done) {
 	//done(null, user);
 });
 
-
-
 router.get('/account/logout', function(req, res){
 	req.logout();
 	req.flash('success_message', 'You are logged out');
@@ -256,7 +254,6 @@ function ensureAuthenticated(req, res, next){
 			}
 		});
 	}else{
-
 		// return res.status(403).send({ 
 		// 	success: false, 
 		// 	message: 'No token provided.' 
