@@ -119,9 +119,9 @@ body{
     word-wrap: break-word;
 }
 
-.i-select-size{
+/* #i-select-size{
     display: inline;
-}
+} */
 
 .i-detail-wrapper .i-detail-main ul li{
     float: left;
