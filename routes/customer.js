@@ -38,8 +38,6 @@ router.get('/account/login', (req, res)=>{
 
 router.post('/account/login', function(req, res, next){
 	passport.authenticate('local', {session: true}, (err, user, info) => {
-		console.log('Login POST: ', err, info);
-
 		//Xay ra loi
 		if (err || !user){
 			req.flash('error', 'Email hoặc mật khẩu không chính xác. Vui lòng kiểm tra lại.');
@@ -54,9 +52,7 @@ router.post('/account/login', function(req, res, next){
 			if (err){
 				res.send(err);
 			}
-			
-			
-
+		
 			const token = jwt.sign({data: user.email}, 'your_jwt_secret' , {
 				expiresIn: 3600 // 1 week
 			  });
@@ -74,7 +70,7 @@ router.post('/account/login', function(req, res, next){
 			//   });
 			// res.setHeader('x-access-token',token);
 			// console.log(res.getHeader('x-access-token'));
-			res.cookie('x-access-token', token);
+			//res.cookie('x-access-token', token);
 			res.redirect("/");
 		});
 	})(req, res, next);	
@@ -145,30 +141,10 @@ router.post('/register', function(req, res){
     
 });
 
-// passport.use(new LocalStrategy(
-// 	{
-// 	usernameField: 'email',
-// 	passwordField: 'password',
-// 	passReqToCallback : true
-// },function(req, email, password, done) {
-// 		console.log(email, password);
-// 	  models.Customer.findById(email, function (err, user) {
-// 		if (err) {	console.log('err'); 
-// 			return done(err); }
-// 		if (!user) {
-// 			console.log('Incorrect username.');
-// 		  return done(null, false, { message: 'Incorrect username.' });
-// 		}
-// 		if (!user.validPassword(password)) {
-// 			console.log('Incorrect password.');
-// 		  return done(null, false, { message: 'Incorrect password.' });
-// 		}
 
-// 		console.log("user", user);
-// 		return done(null, user);
-// 	  });
-// 	}
-// ));
+router.post('/accout/getusers', (req, res)=>{
+	var user_list = [];
+});
 
 passport.use(new LocalStrategy({
 	usernameField: 'email',
@@ -240,28 +216,40 @@ router.get('/account/edit', ensureAuthenticated, (req, res)=>{
 });
 
 function ensureAuthenticated(req, res, next){
-	//console.log(req);
-	var token = req.body.token || req.query.token || req.cookies['x-access-token'];
-	if (token){
-		jwt.verify(token, 'your_jwt_secret', function(err, decoded){
-			if (!err){
-				//var secrets = {"accountNumber" : "938291239","pin" : "11289","account" : "Finance"};	
-				console.log(decoded); 
-				req.decoded = decoded;
-				return next();
-			}else{
-				return res.json({ success: false, message: 'Failed to authenticate token.' }); 
-			}
-		});
+	console.log(req);
+	if (req.isAuthenticated()){
+		next();
 	}else{
-		// return res.status(403).send({ 
-		// 	success: false, 
-		// 	message: 'No token provided.' 
-		//   });
-
-		return res.redirect('/customer/account/login')
+		res.redirect('/customer/account/login');
 	}
 }
+
+// function ensureAuthenticated(req, res, next){
+// 	//console.log(req);
+// 	var token = req.body.token || req.query.token || req.cookies['x-access-token'];
+// 	if (token){
+// 		jwt.verify(token, 'your_jwt_secret', function(err, decoded){
+// 			if (!err){
+// 				//var secrets = {"accountNumber" : "938291239","pin" : "11289","account" : "Finance"};	
+// 				if (decoded.exp <= Date.now())
+// 				{
+// 					res.end('')
+// 				}
+// 				req.decoded = decoded;
+// 				return next();
+// 			}else{
+// 				return res.json({ success: false, message: 'Failed to authenticate token.' }); 
+// 			}
+// 		});
+// 	}else{
+// 		// return res.status(403).send({ 
+// 		// 	success: false, 
+// 		// 	message: 'No token provided.' 
+// 		//   });
+
+// 		return res.redirect('/customer/account/login')
+// 	}
+// }
 
 // router.use(function(req, res, next){
 // 	var token = req.body.token || req.query.token || req.headers['x-access-token'];

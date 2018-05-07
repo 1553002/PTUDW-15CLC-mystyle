@@ -1,0 +1,110 @@
+<link href="/my_css/cart.css" rel="stylesheet">
+
+<div class="container">
+
+    <div class="panel-heading">
+        <span class="panel-title">Giỏ hàng</span>
+        <span>(1 sản phẩm)</span>
+    </div>
+    <div class="panel panel-right">
+        <div class="panel-module">
+            <div class="module-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Thông tin chi tiết sản phẩm</th>
+                            <th scope="col">Số lượng</th>
+                            <th scope="col">Giá bán</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each data}}
+                        <tr class="item-product">
+                            <td class="pd-info-detail">
+                                <dl>
+                                    <dt class="pd-pic">
+                                        <img src="{{img}}">
+                                    </dt>
+                                    <dd class="pd-link">
+                                        <a href="{{url}}" class="lnk-pd-name">{{name}}</a>
+                                    </dd>
+                                </dl>
+                                <dl class="pd-attribute">
+                                    <dt>Kích cỡ: </dt>
+                                    <dd><span>{{size}}</span></dd>
+                                </dl>
+                            </td>
+                            <td>
+                                Hello
+                            </td>
+                            <td class="pd-price">
+                                <span class="value notranslate">{{price}} VNĐ</span>
+                                <span class="unit">/ cái</span> 
+                                <br>
+                                <del class="pd-quantity-comment">{{originalPrice}} VNĐ/cái</del>
+                            </td>
+                            <td class="text-right">
+                                <div class="action">
+                                    <a href="javascript:void(0);" class="btn btn-link btn-item-delete" data-pd-id="{{id}}" data-title="{{name}}">Xóa</a>
+                                </div>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+
+                    <tfoot>
+                        <tr>
+                        <td colspan="5">
+                            <div class="pd-price-info-wrapper float-right" >
+                                        <div class="pd-price-info2">
+                                    <span class="pd-price-title">Tạm tính:</span>
+                                    <span class="pd-price-total ui-cost notranslate">500000 VNĐ</span>
+                                    <div class="pd-price-info3">
+                                        <button class="btn btn-primary">Tiến hành đặt hàng</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        </tr>
+                    </tfoot>
+                </table>
+                {{!--
+                <form action="" method="POST">
+                    {{#each data}}
+                    <div class="shopping-cart-item row">
+                        <div class="col-md-2">
+                            <div class="float-left img-thumbnail-custom">
+                                <p class="image">
+                                    <img class="image-responsive" src="{{img}}">
+                                </p>
+
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="item-info float">
+                                <div class="box-info">
+                                    <a class="name" href="{{url}}">{{name}}</a>
+                                </div>
+
+                            </div>
+                            <p class="action">
+                                <a href="javascript:void(0);" class="btn btn-link btn-item-delete" data-pd-id="{{id}}" data-title="{{name}}">
+                                    Xóa
+                                </a>
+                            </p>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="price-info float-right">
+                                <p class="price">{{price}} VNĐ</p>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </form> --}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/js/product-detail.js"></script>

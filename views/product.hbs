@@ -50,23 +50,23 @@
             <div class="row">
                 {{#each category.Products}}
                 <div class="product-item col-md-4">
-                    <div class="product-wrapper">
+                    <a class="product-wrapper" href="/product/{{../category.id}}/{{id}}" data-id="{{id}}">
                         <div class="product-img">
-                            <a class="img-change" href="/product/ao-thun-co-tron/{{id}}">
+                            <div class="img-change" >
                                 <img src={{image1}} data-alt-src={{image3}} class="bell mx-auto" col="g">
                                 {{!-- <img src={{ProductImage2}} class="bell" style="display:none" col="b"> --}}
                                 <span class="product-badge sale">-{{discount}}%</span>
-                            </a>
+                            </div>
                         </div>
                         <div class="product-info">
-                            <a class="product-name" href="/product">{{name}}</a>
+                            <span class="product-name" href="/product">{{name}}</span>
                             <div class="product-price">
                                 <span class="money money-sale">{{price}}</span>
                                 <span class="money-text">còn</span>
                                 <span class="money">{{discountPrice}}</span>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 {{/each}}
 
@@ -75,3 +75,5 @@
 
     </div>
 </div>
+
+<script type="text/javascript" src="/js/product-detail.js"></script>
