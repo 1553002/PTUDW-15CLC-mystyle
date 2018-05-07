@@ -314,11 +314,19 @@ router.delete('/:id', function (req, res) {
     });
 });
 
-router.post('/themdanhmuc', function (req, res) {
-    categoriesController.create(req.body.CategoryId, req.body.category, function (categories) {
+router.post('/danhmucsanpham/themdanhmuc', function (req, res) {
+    categoriesController.create(req.body.id, req.body.category, function (categories) {
         res.sendStatus(201);
         res.end();
     });
+});
+
+router.post('/taikhoankhachhang/status', function(req,res){
+    console.log(req.body.email, req.body.active);
+    customerController.update(req.body.email, req.body.active, req.body.isAdmin, function(cus){
+        res.end();
+    });
+    
 });
 
 module.exports = router;

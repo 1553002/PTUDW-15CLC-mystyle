@@ -56,4 +56,15 @@ controller.getAllUserByEmail = function(email,callback){
     });
 };
 
+controller.update = function (email, status, admin, callback) {
+    models.Customer.update({active:status, isAdmin: admin}, {
+        where: {
+            email: email
+        }
+    }).then(function (customer) {
+        callback(customer);
+    });
+};
+
+
 module.exports = controller;

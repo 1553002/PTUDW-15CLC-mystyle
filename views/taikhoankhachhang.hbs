@@ -32,7 +32,7 @@
       <div class="panel-body bg-light card-body">
         <form method="POST" id="form-product">
           <div>
-            <table class="table table-bordered table-hover" id="dataTable">
+            <table class="table table-bordered table-hover" id = "dataTable">
               <thead>
                 <tr>
                 <td class="text-left">Địa chỉ mail</td>
@@ -47,29 +47,32 @@
                 <tr>
                   <td class="text-left">{{email}} </td>
                   <td class="text-left"> {{fullname}}</td>
+                  <form data-id= "{{email}}">
                   {{#if gender}}
                     <td class="text-center">Nam</td>
                   {{else}}
                     <td class="text-center">Nữ</td>
                   {{/if}}
-
+</form>
+                
                   <td class="text-center">
-                    <form>
+                   <form data-email= "{{email}}" data-target="change-admin">
                       {{#if isAdmin}}
-                          <input type="checkbox" name="vehicle" value="true" checked = "checked">
+                          <input type="checkbox" name="isAdmin" class="check-admin" checked = "checked">
                       {{else}}
-                          <input type="checkbox" name="vehicle" value="true">
+                          <input type="checkbox" name="isAdmin" class="check-admin">
                       {{/if}}
                     </form>
+                  </td>
 
                   <td class="text-center">
-                    <form>
+                    <form data-id= "{{email}}" data-target="change-status">
                       {{#if active}}
-                        <input type="radio" name="gender" value="true" checked="checked">Active &emsp; &emsp;
-                        <input type="radio" name="gender" value="false">Inactive
+                        <input type="radio" name="status" checked="checked" class="active">Active &emsp; &emsp;
+                        <input type="radio" name="status" class="inactive">Inactive
                       {{else}}
-                        <input type="radio" name="gender" value="true">Active &emsp; &emsp;
-                        <input type="radio" name="gender" value="false" checked="checked">Inactive
+                        <input type="radio" name="status" class="active">Active &emsp; &emsp;
+                        <input type="radio" name="status" class="inactive" checked="checked">Inactive
                       {{/if}}
                     </form>
                   </td>
