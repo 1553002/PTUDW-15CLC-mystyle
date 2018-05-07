@@ -92,7 +92,6 @@ $(function () {
         var cartItems = cart.find('#cart-count'),
             text = parseInt(cartItems.text()) + 1;
         cartItems.text(text);
-
         cartItems.focus();
     }
 
