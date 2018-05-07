@@ -8,14 +8,14 @@ var env       = process.env.NODE_ENV || 'development';
 var config    = require(__dirname + '/../config/config.json')[env];
 //var db        = {};
 
-var database = process.env.DATABASE_URL || 'campeonatodb'
+var db = process.env.DATABASE_URL || 'campeonatodb';
         var sequelize = ""
 
         if (process.env.DATABASE_URL) {
-            sequelize = new Sequelize(database)
+            sequelize = new Sequelize(db)
         }
         else {
-            sequelize = new Sequelize(database, 'postgres', '', {
+            sequelize = new Sequelize(db, 'postgres', '', {
                 dialect: 'postgres'
             });
         }
