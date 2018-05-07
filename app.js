@@ -58,6 +58,7 @@ app.use(breadcrumbs.setHome({
     url:'/'
 }));
 
+
 app.use(session({
 	secret: "secret",
 	resave: false,
@@ -111,6 +112,9 @@ app.all('/*', function (req, res, next) {
 //   }
 //     //res.send(req.files);
 // });
+
+
+
 var index = require("./routes/index");
 app.use('/', index);
 
@@ -124,10 +128,8 @@ app.use('/customer',customer);
 var products = require('./routes/products');
 app.use('/product', products);
 
-app.get('/product-detail', (req, res)=>{
-  console.log(req);
-    //res.render('product-detail')
-})
+var cart = require("./routes/cart");
+app.use('/cart', cart);
 
 var adminRouter = require("./routes/admin");
 app.use("/admin", adminRouter);

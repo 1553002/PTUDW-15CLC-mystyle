@@ -35,27 +35,24 @@
                             <div class="form-wrapper">
                                 <form action="/customer/account/login" method="post" id="login-form">
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label" for="email">Email: </label>
+                                        <label class="col-sm-2 col-form-label" for="email-login">Email:</label>
                                         <div class="col-sm-10">
-                                            <input type="email" class="form-control" placeholder="Nhập Email hoặc số điện thoại" id="email" name="email" required>
+                                            <input type="email" class="form-control" placeholder="Nhập Email đã đăng ký" id="email-login" name="email" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label" for="email">Mật khẩu:</label>
+                                        <label class="col-sm-2 col-form-label" for="password-login">Mật khẩu:</label>
                                         <div class="col-sm-10">
-                                            <input type="password" class="form-control" placeholder="Mật khẩu bao gồm từ 8 đến 32 ký tự" id="password" name="password" required>
+                                            <input type="password" class="form-control" placeholder="Mật khẩu bao gồm từ 8 đến 32 ký tự" id="password-login" name="password" required>
                                         </div>
                                     </div>
                                     <div class="form-row form-row-button">
-                                        <button type="submit" value="Login" name="dwfrm_profile_confirm">
-                                            Đăng nhập
-                                        </button>
+                                        <button type="submit" value="Login" name="dwfrm_profile_confirm">Đăng nhập</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-
                     {{!-- Tao tai khoan --}}
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         {{!-- Neu su dung (novalidate="novalidate") trong tag form thi required mat gia tri --}}
