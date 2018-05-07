@@ -58,30 +58,95 @@ $('.delete').on('click', function (event) {
             location.reload();
         }
     })
+});
+
+
+
+
+$('[data-target="change-status"]').change(function(e){
+    var active;
+    var email = $(this).attr("data-id");
+    console.log("STATUS");
+    if($('[data-id="'+email+'"] input.inactive').is(":checked")){
+        active = false;
+    }else{
+        active = true;
+    }
+
+    console.log(email, $('[data-email="'+email+'"] input').is(':checked'),active);
+
+    $.ajax({
+        url: '/admin/taikhoankhachhang/status',
+        data: JSON.stringify({
+            email: email,
+            isAdmin: $('[data-email="'+email+'"] input').is(':checked'),
+            active: active
+        }),
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        type: 'POST',
+        success: function(respone){
+            console.log(respone);
+        }
+    });
+    e.preventDefault();
+});
+
+
+$('[data-target="change-admin"]').change(function(e){
+    console.log("ADMIN");
+    var admin;
+    var email = $(this).attr("data-email");
+
+
+    if($('[data-email="'+email+'"] .check-admin').is(':checked'))
+        admin = true;
+    else
+        admin = false;
+
+    console.log(email, admin, $('[data-id="'+email+'"] input.active').is(':checked'));
+    $.ajax({
+        url: '/admin/taikhoankhachhang/status',
+        data: JSON.stringify({
+            email: email,
+            isAdmin: admin,
+            active: $('[data-id="'+email+'"] input.active').is(':checked')
+        }),
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        type: 'POST',
+        success: function(respone){
+            console.log(respone);
+        }
+    });
+    e.preventDefault();
+});
+
+$("#them_danh_muc button").click(()=>{
+    $("#them_danh_muc").submit();
 })
 
-
-$("#ThemDanhMuc").submit(function (e) {
+$("#them_danh_muc").submit(function (e) {
+    console.log("HELLO");
     var category = $('#inputCategory').val();
     var category_id = category.toLowerCase();
     category_id = change_alias(category_id);
-    category_id = category_id.split(' ').join('-');;
+    category_id = category_id.split(' ').join('-');
     console.log(category_id);
 
-
     $.ajax({
-        url: '/admin/themdanhmuc',
+        url: '/admin/danhmucsanpham/themdanhmuc',
         type: 'POST',
         data: {
             category: category,
-            CategoryId: category_id
+            id: category_id
         },
         success: function (respone) {
             location.reload();
         }
     });
+    e.preventDefault();
     return false;
-
 });
 
 
