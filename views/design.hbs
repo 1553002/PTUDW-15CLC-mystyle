@@ -240,20 +240,21 @@
                     </p>
 
                     <div id="shirt-color" style="width:200px">
-                        <p>Màu áo: </p>
+                        <p>Số lượng: </p>
+                        <div class="row" style="margin-left:10px; margin-bottom:10px" >
+                            <label for="">Cỡ nhỏ:</label>
+                            <input type="number" value="0" onfocus="ClearPlaceHolder (this)" onblur="SetPlaceHolder (this)" style="width:50px; margin-left:10px"/> 
+                        </div>
+                        
+                        <div class="row" style="margin-left:10px; margin-bottom:10px" >
+                            <label for=""> Cỡ vừa: </label>
+                            <input type="number" value="0" onfocus="ClearPlaceHolder (this)" onblur="SetPlaceHolder (this)" style="width:50px; margin-left:10px"/> 
+                        </div>
+                        <div class="row" style="margin-left:10px;" >
+                            <label for=""> Cỡ lớn: </label>
+                            <input type="number" value="0" onfocus="ClearPlaceHolder (this)" onblur="SetPlaceHolder (this)" style="width:50px; margin-left:10px"/> 
+                        </div>
 
-                        <div class="foo white"></div>
-                        <div class="foo black"></div>
-                        <div class="foo red"></div>
-                        <div class="foo blue"></div>
-                        <div class="foo yellow"></div>
-                        <div class="foo green"></div>
-                        <div class="foo orange"></div>
-                        <div class="foo purple"></div>
-                        <div class="foo brown"></div>
-                        <div class="foo pink"></div>
-                        <div class="foo violet"></div>
-                        <div class="foo gray"></div>
 
 
                     </div>
@@ -284,7 +285,7 @@
 
                 </form>
                 <input id="Design_store" class="inputfile" onclick="return open_Store()" />
-                <label for="Design_store">Tải về máy!</label>
+                <label for="Design_store">Thiết kế của tôi!</label>
 
 
             </div>
@@ -311,17 +312,24 @@
         
         <div class="modal-content">
             <span id="modal_close" class="close" onclick="return close_modal()">&times;</span>
-            <form action="#">
+             <h4 id="shirt-title" style="text-align:center">Thiết kế của tôi</h4>
+            <form action="#" style="overflow-y:auto; overflow-x:hidden">
                 
-                 <h4 id="shirt-title" style="text-align:center">Thiết kế của bạn</h4>
-                <div class="row">
+                
+                    <div  id="modal-image-list" class="row" style="margin-left:5px;">
                     {{#each customproducts}}
           
-                        <img src={{url}} alt="Your design" height="250px" width="250px">
+                        <img id={{id}} src={{url}} alt="Your design" height="240px" width="240px">
    
                     {{/each}}
-                </div>
+                     </div>
             </form>
+            <div class="row" >
+                <button type="button" class="btn btn-default btn-block" style="width:70px;height:35px; margin:7px; margin-left:480px">Thoát</button>
+                <button type="button" class="btn btn-default btn-block" style="width:70px;height:35px;margin:7px">Xóa</button>
+                <button type="button" class="btn btn-default btn-block" style="width:70px;height:35px;margin:7px">Dùng</button>
+            </div>
+            
         </div>
 </div>
 

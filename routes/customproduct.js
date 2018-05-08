@@ -20,7 +20,7 @@ router.post('/', function (req, res) {
 
     img =req.body.hidden_data;
     img_back=req.body.hidden_data_back;
-
+    
    
     
      customproductsController.create(img,img_back,null, function (customproducts) {

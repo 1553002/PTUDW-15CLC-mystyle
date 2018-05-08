@@ -5,7 +5,14 @@ var models = require('../models');
 
 controller.getAll = function (callback) {
     models.CustomProduct
-        .findAll()
+        .findAll(
+            {
+                where: {
+                    account: "nhan@gmail.com"
+                }
+               
+            }
+        )
         .then(function (customproducts) {
             callback(customproducts);
         })
