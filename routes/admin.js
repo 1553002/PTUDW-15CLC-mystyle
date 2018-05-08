@@ -206,7 +206,6 @@ router.post('/sanpham/sua', (req, res)=>{
         unit:'cái',
         available:'true'};
     
-    console.log(id);
 
     productsController.update(id, Product, function(product){
         if (product)
