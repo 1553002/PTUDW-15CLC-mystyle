@@ -11,17 +11,21 @@
   
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "password": "2dd466cb7c436d6579542d751471424a652b231b109e1d11196b54ac70923363",
+    "database": "d94v9vhpn8rirj",
+    "host": "ec2-54-243-63-13.compute-1.amazonaws.com",
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": true
+    }
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "password": "2dd466cb7c436d6579542d751471424a652b231b109e1d11196b54ac70923363",
+    "database": "d94v9vhpn8rirj",
+    "host": "ec2-54-243-63-13.compute-1.amazonaws.com",
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": true
+    }
   }
 }

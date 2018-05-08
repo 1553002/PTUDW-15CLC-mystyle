@@ -183,7 +183,8 @@ router.post('/sanpham/sua', (req, res)=>{
         muc_giam_gia = parseInt(muc_giam_gia);
         return (gia_goc*muc_giam_gia)/100;
     }
-
+    console.log(product_price, discount_percent);
+    
     var discountPrice = calDiscountPrice(product_price, discount_percent);
 
     var Product = {
@@ -273,8 +274,9 @@ router.post('/sanpham', function(req, res){
         return (gia_goc*muc_giam_gia)/100;
     }
 
+    
     var discountPrice = calDiscountPrice(product_price, discount_percent);
-    console.log(product_price);
+
     var Product = {
         name:product_name, 
         CategoryId : product_category, 
