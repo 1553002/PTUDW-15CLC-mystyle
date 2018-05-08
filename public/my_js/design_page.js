@@ -3,6 +3,8 @@
 var index=1;
 var area =document.getElementById("design-area");
 var shirt=document.getElementById("design-shirt");
+var modal = document.getElementById('myModal');
+var span = document.getElementsByClassName("close")[0];
 var fonts = ["Montez","Lobster","Josefin Sans","Shadows Into Light","Pacifico","Amatic SC", "Orbitron", 
 "Rokkitt","Righteous","Dancing Script","Bangers","Chewy","Sigmar One","Architects Daughter","Abril Fatface",
 "Covered By Your Grace","Kaushan Script","Gloria Hallelujah","Satisfy","Lobster Two","Comfortaa","Cinzel","Courgette"];
@@ -438,8 +440,10 @@ function createParent(id)
     return x;
 }
 
-
-
+function open_Store()
+{
+  modal.style.display = "block";
+}
 (function($) {
 
   $.fn.textfill = function(maxFontSize) {
@@ -462,27 +466,64 @@ function createParent(id)
       });
   };
 })(jQuery);
+
+function uploadEx() {
+
+  var dataURL = mycanvas.toDataURL("image/png");
+  var dataURL_back= mycanvas_back.toDataURL("image/png");
+  document.getElementById('hidden_data').value = dataURL;
+  document.getElementById('hidden_data_back').value = dataURL_back;
+
+  var fd = new FormData(document.forms["form1"]);
+
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', '/', true);
+
+  xhr.upload.onprogress = function(e) {
+      if (e.lengthComputable) {
+          var percentComplete = (e.loaded / e.total) * 100;
+          console.log(percentComplete + '% uploaded');
+          alert('Succesfully uploaded');
+          
+      }
+  };
+
+  xhr.onload = function() {
+
+  };
+  xhr.send(fd);
+};
+/*
 (function($) {
   $('#addForm').on('submit', function (event) {
       event.preventDefault();
      
-      var comment = $('#inputComment').val();
-      var commentContent = {};
-      commentContent.comment = comment;
-      $.ajax({
-          url: '/',
-          type: 'POST',
-          data: JSON.stringify(commentContent),
-          contentType: 'application/json',
-          success: function () {
-              location.reload();
-          }
-      });
+      //var url = $('#inputComment').val();
+      var image=mycanvas.toDataURL();
+      //var customproductContent = {};
+     
+     
+      //document.getElementById("demo").value=image;
+      //customproductContent.url  = "AAAA";
+     
+
+       $.ajax({
+        type: 'POST',
+        url: '/',
+        data: '{ "imageData" : "' + Pic + '" }',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function (msg) {
+            alert("Done, Picture Uploaded.");
+        }
+    });
+        
+      
   });
 
 
 })(jQuery);
-
+*/
 var select = document.getElementById("select");
 for(var a = 0; a < fonts.length ; a++){
 	var opt = document.createElement('option');
@@ -700,24 +741,16 @@ function imageIsLoaded(e)
   //Choose_Img(e.target.result);
 };
 
-(function($) {
-  $('#addForm').on('submit', function (event) {
-      event.preventDefault();
-      //alert("AAAA");
-      var image = $('#inputComment').val();
-      //alert(image);
-      var cartdetailsContent = {};
-      cartdetailsContent.image = image;
-      $.ajax({
-          url: '/',
-          type: 'POST',
-          data: JSON.stringify(cartdetailsContent),
-          contentType: 'application/json',
-          success: function () {
-              location.reload();
-          }
-      });
-  });
 
 
-})(jQuery);
+function close_modal()
+{
+  modal.style.display = "none";
+}
+window.onclick = function(event) {
+  if (event.target == modal) {
+      modal.style.display = "none";
+  }
+}
+
+

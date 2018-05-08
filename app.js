@@ -47,6 +47,7 @@ app.set('view engine', 'hbs');
 
 
 
+
 app.use(logger('dev'));
 //app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -124,13 +125,18 @@ app.all('/*', function (req, res, next) {
 var index = require("./routes/index");
 app.use('/', index);
 
-var comments = require('./routes/comments');
-app.use('/comments', comments);
-
+var comments = require('./routes/customproduct');
+app.use('/customproduct', comments);
 
 app.get('/design', function(req, res){
-  res.redirect('/comments');
+  res.redirect('/customproduct');
 });
+
+app.post('/', function(req, res){
+	res.redirect(307 ,'/customproduct');
+})
+
+
 var customer = require('./routes/customer');
 app.use('/customer',customer);
 
