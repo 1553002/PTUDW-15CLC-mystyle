@@ -7,39 +7,10 @@
 <div class="page-header">
   <div class="container-fluid">
     <div class="float-right">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-original-title="Thêm danh mục sản phẩm">
+      <button type="button" id="add-category-btn" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-original-title="Thêm danh mục sản phẩm">
         <i class="fa fa-plus"></i>
       </button>
     </div>
-
-
-    <!--Dialog thêm danh mục sản phẩm -->
-    <div class="container">
-      <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Thông tin danh mục</h4>
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <form id="them_danh_muc" action="/" data-category="ao-thun-tay-dai">
-              <div class="modal-body">
-                <div class="form-group row required">
-                  <label class="col-2 col-form-label control-label">Tên danh mục:</label>
-                  <div class="col-10">
-                    <input class="form-control" type="text" id="inputCategory" placeholder="Tên danh mục">
-                  </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" data-dismiss="modal">Hoàn tất</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
 
     {{#if title}}
     <h1>{{title}}</h1>
@@ -81,11 +52,14 @@
                 <td class="text-center">
                   <ul>
                     <li>
-                      <a href="" data-toggle="tooltip" title="Xóa danh mục này" data-original-title="Delete" class="delete"
-                        data-id={{id}}>Xóa</a>
-                    </li>
-                    <li>
-                      <a href="" data-toggle="tooltip" title="Sửa danh mục này" data-original-title="Edit" class="edit" data-id={{id}}>Sửa</a>
+                      <button type="button" class="btn btn-danger" data-original-title="Xóa danh mục sản phẩm">
+                        <a href="" data-toggle="tooltip" title="Xóa danh mục này" data-original-title="Delete" class="delete" data-id={{id}}>
+                          <i class="fas fa-trash-alt" style="color:white"></i>
+                        </a>
+                      </button>
+                      <button type="button" class="btn btn-primary edit" data-value = "{{categoryName}}" data-id={{id}} data-toggle="modal" data-target="#myModal" data-original-title="Sửa danh mục sản phẩm" title="Sửa danh mục này">
+                        <i class="fas fa-pencil-alt"></i>
+                      </button>
                     </li>
                   </ul>
                 </td>
@@ -95,6 +69,33 @@
           </table>
         </div>
       </form>
+    </div>
+  </div>
+</div>
+
+<!--Dialog thêm danh mục sản phẩm -->
+<div class="container">
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Thông tin danh mục</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <form id="set-category" action="" method="">
+          <div class="modal-body">
+            <div class="form-group row required">
+              <label class="col-2 col-form-label control-label">Tên danh mục:</label>
+              <div class="col-10">
+                <input class="form-control" type="text" id="inputCategory" placeholder="Tên danh mục">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" data-dismiss="modal">Hoàn tất</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>

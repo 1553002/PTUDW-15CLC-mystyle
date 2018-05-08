@@ -330,4 +330,11 @@ router.post('/taikhoankhachhang/status', function(req,res){
     
 });
 
+router.put('/danhmucsanpham/suadanhmuc', function(req,res){
+    categoriesController.update(req.body.old_id, req.body.new_id, req.body.category, function(cus){
+        res.end();
+    });
+    
+});
+
 module.exports = router;
