@@ -168,3 +168,49 @@
     width: 200px;
     float: left;
 }
+
+.border .well {
+    background: #58b712;
+    font-size: 25px;
+    color: #fff;
+    border: none;
+    text-align: center;
+    font-weight: 400;
+    position: relative;
+    border-radius: 5px;
+    width: 150px;
+    margin: auto;
+}
+
+.success{
+    margin-left: auto;
+    margin-right: auto; 
+    display: block;
+    border-radius: 10px;
+    text-align: center;
+    background-color: white;
+}
+
+.panel-body {
+    padding: 5em 15px 0;
+}
+
+div div h3{
+    margin-top: 1em;
+    margin-bottom: 10px;
+    color: red;
+}
+
+div div div p {
+    margin: 8px;
+}
+
+div div div p a {
+    color: blue;
+}
+
+.panel-body .success .content{
+    margin: 1em;
+    margin-bottom: 2.5em;
+}
+
