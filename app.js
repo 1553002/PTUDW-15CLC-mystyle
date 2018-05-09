@@ -23,7 +23,7 @@ var methodOverride = require('method-override');
 var bodyParser    = require('body-parser');
 var errorHandler  = require('errorhandler');
 var upload        = require("express-fileupload");
-var flash         = require("express-flash");
+var flash         = require("connect-flash");
 
 var models = require('./models');
 
@@ -69,10 +69,10 @@ app.use(breadcrumbs.setHome({
 app.use(session({
 	secret: "secret",
 	resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true,
   cookie: {
     maxAge: 60*60*1000, //in milliseconds
-    httpOnly: true
+    // httpOnly: true
   }
 }));
 
@@ -100,31 +100,6 @@ app.all('/*', function (req, res, next) {
   res.locals.user = req.user || null;
   next(); // pass control to the next handler
 });
-
-
-
-
-
-// app.post('/', (req, res)=>{
-//   //console.log("HHHHHHHHHHHHHHH")
-//   if (req.files){
-//     // console.log(req.files);
-//     var file = req.files.filename,
-//     filename = file.name;
-
-//     file.mv("./public/upload/"+filename, function(err){
-//       if (err){
-//         console.log(err);
-//         res.send("error occured");
-//       }
-//       else{
-//         res.send("done");
-//       }
-//     });
-//   }
-//     //res.send(req.files);
-// });
-
 
 
 var index = require("./routes/index");

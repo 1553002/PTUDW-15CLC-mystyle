@@ -33,10 +33,6 @@ router.get('/', (req, res) => {
     res.render('admin_page/admin', { layout: 'admin_layout' });
 })
 
-router.get('/donhang', (req, res) => {
-    res.render("admin_page/donhang");
-});
-
 router.get('/thongke', (req, res) => {
     res.render("admin_page/thongke");
 });
@@ -85,6 +81,19 @@ router.get('/danhmucsanpham', (req, res) => {
             breadcrumbs: req.breadcrumbs(),
             categories: categories,
             title: 'Tất cả danh mục'
+        });
+    });
+})
+
+
+router.get('/donhang', (req, res) => {
+    cartsController.getAll(function (carts) {
+        console.log("Tất cả đơn hàng");
+        req.breadcrumbs('Tất cả đơn hàng', '/admin/donhang');
+        res.render('admin_page/donhang', {
+            breadcrumbs: req.breadcrumbs(),
+            carts: carts,
+            title: 'Tất cả đơn hàng'
         });
     });
 })
@@ -329,6 +338,20 @@ router.post('/danhmucsanpham/themdanhmuc', function (req, res) {
         res.sendStatus(201);
         res.end();
     });
+});
+
+router.get('/donhang/chitietdonhang/:id', function (req, res) {
+    var cartID = req.params.id;
+    console.log(cartID);
+
+    cartsController.getCartById(cartID, function(cart){
+        console.log(cart);
+    })
+
+    // cartsController.create(req.body.id, function (carts) {
+    //     res.sendStatus(201);
+    //     res.end();
+    // });
 });
 
 router.post('/taikhoankhachhang/status', function (req, res) {

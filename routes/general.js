@@ -9,5 +9,10 @@ router.get_quantity_of_items = function(req, res){
     return 0;
 }
 
+router.Convert_price_to_int = function(price_string){
+    return parseInt(price_string.replace(',', ''));
+}
+
+
 
 module.exports = router;

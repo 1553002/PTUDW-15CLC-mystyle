@@ -20,8 +20,30 @@
 }
 
 /*---------------------------------
+        Header Styles
+-----------------------------------*/
+#header-inner {
+    position: relative;
+    height: 85px;
+    margin: 0 auto;
+    width: 990px;
+}
+
+.hd-simple .logo {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 180px;
+    height: 52px;
+}
+
+/*---------------------------------
         Step status Styles
 -----------------------------------*/
+.process-min{
+    margin-bottom: 25px;
+}
+
 .ui-step-normal li {
     list-style: none;
     float: left;

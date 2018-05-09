@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       // defaultValue: DataTypes.UUIDV4,
       // allowNull: false
     },
+    receiver: DataTypes.STRING,
     paymentType: {
       type: DataTypes.ENUM,
       values: ['Thanh toán khi nhận hàng', 'Thẻ nội địa', 'Thẻ quốc tế']
@@ -34,13 +35,14 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Cart.associate = function(models) {
     Cart.belongsTo(models.Customer);
-    //Cart.hasMany(models.CartDetail);
-    Cart.belongsToMany(models.Product, {
-      through: {
-        model: models.CartDetail
-      },
-      foreignKey: 'cartId'
-    });
+    Cart.hasMany(models.CartDetail);
+    // Cart.belongsToMany(models.Product, {
+    //   through: {
+    //     model: models.CartDetail
+    //   },
+    //   foreignKey: 'cartId',
+    //   as: 'ProductDetail'
+    // });
   };
   return Cart;
 };

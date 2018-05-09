@@ -203,7 +203,7 @@ label.code{
     justify-content: flex-end;
 }
 
-.button, .buttonstyle, .product-variations .size-chart-link a, button, input[type=button] {
+.button, .buttonstyle, a[type=button], button, input[type=button] {
     font-weight: 700;
     background-color: #000;
     border: 1px solid #000; 

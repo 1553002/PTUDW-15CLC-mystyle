@@ -111,9 +111,9 @@ router.route('/:categoryId/:productId')
                 id: product_detail.id,
                 url: req.url,
                 img: product_detail.image1,
-                price: product_detail.discountAvailable ? product_detail.discountPrice : product_detail.price,
-                originalPrice: product_detail.price,
+                price: handlerGeneral.Convert_price_to_int(product_detail.discountAvailable ? product_detail.discountPrice : product_detail.price),
                 quantity: order_quantity,
+                total_price : parseInt(order_quantity)*parseInt(price),
                 size: order_size
             }
             
@@ -128,20 +128,22 @@ router.route('/:categoryId/:productId')
             }
 
             var exist = false;
-            var new_money = parseInt(order_quantity)*parseInt(item.price.replace(',',''));
+            //var new_money = parseInt(order_quantity)*parseInt(item.price.replace(',',''));
 
             if (product_list.length > 0){
                 //Kiểm tra mặt hàng đã tồn tại hay chưa
                 for (index in product_list){
                     if (product_list[index].id === item.id && product_list[index].size === item.size){
                         product_list[index].quantity = parseInt(product_list[index].quantity) + parseInt(order_quantity);
+                        product_list[index].total_price = handlerGeneral.Convert_price_to_int(product_list[index].total_price) 
+                        + item.total_price;
                         exist = true;
                     }
                 }
             }
 
             cur_total_quantity += parseInt(order_quantity);
-            cur_money += new_money;
+            cur_money += item.total_price;
 
             //Nếu sp chưa tồn tại trong đơn hàng
             if (!exist){

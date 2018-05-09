@@ -77,50 +77,6 @@
                     </div>
                 </div>
             </div>
-            {{!-- <script>
-                $(function () {
-                    var num = 0;
-                    var data = getCookie('paid-products');
-                    console.log("HERE", data);
-                    if (data != ''){
-                        console.log("HERE", data);
-                        data = JSON.parse(data);
-                        jQuery.each(data, function () {
-                            //console.log(data);
-                            num += parseInt(this.quantity);
-                        });
-                    }
-                    $("#cart-count").html(num);                    
-                })
-
-                function getCookie(cname) {
-                    var name = cname + "=";
-                    var decodedCookie = decodeURIComponent(document.cookie);
-                    var ca = decodedCookie.split(';');
-                    for (var i = 0; i < ca.length; i++) {
-                        var c = ca[i];
-                        while (c.charAt(0) == ' ') {
-                            c = c.substring(1);
-                        }
-                        if (c.indexOf(name) == 0) {
-                            return c.substring(name.length, c.length);
-                        }
-                    }
-                    return "";
-                }
-
-                var parseCookies = function () {
-                    var cookieData = (typeof document.cookie === 'string' ? document.cookie : '').trim();
-
-                    return (cookieData ? cookieData.split(';') : []).reduce(function (cookies, cookieString) {
-                        var cookiePair = cookieString.split('=');
-
-                        cookies[cookiePair[0].trim()] = cookiePair.length > 1 ? cookiePair[1].trim() : '';
-
-                        return cookies;
-                    }, {});
-                };
-            </script> --}}
         </div>
     </div>
 

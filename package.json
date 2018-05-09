@@ -37,6 +37,7 @@
     "passport-local": "^1.0.0",
     "paypal-rest-sdk": "^1.8.1",
     "pg": "^7.4.1",
-    "sequelize": "^4.37.6"
+    "sequelize": "^4.37.6",
+    "vn-payments": "^1.0.3"
   }
 }

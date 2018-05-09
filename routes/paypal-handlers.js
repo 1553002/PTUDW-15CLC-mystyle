@@ -4,8 +4,8 @@ var router = express.Router();
 
 paypal.configure({
   'mode': 'sandbox', //sandbox or live 
-  'client_id': 'AQ2pHzy2mHcLnWIZQMGFmVUL8fNU9teZvr9xfnU7kRv5FP07TRqCq3VNitW0No7RnnAyAkLB7RG_DNZD', // please provide your client id here 
-  'client_secret': 'EKbJA0A4LEwWorjcYcFLjoHZukbUyC8YYhKnR5WMYUIorTxzl1IndgHDczVHTjB6AZ3fmYGV3GZ1fP4y' // provide your client secret here 
+  'client_id': 'AXQ3YqugCYBb0YygbbiRzMxnbyJllJzermVGrTNY0O1wtFUn_7M_w3LbAMSdjM7Nw9dVnXCKxFKRvJn3', // please provide your client id here 
+  'client_secret': 'EMH1w_GYiuEDuDl8OcHJH4x2gMvvUUcsKnyLp0qfQUcbzqZb8oUHSMLKXZUD5yUOiCH0LSm3CEdfNU0D' // provide your client secret here 
 });
 
 // paypal.configure({
@@ -24,8 +24,8 @@ module.exports = {
         "payment_method": "paypal"
       },
       "redirect_urls": {
-        "return_url": `http://${req.headers.host}/payment/paypal/callback`,
-        "cancel_url": `http://${req.headers.host}/err`
+        "return_url": `http://${req.headers.host}/checkout/payment/paypal/callback`,
+        "cancel_url": `http://${req.headers.host}/checkout/payment/err`
       }
     };
     payment.transactions = res.locals.transactions;

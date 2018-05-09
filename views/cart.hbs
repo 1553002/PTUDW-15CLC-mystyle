@@ -1,6 +1,6 @@
 <link href="/my_css/cart.css" rel="stylesheet">
 
-<div class="container default-margin-top" >
+<div class="container default-margin-top">
     <div class="panel-heading">
         <span class="panel-title">Giỏ hàng</span>
         <span>({{number_of_items}} sản phẩm)</span>
@@ -59,9 +59,9 @@
                                     <div class="pd-price-info2">
                                         <span class="pd-price-title">Tạm tính:</span>
                                         <span class="pd-price-total ui-cost notranslate">{{mney}}&nbsp;₫</span>
-                                        
+
                                         <div class="form-row form-row-button">
-                                            <a href="/checkout/shipping-detail">Tiến hành đặt hàng</a>
+                                            <a href="/checkout/shipping-detail" type="button" class="btn" value="Tiến hành đặt hàng">Tiến hành đặt hàng</a> 
                                         </div>
                                     </div>
                                 </div>
@@ -69,39 +69,6 @@
                         </tr>
                     </tfoot>
                 </table>
-                {{!--
-                <form action="" method="POST">
-                    {{#each data}}
-                    <div class="shopping-cart-item row">
-                        <div class="col-md-2">
-                            <div class="float-left img-thumbnail-custom">
-                                <p class="image">
-                                    <img class="image-responsive" src="{{img}}">
-                                </p>
-
-                            </div>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="item-info float">
-                                <div class="box-info">
-                                    <a class="name" href="{{url}}">{{name}}</a>
-                                </div>
-
-                            </div>
-                            <p class="action">
-                                <a href="javascript:void(0);" class="btn btn-link btn-item-delete" data-pd-id="{{id}}" data-title="{{name}}">
-                                    Xóa
-                                </a>
-                            </p>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="price-info float-right">
-                                <p class="price">{{price}} VNĐ</p>
-                            </div>
-                        </div>
-                    </div>
-                    {{/each}}
-                </form> --}}
             </div>
         </div>
     </div>

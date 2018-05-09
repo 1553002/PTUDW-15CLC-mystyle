@@ -689,7 +689,7 @@ a.btn-special:hover{
 }
 
 .product-main .product-item{
-    padding-bottom: 20px;
+    padding-top: 10px;
 }
 
 .product-item:hover{
@@ -737,6 +737,7 @@ a.img-change{
     font-size: 14px;
     padding: 0px 8px;
     position: absolute;
+    margin: 10px 15px 0 0;
     top: 0;
     font-family: 'Montserrat';
 }
@@ -1001,3 +1002,14 @@ ul.breadcrumb li a::after, .breadcrumb li a::before{
     border: 0px;
 }
 
+.help-block {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    color: #737373;
+}
+
+.help-block{
+    color: #a94442;
+    font-size: 11px;
+}

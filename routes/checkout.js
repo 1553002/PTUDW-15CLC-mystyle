@@ -3,19 +3,20 @@ var router = express.Router();
 var session = require('express-session');
 
 var paypal = require('./paypal-handlers');
+var onepay = require('./onepay-handlers');
 
 var handlerGeneral = require('./general');
 var cur_total_quantity = 0, cur_money = 0 , product_list = [];
 
 // Use the session middleware
-router.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
+// router.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
 
 router.get("/*", (req, res, next) => {
     req.app.locals.layout = 'checkout_layout'; // set your layout here
     next();
 })
 
-router.get('/shipping-detail', (req, res) => {
+router.get('/shipping-detail', ensureAuthenticated, (req, res) => {
     res.render('checkout/shipping-detail');
 })
 
@@ -40,11 +41,16 @@ router.get('/payment', (req, res)=>{
 
 router.post('/', (req, res) => {
     var full_name = req.body.full_name, tel = req.body.telephone, address = req.body.address;
-    var shipping_detail = {full_name, tel, address}
-    //req.checkBody('tel', 'Số điện thoại chỉ được chứa 9 - 15 chữ số').len(9, 15);
+	var shipping_detail = {full_name, tel, address}
+	
+	//req.checkBody('tel', 'Số điện thoại chỉ được chứa 9 - 15 chữ số').len(9, 15);
+	req.checkBody('full_name', 'Tên người nhận không được bỏ trống').notEmpty();
+	req.checkBody('address', 'Địa chỉ giao hàng không được bỏ trống').notEmpty();
+
     let errors = req.validationErrors();
     if (errors) {
-        //res.flash({ success: false, message: errors });
+		console.log(errors);
+		//res.flash({ success: false, message: errors });
     }
     else {
         req.session.shipping_detail = shipping_detail;
@@ -56,7 +62,6 @@ router.post('/', (req, res) => {
 
 
 router.post("/payment", (req, res)=>{
-
     get_cart_detail_from_cookie(req, res);
     var cart = {
         "items": product_list,
@@ -76,8 +81,8 @@ router.post("/payment", (req, res)=>{
 		(req.connection.socket ? req.connection.socket.remoteAddress : null);
 
         
-    const amount = parseInt(params.amount,10);
-    
+	//const amount = parseInt(params.amount,10);
+	const amount = parseInt(cart.total);
 	const now = new Date();
 
 	// NOTE: only set the common required fields and optional fields from all gateways here, redundant fields will invalidate the payload schema checker
@@ -108,14 +113,17 @@ router.post("/payment", (req, res)=>{
 
 	// Note: these handler are asynchronous
     let asyncCheckout = null;
-    console.log(cart.total);
 	switch (params.paymentMethod) {
+		case 'onepayDomestic':
+			asyncCheckout = onepay.checkoutOnePayDomestic(req, res);
+			break;
 		case 'paypal':
+			amount = Convert_currency(cart.total, 'VND', 'USD');
 			var transactions = [
                 {
                     "amount": {
-                    "total": cart.total,
-                    "currency": "VND",
+                    "total": Convert_currency(cart.total, 'VND', 'USD'),
+                    "currency": "USD",
                     "details": {
                       "subtotal": cart.total,
                     }
@@ -135,7 +143,7 @@ router.post("/payment", (req, res)=>{
                       "quantity": "3",
                       "price": "265000",
                       "sku": "1",
-                      "currency": "VND"
+                      "currency": "USD"
                       }
                     ],
                     "shipping_address": {
@@ -173,7 +181,7 @@ router.post("/payment", (req, res)=>{
             ];
             //console.log(transactions);
 			res.locals.transactions = transactions;
-			asyncCheckout = paypal.checkoutPaypal(req, res);
+			//asyncCheckout = paypal.checkoutPaypal(req, res);
 			break;
 		default:
 			break;
@@ -199,6 +207,9 @@ router.get('/payment/:gateway/callback', (req, res) => {
 	let asyncFunc = null;
 
 	switch (gateway) {
+		case 'onepaydom':
+			asyncFunc = onepay.callbackOnePayDomestic(req, res);
+			break;
 		case 'paypal':
 			asyncFunc = paypal.callbackPaypal(req, res);
 			break;
@@ -207,18 +218,34 @@ router.get('/payment/:gateway/callback', (req, res) => {
 	}
 
 	if (asyncFunc) {
+		// asyncFunc.then(() => {
+			
+		// 	res.render('result', {
+		// 		title: `Demo NodeJS Payment via ${gateway.toUpperCase()}`,
+		// 		items: cart.items,
+		// 		promo: cart.shipping_discount,
+		// 		currency: res.locals.currency || 'VND'
+		// 	});
+			
+		// })
+		// .catch((err) => {
+		// 	res.send(err);
+		// });
 		asyncFunc.then(() => {
-			
-			res.render('result', {
-				title: `Demo NodeJS Payment via ${gateway.toUpperCase()}`,
-				items: cart.items,
-				promo: cart.shipping_discount,
-				currency: res.locals.currency || 'VND'
+			console.log("YOU HERE");
+			res.render('checkout/result', {
+				title: `MyStyle Payment via ${gateway.toUpperCase()}`,
+				isSucceed: res.locals.isSucceed,
+				email: res.locals.email,
+				orderId: res.locals.orderId,
+				price: res.locals.price,
+				message: res.locals.message,
+				billingStreet: res.locals.billingStreet,
+				billingCountry: res.locals.billingCountry,
+				billingCity: res.locals.billingCity,
+				billingStateProvince: res.locals.billingStateProvince,
+				billingPostalCode: res.locals.billingPostalCode,
 			});
-			
-		})
-		.catch((err) => {
-			res.send(err);
 		});
 	} else {
 		res.send('No callback found');
@@ -247,4 +274,22 @@ function get_cart_detail_from_cookie(req, res){
     }
 }
 
+var rates = [22778.1, 0.000040000];
+var VNDUSD = rates[1],
+USBVND = rates[0];
+
+
+function Convert_currency(amount, convert_from, convert_to){
+	if (convert_from == "VND" && convert_to == "USD"){
+		console.log("VNDUSD", VNDUSD);
+		result = amount * VNDUSD;
+	}else if (convert_from == "USD" && convert_to == "VND"){
+		result = amount * USDVND;
+	}else if (convert_from == convert_to){
+		result = amount;
+	}
+
+	console.log(result);
+	return result;
+}
 module.exports = router;
