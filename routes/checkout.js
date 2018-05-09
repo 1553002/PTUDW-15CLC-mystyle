@@ -118,7 +118,6 @@ router.post("/payment", (req, res)=>{
 			asyncCheckout = onepay.checkoutOnePayDomestic(req, res);
 			break;
 		case 'paypal':
-			amount = Convert_currency(cart.total, 'VND', 'USD');
 			var transactions = [
                 {
                     "amount": {
@@ -292,4 +291,11 @@ function Convert_currency(amount, convert_from, convert_to){
 	console.log(result);
 	return result;
 }
+
+function Convert_currency_for_items(list, convert_from, convert_to){
+	for (index in list){
+		list[index].price
+	}
+}
+
 module.exports = router;
