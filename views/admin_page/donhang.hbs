@@ -1,0 +1,79 @@
+<head>
+  {{#if title}}
+      <title>{{title}}</title>
+  {{/if}}
+</head>
+
+<div class="page-header">
+  <div class="container-fluid">
+    {{#if title}}
+      <h1>{{title}}</h1>
+    {{/if}}
+    <ul class="breadcrumb">
+      {{#each breadcrumbs}}
+      <li>
+        <a href={{this.url}}>{{name}}</a>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+</div>
+
+<div class="container-fluid">
+    <div class="panel">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-table"></i> Danh sách tài khoản khách hàng</h3>
+      </div>
+      <div class="panel-body bg-light card-body">
+        <form method="POST" id="form-product">
+          <div>
+            <table class="table table-bordered table-hover" id = "dataTable">
+              <thead>
+                <tr>
+                <td class="text-left">Mã đơn hàng</td>
+                <td class="text-left">Người nhận</td>
+                <td class="text-center">Địa chỉ giao hàng</td>
+                <td class="text-center">Tổng tiền</td>
+                <td class="text-center">Tình trạng đơn hàng</td>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each customers}}
+                <tr>
+                  <td class="text-left">{{email}} </td>
+                  <td class="text-left"> {{fullname}}</td>
+                  <form data-id= "{{email}}">
+                    {{#if gender}}
+                      <td class="text-center">Nam</td>
+                    {{else}}
+                      <td class="text-center">Nữ</td>
+                    {{/if}}
+                  </form>
+                
+                  <td class="text-center">
+                   <form data-email= "{{email}}" data-target="change-admin">
+                      {{#if isAdmin}}
+                          <input type="checkbox" name="isAdmin" class="check-admin" checked = "checked">
+                      {{else}}
+                          <input type="checkbox" name="isAdmin" class="check-admin">
+                      {{/if}}
+                    </form>
+                  </td>
+
+                  <td class="text-center">
+                    <select>
+                      <option value="Xử lý">Xử lý</option>
+                      <option value="Đóng gói">Đóng gói</option>
+                      <option value="Vận chuyển">Vận chuyển</option>
+                      <option value="Giao hàng thành công">Giao hàng thành công</option>
+                    </select>
+                  </td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
+        </form>
+      </div>
+    </div>
+</div>

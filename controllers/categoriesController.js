@@ -45,4 +45,15 @@ controller.create = function (categoryId, category, callback) {
         });
 };
 
+controller.update = function (old_id, new_id, category, callback) {
+    models.Category.update({id : new_id, categoryName: category}, {
+        where: {
+            id : old_id
+        }
+    }).then(function (category) {
+        callback(category);
+    });
+};
+
+
 module.exports = controller;

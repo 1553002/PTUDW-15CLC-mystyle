@@ -19,6 +19,10 @@ router.get('/shipping-detail', (req, res) => {
     res.render('checkout/shipping-detail');
 })
 
+router.get('/success', (req, res) => {
+    res.render('checkout/success');
+})
+
 router.get('/payment', (req, res)=>{
     // var data = JSON.parse(req.cookies['paid-products'].toString());
     // var product_list = JSON.parse(data.product_list.toString());
