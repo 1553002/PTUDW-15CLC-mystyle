@@ -857,6 +857,11 @@ function Choose_Img_Modal(id)
 
 function Use_design()
 {
-  
+  close_modal();
+  $('.nhan_image').remove();
   Choose_shirt_from_modal(img_modal.src,img_modal.alt);
+  load_design();
+  
+
+
 }
