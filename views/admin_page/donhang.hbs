@@ -33,41 +33,20 @@
                 <td class="text-left">Mã đơn hàng</td>
                 <td class="text-left">Người nhận</td>
                 <td class="text-center">Địa chỉ giao hàng</td>
+                <td class="text-center">Ngày giao hàng</td>
                 <td class="text-center">Tổng tiền</td>
-                <td class="text-center">Tình trạng đơn hàng</td>
                 </tr>
               </thead>
               <tbody>
-                {{#each customers}}
+                {{#each carts}}
                 <tr>
-                  <td class="text-left">{{email}} </td>
-                  <td class="text-left"> {{fullname}}</td>
-                  <form data-id= "{{email}}">
-                    {{#if gender}}
-                      <td class="text-center">Nam</td>
-                    {{else}}
-                      <td class="text-center">Nữ</td>
-                    {{/if}}
-                  </form>
-                
-                  <td class="text-center">
-                   <form data-email= "{{email}}" data-target="change-admin">
-                      {{#if isAdmin}}
-                          <input type="checkbox" name="isAdmin" class="check-admin" checked = "checked">
-                      {{else}}
-                          <input type="checkbox" name="isAdmin" class="check-admin">
-                      {{/if}}
-                    </form>
+                  <td class="text-left">
+                    <a class="detail" data-id={{id}} data-toggle="modal" href="#myModal">{{id}}</a>
                   </td>
-
-                  <td class="text-center">
-                    <select>
-                      <option value="Xử lý">Xử lý</option>
-                      <option value="Đóng gói">Đóng gói</option>
-                      <option value="Vận chuyển">Vận chuyển</option>
-                      <option value="Giao hàng thành công">Giao hàng thành công</option>
-                    </select>
-                  </td>
+                  <td class="text-left">{{receiver}}</td>
+                  <td class="text-left">{{receiveAddress}}</td>
+                  <td class="text-left">{{deliveryDate}}</td>
+                  <td class="text-left">{{total}}</td>
                 </tr>
                 {{/each}}
               </tbody>
@@ -76,4 +55,43 @@
         </form>
       </div>
     </div>
+</div>
+
+
+<!--Dialog thêm danh mục sản phẩm -->
+<div class="container">
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Chi tiết đơn hàng</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <form id="set-category" action="" method="">
+          <div class="modal-body">
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                <td class="text-left">Hình ảnh minh họa</td>
+                <td class="text-left">Số lượng</td>
+                <td class="text-center">Đơn giá</td>
+                <td class="text-center">Thành tiền</td>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each carts}}
+                <tr>
+                  <td class="text-center"><img src={{image1}} alt="" class="img-thumbnail"> </td>
+                  <td class="text-left">{{CartDetail.cartId}} </td>
+                  <td class="text-left"> {{Category.categoryName}}</td>
+                  <td class="text-right">{{price}}</td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
