@@ -1,6 +1,6 @@
 var controller = {};
 
-var models = require('../model');
+var models = require('../models');
 
 controller.getAll = function(callback){
     models.Cart.findAll()

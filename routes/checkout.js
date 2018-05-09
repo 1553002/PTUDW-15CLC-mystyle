@@ -118,10 +118,11 @@ router.post("/payment", (req, res)=>{
 			asyncCheckout = onepay.checkoutOnePayDomestic(req, res);
 			break;
 		case 'paypal':
+			amount = Convert_currency(cart.total, 'VND', 'USD');
 			var transactions = [
                 {
                     "amount": {
-                    "total": cart.total,
+                    "total": Convert_currency(cart.total, 'VND', 'USD'),
                     "currency": "USD",
                     "details": {
                       "subtotal": cart.total,
@@ -180,7 +181,7 @@ router.post("/payment", (req, res)=>{
             ];
             //console.log(transactions);
 			res.locals.transactions = transactions;
-			asyncCheckout = paypal.checkoutPaypal(req, res);
+			//asyncCheckout = paypal.checkoutPaypal(req, res);
 			break;
 		default:
 			break;
@@ -273,4 +274,22 @@ function get_cart_detail_from_cookie(req, res){
     }
 }
 
+var rates = [22778.1, 0.000040000];
+var VNDUSD = rates[1],
+USBVND = rates[0];
+
+
+function Convert_currency(amount, convert_from, convert_to){
+	if (convert_from == "VND" && convert_to == "USD"){
+		console.log("VNDUSD", VNDUSD);
+		result = amount * VNDUSD;
+	}else if (convert_from == "USD" && convert_to == "VND"){
+		result = amount * USDVND;
+	}else if (convert_from == convert_to){
+		result = amount;
+	}
+
+	console.log(result);
+	return result;
+}
 module.exports = router;
