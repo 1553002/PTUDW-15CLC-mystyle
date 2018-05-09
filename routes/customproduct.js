@@ -26,10 +26,17 @@ router.post('/', function (req, res) {
      customproductsController.create(img,img_back,null, function (customproducts) {
      res.sendStatus(201);
      res.end();
-});
+    });
 
 
     
+});
+
+router.delete('/:id', function (req, res) {
+         customproductsController.destroy(parseInt(req.params.id), function (customproducts) {
+        res.sendStatus(204);
+        res.end();
+    });
 });
 
 

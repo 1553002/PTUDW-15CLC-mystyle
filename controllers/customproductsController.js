@@ -33,6 +33,15 @@ controller.create = function (url,url1,url2, callback) {
         });
 };
 
+controller.destroy = function (id, callback) {
+    models.CustomProduct.destroy({
+        where: {
+            id: id
+        }
+    }).then(function (customproducts) {
+        callback(customproducts);
+    });
+};
 
 
 module.exports = controller;

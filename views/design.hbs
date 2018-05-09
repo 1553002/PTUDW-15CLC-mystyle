@@ -319,15 +319,15 @@
                     <div  id="modal-image-list" class="row" style="margin-left:5px;">
                     {{#each customproducts}}
           
-                        <img id={{id}} src={{url}} alt="Your design" height="240px" width="240px">
-   
+                        <img id={{id}} src={{url}} alt={{url1}} class="modal_image" height="240px" width="240px" onclick="Choose_Img_Modal(this.id)">
+
                     {{/each}}
                      </div>
             </form>
             <div class="row" >
-                <button type="button" class="btn btn-default btn-block" style="width:70px;height:35px; margin:7px; margin-left:480px">Thoát</button>
-                <button type="button" class="btn btn-default btn-block" style="width:70px;height:35px;margin:7px">Xóa</button>
-                <button type="button" class="btn btn-default btn-block" style="width:70px;height:35px;margin:7px">Dùng</button>
+                <button id="btn_modal_close"  type="button" class="btn btn-default btn-block active" style="position: absolute; width:70px;height:35px; margin:7px;margin-left:480px ">Thoát</button>
+                <button id="btn_modal_delete"  type="button" class="btn btn-default btn-block disabled" style="position: absolute; width:70px;height:35px;margin:7px;margin-left:580px">Xóa</button>
+                <button id="btn_modal_use" onclick="return Use_design()" type="button" class="btn btn-default btn-block disabled" style="position: absolute; width:70px;height:35px;margin:7px;margin-left:680px">Dùng</button>
             </div>
             
         </div>
@@ -337,6 +337,7 @@
     
 
 {{>footer}}
+
 
 {{!-- 1553023 - javascript --}}
 <script src="/my_js/design_page.js"></script>
