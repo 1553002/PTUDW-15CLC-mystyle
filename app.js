@@ -8,6 +8,8 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+
+
 //1553002
 var session = require('express-session');
 var passport = require('passport'); //Ho tro dang nhap
@@ -38,10 +40,15 @@ var hbs = expressHbs.create(
   }
 )
 
+
+
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
+
+
+
 
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -87,11 +94,16 @@ app.get('/sync', function(req, res){
     });
 });
 
+
 app.all('/*', function (req, res, next) {
   req.app.locals.layout = 'layout'; // set your layout here
   res.locals.user = req.user || null;
   next(); // pass control to the next handler
 });
+
+
+
+
 
 // app.post('/', (req, res)=>{
 //   //console.log("HHHHHHHHHHHHHHH")
@@ -118,9 +130,17 @@ app.all('/*', function (req, res, next) {
 var index = require("./routes/index");
 app.use('/', index);
 
+var comments = require('./routes/customproduct');
+app.use('/customproduct', comments);
+
 app.get('/design', function(req, res){
-  res.render('design');
+  res.redirect('/customproduct');
 });
+
+app.post('/', function(req, res){
+	res.redirect(307 ,'/customproduct');
+})
+
 
 var customer = require('./routes/customer');
 app.use('/customer',customer);
