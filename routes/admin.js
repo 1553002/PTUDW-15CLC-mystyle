@@ -10,6 +10,7 @@ var categoriesController = require('../controllers/categoriesController');
 var customerController = require('../controllers/customersController');
 var suppliersController = require('../controllers/suppliersController');
 var modelImageUploadController = require('../controllers/modelImageUploadController');
+var cartsController = require('../controllers/cartsController');
 
 var crypto = require("crypto");
 
@@ -29,15 +30,23 @@ router.all('/*', function (req, res, next) {
 });
 
 router.get('/', (req, res) => {
-    res.render('admin', { layout: 'admin_layout' });
+    res.render('admin_page/admin', { layout: 'admin_layout' });
 })
 
+router.get('/donhang', (req, res) => {
+    res.render("admin_page/donhang");
+});
+
+router.get('/thongke', (req, res) => {
+    res.render("admin_page/thongke");
+});
+
 router.get('/dangnhap', (req, res) => {
-    res.render("dangnhap", { layout: false });
+    res.render("admin_page/dangnhap", { layout: false });
 });
 
 router.get('/dangki', (req, res) => {
-    res.render("dangki", { layout: false });
+    res.render("admin_page/dangki", { layout: false });
 });
 
 router.get('/sanpham', (req, res) => {
@@ -60,7 +69,7 @@ router.get('/sanpham', (req, res) => {
         // products = products.slice(offset, offset + limit);
 
         req.breadcrumbs('Tất cả sản phẩm', '/admin/sanpham');
-        res.render('sanpham', {
+        res.render('admin_page/sanpham', {
             breadcrumbs: req.breadcrumbs(),
             products: products,
             title: 'Tất cả sản phẩm'
@@ -72,7 +81,7 @@ router.get('/danhmucsanpham', (req, res) => {
     //Lay toan bo san pham hien co
     categoriesController.getAll(function (categories) {
         req.breadcrumbs('Tất cả danh mục', '/admin/danhmucsanpham');
-        res.render('danhmucsanpham', {
+        res.render('admin_page/danhmucsanpham', {
             breadcrumbs: req.breadcrumbs(),
             categories: categories,
             title: 'Tất cả danh mục'
@@ -85,7 +94,7 @@ router.get('/taikhoankhachhang', (req, res) => {
     //Lay toan bo san pham hien co
     customerController.getAll(function (customers) {
         req.breadcrumbs('Tài khoản khách hàng', '/admin/taikhoankhachhang');
-        res.render('taikhoankhachhang', {
+        res.render('admin_page/taikhoankhachhang', {
             breadcrumbs: req.breadcrumbs(),
             customers: customers,
             title: 'Tài khoản khách hàng'
@@ -109,7 +118,7 @@ router.get('/sanpham/them', (req, res) => {
                 //Cua ham sua => phai goi them ham lay thong tin cua san pham XXX
 
                 //console.log(models);
-                res.render('them-san-pham', {
+                res.render('admin_page/them-san-pham', {
                     breadcrumbs: req.breadcrumbs(),
                     title: 'Chi tiết sản phẩm',
                     categories: categories,
@@ -141,7 +150,7 @@ router.get('/sanpham/sua/:id', (req, res) => {
 
                     console.log(req.params.id);
 
-                    res.render('them-san-pham', {
+                    res.render('admin_page/them-san-pham', {
                         breadcrumbs: req.breadcrumbs(),
                         title: 'Chi tiết sản phẩm',
                         categories: categories,
