@@ -23,10 +23,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     receiveAddress: DataTypes.STRING,
     total: DataTypes.STRING,
+    delete : DataTypes.BOOLEAN,
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE,
-      defaultValue: sequelize.literal('NOW()')
+      defaultValue: sequelize.literal('NOW()::date')
     },
     updatedAt: {
       allowNull: true,
