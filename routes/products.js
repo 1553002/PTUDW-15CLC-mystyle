@@ -3,6 +3,7 @@ var router = express.Router();
 
 var categoriesController = require('../controllers/categoriesController');
 var productsController = require('../controllers/productsController');
+var handlerGeneral = require('./general');
 
 var getAllCategories = (req, res) => {
     var isLogin = req.isAuthenticated();
@@ -18,11 +19,17 @@ var getAllCategories = (req, res) => {
             title: 'Sản phẩm',
             categories: categories,
             breadcrumbs: req.breadcrumbs(),
+            number_of_items: handlerGeneral.get_quantity_of_items(req, res),
             user: username
         });
     });
 }
 
+// router.get('/*', (req, res, next)=>{
+//     res.json({
+//         number_of_items: res.locals.nums});
+//     next();
+// })
 
 router.get('/', getAllCategories);
 
@@ -51,6 +58,7 @@ router.get('/:id', function (req, res) {
                 title: 'Sản phẩm-' + category.categoryName,
                 categories: categories,
                 category: category,
+                number_of_items: handlerGeneral.get_quantity_of_items(req, res),
                 breadcrumbs: req.breadcrumbs()
             });
         });
@@ -61,7 +69,6 @@ var product_detail;
 router.route('/:categoryId/:productId')
     .all(function(req, res, next){
         productsController.getProductDetailById(req.params.productId, function (product) {
-            console.log("Get_product_detail CALLED");
             product_detail = product;
             if (product_detail != 'undifined' && product_detail != null){
                 next();
@@ -79,6 +86,7 @@ router.route('/:categoryId/:productId')
         res.render('product_detail', {
             title: 'Sản phẩm-' + product_detail.name,
             product: product_detail,
+            number_of_items: handlerGeneral.get_quantity_of_items(req, res),
             breadcrumbs: req.breadcrumbs()
         })
     })
@@ -86,7 +94,7 @@ router.route('/:categoryId/:productId')
         var cookie = req.cookies['paid-products'];
         let order_quantity = req.body.data.quantity, order_size = req.body.data.size;
         
-        var data = [];
+        var product_list = [];
 
         if (order_quantity===undefined || order_quantity == null){
             order_quantity = -1;
@@ -103,71 +111,54 @@ router.route('/:categoryId/:productId')
                 id: product_detail.id,
                 url: req.url,
                 img: product_detail.image1,
-                price: product_detail.discountAvailable ? product_detail.discountPrice : product_detail.price,
-                originalPrice: product_detail.price,
+                price: handlerGeneral.Convert_price_to_int(product_detail.discountAvailable ? product_detail.discountPrice : product_detail.price),
                 quantity: order_quantity,
+                total_price : parseInt(order_quantity)*parseInt(price),
                 size: order_size
             }
             
-            if (cookie != null){
-                data = JSON.parse(req.cookies['paid-products'].toString());
-            }
-            var exist = false;
-            
-            if (data.length > 0){
+            var data, cur_money = 0, cur_total_quantity = 0;
+            if (cookie != null && cookie != undefined){
+                data =  JSON.parse(req.cookies['paid-products'].toString());
                 
+                //Lay nhung thong tin can thiet
+                product_list = JSON.parse(data.product_list.toString()); //Danh sach sp trong gio hang hien tai
+                cur_money = data["totalMoney"]; //Tong gia hien tai
+                cur_total_quantity = data["totalQuantity"]; //So luong sp trong gio hang hien tai
+            }
+
+            var exist = false;
+            //var new_money = parseInt(order_quantity)*parseInt(item.price.replace(',',''));
+
+            if (product_list.length > 0){
                 //Kiểm tra mặt hàng đã tồn tại hay chưa
-                for (index in data){
-                    if (data[index].id === item.id && data[index].size === item.size){
-                        data[index].quantity =parseInt(data[index].quantity) + parseInt(order_quantity);
+                for (index in product_list){
+                    if (product_list[index].id === item.id && product_list[index].size === item.size){
+                        product_list[index].quantity = parseInt(product_list[index].quantity) + parseInt(order_quantity);
+                        product_list[index].total_price = handlerGeneral.Convert_price_to_int(product_list[index].total_price) 
+                        + item.total_price;
                         exist = true;
                     }
                 }
             }
 
-            function cal (a, b){
-                console.log("CALLL ME");
-                return parseInt(a) + parseInt(b);
-            }
+            cur_total_quantity += parseInt(order_quantity);
+            cur_money += item.total_price;
+
             //Nếu sp chưa tồn tại trong đơn hàng
             if (!exist){
-                data.push(item);
+                product_list.push(item);
             }
             
-            var tmp = new Date(new Date().getTime()+86409000).toUTCString();
-            res.cookie('paid-products', JSON.stringify(data), {maxAge : 1000*60*60*24*30, httpOnly: true});
-
-            //console.log(cookie);
+            var my_data = {totalQuantity: cur_total_quantity, totalMoney: cur_money, product_list: JSON.stringify(product_list)};
+            
+            //var expireDay = new Date(new Date().getTime()+86409000).toUTCString();
+            res.cookie('paid-products', JSON.stringify(my_data), {maxAge : 1000*60*60*24*30, httpOnly: false});
         }
         res.send("OK");
     })
 
 
-// router.get('/:id/:productID', [Get_product_detail, Render_product_detail]);
-// router.get('/:id/:productId/add-to-cart', [Get_product_detail]);
-//Hàm lấy thông tin sản phẩm
-// router.get('/:id/:productID', function (req, res) {
-//     productsController.getProductDetailById(req.params.productID, function (product) {
 
-//         req.breadcrumbs('Sản phẩm', '/product');
-//         req.breadcrumbs(req.params.id, '/product/' + req.params.id);
-
-//         req.breadcrumbs(product.name);
-//         function getDay(date) {
-//             console.log(date);
-//             var tmp = new Date(date);
-//             var day = tmp.getDate();
-//         }
-
-//         getDay(product.createdAt);
-
-//         res.render('product_detail', {
-//             title: 'Sản phẩm-' + product.name,
-//             product: product,
-//             breadcrumbs: req.breadcrumbs(),
-//             user: username
-//         })
-//     });
-// })
 
 module.exports = router;

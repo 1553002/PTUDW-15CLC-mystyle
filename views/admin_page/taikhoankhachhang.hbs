@@ -1,0 +1,82 @@
+<head>
+  {{#if title}}
+      <title>{{title}}</title>
+  {{/if}}
+</head>
+
+<div class="page-header">
+  <div class="container-fluid">
+    {{#if title}}
+      <h1>{{title}}</h1>
+    {{/if}}
+    <ul class="breadcrumb">
+      {{#each breadcrumbs}}
+      <li>
+        <a href={{this.url}}>{{name}}</a>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+</div>
+
+<div class="container-fluid">
+    <div class="panel">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-table"></i> Danh sách tài khoản khách hàng</h3>
+      </div>
+      <div class="panel-body bg-light card-body">
+        <form method="POST" id="form-product">
+          <div>
+            <table class="table table-bordered table-hover" id = "dataTable">
+              <thead>
+                <tr>
+                <td class="text-left">Địa chỉ mail</td>
+                <td class="text-left">Họ tên</td>
+                <td class="text-center">Giới tính</td>
+                <td class="text-center">isAdmin</td>
+                <td class="text-center">Tình trạng</td>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each customers}}
+                <tr>
+                  <td class="text-left">{{email}} </td>
+                  <td class="text-left"> {{fullname}}</td>
+                  <form data-id= "{{email}}">
+                  {{#if gender}}
+                    <td class="text-center">Nam</td>
+                  {{else}}
+                    <td class="text-center">Nữ</td>
+                  {{/if}}
+</form>
+                
+                  <td class="text-center">
+                   <form data-email= "{{email}}" data-target="change-admin">
+                      {{#if isAdmin}}
+                          <input type="checkbox" name="isAdmin" class="check-admin" checked = "checked">
+                      {{else}}
+                          <input type="checkbox" name="isAdmin" class="check-admin">
+                      {{/if}}
+                    </form>
+                  </td>
+
+                  <td class="text-center">
+                    <form data-id= "{{email}}" data-target="change-status">
+                      {{#if active}}
+                        <input type="radio" name="status" checked="checked" class="active">Active &emsp; &emsp;
+                        <input type="radio" name="status" class="inactive">Inactive
+                      {{else}}
+                        <input type="radio" name="status" class="active">Active &emsp; &emsp;
+                        <input type="radio" name="status" class="inactive" checked="checked">Inactive
+                      {{/if}}
+                    </form>
+                  </td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
+        </form>
+      </div>
+    </div>
+</div>

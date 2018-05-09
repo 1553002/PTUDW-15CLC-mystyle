@@ -39,10 +39,11 @@ module.exports = (sequelize, DataTypes) => {
     Product.belongsTo(models.Supplier);
     Product.belongsTo(models.Category);
     //Product.hasOne(models.CartDetail);
-    Product.belongsToMany(models.Cart, {
-      through: models.CartDetail,
-      foreignKey: 'productId'
-    });
+    // Product.belongsToMany(models.Cart, {
+    //   through: models.CartDetail,
+    //   foreignKey: 'productId',
+    //   as: 'CartProductDetail'
+    // });
   };
   return Product;
 };

@@ -3,11 +3,17 @@
 var index=1;
 var area =document.getElementById("design-area");
 var shirt=document.getElementById("design-shirt");
+var modal = document.getElementById('myModal');
+var span = document.getElementsByClassName("close")[0];
 var fonts = ["Montez","Lobster","Josefin Sans","Shadows Into Light","Pacifico","Amatic SC", "Orbitron", 
 "Rokkitt","Righteous","Dancing Script","Bangers","Chewy","Sigmar One","Architects Daughter","Abril Fatface",
 "Covered By Your Grace","Kaushan Script","Gloria Hallelujah","Satisfy","Lobster Two","Comfortaa","Cinzel","Courgette"];
-var mycanvas;
+var mycanvas, mycanvas_back , isFront=true;
 
+var shirt_list;
+var str_canvas;
+var shirt_front =document.getElementById("shirt-area");
+var shirt_back =document.getElementById("shirt-back-area");
 
 function convertImgToBase64(url, myimage, outputFormat){
   var img = new Image();
@@ -26,6 +32,7 @@ function convertImgToBase64(url, myimage, outputFormat){
   img.src = url;
   
 }
+
 function Choose_Img(src) {
     var id="image"+index;
     index=index+1;
@@ -59,13 +66,39 @@ var getDataUrl = function (img)
          return canvas.toDataURL( );
 };
 
-function Choose_shirt(src)
+function split_shirt(alt)
 {
-  var shirt= document.getElementById("design-shirt");     
+  shirt_list=alt.split(" ");
+
+}
+function Choose_shirt(src,alt)
+{
+  var shirt= document.getElementById("design-shirt");   
+  var shirt_back =  document.getElementById("design-back-shirt");   
+
+
+
   convertImgToBase64(src,shirt);
+  convertImgToBase64(alt,shirt_back);
+
   
 }
+function Choose_shirt_color(color)
+{
+  var shirt= document.getElementById("design-shirt");   
+  var shirt_back =  document.getElementById("design-back-shirt");   
 
+ 
+  var src_front="";
+  var src_back="";
+
+    src_front=shirt_list[1];
+    src_back=shirt_list[0];
+  
+    alert(src_back);
+  convertImgToBase64(src_front,shirt);
+  convertImgToBase64(src_back,shirt_back);
+}
 // Tao anh co the di chuyen dc 
   window.onload = function()
   {
@@ -297,18 +330,52 @@ function getPosition( element ) {
   return {x:rect.left,y:rect.top};
 }
 
+function Rotate()
+{
+  var shirt =document.getElementById("shirt-area");
+  var shirt_back =document.getElementById("shirt-back-area");
+
+  if(shirt.style.display=="none")
+  {
+    shirt.style.display="block"
+    shirt_back.style.display="none"
+    area =document.getElementById("design-area");
+  }
+  else
+  {
+    shirt.style.display="none"
+    shirt_back.style.display="block"
+    area =document.getElementById("design-back-area");
+  }
+}
 function Zoom()
 {
   
- area.style.transform= "scale(1.5)";
- shirt.style.transform="scale(1.5)";
+  if(shirt_front.style.display=="none")
+  {
+    document.getElementById("design-back-shirt").style.transform= "scale(1.5)";
+    document.getElementById("design-back-area").style.transform= "scale(1.5)";
+  }
+  else{
+    document.getElementById("design-shirt").style.transform= "scale(1.5)";
+    document.getElementById("design-area").style.transform= "scale(1.5)";
+  }
+
  return;
 }
 function Smaller()
 {
-  area.style.transform= "scale(1.0)";
-  shirt.style.transform="scale(1.0)";
-  return;
+  if(shirt_front.style.display=="none")
+  {
+    document.getElementById("design-back-shirt").style.transform= "scale(1.0)";
+    document.getElementById("design-back-area").style.transform= "scale(1.0)";
+  }
+  else{
+    document.getElementById("design-shirt").style.transform= "scale(1.0)";
+    document.getElementById("design-area").style.transform= "scale(1.0)";
+  }
+
+ return;
 }
 function ResetAll()
 {
@@ -358,7 +425,14 @@ function createParent(id)
     x.setAttribute("class","nhan_image");
     x.setAttribute("onclick","onSelected(id)");
     
-    document.getElementById("design-area").appendChild(x);
+    if(shirt_front.style.display=="none")
+    {
+      document.getElementById("design-back-area").appendChild(x);
+    }
+    else
+    {
+      document.getElementById("design-area").appendChild(x);
+    }
     x.style.width="100px";
     x.style.height="100px";
     x.style.left="85px";
@@ -366,8 +440,10 @@ function createParent(id)
     return x;
 }
 
-
-
+function open_Store()
+{
+  modal.style.display = "block";
+}
 (function($) {
 
   $.fn.textfill = function(maxFontSize) {
@@ -391,7 +467,63 @@ function createParent(id)
   };
 })(jQuery);
 
+function uploadEx() {
 
+  var dataURL = mycanvas.toDataURL("image/png");
+  var dataURL_back= mycanvas_back.toDataURL("image/png");
+  document.getElementById('hidden_data').value = dataURL;
+  document.getElementById('hidden_data_back').value = dataURL_back;
+
+  var fd = new FormData(document.forms["form1"]);
+
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', '/', true);
+
+  xhr.upload.onprogress = function(e) {
+      if (e.lengthComputable) {
+          var percentComplete = (e.loaded / e.total) * 100;
+          console.log(percentComplete + '% uploaded');
+          alert('Succesfully uploaded');
+          
+      }
+  };
+
+  xhr.onload = function() {
+
+  };
+  xhr.send(fd);
+};
+/*
+(function($) {
+  $('#addForm').on('submit', function (event) {
+      event.preventDefault();
+     
+      //var url = $('#inputComment').val();
+      var image=mycanvas.toDataURL();
+      //var customproductContent = {};
+     
+     
+      //document.getElementById("demo").value=image;
+      //customproductContent.url  = "AAAA";
+     
+
+       $.ajax({
+        type: 'POST',
+        url: '/',
+        data: '{ "imageData" : "' + Pic + '" }',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function (msg) {
+            alert("Done, Picture Uploaded.");
+        }
+    });
+        
+      
+  });
+
+
+})(jQuery);
+*/
 var select = document.getElementById("select");
 for(var a = 0; a < fonts.length ; a++){
 	var opt = document.createElement('option');
@@ -409,42 +541,143 @@ function fontChange()
   
 
 }
-function load_design() 
-{
 
-  if(mycanvas)
+function load_back_design(print,str)
+{
+  if(mycanvas_back)
   { 
-    document.getElementById("canvas").remove();
+    document.getElementById("canvas_back").remove();
+    
     
   }
   
   var img=document.getElementById("image_save_zone_border");
-  html2canvas($("#shirt-area"), {
+ 
+  var re = false;
+  if( document.getElementById("shirt-back-area").style.display == "none")
+  {
+    re=true;
+    document.getElementById("shirt-back-area").style.display="block"
+    document.getElementById("shirt-area").style.display="none"
+  }
+  
+  html2canvas($(str), {
     onrendered: function(canvas) {
-        mycanvas = canvas;
-        canvas.id="canvas";
+      mycanvas_back= canvas;
+        canvas.id="canvas_back";
         canvas.style.width="100%";
         canvas.style.height="100%";
-        img.appendChild(canvas);
+        str_canvas=canvas.toDataURL();
+          if(print)
+          {
+            img.appendChild(canvas);
+          }
+         
+          if(re==true)
+          {
+            document.getElementById("shirt-back-area").style.display="none";
+            document.getElementById("shirt-area").style.display="block"
+            re=false;
+          }
+
+           
+ 
+          
+          return;
 
       
         // Clean up 
         //document.body.removeChild(canvas);
     }
-});
+    
+  });
+
+ 
   
 }
+function load_front_design(print,str)
+{
+  if(mycanvas)
+  { 
+    document.getElementById("canvas").remove();
+    
+    
+  }
+  
+  var img=document.getElementById("image_save_zone_border");
+ 
+  var re = false;
+  if( document.getElementById("shirt-area").style.display == "none")
+  {
+    re=true;
+    document.getElementById("shirt-area").style.display="block"
+    document.getElementById("shirt-back-area").style.display="none"
+  }
+  
+  html2canvas($(str), {
+    onrendered: function(canvas) {
+        mycanvas= canvas;
+        canvas.id="canvas";
+        canvas.style.width="100%";
+        canvas.style.height="100%";
+        str_canvas=canvas.toDataURL();
+          if(print)
+          {
+            img.appendChild(canvas);
+          }
+         
+          if(re==true)
+          {
+            document.getElementById("shirt-area").style.display="none";
+            document.getElementById("shirt-back-area").style.display="block"
+            re=false;
+          }
+
+           
+          load_back_design(true,"#shirt-back-area");
+          
+          return;
+
+      
+        // Clean up 
+        //document.body.removeChild(canvas);
+    }
+    
+  });
+
+ 
+  
+}
+function load_design() 
+{
+
+  
+
+  load_front_design(true,"#shirt-area");
+ 
+
+  
+
+  
+
+
+
+}
+
+
+
 function save_as() 
 {
  
-
-       
-  return Canvas2Image.saveAsPNG(mycanvas);;
+  Canvas2Image.saveAsPNG(mycanvas);;
+ 
+  return  Canvas2Image.saveAsPNG(mycanvas_back);;
   
 }
 $(document).ready(function () {
 
 
+  Choose_shirt("https://image.ibb.co/hfJKfS/shirt_1.png","https://image.ibb.co/gv8PYc/shirt_1_back.png");
 
   document.getElementById("text_box").style.fontFamily=fonts[select.value];
   document.getElementById("text_box").style.color=document.getElementById("text_color").value;
@@ -509,3 +742,25 @@ function imageIsLoaded(e)
 };
 
 
+
+function close_modal()
+{
+  modal.style.display = "none";
+}
+window.onclick = function(event) {
+  if (event.target == modal) {
+      modal.style.display = "none";
+  }
+}
+
+
+function ClearPlaceHolder (input) {
+  if (input.value == input.defaultValue) {
+      input.value = "";
+  }
+}
+function SetPlaceHolder (input) {
+  if (input.value == "") {
+      input.value = input.defaultValue;
+  }
+}

@@ -10,6 +10,7 @@ var categoriesController = require('../controllers/categoriesController');
 var customerController = require('../controllers/customersController');
 var suppliersController = require('../controllers/suppliersController');
 var modelImageUploadController = require('../controllers/modelImageUploadController');
+var cartsController = require('../controllers/cartsController');
 
 var crypto = require("crypto");
 
@@ -28,22 +29,26 @@ router.all('/*', function (req, res, next) {
     next(); // pass control to the next handler
 });
 
-router.get('/', (req, res)=>{
-    res.render('admin', {layout:'admin_layout'});
+router.get('/', (req, res) => {
+    res.render('admin_page/admin', { layout: 'admin_layout' });
 })
 
-router.get('/dangnhap', (req, res)=>{
-    res.render("dangnhap", {layout: false});
+router.get('/thongke', (req, res) => {
+    res.render("admin_page/thongke");
 });
 
-router.get('/dangki', (req, res)=>{
-    res.render("dangki", {layout: false});
+router.get('/dangnhap', (req, res) => {
+    res.render("admin_page/dangnhap", { layout: false });
 });
 
-router.get('/sanpham', (req, res)=>{
+router.get('/dangki', (req, res) => {
+    res.render("admin_page/dangki", { layout: false });
+});
+
+router.get('/sanpham', (req, res) => {
     //Lay toan bo san pham hien co
-    productsController.getAll(function(products){
-        
+    productsController.getAll(function (products) {
+
         // var page = parseInt(req.query.page);
         // if(isNaN(page)){
         //     page = 1;
@@ -60,34 +65,47 @@ router.get('/sanpham', (req, res)=>{
         // products = products.slice(offset, offset + limit);
 
         req.breadcrumbs('Tất cả sản phẩm', '/admin/sanpham');
-        res.render('sanpham', { 
-            breadcrumbs: req.breadcrumbs(), 
-            products : products,
+        res.render('admin_page/sanpham', {
+            breadcrumbs: req.breadcrumbs(),
+            products: products,
             title: 'Tất cả sản phẩm'
         });
     });
 })
 
-router.get('/danhmucsanpham', (req, res)=>{
+router.get('/danhmucsanpham', (req, res) => {
     //Lay toan bo san pham hien co
-    categoriesController.getAll(function(categories){
+    categoriesController.getAll(function (categories) {
         req.breadcrumbs('Tất cả danh mục', '/admin/danhmucsanpham');
-        res.render('danhmucsanpham', { 
-            breadcrumbs: req.breadcrumbs(), 
-            categories : categories,
+        res.render('admin_page/danhmucsanpham', {
+            breadcrumbs: req.breadcrumbs(),
+            categories: categories,
             title: 'Tất cả danh mục'
         });
     });
 })
 
 
-router.get('/taikhoankhachhang', (req, res)=>{
+router.get('/donhang', (req, res) => {
+    cartsController.getAll(function (carts) {
+        console.log("Tất cả đơn hàng");
+        req.breadcrumbs('Tất cả đơn hàng', '/admin/donhang');
+        res.render('admin_page/donhang', {
+            breadcrumbs: req.breadcrumbs(),
+            carts: carts,
+            title: 'Tất cả đơn hàng'
+        });
+    });
+})
+
+
+router.get('/taikhoankhachhang', (req, res) => {
     //Lay toan bo san pham hien co
-    customerController.getAll(function(customers){
+    customerController.getAll(function (customers) {
         req.breadcrumbs('Tài khoản khách hàng', '/admin/taikhoankhachhang');
-        res.render('taikhoankhachhang', { 
-            breadcrumbs: req.breadcrumbs(), 
-            customers : customers,
+        res.render('admin_page/taikhoankhachhang', {
+            breadcrumbs: req.breadcrumbs(),
+            customers: customers,
             title: 'Tài khoản khách hàng'
         });
     });
@@ -96,69 +114,69 @@ router.get('/taikhoankhachhang', (req, res)=>{
 
 //1553002
 //Note: Nho gọi hàm lồng nhau, bởi nó dùng callback nên ko thể gọi hàm này xong mới tới hàm kia
-router.get('/sanpham/them', (req, res)=>{
+router.get('/sanpham/them', (req, res) => {
     req.breadcrumbs('Tất cả sản phẩm', '/admin/sanpham');
 
     //Lay toan bo danh muc san pham
-    categoriesController.getAll((categories)=>{
-  
-        //Lay toan bo danh sach nha cung cap
-        suppliersController.getAll((suppliers)=>{
+    categoriesController.getAll((categories) => {
 
-            modelImageUploadController.getAll((models)=>{
-                    //Cua ham sua => phai goi them ham lay thong tin cua san pham XXX
-               
+        //Lay toan bo danh sach nha cung cap
+        suppliersController.getAll((suppliers) => {
+
+            modelImageUploadController.getAll((models) => {
+                //Cua ham sua => phai goi them ham lay thong tin cua san pham XXX
+
                 //console.log(models);
-                res.render('them-san-pham', { 
+                res.render('admin_page/them-san-pham', {
                     breadcrumbs: req.breadcrumbs(),
                     title: 'Chi tiết sản phẩm',
                     categories: categories,
-                    suppliers : suppliers,
-                    modelImages : models,
-                    
+                    suppliers: suppliers,
+                    modelImages: models,
+
                 });
             })
-           
+
         })
     });
 });
 
 //them router.get -> sanpham/sua
 //nhưng 
-router.get('/sanpham/sua/:id', (req, res)=>{
+router.get('/sanpham/sua/:id', (req, res) => {
     req.breadcrumbs('Tất cả sản phẩm', '/admin/sanpham');
 
     //Lay toan bo danh muc san pham
-    categoriesController.getAll((categories)=>{
-  
-        //Lay toan bo danh sach nha cung cap
-        suppliersController.getAll((suppliers)=>{
+    categoriesController.getAll((categories) => {
 
-            modelImageUploadController.getAll((models)=>{
-                    //Cua ham sua => phai goi them ham lay thong tin cua san pham XXX
+        //Lay toan bo danh sach nha cung cap
+        suppliersController.getAll((suppliers) => {
+
+            modelImageUploadController.getAll((models) => {
+                //Cua ham sua => phai goi them ham lay thong tin cua san pham XXX
                 //console.log(req.params.id);
-                productsController.getProductDetailById(req.params.id, function(productDetail){
-                    
+                productsController.getProductDetailById(req.params.id, function (productDetail) {
+
                     console.log(req.params.id);
 
-                    res.render('them-san-pham', { 
+                    res.render('admin_page/them-san-pham', {
                         breadcrumbs: req.breadcrumbs(),
                         title: 'Chi tiết sản phẩm',
                         categories: categories,
-                        suppliers : suppliers,
-                        modelImages : models,
+                        suppliers: suppliers,
+                        modelImages: models,
                         productDetail: productDetail,
-                        productId : req.params.id,
-                        sua:'/sua'
+                        productId: req.params.id,
+                        sua: '/sua'
                     });
                 });
             })
-           
+
         })
     });
 });
 
-router.post('/sanpham/sua', (req, res)=>{
+router.post('/sanpham/sua', (req, res) => {
     var product_name = req.body['product_description[1][name]'];
     var product_category = req.body['product_description[1][category]'];
     var product_supplier = req.body["product_description[1][supplier]"];
@@ -175,31 +193,31 @@ router.post('/sanpham/sua', (req, res)=>{
     var discount_percent = req.body['product_discount[0][percent]'];
     var discount_exp = req.body['product_discount[0][date]'];
     var id = req.body['product-id'];
-        //Note: chưa xử lý TH người dùng ko nhập discount_percent
-    function calDiscountPrice (gia_goc, muc_giam_gia){
+    //Note: chưa xử lý TH người dùng ko nhập discount_percent
+    function calDiscountPrice(gia_goc, muc_giam_gia) {
         //Xoa bo toan bo dau ','
         gia_goc = gia_goc.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '');
         gia_goc = parseInt(gia_goc);
         muc_giam_gia = parseInt(muc_giam_gia);
-        return (gia_goc*muc_giam_gia)/100;
+        return (gia_goc * muc_giam_gia) / 100;
     }
     console.log(product_price, discount_percent);
-    
+
     var discountPrice = calDiscountPrice(product_price, discount_percent);
 
     var Product = {
-        name:product_name, 
-        CategoryId : product_category, 
-        SupplierId: product_supplier, 
-        price : product_price, 
-        s:product_sizeS, 
-        l:product_sizeL,
-        m:product_sizeM, 
-        xl:product_sizeXL, 
-        image1:image1, 
-        image2:image2, 
-        image3:image3, 
-        image4:image4, 
+        name: product_name,
+        CategoryId: product_category,
+        SupplierId: product_supplier,
+        price: product_price,
+        s: product_sizeS,
+        l: product_sizeL,
+        m: product_sizeM,
+        xl: product_sizeXL,
+        image1: image1,
+        image2: image2,
+        image3: image3,
+        image4: image4,
         discountPrice: discountPrice,
         discountAvailable:discount_status, 
         discount:discount_percent, 
@@ -207,47 +225,45 @@ router.post('/sanpham/sua', (req, res)=>{
         unit:'cái',
         available:'true'};
     
-    console.log(id);
 
-    productsController.update(id, Product, function(product){
-        if (product)
-        {
+    productsController.update(id, Product, function (product) {
+        if (product) {
             console.log("Update thanh cong");
         }
-        else{
+        else {
             console.log("Update failed");
         }
         res.redirect("/admin/sanpham");
     });
 });
 
-router.post('/', (req, res)=>{
-    
+router.post('/', (req, res) => {
+
     //console.log(req.body.nameFile);
-    if (req.files){
+    if (req.files) {
         var file = req.files.myFile,
-        //id = crypto.randomBytes(20).toString('hex'),
-        //filename = "mystyle-model-"+id+'.png';
-        filename = req.body.nameFile;
-       // console.log(file);
-        
-        file.mv("./public/upload/"+filename, function(err){
-            if (err){
-              res.send("error occured");
+            //id = crypto.randomBytes(20).toString('hex'),
+            //filename = "mystyle-model-"+id+'.png';
+            filename = req.body.nameFile;
+        // console.log(file);
+
+        file.mv("./public/upload/" + filename, function (err) {
+            if (err) {
+                res.send("error occured");
             }
-            else{
-                modelImageUploadController.create(filename,function(imageloads){
+            else {
+                modelImageUploadController.create(filename, function (imageloads) {
                     console.log("modelImageUploadController");
                     console.log('Image is uploaded');
                 });
-              res.end();
+                res.end();
             }
         });
     }
 });
 
 //Them
-router.post('/sanpham', function(req, res){
+router.post('/sanpham', function (req, res) {
     //console.log(req.body);
     var product_name = req.body['product_description[1][name]'];
     var product_category = req.body['product_description[1][category]'];
@@ -267,38 +283,39 @@ router.post('/sanpham', function(req, res){
     console.log(discount_exp);
 
     //Note: chưa xử lý TH người dùng ko nhập discount_percent
-    function calDiscountPrice (gia_goc, muc_giam_gia){
+    function calDiscountPrice(gia_goc, muc_giam_gia) {
         //Xoa bo toan bo dau ','
         gia_goc = gia_goc.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '');
         gia_goc = parseInt(gia_goc);
         muc_giam_gia = parseInt(muc_giam_gia);
-        return (gia_goc*muc_giam_gia)/100;
+        return (gia_goc * muc_giam_gia) / 100;
     }
 
-    
+
     var discountPrice = calDiscountPrice(product_price, discount_percent);
 
     var Product = {
-        name:product_name, 
-        CategoryId : product_category, 
-        SupplierId: product_supplier, 
-        price : product_price, 
-        s:product_sizeS, 
-        l:product_sizeL,
-        m:product_sizeM, 
-        xl:product_sizeXL, 
-        image1:image1, 
-        image2:image2, 
-        image3:image3, 
-        image4:image4, 
+        name: product_name,
+        CategoryId: product_category,
+        SupplierId: product_supplier,
+        price: product_price,
+        s: product_sizeS,
+        l: product_sizeL,
+        m: product_sizeM,
+        xl: product_sizeXL,
+        image1: image1,
+        image2: image2,
+        image3: image3,
+        image4: image4,
         discountPrice: discountPrice,
-        discountAvailable:discount_status, 
-        discount:discount_percent, 
-        salloffExpDate:discount_exp,
-        unit:'cái',
-        available:'true'};
-    
-    productsController.create(Product, function(callback){
+        discountAvailable: discount_status,
+        discount: discount_percent,
+        salloffExpDate: discount_exp,
+        unit: 'cái',
+        available: 'true'
+    };
+
+    productsController.create(Product, function (callback) {
         console.log(callback);
     });
     res.redirect('/admin/sanpham');
@@ -317,15 +334,36 @@ router.delete('/:id', function (req, res) {
 });
 
 router.post('/danhmucsanpham/themdanhmuc', function (req, res) {
-    categoriesController.create(req.body.id, req.body.category, function (categories) {
+    categoriesController.create(req.body.new_id, req.body.category, function (categories) {
         res.sendStatus(201);
         res.end();
     });
 });
 
-router.post('/taikhoankhachhang/status', function(req,res){
+router.get('/donhang/chitietdonhang/:id', function (req, res) {
+    var cartID = req.params.id;
+    console.log(cartID);
+
+    cartsController.getCartById(cartID, function(cart){
+        console.log(cart);
+    })
+
+    // cartsController.create(req.body.id, function (carts) {
+    //     res.sendStatus(201);
+    //     res.end();
+    // });
+});
+
+router.post('/taikhoankhachhang/status', function (req, res) {
     console.log(req.body.email, req.body.active);
-    customerController.update(req.body.email, req.body.active, req.body.isAdmin, function(cus){
+    customerController.update(req.body.email, req.body.active, req.body.isAdmin, function (cus) {
+        res.end();
+    });
+
+});
+
+router.put('/danhmucsanpham/suadanhmuc', function(req,res){
+    categoriesController.update(req.body.old_id, req.body.new_id, req.body.category, function(cus){
         res.end();
     });
     

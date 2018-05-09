@@ -1,12 +1,14 @@
 <head>
     <link rel="stylesheet" href="/my_css/design_page.css">
+    <link rel="stylesheet" href="/my_css/spectrum.css">
+
 </head>
 
 <div id="content">
     <div class="container-fluid">
         <div id="tool-top" class="row">
             <div class="tool-top-nav">
-                <a href="#">
+                <a href="#" onclick="Rotate()">
                     <img src="\image\icon-rotate.png">
                     <p>Xoay </p>
                 </a>
@@ -22,6 +24,7 @@
                     <img src="\image\icon-trash.png">
                     <p>Tạo lại </p>
                 </a>
+               
 
             </div>
         </div>
@@ -61,14 +64,16 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="thumbnail">
-                                    <img src="https://image.ibb.co/hfJKfS/shirt_1.png" alt="NONE" style="width:120px ; height:120px" onclick="Choose_shirt(this.src)">
+                                    <img src="https://image.ibb.co/hfJKfS/shirt_1.png" alt="https://image.ibb.co/gv8PYc/shirt_1_back.png " 
+                                                     
+                                    style="width:120px ; height:120px" onclick="Choose_shirt(this.src,this.alt)">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="thumbnail">
 
-                                    <img src="https://image.ibb.co/no6Qn7/shirt_2.png" alt="NONE" style="width:120px ; height:120px" onclick="Choose_shirt(this.src)">
-
+                                    <img src="https://image.ibb.co/no6Qn7/shirt_2.png" alt="https://image.ibb.co/kAsJtc/shirt_2_back.png" style="width:120px ; height:120px" onclick="Choose_shirt(this.src,this.alt)">
+                                    
 
                                 </div>
                             </div>
@@ -77,13 +82,13 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="thumbnail">
-                                    <img src="https://image.ibb.co/eVmx0S/shirt_3.png" alt="NONE" style="width:120px ; height:120px" onclick="Choose_shirt(this.src)">
+                                    <img src="https://image.ibb.co/eVmx0S/shirt_3.png" alt="NONE" style="width:120px ; height:120px" onclick="Choose_shirt(this.src,this.alt)">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="thumbnail">
 
-                                    <img src="https://image.ibb.co/cqm0n7/shirt_4.png" alt="NONE" style="width:120px ; height:120px" onclick="Choose_shirt(this.src)">
+                                    <img src="https://image.ibb.co/cqm0n7/shirt_4.png" alt="NONE" style="width:120px ; height:120px" onclick="Choose_shirt(this.src,this.alt)">
 
 
                                 </div>
@@ -177,25 +182,44 @@
                     <div id="Save_as_png" class="tab-pane fade">
                         <div id="image_save_zone_border">
 
-
-                            <img src="\image\icon-refresh.png" class="refesh" onclick="load_design()">
-
+                            
+                           
+                            
                         </div>
-
+                        <img src="\image\icon-refresh.png" class="refesh" onclick="load_design()">
+                        
                         <input id="btn_save_as" class="inputfile" onclick="return save_as()" />
-                        <label for="btn_save_as">Lưu dưới dạng .PNG!</label>
+                        <label for="btn_save_as">Tải về máy!</label>
 
+                        
 
+                        <input id="btn_upload" class="inputfile" onclick="return uploadEx()" />
+                        <label for="btn_upload">Lưu thiết kế</label>
+                        
+                        <form method="post" accept-charset="utf-8" name="form1">
+                                    <input name="hidden_data" id='hidden_data' type="hidden"/>
+                                    <input name="hidden_data_back" id='hidden_data_back' type="hidden"/>
+                        </form>
 
                     </div>
                 </div>
             </div>
             <div id="shirt" class="col-md-5">
 
-                <div id="shirt-area">
+                <div id="shirt-area" >
 
-                    <img id="design-shirt" src="https://image.ibb.co/hfJKfS/shirt_1.png" alt="Shirt image">
+                    <img id="design-shirt" src="https://image.ibb.co/hfJKfS/shirt_1.png" alt="https://image.ibb.co/gv8PYc/shirt_1_back.png">
                     <div id="design-area">
+
+
+                    </div>
+
+                </div>
+
+                <div id="shirt-back-area" style="display:none" >
+
+                    <img id="design-back-shirt" src="https://image.ibb.co/gv8PYc/shirt_1_back.png" alt="Shirt image">
+                    <div id="design-back-area">
 
 
                     </div>
@@ -216,20 +240,21 @@
                     </p>
 
                     <div id="shirt-color" style="width:200px">
-                        <p>Màu áo: </p>
+                        <p>Số lượng: </p>
+                        <div class="row" style="margin-left:10px; margin-bottom:10px" >
+                            <label for="">Cỡ nhỏ:</label>
+                            <input type="number" value="0" onfocus="ClearPlaceHolder (this)" onblur="SetPlaceHolder (this)" style="width:50px; margin-left:10px"/> 
+                        </div>
+                        
+                        <div class="row" style="margin-left:10px; margin-bottom:10px" >
+                            <label for=""> Cỡ vừa: </label>
+                            <input type="number" value="0" onfocus="ClearPlaceHolder (this)" onblur="SetPlaceHolder (this)" style="width:50px; margin-left:10px"/> 
+                        </div>
+                        <div class="row" style="margin-left:10px;" >
+                            <label for=""> Cỡ lớn: </label>
+                            <input type="number" value="0" onfocus="ClearPlaceHolder (this)" onblur="SetPlaceHolder (this)" style="width:50px; margin-left:10px"/> 
+                        </div>
 
-                        <div class="foo white"></div>
-                        <div class="foo black"></div>
-                        <div class="foo red"></div>
-                        <div class="foo blue"></div>
-                        <div class="foo yellow"></div>
-                        <div class="foo green"></div>
-                        <div class="foo orange"></div>
-                        <div class="foo purple"></div>
-                        <div class="foo brown"></div>
-                        <div class="foo pink"></div>
-                        <div class="foo violet"></div>
-                        <div class="foo gray"></div>
 
 
                     </div>
@@ -259,7 +284,8 @@
 
 
                 </form>
-
+                <input id="Design_store" class="inputfile" onclick="return open_Store()" />
+                <label for="Design_store">Thiết kế của tôi!</label>
 
 
             </div>
@@ -280,11 +306,41 @@
 
 </div>
 
+
+<div id="myModal" class="modal">
+        <!-- Nội dung form đăng nhập -->
+        
+        <div class="modal-content">
+            <span id="modal_close" class="close" onclick="return close_modal()">&times;</span>
+             <h4 id="shirt-title" style="text-align:center">Thiết kế của tôi</h4>
+            <form action="#" style="overflow-y:auto; overflow-x:hidden">
+                
+                
+                    <div  id="modal-image-list" class="row" style="margin-left:5px;">
+                    {{#each customproducts}}
+          
+                        <img id={{id}} src={{url}} alt="Your design" height="240px" width="240px">
+   
+                    {{/each}}
+                     </div>
+            </form>
+            <div class="row" >
+                <button type="button" class="btn btn-default btn-block" style="width:70px;height:35px; margin:7px; margin-left:480px">Thoát</button>
+                <button type="button" class="btn btn-default btn-block" style="width:70px;height:35px;margin:7px">Xóa</button>
+                <button type="button" class="btn btn-default btn-block" style="width:70px;height:35px;margin:7px">Dùng</button>
+            </div>
+            
+        </div>
 </div>
 
+
+    
 
 {{>footer}}
 
 {{!-- 1553023 - javascript --}}
-<script src="/my_js/nhan_js.js"></script>
+<script src="/my_js/design_page.js"></script>
 <script src="/my_js/spectrum.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
+<script src="https://superal.github.io/canvas2image/canvas2image.js"></script>

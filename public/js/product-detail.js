@@ -2,7 +2,7 @@ var number_of_item_in_stock;
 var productCustomization = $('.detail-wrap');
 var cart = $('#bag-shopping-cart');
 var Arrays = new Array();
-var cur_quantity;
+var cur_quantity, order_quantity = 0;
 
 $(function () {
     number_of_item_in_stock = $("#form-select-attributes #availability-number").text();
@@ -25,37 +25,37 @@ $(function () {
         //Xu ly sư kiện thêm sản phẩm vào giỏ hàng
         var addToCartBtn = item.find('#add-to-cart');
         addToCartBtn.on('click', function () {
+            order_quantity = $("#pd_quantity").val();
             if (!animating) {
                 //animate if not already animating
                 animating = true;
-                resetCustomization();
-
-                // addToCartBtn.addClass('is-added').find('path').eq(0).animate({ 'stroke-dashoffset': 0 }, 300, function () {
-                //     setTimeout(function () {
-                //         updateCart();
-                //         addToCartBtn.removeClass('is-added').find('span').on('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function () {
-                //             //wait for the end of the transition to reset the check icon
-                //             addToCartBtn.find('path').eq(0).css('stroke-dashoffset', '19.79');
-                //             animating = false;
-                //         });
-
-                //         if ($('.no-csstransitions').length > 0) {
-                //             // check if browser doesn't support css transitions
-                //             addToCartBtn.find('path').eq(0).css('stroke-dashoffset', '19.79');
-                //             animating = false;
-                //         }
-                //     }, 600);
-                // });
+                addToCartBtn.prop('disabled', true);
             }
 
-            
             $.ajax({
                 url: window.location.pathname,
                 type: 'POST',
                 contentType: "application/json",
-                data: JSON.stringify({data:{"size": $("#i-select-size li.selected span").text(),"quantity":  $("#pd_quantity").val()}})
+                data: JSON.stringify({data:{"size": $("#i-select-size li.selected span").text(),"quantity": order_quantity }})
             }).done(function(result){
+                addToCartBtn.addClass('is-added').find('path').eq(0).animate({ 'stroke-dashoffset': 0 }, 300, function () {
+                    setTimeout(function () {
+                        updateCart();
+                        addToCartBtn.removeClass('is-added').find('span').on('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function () {
+                            //wait for the end of the transition to reset the check icon
+                            addToCartBtn.find('path').eq(0).css('stroke-dashoffset', '19.79');
+                            animating = false;
+                        });
 
+                        if ($('.no-csstransitions').length > 0) {
+                            // check if browser doesn't support css transitions
+                            addToCartBtn.find('path').eq(0).css('stroke-dashoffset', '19.79');
+                            animating = false;
+                        }
+                    }, 600);
+                });
+
+                resetCustomization();   
             }).fail(function(err){
 
             })
@@ -66,9 +66,7 @@ $(function () {
 
 
     function resetCustomization() {
-        // $("[data-type=select]").each(function () {
-        //     $(this).children("li.selected").removeClass("selected");
-        // });
+        $("#i-select-size li.selected").removeClass("selected");
     }
 
 
@@ -90,48 +88,24 @@ $(function () {
 
     function updateCart() {
         var cartItems = cart.find('#cart-count'),
-            text = parseInt(cartItems.text()) + 1;
-        cartItems.text(text);
-        cartItems.focus();
+            text = parseInt(cartItems.text()) + parseInt(order_quantity);
+            cartItems.text(text);
     }
 
-    
 });
 
 $(".btn-item-delete").click(function(event){
-
+    event.preventDefault();
+    
     $.ajax({
         url: window.location.pathname + '/delete',
         type: 'POST',
         contentType: "application/json",
-        data: JSON.stringify({data:{"id": $(this).data('pd-id')}})
+        data: JSON.stringify({data:{"id": $(this).data('pd-id'), "size": $(this).data('pd-size')}})
     }).done(function(result){
         location.reload();
     }).fail(function(err){
 
     })
+
 })
-
-function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    var expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    console.log(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}

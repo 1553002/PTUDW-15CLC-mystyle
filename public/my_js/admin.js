@@ -62,7 +62,7 @@ $('.delete').on('click', function (event) {
 
 
 
-
+//thay đổi trạng thái khách hàng
 $('[data-target="change-status"]').change(function(e){
     var active;
     var email = $(this).attr("data-id");
@@ -92,7 +92,7 @@ $('[data-target="change-status"]').change(function(e){
     e.preventDefault();
 });
 
-
+//thay đổi trạng thái khách hàng
 $('[data-target="change-admin"]').change(function(e){
     console.log("ADMIN");
     var admin;
@@ -122,34 +122,83 @@ $('[data-target="change-admin"]').change(function(e){
     e.preventDefault();
 });
 
-$("#them_danh_muc button").click(()=>{
-    $("#them_danh_muc").submit();
+$("#set-category button").click(()=>{
+    $("#set-category").submit();
 })
 
-$("#them_danh_muc").submit(function (e) {
-    console.log("HELLO");
+//thêm danh mục
+$("#set-category").submit(function (e) {
     var category = $('#inputCategory').val();
     var category_id = category.toLowerCase();
     category_id = change_alias(category_id);
     category_id = category_id.split(' ').join('-');
-    console.log(category_id);
 
-    $.ajax({
-        url: '/admin/danhmucsanpham/themdanhmuc',
-        type: 'POST',
-        data: {
-            category: category,
-            id: category_id
-        },
-        success: function (respone) {
-            location.reload();
-        }
-    });
+    var action = $('#set-category').attr('action');
+    if (action != undefined && action!=null){
+        $.ajax({
+            url: action,
+            type: $("#set-category").attr('method'),
+            data: {
+                category: category,
+                old_id: $("#set-category").attr('product_id'),
+                new_id: category_id
+            },
+            success: function (respone) {
+                location.reload();
+            }
+        });
+    }
+    
     e.preventDefault();
     return false;
 });
 
 
+$("#add-category-btn").click(()=>{
+    $("#set-category").attr('action', '/admin/danhmucsanpham/themdanhmuc');
+    $("#set-category").attr('method', 'POST');
+})
+
+//Xử lý sự kiện button edit click
+$('.edit').click(function() {
+    var id = $(this).data('id');
+    var category = $(this).data('value');
+
+    $("#inputCategory").val($(this).data('value'));
+
+    //Change all relative atrributes in form
+    $("#set-category").attr('action', '/admin/danhmucsanpham/suadanhmuc');
+    $("#set-category").attr('method', 'PUT');
+    $("#set-category").attr('product_id', id);
+});
+
+//xem chi tiet don hang
+$('.detail').click(function() {
+    var id = $(this).data('id');
+
+    $.ajax({
+        url: '/admin/donhang/chitietdonhang',
+        data: {
+            id: id
+        },
+        contentType: "application/json; charset=utf-8",
+        type: 'GET',
+        success: function(respone){
+            console.log(respone);
+        }
+    });
+    e.preventDefault();
+});
+
+$('#myModal').on('hidden.bs.modal', function () {
+    $("#inputCategory").val('');
+})
+
+
+
+
+
+//Tao id cho danh mục
 function change_alias(alias) {
     var str = alias;
     str = str.toLowerCase();
@@ -230,6 +279,7 @@ function formatCurrency(number) {
     var n2 = n.replace(/\d\d\d(?!$)/g, "$&,");
     return n2.split('').reverse().join('');
 }
+
 
 //Xử lý data table
 $(document).ready(function () { $("#dataTable").DataTable() });

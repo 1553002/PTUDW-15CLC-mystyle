@@ -10,18 +10,26 @@
                 <a href="">Theo dõi đơn hàng</a>
                 <span>|</span>
                 {{#if user}}
-                    <div class='user-profile'>
-                        <a class='user-name'>chào {{user}} </a>
-                        <div class='box'>
-                            <ul class='user-ajax-customer'>
-                                <li><a href='/customer/account/edit' title='Thông tin tài khoản' rel='nofollow'>Thông tin tài khoản</a></li>
-                                <li><a href='/cart' title='Đơn hàng của tôi' rel='nofollow'>Đơn hàng của tôi</a></li>
-                                <li><a href='/customer/account/logout' title='Đăng xuất' rel='nofollow'>Đăng xuất</a></li>
-                                </ul>
-                        </div>
+                <div class='user-profile'>
+                    <a class='user-name'>chào {{user}} </a>
+                    <div class='box'>
+                        <ul class='user-ajax-customer'>
+                            <li>
+                                <a href='/customer/account/edit' title='Thông tin tài khoản' rel='nofollow'>Thông tin tài khoản</a>
+                            </li>
+                            <li>
+                                <a href='/cart' title='Đơn hàng của tôi' rel='nofollow'>Đơn hàng của tôi</a>
+                            </li>
+                            <li>
+                                <a href='/customer/account/logout' title='Đăng xuất' rel='nofollow'>Đăng xuất</a>
+                            </li>
+                        </ul>
                     </div>
+                </div>
                 {{else}}
-                    <a href='/customer/account/login'>Đăng nhập </a><span>|</span><a href='/customer/account/login'> Đăng ký </a>
+                <a href='/customer/account/login'>Đăng nhập </a>
+                <span>|</span>
+                <a href='/customer/account/login'> Đăng ký </a>
                 {{/if}}
             </div>
         </div>
@@ -63,7 +71,7 @@
                     <div class="shopping-cart-wrapper">
                         <a href="/cart" id="bag-shopping-cart" title="View bag">
                             <span class="fas fa-shopping-bag"></span>
-                            <span id="cart-count">0</span>
+                            <span id="cart-count">{{number_of_items}}</span>
                         </a>
                     </div>
                 </div>

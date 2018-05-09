@@ -1,0 +1,103 @@
+<link href="/my_css/checkout.css" rel="stylesheet">
+
+<div class="container">
+
+    <div class="process-min clearfix">
+        <div class="ui-step ui-step-normal">
+            <ol class="col4">
+                <li>
+                    <span class="state" style="background-position-y: -20px;">Địa chỉ giao hàng</span>
+                </li>
+                <li class="current">
+                    <span class="state">Thanh toán & Đặt mua</span>
+                </li>
+                <li class="last">
+                    <span class="state">Hoàn tất</span>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <form class="" role="form" id="form-payment" action="/checkout/payment" method="POST">
+                <div class="heading-title">
+                    <p>1. Chọn hình thức giao hàng</p>
+                </div>
+                <div class="panel" id="choose_shipping_plan">
+                    <div class="control-group">
+                        <label class="control control--radio">Giao hàng tiêu chuẩn()
+                            <input type="radio" name="selected_shipping_plan" value="1" id="plan-1" checked="checked" />
+                            <div class="control__indicator"></div>
+                        </label>
+                    </div>
+                </div>
+                <div class="heading-title">
+                    <p>2. Chọn hình thức thanh toán</p>
+                </div>
+                <div class="panel" id="choose_payment_method">
+                    <div class="control-group">
+                        <label class="control control--radio">Thanh toán tiền mặt khi nhận hàng
+                            <input type="radio" name="paymentMethod" value="cod" id="cod" checked="checked" />
+                            <div class="control__indicator"></div>
+                        </label>
+                        <label class="control control--radio">Thanh toán bằng thẻ quốc tế Visa, Master, JCB
+                            <input type="radio" name="paymentMethod" value="paypal" id="paypal" />
+                            <div class="control__indicator"></div>
+                        </label>
+                        <label class="control control--radio">Thanh toán bằng thẻ ATM nội địa/ internet banking
+                            <input type="radio" name="paymentMethod" value="onepayDomestic" id="onepayDomestic" />
+                            <div class="control__indicator"></div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="checkout">
+                    <button type="submit" id="btn-placeorder" class="btn btn-block btn-danger">ĐẶT MUA</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <div class="panel cart">
+                <div class="module-heading">
+                    <h4 class="module-title">Địa chỉ giao hàng</h4>
+                </div>
+                <div class="module-body">
+                    <div class="information">
+                        <h6 name="fullname">{{shipping_detail.full_name}}</h6>
+                        <p class="end" name="address">{{shipping_detail.address}}
+                            <br name="phone">T: {{shipping_detail.tel}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="panel cart">
+                <div class="module-heading">
+                    <h4 class="module-title">Đơn hàng&nbsp;
+                        <span>(1 sảm phẩm)</span>
+                    </h4>
+                </div>
+                <div class="module-body">
+                    <div class="product">
+                        <div class="item clearfix">
+                            {{#each product_list}}
+                            <p class="title">
+                                <strong>{{quantity}}&nbsp;x</strong>
+                                <a href=" " target="_blank">{{name}}</a>
+                            </p>
+                            <span class="float-right">&emsp; {{price}}&nbsp;₫ </span>
+                            {{/each}}
+                        </div>
+                        <p class="ship-price">
+                            Phí vận chuyển:
+                            <span>0&nbsp;₫</span>
+                        </p>
+                    </div>
+                    <p class="total2">
+                        Thành tiền:
+                        <span>732.000&nbsp;₫ </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
