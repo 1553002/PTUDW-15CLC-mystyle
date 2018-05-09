@@ -163,7 +163,7 @@ $("#add-category-btn").click(()=>{
 $('.edit').click(function() {
     var id = $(this).data('id');
     var category = $(this).data('value');
-
+    
     $("#inputCategory").val($(this).data('value'));
 
     //Change all relative atrributes in form
@@ -171,6 +171,13 @@ $('.edit').click(function() {
     $("#set-category").attr('method', 'PUT');
     $("#set-category").attr('product_id', id);
 });
+
+//Xử lý sự kiện xóa tạm thời
+$('.mark_delete').click(function() {
+    var id = $(this).data('id');
+    console.log(id);
+});
+
 
 //xem chi tiet don hang
 $('.detail').click(function() {
@@ -189,6 +196,7 @@ $('.detail').click(function() {
     });
     e.preventDefault();
 });
+
 
 $('#myModal').on('hidden.bs.modal', function () {
     $("#inputCategory").val('');
