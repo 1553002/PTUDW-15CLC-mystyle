@@ -1,12 +1,11 @@
 <link href="/my_css/cart.css" rel="stylesheet">
 
-<div class="container">
-
+<div class="container default-margin-top" >
     <div class="panel-heading">
         <span class="panel-title">Giỏ hàng</span>
-        <span>(1 sản phẩm)</span>
+        <span>({{number_of_items}} sản phẩm)</span>
     </div>
-    <div class="panel panel-right">
+    <div class="panel panel-right default-margin-top">
         <div class="panel-module">
             <div class="module-body">
                 <table class="table">
@@ -32,21 +31,21 @@
                                 </dl>
                                 <dl class="pd-attribute">
                                     <dt>Kích cỡ: </dt>
-                                    <dd><span>{{size}}</span></dd>
+                                    <dd>
+                                        <span>{{size}}</span>
+                                    </dd>
                                 </dl>
                             </td>
                             <td>
-                                Hello
+                                {{quantity}}
                             </td>
                             <td class="pd-price">
-                                <span class="value notranslate">{{price}} VNĐ</span>
-                                <span class="unit">/ cái</span> 
-                                <br>
-                                <del class="pd-quantity-comment">{{originalPrice}} VNĐ/cái</del>
+                                <p class="price">{{price}}&nbsp;₫</p>
+                                <p class="price2">{{originalPrice}}&nbsp;₫</p>
                             </td>
                             <td class="text-right">
                                 <div class="action">
-                                    <a href="javascript:void(0);" class="btn btn-link btn-item-delete" data-pd-id="{{id}}" data-title="{{name}}">Xóa</a>
+                                    <a href="javascript:void(0);" class="btn-link btn-item-delete" data-pd-id="{{id}}" data-pd-size="{{size}}" data-title="{{name}}">Xóa</a>
                                 </div>
                             </td>
                         </tr>
@@ -55,17 +54,18 @@
 
                     <tfoot>
                         <tr>
-                        <td colspan="5">
-                            <div class="pd-price-info-wrapper float-right" >
-                                        <div class="pd-price-info2">
-                                    <span class="pd-price-title">Tạm tính:</span>
-                                    <span class="pd-price-total ui-cost notranslate">500000 VNĐ</span>
-                                    <div class="pd-price-info3">
-                                        <button class="btn btn-primary">Tiến hành đặt hàng</button>
+                            <td colspan="5">
+                                <div class="pd-price-info-wrapper float-right">
+                                    <div class="pd-price-info2">
+                                        <span class="pd-price-title">Tạm tính:</span>
+                                        <span class="pd-price-total ui-cost notranslate">{{mney}}&nbsp;₫</span>
+                                        
+                                        <div class="form-row form-row-button">
+                                            <a href="/checkout/shipping-detail">Tiến hành đặt hàng</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </td>
+                            </td>
                         </tr>
                     </tfoot>
                 </table>

@@ -10,18 +10,26 @@
                 <a href="">Theo dõi đơn hàng</a>
                 <span>|</span>
                 {{#if user}}
-                    <div class='user-profile'>
-                        <a class='user-name'>chào {{user}} </a>
-                        <div class='box'>
-                            <ul class='user-ajax-customer'>
-                                <li><a href='/customer/account/edit' title='Thông tin tài khoản' rel='nofollow'>Thông tin tài khoản</a></li>
-                                <li><a href='/cart' title='Đơn hàng của tôi' rel='nofollow'>Đơn hàng của tôi</a></li>
-                                <li><a href='/customer/account/logout' title='Đăng xuất' rel='nofollow'>Đăng xuất</a></li>
-                                </ul>
-                        </div>
+                <div class='user-profile'>
+                    <a class='user-name'>chào {{user}} </a>
+                    <div class='box'>
+                        <ul class='user-ajax-customer'>
+                            <li>
+                                <a href='/customer/account/edit' title='Thông tin tài khoản' rel='nofollow'>Thông tin tài khoản</a>
+                            </li>
+                            <li>
+                                <a href='/cart' title='Đơn hàng của tôi' rel='nofollow'>Đơn hàng của tôi</a>
+                            </li>
+                            <li>
+                                <a href='/customer/account/logout' title='Đăng xuất' rel='nofollow'>Đăng xuất</a>
+                            </li>
+                        </ul>
                     </div>
+                </div>
                 {{else}}
-                    <a href='/customer/account/login'>Đăng nhập </a><span>|</span><a href='/customer/account/login'> Đăng ký </a>
+                <a href='/customer/account/login'>Đăng nhập </a>
+                <span>|</span>
+                <a href='/customer/account/login'> Đăng ký </a>
                 {{/if}}
             </div>
         </div>
@@ -63,11 +71,55 @@
                     <div class="shopping-cart-wrapper">
                         <a href="/cart" id="bag-shopping-cart" title="View bag">
                             <span class="fas fa-shopping-bag"></span>
-                            <span id="cart-count">0</span>
+                            <span id="cart-count">{{number_of_items}}</span>
                         </a>
                     </div>
                 </div>
             </div>
+            {{!-- <script>
+                $(function () {
+                    var num = 0;
+                    var data = getCookie('paid-products');
+                    console.log("HERE", data);
+                    if (data != ''){
+                        console.log("HERE", data);
+                        data = JSON.parse(data);
+                        jQuery.each(data, function () {
+                            //console.log(data);
+                            num += parseInt(this.quantity);
+                        });
+                    }
+                    $("#cart-count").html(num);                    
+                })
+
+                function getCookie(cname) {
+                    var name = cname + "=";
+                    var decodedCookie = decodeURIComponent(document.cookie);
+                    var ca = decodedCookie.split(';');
+                    for (var i = 0; i < ca.length; i++) {
+                        var c = ca[i];
+                        while (c.charAt(0) == ' ') {
+                            c = c.substring(1);
+                        }
+                        if (c.indexOf(name) == 0) {
+                            return c.substring(name.length, c.length);
+                        }
+                    }
+                    return "";
+                }
+
+                var parseCookies = function () {
+                    var cookieData = (typeof document.cookie === 'string' ? document.cookie : '').trim();
+
+                    return (cookieData ? cookieData.split(';') : []).reduce(function (cookies, cookieString) {
+                        var cookiePair = cookieString.split('=');
+
+                        cookies[cookiePair[0].trim()] = cookiePair.length > 1 ? cookiePair[1].trim() : '';
+
+                        return cookies;
+                    }, {});
+                };
+            </script> --}}
         </div>
     </div>
 

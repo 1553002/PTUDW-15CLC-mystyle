@@ -134,6 +134,9 @@ app.use('/cart', cart);
 var adminRouter = require("./routes/admin");
 app.use("/admin", adminRouter);
 
+var checkout = require("./routes/checkout");
+app.use('/checkout', checkout);
+
 
 // models.sequelize.sync().then(function() {
 //   http.createServer(app).listen(app.get('port'), function(){
