@@ -196,7 +196,9 @@ body{
     text-align: center;
 }
 
-
+.row{
+    margin: 0;
+}
 
 .availability{
     display: inline-block;
