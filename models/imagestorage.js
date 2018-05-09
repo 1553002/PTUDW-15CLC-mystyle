@@ -6,6 +6,8 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       allowNull: false
     },
+    delete : DataTypes.BOOLEAN,
+    ofUser : DataTypes.BOOLEAN,
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE,

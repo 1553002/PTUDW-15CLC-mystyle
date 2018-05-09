@@ -118,21 +118,13 @@ router.post("/payment", (req, res)=>{
 			asyncCheckout = onepay.checkoutOnePayDomestic(req, res);
 			break;
 		case 'paypal':
-<<<<<<< HEAD
-=======
-			amount = Convert_currency(cart.total, 'VND', 'USD');
->>>>>>> 69a3fd425e4bbbb53fb27a18784a6b13e3966389
 			var transactions = [
                 {
                     "amount": {
                     "total": Convert_currency(cart.total, 'VND', 'USD'),
                     "currency": "USD",
                     "details": {
-<<<<<<< HEAD
-                      "subtotal": Convert_currency(cart.total, 'VND', 'USD'),
-=======
                       "subtotal": cart.total,
->>>>>>> 69a3fd425e4bbbb53fb27a18784a6b13e3966389
                     }
                     },
                     "description": "The payment transaction description.",
@@ -299,7 +291,6 @@ function Convert_currency(amount, convert_from, convert_to){
 	console.log(result);
 	return result;
 }
-<<<<<<< HEAD
 
 function Convert_currency_for_items(list, convert_from, convert_to){
 	for (index in list){
@@ -307,6 +298,4 @@ function Convert_currency_for_items(list, convert_from, convert_to){
 	}
 }
 
-=======
->>>>>>> 69a3fd425e4bbbb53fb27a18784a6b13e3966389
 module.exports = router;
