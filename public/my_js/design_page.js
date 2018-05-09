@@ -9,12 +9,12 @@ var fonts = ["Montez","Lobster","Josefin Sans","Shadows Into Light","Pacifico","
 "Rokkitt","Righteous","Dancing Script","Bangers","Chewy","Sigmar One","Architects Daughter","Abril Fatface",
 "Covered By Your Grace","Kaushan Script","Gloria Hallelujah","Satisfy","Lobster Two","Comfortaa","Cinzel","Courgette"];
 var mycanvas, mycanvas_back , isFront=true;
-
+var img_modal;
 var shirt_list;
 var str_canvas;
 var shirt_front =document.getElementById("shirt-area");
 var shirt_back =document.getElementById("shirt-back-area");
-
+var curID=0;
 function convertImgToBase64(url, myimage, outputFormat){
   var img = new Image();
   img.crossOrigin = 'Anonymous';
@@ -82,6 +82,14 @@ function Choose_shirt(src,alt)
   convertImgToBase64(alt,shirt_back);
 
   
+}
+function Choose_shirt_from_modal(src,alt)
+{
+  var shirt= document.getElementById("design-shirt");   
+  var shirt_back =  document.getElementById("design-back-shirt");   
+
+  shirt.src=src;
+  shirt_back.src=alt;
 }
 function Choose_shirt_color(color)
 {
@@ -380,6 +388,7 @@ function Smaller()
 function ResetAll()
 {
   $('.nhan_image').remove();
+  location.reload();
 }
 function addtext()
 {
@@ -443,7 +452,41 @@ function createParent(id)
 function open_Store()
 {
   modal.style.display = "block";
+ // $('#btn_modal_delete').removeClass('active');
+ // $('#btn_modal_use').removeClass('active');
+ // $('#btn_modal_delete').addClass('disabled');
+  //$('#btn_modal_use').addClass('disabled');
 }
+
+(function($) {
+
+  
+ 
+    $('#btn_modal_delete').on('click', function (event) 
+    {
+      event.preventDefault();
+
+      var id = img_modal.id;
+      if(id.indexOf("new_img")<0)
+      {
+        $.ajax({
+          url: '/' + id,
+          type: 'DELETE',
+          success: function () {
+              
+          }
+        })
+      }
+      
+      alert(id);
+      document.getElementById(id).remove();
+
+    })
+ 
+
+ 
+})(jQuery);
+
 (function($) {
 
   $.fn.textfill = function(maxFontSize) {
@@ -492,7 +535,40 @@ function uploadEx() {
 
   };
   xhr.send(fd);
+
+  var x = document.createElement("img");
+  var id=curID;
+  curID++;
+
+  x.setAttribute("alt", dataURL_back);
+  x.setAttribute("id",id);
+  x.setAttribute("src",dataURL)
+  x.setAttribute("class","modal_image")
+  x.setAttribute("onclick","Choose_Img_Modal(id)");
+
+  document.getElementById("modal-image-list").appendChild(x);
+  x.style.height="240px";
+  x.style.width="240px";
+  
+
 };
+
+
+function findLastID()
+{
+  list=document.getElementsByClassName("modal_image");
+  var max=0;
+  
+  for(i=0;i<list.length;i++)
+  {
+    if(list[i].id>max)
+    {
+      max=list[i].id;
+    }
+  }
+  max=parseInt(max)+1;
+  return max;
+}
 /*
 (function($) {
   $('#addForm').on('submit', function (event) {
@@ -676,7 +752,8 @@ function save_as()
 }
 $(document).ready(function () {
 
-
+   curID= findLastID();
+   alert(curID);
   Choose_shirt("https://image.ibb.co/hfJKfS/shirt_1.png","https://image.ibb.co/gv8PYc/shirt_1_back.png");
 
   document.getElementById("text_box").style.fontFamily=fonts[select.value];
@@ -763,4 +840,28 @@ function SetPlaceHolder (input) {
   if (input.value == "") {
       input.value = input.defaultValue;
   }
+}
+function Choose_Img_Modal(id)
+{
+
+  //var old=document.getElementsByClassName("selected");
+  //old.classList.remove("selected");
+  $('.selected').removeClass('selected');
+  img_modal =document.getElementById(id);
+  img_modal.classList.add("selected");
+  $('#btn_modal_delete').removeClass('disabled');
+  $('#btn_modal_use').removeClass('disabled');
+  $('#btn_modal_delete').addClass('active');
+  $('#btn_modal_use').addClass('active');
+}
+
+function Use_design()
+{
+  close_modal();
+  $('.nhan_image').remove();
+  Choose_shirt_from_modal(img_modal.src,img_modal.alt);
+  load_design();
+  
+
+
 }

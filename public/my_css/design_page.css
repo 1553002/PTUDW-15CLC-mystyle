@@ -1104,3 +1104,9 @@ select
     text-decoration: none;
     cursor: pointer;
 }
+.selected
+{
+    border-style: dashed;
+    border-width: 1px;
+    border-color:grey; 
+}

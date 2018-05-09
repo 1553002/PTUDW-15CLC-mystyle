@@ -137,10 +137,13 @@ app.get('/design', function(req, res){
   res.redirect('/customproduct');
 });
 
+
 app.post('/', function(req, res){
 	res.redirect(307 ,'/customproduct');
 })
-
+app.delete('/:id', function(req, res){
+	res.redirect(307 ,'/customproduct/'+req.params.id);
+})
 
 var customer = require('./routes/customer');
 app.use('/customer',customer);
