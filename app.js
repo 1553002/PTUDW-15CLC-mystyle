@@ -130,10 +130,11 @@ app.all('/*', function (req, res, next) {
 var index = require("./routes/index");
 app.use('/', index);
 
-var comments = require('./routes/customproduct');
-app.use('/customproduct', comments);
+var customproducts = require('./routes/customproduct');
+app.use('/customproduct', customproducts);
 
 app.get('/design', function(req, res){
+  
   res.redirect('/customproduct');
 });
 
@@ -144,6 +145,9 @@ app.post('/', function(req, res){
 app.delete('/:id', function(req, res){
 	res.redirect(307 ,'/customproduct/'+req.params.id);
 })
+//app.get('/:email', function(req, res){
+//	res.redirect(307 ,'/customproduct/'+req.params.email);
+//})
 
 var customer = require('./routes/customer');
 app.use('/customer',customer);

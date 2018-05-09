@@ -71,7 +71,24 @@ router.post('/account/login', function(req, res, next){
 			// res.setHeader('x-access-token',token);
 			// console.log(res.getHeader('x-access-token'));
 			//res.cookie('x-access-token', token);
-			res.redirect("/");
+			if(user.active==true)
+			{
+				if(user.isAdmin==false)
+				{
+					res.redirect("/");
+				}
+				else
+				{
+					res.redirect('/admin')
+				}
+			}
+			else
+			{
+				req.flash('error', 'Tài khoản chưa kích hoạt. Vui lòng kiểm tra lại.');
+
+				return res.redirect('/customer/account/login');
+			}
+
 		});
 	})(req, res, next);	
 });

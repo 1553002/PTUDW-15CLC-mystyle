@@ -451,7 +451,25 @@ function createParent(id)
 
 function open_Store()
 {
-  modal.style.display = "block";
+  if(document.getElementById("hidden_data_email").value!="")
+  {
+    modal.style.display = "block";
+  }
+  else
+  {
+    alert("Vui lòng đăng nhập để dùng tính năng này");
+  }
+ 
+  /*
+  email= document.getElementById("hidden_data_email").value;
+  $.ajax({
+    url: '/' + email,
+    type: 'GET',
+    success: function () {
+        
+    }
+  })
+  */
  // $('#btn_modal_delete').removeClass('active');
  // $('#btn_modal_use').removeClass('active');
  // $('#btn_modal_delete').addClass('disabled');
@@ -512,11 +530,17 @@ function open_Store()
 
 function uploadEx() {
 
+  if(document.getElementById("hidden_data_email").value=="")
+  {
+    alert("Vui lòng đăng nhập để sử dụng tính năng này")
+    return;
+  }
   var dataURL = mycanvas.toDataURL("image/png");
   var dataURL_back= mycanvas_back.toDataURL("image/png");
   document.getElementById('hidden_data').value = dataURL;
   document.getElementById('hidden_data_back').value = dataURL_back;
 
+  
   var fd = new FormData(document.forms["form1"]);
 
   var xhr = new XMLHttpRequest();
@@ -569,6 +593,7 @@ function findLastID()
   max=parseInt(max)+1;
   return max;
 }
+
 /*
 (function($) {
   $('#addForm').on('submit', function (event) {
@@ -753,7 +778,8 @@ function save_as()
 $(document).ready(function () {
 
    curID= findLastID();
-   alert(curID);
+  var mail =document.getElementById("hidden_data_email").value;
+  document.getElementById("hidden_data_email").value= mail.split('/')[0];
   Choose_shirt("https://image.ibb.co/hfJKfS/shirt_1.png","https://image.ibb.co/gv8PYc/shirt_1_back.png");
 
   document.getElementById("text_box").style.fontFamily=fonts[select.value];
