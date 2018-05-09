@@ -172,6 +172,23 @@ $('.edit').click(function() {
     $("#set-category").attr('product_id', id);
 });
 
+//xem chi tiet don hang
+$('.detail').click(function() {
+    var id = $(this).data('id');
+
+    $.ajax({
+        url: '/admin/donhang/chitietdonhang',
+        data: {
+            id: id
+        },
+        contentType: "application/json; charset=utf-8",
+        type: 'GET',
+        success: function(respone){
+            console.log(respone);
+        }
+    });
+    e.preventDefault();
+});
 
 $('#myModal').on('hidden.bs.modal', function () {
     $("#inputCategory").val('');
