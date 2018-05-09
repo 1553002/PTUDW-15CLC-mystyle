@@ -1,6 +1,9 @@
 /*1553002*/
+a, *{
+    font-size: 14px;
+}
 
-.container{
+.default-margin-top{
     margin-top: 10px;
 }
 
@@ -135,7 +138,10 @@ label.code{
     width: 300px;
 }
 
-
+.table thead th {
+    font-weight: 400;
+    font-size: 14px;
+}
 
 .pd-info-detail .pd-pic{
     float: left;
@@ -148,7 +154,7 @@ label.code{
 }
 
 .item-product .action a{
-    font-size: inherit;
+    font-size: 13px;
 }
 
 .pd-link {
@@ -166,13 +172,18 @@ label.code{
     margin-right: 5px;
 }
 
-.pd-quantity-comment {
-    color: #999;
-    display: block;
+.pd-price .price{
+    font-size: 16px;
+    margin-bottom: 5px;
+    font-weight: 500;
+    padding-top: 0;
 }
 
-.pd-price .unit {
-    color: #999;
+.pd-price .price2{
+    font-size: 12px;
+    margin-bottom: 8px;
+    text-decoration: line-through;
+    color: #a2a2a2;
 }
 
 .pd-price-title {
@@ -185,4 +196,24 @@ label.code{
     color: #fe3834;
     font-size: 22px;
     font-weight: 400;
+}
+
+.form-row-button{
+    margin-top: 10px;
+    justify-content: flex-end;
+}
+
+.button, .buttonstyle, .product-variations .size-chart-link a, button, input[type=button] {
+    font-weight: 700;
+    background-color: #000;
+    border: 1px solid #000; 
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 12px;
+    line-height: normal;
+    letter-spacing: .6px;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 12px;
 }
