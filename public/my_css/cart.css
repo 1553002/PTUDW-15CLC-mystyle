@@ -217,3 +217,16 @@ label.code{
     text-transform: uppercase;
     padding: 12px;
 }
+
+.empty-cart {
+    margin: 1em;
+}
+
+.empty-cart .message{
+    margin: 30px;
+}
+
+.empty-cart a{
+    font-size: 18px;
+    color: blue;
+}

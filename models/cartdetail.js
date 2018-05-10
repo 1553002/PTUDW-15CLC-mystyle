@@ -11,8 +11,9 @@ module.exports = (sequelize, DataTypes) => {
     size: DataTypes.STRING,
     image: DataTypes.TEXT,
     quantity: DataTypes.INTEGER,
-    price: DataTypes.STRING,
-    total: DataTypes.STRING,
+    price: DataTypes.INTEGER,
+    total: DataTypes.INTEGER,
+    delete: DataTypes.BOOLEAN,
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE,

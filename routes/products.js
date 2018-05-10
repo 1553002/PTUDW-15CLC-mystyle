@@ -93,7 +93,7 @@ router.route('/:categoryId/:productId')
     })
     .post(function(req, res){
         var cookie = req.cookies['paid-products'];
-        let order_quantity = req.body.data.quantity, order_size = req.body.data.size;
+        let order_quantity = parseInt(req.body.data.quantity), order_size = req.body.data.size;
         
         var product_list = [];
 
