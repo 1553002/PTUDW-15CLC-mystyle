@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       values: ['Xử lý','Đóng gói','Vận chuyển','Giao hàng thành công','Hủy']
     },
     receiveAddress: DataTypes.STRING,
-    total: DataTypes.FLOAT,
+    total: DataTypes.INTEGER,
     delete : DataTypes.BOOLEAN,
     createdAt: {
       allowNull: false,

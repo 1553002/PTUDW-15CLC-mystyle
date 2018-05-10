@@ -36,8 +36,8 @@ $(function () {
                 url: window.location.pathname,
                 type: 'POST',
                 contentType: "application/json",
-                data: JSON.stringify({data:{"size": $("#i-select-size li.selected span").text(),"quantity": order_quantity }})
-            }).done(function(result){
+                data: JSON.stringify({ data: { "size": $("#i-select-size li.selected span").text(), "quantity": order_quantity } })
+            }).done(function (result) {
                 addToCartBtn.addClass('is-added').find('path').eq(0).animate({ 'stroke-dashoffset': 0 }, 300, function () {
                     setTimeout(function () {
                         updateCart();
@@ -55,57 +55,55 @@ $(function () {
                     }, 600);
                 });
 
-                resetCustomization();   
-            }).fail(function(err){
+                resetCustomization();
+            }).fail(function (err) {
 
             })
 
         });//  End addToCartBtn click
     }
 
+        function resetCustomization() {
+            $("#i-select-size li.selected").removeClass("selected");
+        }
 
 
-    function resetCustomization() {
-        $("#i-select-size li.selected").removeClass("selected");
-    }
+        //Xử lý sự kiện nhấn chọn size áo
+        $("#i-select-size li").on('click', function () {
+            //Xóa thẻ hiện đang được chọn
+            $("#i-select-size li.selected").removeClass("selected");
+            //Cập nhật lại thẻ mới
+            $(this).addClass("selected");
 
+            $("#add-to-cart.btn-noradius").prop('disabled', false);
+        });
 
-    //Xử lý sự kiện nhấn chọn size áo
-    $("#i-select-size li").on('click', function () {
-        //Xóa thẻ hiện đang được chọn
-        $("#i-select-size li.selected").removeClass("selected");
-        //Cập nhật lại thẻ mới
-        $(this).addClass("selected");
+        function checkConditionToEnableAddToCartButton() {
+            if ($("#i-select-size li").hasClass("selected")) {
+                $("#add-to-cart.btn-noradius").prop('disabled', false);
+            }
+        }
 
-        $("#add-to-cart.btn-noradius").prop('disabled', false);
+        function updateCart() {
+            var cartItems = cart.find('#cart-count'),
+                text = parseInt(cartItems.text()) + parseInt(order_quantity);
+            cartItems.text(text);
+        }
+
     });
 
-    function checkConditionToEnableAddToCartButton() {
-        if ($("#i-select-size li").hasClass("selected")) {
-            $("#add-to-cart.btn-noradius").prop('disabled', false);
-        }
-    }
+    $(".btn-item-delete").click(function (event) {
+        event.preventDefault();
 
-    function updateCart() {
-        var cartItems = cart.find('#cart-count'),
-            text = parseInt(cartItems.text()) + parseInt(order_quantity);
-            cartItems.text(text);
-    }
+        $.ajax({
+            url: window.location.pathname + '/delete',
+            type: 'POST',
+            contentType: "application/json",
+            data: JSON.stringify({ data: { "id": $(this).data('pd-id'), "size": $(this).data('pd-size') } })
+        }).done(function (result) {
+            location.reload();
+        }).fail(function (err) {
 
-});
-
-$(".btn-item-delete").click(function(event){
-    event.preventDefault();
-    
-    $.ajax({
-        url: window.location.pathname + '/delete',
-        type: 'POST',
-        contentType: "application/json",
-        data: JSON.stringify({data:{"id": $(this).data('pd-id'), "size": $(this).data('pd-size')}})
-    }).done(function(result){
-        location.reload();
-    }).fail(function(err){
+        })
 
     })
-
-})
