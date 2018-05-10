@@ -93,7 +93,7 @@ router.route('/:categoryId/:productId')
     })
     .post(function(req, res){
         var cookie = req.cookies['paid-products'];
-        let order_quantity = req.body.data.quantity, order_size = req.body.data.size;
+        let order_quantity = parseInt(req.body.data.quantity), order_size = req.body.data.size;
         
         var product_list = [];
 
@@ -118,6 +118,8 @@ router.route('/:categoryId/:productId')
                 total_price : order_quantity*(product_detail.discountAvailable ? product_detail.discountPriceNumber : product_detail.priceNumber),
                 size: order_size
             }
+
+            console.log(item);
 
             var data, cur_money = 0, cur_total_quantity = 0;
             if (cookie != null && cookie != undefined){
@@ -151,7 +153,7 @@ router.route('/:categoryId/:productId')
             }
             
             var my_data = {totalQuantity: cur_total_quantity, totalMoney: cur_money, product_list: JSON.stringify(product_list)};
-
+            console.log(my_data);
             res.cookie('paid-products', JSON.stringify(my_data), {maxAge : 1000*60*60*24*30, httpOnly: false});
         }
         res.send("OK");

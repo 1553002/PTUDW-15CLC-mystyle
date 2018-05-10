@@ -13,7 +13,7 @@ module.exports = {
     checkoutOnePayDomestic: function (req, res) {
         const checkoutData = res.locals.checkoutData;
         checkoutData.returnUrl = `http://${req.headers.host}/checkout/payment/onepaydom/callback`;
-
+        
         return onepayDom.buildCheckoutUrl(checkoutData).then(checkoutUrl => {
             res.locals.checkoutUrl = checkoutUrl;
 
@@ -30,8 +30,13 @@ module.exports = {
                 res.locals.email = 'tu.nguyen@naustud.io';
                 res.locals.orderId = results.orderId || '';
                 res.locals.price = results.amount;
+                res.locals.billingStreet = results.billingStreet;
+                res.locals.billingCountry = Countries[results.billingCountry];
+                res.locals.billingStateProvince = results.billingStateProvince;
+                res.locals.billingCity = results.billingCity;
+                res.locals.billingPostalCode = results.billingPostCode;
                 res.locals.isSucceed = results.isSuccess;
-                res.locals.message = results.message;
+			    res.locals.message = results.message;
             } else {
                 res.locals.isSucceed = false;
             }

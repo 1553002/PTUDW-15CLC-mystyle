@@ -41,8 +41,8 @@ controller.createCart = function (Obj, callback) {
 
 controller.createCartDetail = function (Obj, callback) {
     models.CartDetail
-        .create(Obj).then(function () {
-            callback();
+        .create(Obj).then(function (carts) {
+            callback(carts);
         }).catch((error) => {
             callback(error);
         })

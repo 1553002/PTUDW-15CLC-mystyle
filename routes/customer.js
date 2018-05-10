@@ -100,7 +100,6 @@ passport.authenticate('local', {
 });
 
 router.post('/account/edit', function(req, res){
-
 	if(req.body.old_pass=="")
 	{
 		customersController.updateInfo(req.body.email, req.body.fullname,req.body.gender, function (customers) {
@@ -264,7 +263,6 @@ router.post('/register', function (req, res) {
 
 router.get('/account/logout', function (req, res) {
 	req.logout();
-	req.flash('success_message', 'You are logged out');
 	res.redirect('/');
 });
 
@@ -272,14 +270,17 @@ router.get('/account/edit', ensureAuthenticated, (req, res) => {
 	var user_email = req.session.passport.user;
 
 	models.Customer.findById(user_email, { password: 0 }).then(function (user) {
-		res.render('account_edit', { name: user.fullname, email: user.email, gender: user.gender });
+		res.render('account_edit', { 
+			name: user.fullname, 
+			email: user.email, 
+			gender: user.gender,
+			number_of_items: handlerGeneral.get_quantity_of_items(req, res) });
 	}).catch(function (err) {
 
 	});
 });
 
 function ensureAuthenticated(req, res, next) {
-	//console.log(req);
 	if (req.isAuthenticated()) {
 		next();
 	} else {

@@ -4,8 +4,8 @@ var router = express.Router();
 
 paypal.configure({
   'mode': 'sandbox', //sandbox or live 
-  'client_id': 'AXQ3YqugCYBb0YygbbiRzMxnbyJllJzermVGrTNY0O1wtFUn_7M_w3LbAMSdjM7Nw9dVnXCKxFKRvJn3', // please provide your client id here 
-  'client_secret': 'EMH1w_GYiuEDuDl8OcHJH4x2gMvvUUcsKnyLp0qfQUcbzqZb8oUHSMLKXZUD5yUOiCH0LSm3CEdfNU0D' // provide your client secret here 
+  'client_id': 'AXY-TTWZ7dAC-EORlRxG4achel_O7J6WZtqCWtX80JOBC4BjGMfv6LqdE6fHqM-VKiBJSMWcH3wHenQF', // please provide your client id here 
+  'client_secret': 'EGyW-pRmDfLYvTiczpUA6x9Buz3yO2by1RxiaH8R18yi91hAiaF9D77LNysSJUGKwV9igNmns_MK7XEt' // provide your client secret here 
 });
 
 // paypal.configure({
@@ -29,7 +29,7 @@ module.exports = {
       }
     };
     payment.transactions = res.locals.transactions;
-    console.log(payment);
+  
     return createPay(payment)
       .then(transaction => {
         req.session.paymentId = transaction.id;
@@ -49,6 +49,7 @@ module.exports = {
   },
 
   callbackPaypal : function(req, res) {
+    console.log("Call function is called");
     const paymentId = req.session.paymentId;
     const payerId = req.query.PayerID;    
     const details = { payer_id: payerId };
@@ -63,11 +64,13 @@ module.exports = {
           res.locals.state = payment.payer.payer_info.shipping_address.state;
           res.locals.city = payment.payer.payer_info.shipping_address.city;
           res.locals.postalCode = payment.payer.payer_info.shipping_address.postal_code;
-          res.locals.currency = "VND";
+          res.locals.currency = "USD";
           res.locals.isSucceed = true;
           res.locals.message = "";     
+          console.log("payment");
       })
       .catch((err) => {
+        console.log("failed", err);
         res.locals.isSucceed = false;
         res.locals.message = err.message;
       });
@@ -93,6 +96,7 @@ var createPay = payment => {
 };
 
 var executePay = (paymentId, details) => {
+  console.log("executePay", paymentId, details);
   return new Promise((resolve, reject) => {
     paypal.payment.execute(paymentId, details, (err, payment) => {
       if (err) {
