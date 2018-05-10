@@ -7,6 +7,7 @@ var onepay = require('./onepay-handlers');
 
 var handlerGeneral = require('./general');
 var cur_total_quantity = 0, cur_money = 0 , product_list = [];
+
 var cartsController = require('../controllers/cartsController');
 // Use the session middleware
 // router.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
@@ -24,7 +25,6 @@ router.get('/shipping-detail', ensureAuthenticated, (req, res) => {
 router.get('/payment', (req, res)=>{
 
     get_cart_detail_from_cookie(req, res);
-
     res.render('checkout/payment', {
         shipping_detail: req.session.shipping_detail,
         product_list : product_list,
@@ -42,7 +42,7 @@ router.post('/', (req, res) => {
 
     let errors = req.validationErrors();
     if (errors) {
-		console.log(errors);
+		console.log("ERORR: ", errors);
 		//res.flash({ success: false, message: errors });
     }
     else {
@@ -65,9 +65,7 @@ router.post("/payment", (req, res)=>{
 	var cart = {
         "items": product_list,
         'total': cur_money,
-        "tax" : "0",
         "shipping": "0",
-        "handling_fee": "0",
         "currency": "VND"
 	};
 	
@@ -112,8 +110,12 @@ router.post("/payment", (req, res)=>{
 	res.locals.checkoutData = checkoutData;
 
 	// Note: these handler are asynchronous
-    let asyncCheckout = null;
+	let asyncCheckout = null;
+	console.log("PAY MEHTOD",params.paymentMethod);
 	switch (params.paymentMethod) {
+		case 'cod':
+			createCart(id, 'cod', product_list, req, res);
+			break;
 		case 'onepayDomestic':
 			asyncCheckout = onepay.checkoutOnePayDomestic(req, res);
 			break;
@@ -124,8 +126,8 @@ router.post("/payment", (req, res)=>{
                     "total": Convert_currency(cart.total, 'VND', 'USD'),
                     "currency": "USD",
                     "details": {
-                      "subtotal": cart.total,
-                    }
+                      "subtotal": Convert_currency(cart.total, 'VND', 'USD'),
+                    }	
                     },
                     "description": "The payment transaction description.",
                     "custom": "EBAY_EMS_90048630024435",
@@ -157,30 +159,10 @@ router.post("/payment", (req, res)=>{
                     }
                     }
                   }
-			// {
-			//   "amount": {
-			// 	"total": cart.total,
-			// 	"currency": cart.currency,
-			// 	"details": {
-			// 		"tax": cart.tax,
-			// 		"shipping": cart.shipping,
-			// 		"handling_fee": cart.handling_fee		
-			// 	}
-			//   },
-			//   "description": "The payment transaction description.",
-			//   "item_list": {
-			// 	"items": cart.items,
-			// 	"shipping_address": {
-			// 		"recipient_name": params.fullname,
-			// 		"address": params.address || "",
-			// 		"phone": params.phone || ""
-			// 	}
-			//   }
-			// }
             ];
             //console.log(transactions);
 			res.locals.transactions = transactions;
-			//asyncCheckout = paypal.checkoutPaypal(req, res);
+			asyncCheckout = paypal.checkoutPaypal(req, res);
 			break;
 		default:
 			break;
@@ -202,7 +184,6 @@ router.post("/payment", (req, res)=>{
 
 router.get('/payment/:gateway/callback', (req, res) => {
 	const gateway = req.params.gateway;
-	console.log('gateway', req.params.gateway);
 	let asyncFunc = null;
 
 	switch (gateway) {
@@ -243,7 +224,6 @@ router.get('/payment/:gateway/callback', (req, res) => {
 
 
 function ensureAuthenticated(req, res, next) {
-    console.log(req);
     if (req.isAuthenticated()) {
         next();
     } else {
@@ -270,7 +250,6 @@ USBVND = rates[0];
 
 function Convert_currency(amount, convert_from, convert_to){
 	if (convert_from == "VND" && convert_to == "USD"){
-		console.log("VNDUSD", VNDUSD);
 		result = amount * VNDUSD;
 	}else if (convert_from == "USD" && convert_to == "VND"){
 		result = amount * USDVND;
@@ -325,9 +304,9 @@ function Create_cart(cart_id, payment_method, product_list ,req, res){
 		paymentType : payment_type,
 		deliveryDate : delivery_date,
 		transactStatus : 'Xử lý',
-		receiverAddress : shipping_detail.address,
+		receiveAddress : shipping_detail.address,
 		total: cur_money,
-		CustomerEmail: 'lccanh97@gmail.com'
+		CustomerEmail: res.locals.user.email
 	}
 
 	cartsController.createCart(cart, function(cart){
@@ -339,6 +318,7 @@ function Create_cart(cart_id, payment_method, product_list ,req, res){
 				quantity :  product_list[index].quantity,
 				price :  product_list[index].price,
 				total :  product_list[index].total_price,
+				delete : 'false',
 				CartId : cart_id
 			}
 

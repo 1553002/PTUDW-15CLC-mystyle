@@ -151,7 +151,7 @@ passport.use(new LocalStrategy({
 
 				if(user.isAdmin) {isAdmin=true;}
 				else isAdmin=false;
-				if(user.active==false)
+				if(user.active == false)
 				{
 					return callback(null, false, req.flash('error_password','Tài khoản chưa kích hoạt. Vui lòng kiểm tra lại!'));
 				}
@@ -241,7 +241,9 @@ router.post('/register', function (req, res) {
 					fullname: name,
 					gender: gender,
 					dateOB: birthday,
-					password: password
+					password: password,
+					isAdmin: false,
+					active: true,
 				}
 
 				customersController.createUser(newUser, function (err) {

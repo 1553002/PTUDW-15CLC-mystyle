@@ -3,7 +3,11 @@ var controller = {};
 var models = require('../models');
 
 controller.getAll = function (callback) {
-    models.Cart.findAll()
+    models.Cart.findAll({
+        where:{
+            delete : false
+        }
+    })
         .then(function (carts) {
             callback(carts);
         })
@@ -44,4 +48,15 @@ controller.createCartDetail = function (Obj, callback) {
         })
 }
 
+controller.updateStatusCart = function (id, callback) {
+    models.Cart.update({delete : "true"}, {
+        where: {
+            id : id
+        }
+    }).then(function (cart) {
+        callback(cart);
+    }).catch(function(err){
+        callback(err);
+    })
+};
 module.exports = controller;

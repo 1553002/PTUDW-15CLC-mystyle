@@ -98,6 +98,15 @@ router.get('/donhang', (req, res) => {
     });
 })
 
+router.put('/donhang/:id', (req, res)=>{
+    console.log("Hello");
+    let id = req.params.id;
+
+    cartsController.updateStatusCart(id, (cart)=>{
+        if (cart)
+            res.sendStatus(200).end();
+    })
+})
 
 router.get('/taikhoankhachhang', (req, res) => {
     //Lay toan bo san pham hien co

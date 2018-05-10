@@ -146,7 +146,15 @@ $('.edit').click(function() {
 //Xử lý sự kiện xóa tạm thời
 $('.mark_delete').click(function() {
     var id = $(this).data('id');
-    console.log(id);
+    $.ajax({
+        url : window.location.pathname + '/' + id,
+        type : 'PUT'
+    }).done(function(){
+        alert("Đã đánh dấu xóa đơn hành trong CSDL");
+        location.reload();
+    }).fail(function(){
+        alert("Đã xảy ra lỗi trong quá trình xóa đơn hàng. Vui lòng thử lại!");
+    })
 });
 
 $('#myModal').on('hidden.bs.modal', function () {
@@ -172,15 +180,6 @@ $('[data-target="cartModal"]').click(function(e) {
             '<td class="text-right">'+product_list[index].price+'</td>'+
             '<td class="text-right">'+product_list[index].total+'</td>'+
             '</tr>';
-
-            
-            // $(".modal-body tbody")
-            // .append('<tr>'+
-            // '<td class="text-center"><img src="'+product_list[index].image+'" class="img-thumbnail"> </td>'+
-            // '<td class="text-left">'+product_list[index].productName+'</td>' +
-            // '<td class="text-left">'+product_list[index].size+'</td>' +
-            // '<td class="text-right">'+product_list[index].quantity+'</td>'+
-            // '</tr>');
         }
         $(".modal-body tbody").html(string_html);
         console.log(string_html);
@@ -189,6 +188,7 @@ $('[data-target="cartModal"]').click(function(e) {
         
     });
 });
+
 
 
 //Tao id cho danh mục
