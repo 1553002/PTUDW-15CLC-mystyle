@@ -18,6 +18,9 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {{#each cookieimages}}
+                            <input name="hidden_data" id='{{id}}' type="hidden" value="{{url}}"/>
+                        {{/each}}
                         {{#each data}}
                         <tr class="item-product">
                             <td class="pd-info-detail">
@@ -50,6 +53,8 @@
                             </td>
                         </tr>
                         {{/each}}
+
+                        
                     </tbody>
 
                     <tfoot>

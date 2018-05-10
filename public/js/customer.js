@@ -158,10 +158,13 @@ $('#edit-account').on('submit', function (event) {
         type: 'POST',
         success: function () 
         {
-            location.reload();
+      
             
         }
-    });
+    }).done
+    {
+        location.reload();
+    };
 
     
 });

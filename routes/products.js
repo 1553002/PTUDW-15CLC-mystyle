@@ -93,13 +93,14 @@ router.route('/:categoryId/:productId')
     })
     .post(function(req, res){
         var cookie = req.cookies['paid-products'];
-        let order_quantity = req.body.data.quantity, order_size = req.body.data.size;
+        let order_quantity = parseInt(req.body.data.quantity), order_size = req.body.data.size;
         
         var product_list = [];
 
         if (order_quantity===undefined || order_quantity == null){
             order_quantity = -1;
         }
+        
         
         if (order_size != 'M' && order_size!='L' && order_size!='XL' && order_size!='S'){
             order_size = '';
