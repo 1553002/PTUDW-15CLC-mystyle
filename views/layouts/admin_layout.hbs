@@ -1,26 +1,32 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        {{>general_head}}
-        {{!-- <link rel="stylesheet" href="/my_css/general-style.css"> --}}
-        <link rel="stylesheet" href="/my_css/admin_style.css">
-        <link rel="stylesheet" href="/my_css/spectrum.css">
-        <link rel="stylesheet" href="/datatables/dataTables.bootstrap4.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-    </head>
+
+<head>
+    {{>general_head}} {{!--
+    <link rel="stylesheet" href="/my_css/general-style.css"> --}}
+    <link rel="stylesheet" href="/my_css/admin_style.css">
+    <link rel="stylesheet" href="/my_css/spectrum.css">
+    <link rel="stylesheet" href="/datatables/dataTables.bootstrap4.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+</head>
+
 <body>
     <header id="header">
-    {{>ad_header}}  
+        {{>ad_header}}
     </header>
 
-    {{>left_menu_admin}}
+    <div id="main">
+        {{>left_menu_admin}}
 
-    <div id="content">
-        {{{body}}}
+        <div id="content">
+            {{{body}}}
+        </div>
     </div>
-    
+
+
     <script type="text/javascript" src="/my_js/admin.js"></script>
     <script src="/datatables/jquery.dataTables.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 
 </body>
 

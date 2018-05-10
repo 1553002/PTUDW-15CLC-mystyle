@@ -18,6 +18,67 @@ $(function () {
         console.log(controller());
     })
 
+    if (window.location.pathname == '/admin/thongke') {
+        console.log('AAB');
+        $.ajax({
+            url: '/admin/get-data',
+            type: 'post',
+            success: function (response) {
+                let data = response;
+                var total = data.map(function (a) { return a.sum; });
+                var date = data.map(function (a) { return a.date; });
+
+                var myChart = new Chart($("#myChart"), {
+                    type: 'line',
+                    data: {
+                        labels: date,
+                        datasets: [{
+                            label: "Data",
+                            borderColor: "#80b6f4",
+                            pointBorderColor: "#80b6f4",
+                            pointBackgroundColor: "#80b6f4",
+                            pointHoverBackgroundColor: "#80b6f4",
+                            pointHoverBorderColor: "#80b6f4",
+                            pointBorderWidth: 10,
+                            pointHoverRadius: 10,
+                            pointHoverBorderWidth: 1,
+                            pointRadius: 3,
+                            fill: false,
+                            borderWidth: 4,
+                            data: total
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    fontColor: "rgba(0,0,0,0.5)",
+                                    fontStyle: "bold",
+                                    beginAtZero: false,
+                                    maxTicksLimit: 5,
+                                    padding: 20
+                                },
+                                gridLines: {
+                                    drawTicks: false,
+                                    display: true
+                                }
+                            }],
+                            xAxes: [{
+                                gridLines: {
+                                    zeroLineColor: "transparent"
+                                },
+                                ticks: {
+                                    padding: 20,
+                                    fontColor: "rgba(0,0,0,0.5)",
+                                    fontStyle: "bold"
+                                }
+                            }]
+                        }
+                    }
+                });
+            }
+        });
+    }
 });
 
 $('.delete').on('click', function (event) {
@@ -35,29 +96,29 @@ $('.delete').on('click', function (event) {
 
 
 //thay đổi trạng thái khách hàng
-$('[data-target="change-status"]').change(function(e){
+$('[data-target="change-status"]').change(function (e) {
     var active;
     var email = $(this).attr("data-id");
     console.log("STATUS");
-    if($('[data-id="'+email+'"] input.inactive').is(":checked")){
+    if ($('[data-id="' + email + '"] input.inactive').is(":checked")) {
         active = false;
-    }else{
+    } else {
         active = true;
     }
 
-    console.log(email, $('[data-email="'+email+'"] input').is(':checked'),active);
+    console.log(email, $('[data-email="' + email + '"] input').is(':checked'), active);
 
     $.ajax({
         url: '/admin/taikhoankhachhang/status',
         data: JSON.stringify({
             email: email,
-            isAdmin: $('[data-email="'+email+'"] input').is(':checked'),
+            isAdmin: $('[data-email="' + email + '"] input').is(':checked'),
             active: active
         }),
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         type: 'POST',
-        success: function(respone){
+        success: function (respone) {
             console.log(respone);
         }
     });
@@ -65,40 +126,40 @@ $('[data-target="change-status"]').change(function(e){
 });
 
 //thay đổi trạng thái khách hàng
-$('[data-target="change-admin"]').change(function(e){
+$('[data-target="change-admin"]').change(function (e) {
     console.log("ADMIN");
     var admin;
     var email = $(this).attr("data-email");
 
 
-    if($('[data-email="'+email+'"] .check-admin').is(':checked'))
+    if ($('[data-email="' + email + '"] .check-admin').is(':checked'))
         admin = true;
     else
         admin = false;
 
-    console.log(email, admin, $('[data-id="'+email+'"] input.active').is(':checked'));
+    console.log(email, admin, $('[data-id="' + email + '"] input.active').is(':checked'));
     $.ajax({
         url: '/admin/taikhoankhachhang/status',
         data: JSON.stringify({
             email: email,
             isAdmin: admin,
-            active: $('[data-id="'+email+'"] input.active').is(':checked')
+            active: $('[data-id="' + email + '"] input.active').is(':checked')
         }),
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         type: 'POST',
-        success: function(respone){
+        success: function (respone) {
             console.log(respone);
         }
     });
     e.preventDefault();
 });
 
-$("#set-category button").click(()=>{
+$("#set-category button").click(() => {
     $("#set-category").submit();
 })
 
-$("#add-category-btn").click(()=>{
+$("#add-category-btn").click(() => {
     $("#set-category").attr('action', '/admin/danhmucsanpham/themdanhmuc');
     $("#set-category").attr('method', 'POST');
 })
@@ -111,7 +172,7 @@ $("#set-category").submit(function (e) {
     category_id = category_id.split(' ').join('-');
 
     var action = $('#set-category').attr('action');
-    if (action != undefined && action!=null){
+    if (action != undefined && action != null) {
         $.ajax({
             url: action,
             type: $("#set-category").attr('method'),
@@ -125,16 +186,16 @@ $("#set-category").submit(function (e) {
             }
         });
     }
-    
+
     e.preventDefault();
     return false;
 });
 
 //Xử lý sự kiện button edit click
-$('.edit').click(function() {
+$('.edit').click(function () {
     var id = $(this).data('id');
     var category = $(this).data('value');
-    
+
     $("#inputCategory").val($(this).data('value'));
 
     //Change all relative atrributes in form
@@ -144,7 +205,7 @@ $('.edit').click(function() {
 });
 
 //Xử lý sự kiện xóa tạm thời
-$('.mark_delete').click(function() {
+$('.mark_delete').click(function () {
     var id = $(this).data('id');
     $.ajax({
         url : window.location.pathname + '/' + id,
@@ -162,30 +223,30 @@ $('#myModal').on('hidden.bs.modal', function () {
 })
 
 //xem chi tiet don hang
-$('[data-target="cartModal"]').click(function(e) {
+$('[data-target="cartModal"]').click(function (e) {
 
     e.preventDefault();
     var id = $(this).data('cart-id');
     // console.log(id);
-    $.get("/admin/donhang/chitietdonhang/" + id , function(data, status){
+    $.get("/admin/donhang/chitietdonhang/" + id, function (data, status) {
         console.log("return", data, status);
         var product_list = JSON.parse(data);
         var string_html;
-        for (index in product_list){
-            string_html +='<tr>'+
-            '<td class="text-center"><img src="'+product_list[index].image+'" class="img-thumbnail"> </td>'+
-            '<td class="text-left">'+product_list[index].productName+'</td>' +
-            '<td class="text-left">'+product_list[index].size+'</td>' +
-            '<td class="text-right">'+product_list[index].quantity+'</td>'+
-            '<td class="text-right">'+product_list[index].price+'</td>'+
-            '<td class="text-right">'+product_list[index].total+'</td>'+
-            '</tr>';
+        for (index in product_list) {
+            string_html += '<tr>' +
+                '<td class="text-center"><img src="' + product_list[index].image + '" class="img-thumbnail"> </td>' +
+                '<td class="text-left">' + product_list[index].productName + '</td>' +
+                '<td class="text-left">' + product_list[index].size + '</td>' +
+                '<td class="text-right">' + product_list[index].quantity + '</td>' +
+                '<td class="text-right">' + product_list[index].price + '</td>' +
+                '<td class="text-right">' + product_list[index].total + '</td>' +
+                '</tr>';
         }
         $(".modal-body tbody").html(string_html);
         console.log(string_html);
         $('#myModal').modal('show');
         //$("body").append('<div class="modal-backdrop fade show"></div>');
-        
+
     });
 });
 
@@ -272,6 +333,7 @@ function formatCurrency(number) {
     var n2 = n.replace(/\d\d\d(?!$)/g, "$&,");
     return n2.split('').reverse().join('');
 }
+
 
 
 //Xử lý data table

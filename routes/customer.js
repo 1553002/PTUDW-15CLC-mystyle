@@ -243,7 +243,7 @@ router.post('/register', function (req, res) {
 					dateOB: birthday,
 					password: password,
 					isAdmin: false,
-					active: true,
+					active: true
 				}
 
 				customersController.createUser(newUser, function (err) {

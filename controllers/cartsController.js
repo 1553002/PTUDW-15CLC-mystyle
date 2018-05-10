@@ -1,7 +1,7 @@
 var controller = {};
 
 var models = require('../models');
-
+var sequelize=require('sequelize');
 controller.getAll = function (callback) {
     models.Cart.findAll({
         where:{
@@ -48,6 +48,23 @@ controller.createCartDetail = function (Obj, callback) {
         })
 }
 
+
+controller.getSumbyDate = function (callback) {
+    models.Cart.findAll({
+        attributes: [[sequelize.fn('date_trunc', 'day', sequelize.col('createdAt')),'date'],[sequelize.fn('sum',sequelize.col('total')),'sum']],
+        group: [sequelize.fn('date_trunc', 'day', sequelize.col('createdAt')),'date'],
+        where: {
+            delete : false,
+        },
+        raw: true
+    }).then(function (carts) {
+        callback(carts);
+    }).catch(function(err){
+        callback(err);
+    });
+};
+
+
 controller.updateStatusCart = function (id, callback) {
     models.Cart.update({delete : "true"}, {
         where: {
@@ -59,4 +76,5 @@ controller.updateStatusCart = function (id, callback) {
         callback(err);
     })
 };
+
 module.exports = controller;
