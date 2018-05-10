@@ -115,6 +115,11 @@ app.get('/design', function(req, res){
 app.post('/', function(req, res){
 	res.redirect(307 ,'/customproduct');
 })
+app.post('/order', function(req, res){
+	res.redirect(307 ,'/customproduct/order');
+})
+
+
 app.delete('/:id', function(req, res){
 	res.redirect(307 ,'/customproduct/'+req.params.id);
 })

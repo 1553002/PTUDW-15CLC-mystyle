@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     account: DataTypes.TEXT,
     url: DataTypes.TEXT,
     url1: DataTypes.TEXT,
-    url2: DataTypes.TEXT
+    deleted: DataTypes.BOOLEAN
 
   }, {});
   CustomProduct.associate = function(models) {
