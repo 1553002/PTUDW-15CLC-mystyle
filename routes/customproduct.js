@@ -131,7 +131,10 @@ router.delete('/:id', function (req, res) {
 });
 
 /*
-router.get('/:email', function (req, res) {
+router.get('/:ema
+
+
+, function (req, res) {
     customproductsController.getAll(req.params.email,function (customproducts) {
      
             res.send("OK");
@@ -149,4 +152,6 @@ function makeid() {
   
 	return text;
 }
+
+
 module.exports = router;
