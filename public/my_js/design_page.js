@@ -15,6 +15,19 @@ var str_canvas;
 var shirt_front =document.getElementById("shirt-area");
 var shirt_back =document.getElementById("shirt-back-area");
 var curID=0;
+
+
+
+
+var number_of_item_in_stock;
+var productCustomization = $('.detail-wrap');
+var cart = $('#bag-shopping-cart');
+var Arrays = new Array();
+var cur_quantity, order_quantity = 0;
+
+
+
+
 function convertImgToBase64(url, myimage, outputFormat){
   var img = new Image();
   img.crossOrigin = 'Anonymous';
@@ -581,12 +594,22 @@ function uploadEx() {
 function SendToCart() {
 
   
+
   var dataURL = mycanvas.toDataURL("image/png");
   var dataURL_back= mycanvas_back.toDataURL("image/png");
+
+  var quantity =$("#pd_quantity").val();
+ 
+  var size = $("#i-select-size li.selected span").text();
+
+
   document.getElementById('hidden_data').value = dataURL;
   document.getElementById('hidden_data_back').value = dataURL_back;
-
+  document.getElementById('hidden_data_quantity').value=quantity;
+  document.getElementById('hidden_data_size').value=size;
+  document.getElementById('hidden_data_cookie').value=makeid();
   
+ 
   var fd = new FormData(document.forms["form1"]);
 
   var xhr = new XMLHttpRequest();
@@ -906,9 +929,9 @@ function Choose_Img_Modal(id)
 
   //var old=document.getElementsByClassName("selected");
   //old.classList.remove("selected");
-  $('.selected').removeClass('selected');
+  $('.selected_design').removeClass('selected_design');
   img_modal =document.getElementById(id);
-  img_modal.classList.add("selected");
+  img_modal.classList.add("selected_design");
   $('#btn_modal_delete').removeClass('disabled');
   $('#btn_modal_use').removeClass('disabled');
   $('#btn_modal_delete').addClass('active');
@@ -926,3 +949,75 @@ function Use_design()
 
 }
 
+
+
+(function($) {
+
+    //Xử lý sự kiện nhấn chọn size áo
+    $("#i-select-size li").on('click', function () {
+      //Xóa thẻ hiện đang được chọn
+      $("#i-select-size li.selected").removeClass("selected");
+      //Cập nhật lại thẻ mới
+      $(this).addClass("selected");
+
+      $("#add-to-cart.btn-noradius").prop('disabled', false);
+  });
+
+})(jQuery);
+
+
+
+
+
+
+    number_of_item_in_stock = $("#form-select-attributes #availability-number").text();
+    var animating = false;
+    $(".number-input .btn-touchspin-first").click(function () {
+        cur_quantity = $("#pd_quantity").val();
+        if (cur_quantity > 1)
+            $("#pd_quantity").val(--cur_quantity);
+    });
+
+    $(".number-input .btn-touchspin-secondary").click(function () {
+        cur_quantity = $("#pd_quantity").val();
+        if (cur_quantity < 100)
+            $("#pd_quantity").val(++cur_quantity);
+    });
+
+    initCustomization(productCustomization);
+
+
+
+
+
+    function resetCustomization() {
+        $("#i-select-size li.selected").removeClass("selected");
+    }
+
+
+
+
+    function checkConditionToEnableAddToCartButton() {
+        if ($("#i-select-size li").hasClass("selected")) {
+            $("#add-to-cart.btn-noradius").prop('disabled', false);
+        }
+    }
+
+    function updateCart() {
+        var cartItems = cart.find('#cart-count'),
+            text = parseInt(cartItems.text()) + parseInt(order_quantity);
+            cartItems.text(text);
+    }
+
+
+
+
+    function makeid() {
+      var text = "";
+      var possible = "0123456789";
+      
+      for (var i = 0; i < 9; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+      
+      return text;
+    }

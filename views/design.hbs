@@ -200,6 +200,9 @@
                                     <input name="hidden_data" id='hidden_data' type="hidden"/>
                                     <input name="hidden_data_back" id='hidden_data_back' type="hidden"/>
                                     <input name="hidden_data_email" id='hidden_data_email'  type="hidden" value={{user.email}}/>
+                                    <input name="hidden_data_size" id='hidden_data_size'  type="hidden" />
+                                    <input name="hidden_data_quantity" id='hidden_data_quantity'  type="hidden" />
+                                    <input name="hidden_data_cookie" id='hidden_data_cookie'  type="hidden" />
                         </form>
  
                     </div>
@@ -242,26 +245,6 @@
                       
                      
                     </p>
-
-                    <div id="shirt-color" style="width:200px">
-                        <p>Số lượng: </p>
-                        <div class="row" style="margin-left:10px; margin-bottom:10px" >
-                            <label for="">Cỡ nhỏ:</label>
-                            <input type="number" value="0" onfocus="ClearPlaceHolder (this)" onblur="SetPlaceHolder (this)" style="width:50px; margin-left:10px"/> 
-                        </div>
-                        
-                        <div class="row" style="margin-left:10px; margin-bottom:10px" >
-                            <label for=""> Cỡ vừa: </label>
-                            <input type="number" value="0" onfocus="ClearPlaceHolder (this)" onblur="SetPlaceHolder (this)" style="width:50px; margin-left:10px"/> 
-                        </div>
-                        <div class="row" style="margin-left:10px;" >
-                            <label for=""> Cỡ lớn: </label>
-                            <input type="number" value="0" onfocus="ClearPlaceHolder (this)" onblur="SetPlaceHolder (this)" style="width:50px; margin-left:10px"/> 
-                        </div>
-
-
-
-                    </div>
                     <!--
                         <div id="shirt-size" style="width:100% ">
                                 Số lượng: 
@@ -281,14 +264,57 @@
                                 </p>
 
                         </div>
-                    -->
-                    <div style="text-align:center">
+
+                                            <div style="text-align:center">
                         <input id="btn-order" type="button" value="Đặt hàng" onclick="return SendToCart()">
+                    </div>
+                    -->
+
+
+                    <div  id="form-select-attributes" style="width:100%">
+                        <div>
+                            <dt class="i-detail-title">Cỡ áo: </dt>
+                            <dl class="i-detail-wrapper">
+                               
+                            
+                                <dd class="i-detail-main  "style="margin-left:10%">
+                                    <ul id="i-select-size" data-type="select" >
+                                        <li><span title="Chọn kích cỡ: S" >S</span></li>
+                                        <li><span title="Chọn kích cỡ: M" >M</span></li>
+                                        <li><span title="Chọn kích cỡ: L" >L</span></li>
+                                        <li><span title="Chọn kích cỡ: XL" >XL</span></li>
+                                    </ul>
+                                </dd>
+                            </dl>
+                            <dt class="i-detail-title">Số lượng: </dt>
+                            <dl class="i-detail-wrapper">
+
+                                <div class="number-input" style="width:50%; margin-left:23%">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <button class="btn btn-touchspin-first" type="button">-</button>
+                                        </div>
+                                        <input type="tel" min="1" value="1" id="pd_quantity" class="form-control">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-touchspin-secondary" type="button">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="row" style="text-align:center" >
+                        <button class="btn-noradius" id="add-to-cart" type="button" onclick="return SendToCart()" title="Thêm sản phẩm vào giỏ hàng của bạn" disabled="disabled">
+                        <span>Thêm vào giỏ hàng</span>
+						<svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
+							<path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
+						</svg>
+                        </button>
                     </div>
 
 
                 </form>
-                <input id="Design_store" class="inputfile" onclick="return open_Store()" />
+                <input id="Design_store" class="inputfile" onclick="return open_Store()"  />
                 <label for="Design_store">Thiết kế của tôi!</label>
 
 
