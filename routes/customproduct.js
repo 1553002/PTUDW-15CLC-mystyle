@@ -69,9 +69,9 @@ router.post('/order', function (req, res) {
         }else{
             var item = {
                 id: id,
-                name : "Your Design"+id,
+                name : "Áo đẹp của tôi "+id,
                 url:"Add_url",
-                img: null,
+                img: "Add_url",
                 price: 250000,
                 originalPrice : 250000,
                 quantity: order_quantity,
@@ -131,7 +131,10 @@ router.delete('/:id', function (req, res) {
 });
 
 /*
-router.get('/:email', function (req, res) {
+router.get('/:ema
+
+
+, function (req, res) {
     customproductsController.getAll(req.params.email,function (customproducts) {
      
             res.send("OK");
@@ -149,4 +152,6 @@ function makeid() {
   
 	return text;
 }
+
+
 module.exports = router;

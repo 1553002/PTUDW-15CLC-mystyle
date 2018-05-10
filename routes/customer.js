@@ -15,6 +15,8 @@ var isAdmin=false;
 var customersController = require('../controllers/customersController');
 var cartsController = require('../controllers/cartsController');
 var handlerGeneral = require('./general');
+
+var token="", numberAccount=0, nameToken="login_token", isFirst=true, isPut=false;
 // var flash = require("connect-flash");
 // var cookieParser = require('cookie-parser');
 // var session = require('express-session');
@@ -54,9 +56,20 @@ router.get('/account/login', (req, res) => {
 		res.locals.error_password = error_password;
 	}
 
+	var cookie = req.cookies['login_token'];
+    var data, decode="";
+	
+    if (cookie != null) {
+        data = JSON.parse(req.cookies['login_token'].toString());
+
+		decode= jwt.verify(data, 'your_jwt_secret');
+
+		console.log(decode.data);
+    }
 	res.render("login", {
 		captcha: recaptcha.render(),
-		number_of_items: handlerGeneral.get_quantity_of_items(req, res)
+		number_of_items: handlerGeneral.get_quantity_of_items(req, res),
+		email:decode.data
 	})
 })
 
@@ -98,6 +111,17 @@ passport.authenticate('local', {
 	// var payload = check.toJSON(); 
 	// var token = jwt.sign(payload, 'SecretKeee');
 	   //res.status(300).json({message: "ok", token: 'JWT ' + token});
+
+	if(isPut)
+	{
+		res.cookie("login_token"+numberAccount, JSON.stringify(token), {maxAge : 1000*60*60*24*30, httpOnly: false});
+		numberAccount=numberAccount+1;
+		res.cookie('numberAccount', JSON.stringify(numberAccount), {maxAge : 1000*60*60*24*30, httpOnly: false});
+	}
+	
+
+	
+
 	if(isAdmin)
 	{
 		res.redirect( '/admin');
@@ -167,6 +191,58 @@ passport.use(new LocalStrategy({
 
 				if (err) { return callback(err); }
 				if (isMatch) {
+					 token = jwt.sign({ data: user.email }, 'your_jwt_secret', {
+						expiresIn: 3600 // 1 week
+					});
+					//console.log(token);
+
+					
+					var cookie = req.cookies['numberAccount'];
+					if(cookie!= null)
+					{
+						 isFirst=false;
+						 data = JSON.parse(req.cookies['numberAccount'].toString());
+						
+						 console.log(data);
+						 numberAccount=parseInt(data);
+						 console.log(numberAccount);
+						 var i=0;
+						 while(i<numberAccount)
+						 {
+							curdata = JSON.parse(req.cookies['login_token'+i].toString());
+							decode= jwt.verify(curdata, 'your_jwt_secret');
+							console.log(decode.data);
+						
+							if(decode.data==user.email)
+							{
+								console.log("trung nhau");
+								isPut=false;
+								break;
+							}
+							i=i+1;
+						 }
+							
+					}
+					else
+					{
+						isFirst=true;
+						isPut=true;
+						
+						
+
+					}
+
+
+
+
+
+
+
+
+
+					
+
+					
 					//return callback(null, user, { message: 'You have successfully logged in!!' });
 				return callback(null, user, req.flash('error', 'You have successfully logged in!!')); 
 					
