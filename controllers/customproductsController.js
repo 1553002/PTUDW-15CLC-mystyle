@@ -9,7 +9,9 @@ controller.getAll = function (email,callback) {
         .findAll(
             {
                 where: {
-                    account: email
+                    account: email,
+                    deleted:false
+
                 }
                
             }
@@ -43,6 +45,16 @@ controller.destroy = function (id, callback) {
     });
 };
 
-
+controller.updateDeleted = function (id,callback) {
+    models.CustomProduct.update({
+        deleted:true,
+    }, {
+        where: {
+            id: id
+        }
+    }).then(function (customproducts) {
+        callback(customproducts);
+    });
+};
 
 module.exports = controller;

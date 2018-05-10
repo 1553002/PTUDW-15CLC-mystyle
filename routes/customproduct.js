@@ -49,8 +49,9 @@ router.post('/', function (req, res) {
     
 });
 
+
 router.delete('/:id', function (req, res) {
-         customproductsController.destroy(parseInt(req.params.id), function (customproducts) {
+         customproductsController.updateDeleted(parseInt(req.params.id), function (customproducts) {
         res.sendStatus(204);
         res.end();
     });
