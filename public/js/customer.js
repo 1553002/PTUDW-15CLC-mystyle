@@ -2,7 +2,7 @@ var year_upper_bound = (new Date()).getFullYear();
 var year_lower_bound = 1946;
 var number_of_month = 12;
 var day_of_month_upper_bound = 31;
-
+var gender = document.getElementById("gender").value;
 
 function isLeapYear(year) {
     return new Date(year, 2, 0).getDate() > 28;
@@ -86,6 +86,84 @@ $('#dwfrm_profile_customer_isemailsubscribed').on('click', function () {
     }
 });
 
+if(gender.indexOf("true")>=0)
+{
+    document.getElementById("male").checked =true;
+}
+else
+{
+    document.getElementById("female").checked =true;
+}
+
+
+$('#edit-account').on('submit', function (event) {
+    event.preventDefault();
+
+    var email = document.getElementById("email").value;
+    var name = document.getElementById("full_name").value;
+    var old_pass =document.getElementById("old_password").value;
+    var new_pass =document.getElementById("new_password").value;
+    var re_new_pass =document.getElementById("re_new_password").value;
+    
+    if(old_pass && new_pass && re_new_pass )
+    {
+       if(new_pass.localeCompare(re_new_pass)!=0)
+       {
+           alert("Vui lòng nhập lại mật khẩu kiểm tra.")
+           return;
+       }
+    }
+    else
+    {
+        if(!old_pass && !new_pass && !re_new_pass)
+        {
+            old_pass="";
+            new_pass="";
+            re_new_pass="";
+        }
+        else
+        {
+            alert("Vui lòng nhập đầy đủ mật khẩu.")
+            return;
+        }
+    }
+
+
+    var gender=false;
+    if(document.getElementById("male").checked==true)
+    {
+        gender=true;
+    }
+  
+    
+    var userContent = {};
+    userContent.email = email;
+    userContent.fullname = name;
+   // userContent.gender = gender;
+
+
+    $.ajax
+    ({
+        url: '/customer/account/edit',
+        data: JSON.stringify({
+            email: email,
+            fullname: name,
+            gender:gender,
+            old_pass: old_pass,
+            new_pass: new_pass,
+        }),
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        type: 'POST',
+        success: function () 
+        {
+            location.reload();
+            
+        }
+    });
+
+    
+});
 
 
 // Javascript to enable link to tab

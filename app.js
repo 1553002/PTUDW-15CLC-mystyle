@@ -127,6 +127,10 @@ app.delete('/:id', function(req, res){
 var customer = require('./routes/customer');
 app.use('/customer',customer);
 
+app.post('/customer/account/edit', function(req, res){
+	res.redirect(307 ,'/customer/account/edit');
+})
+
 var products = require('./routes/products');
 app.use('/product', products);
 

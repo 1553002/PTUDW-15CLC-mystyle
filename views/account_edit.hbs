@@ -64,8 +64,11 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-md-4">
+                                        <input type="hidden" id="gender" value="{{user.gender}}"/>
                                         <label>
-                                            <input type="radio" name="gender" value="on" id="male" class="gender" checked="checked">
+                                            
+                                            <input type="radio" name="gender" value="on" id="male" class="gender" >
+                                            
                                             <span>
                                                 <i class="ico"></i>
                                             </span>
@@ -86,7 +89,7 @@
                             </div>
                         </div>
                     </div>
-
+                    <input type="hidden" id="password" value="{{user.password}}"/>
                     <span class="group-title">
                         <strong>Thay đổi mật khẩu</strong>
                     </span>
@@ -118,7 +121,7 @@
 
                     </div>
                     <div class="form-row form-row-button">
-                        <button type="submit" value="Register" name="dwfrm_profile_confirm">Cập nhật</button>
+                        <button type="submit" value="Register" name="dwfrm_profile_confirm" >Cập nhật</button>
                     </div>
                 </form>
             </div>
