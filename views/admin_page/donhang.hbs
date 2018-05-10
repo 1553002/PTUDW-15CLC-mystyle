@@ -33,8 +33,10 @@
                 <td class="text-left">Mã đơn hàng</td>
                 <td class="text-left">Người nhận</td>
                 <td class="text-center">Địa chỉ giao hàng</td>
+                <td class="text-center">Loại thanh toán</td>
                 <td class="text-center">Ngày giao hàng</td>
                 <td class="text-center">Tổng tiền</td>
+                <td class="text-center">Hành động</td>
                 </tr>
               </thead>
               <tbody>
@@ -45,8 +47,16 @@
                   </td>
                   <td class="text-left">{{receiver}}</td>
                   <td class="text-left">{{receiveAddress}}</td>
+                  <td class="text-left">{{paymentType}}</td>
                   <td class="text-left">{{deliveryDate}}</td>
                   <td class="text-left">{{total}}</td>
+                  <td class="text-center">
+                    <button type="button" class="btn btn-danger" data-original-title="Xóa danh mục sản phẩm">
+                      <a href="" data-toggle="tooltip" title="Xóa danh mục này" data-original-title="Mark_delete" class="mark_delete" data-id={{id}}>
+                      <i class="fas fa-trash-alt" style="color:white"></i>
+                      </a>
+                    </button>
+                  </td>
                 </tr>
                 {{/each}}
               </tbody>

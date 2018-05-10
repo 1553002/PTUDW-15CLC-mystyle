@@ -677,9 +677,10 @@ a.btn-special:hover{
 -----------------------------------*/
 .featured-products .page-heading{
     padding-top: 76px;
-    letter-spacing: 0.2em;
     padding-bottom: 10px;
-    font-size: 30px;
+    font-size: 40px;
+    color: #00ccff;
+    font-weight: 350;
 }
 
 .bx-wrapper{
@@ -1012,4 +1013,56 @@ ul.breadcrumb li a::after, .breadcrumb li a::before{
 .help-block{
     color: #a94442;
     font-size: 11px;
+}
+
+.text-gioithieu{
+    margin-left: 4.2em;
+    margin-right: 4.2em;
+}
+
+.module-margin.introduction {
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 52px;
+}
+
+.module-margin.join-to-me {
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 63px;
+}
+
+.join-to-me,.introduction p{
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.join-to-me h3{
+    color: #00ccff; 
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.introduction h1{
+    color: #00ccff;
+    font-weight: 400;
+}
+
+#main{
+    background-color: white;
+}
+
+.text-gioithieu img{
+    display: block; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.text-gioithieu p{
+    text-align: center;
+    font-size: 14px;
+}
+
+.footer-links, .footer-center, .footer-right a{
+    font-weight: 400;
 }

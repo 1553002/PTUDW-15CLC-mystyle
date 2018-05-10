@@ -134,7 +134,7 @@ $("#set-category").submit(function (e) {
 $('.edit').click(function() {
     var id = $(this).data('id');
     var category = $(this).data('value');
-
+    
     $("#inputCategory").val($(this).data('value'));
 
     //Change all relative atrributes in form
@@ -143,7 +143,11 @@ $('.edit').click(function() {
     $("#set-category").attr('product_id', id);
 });
 
-
+//Xử lý sự kiện xóa tạm thời
+$('.mark_delete').click(function() {
+    var id = $(this).data('id');
+    console.log(id);
+});
 
 $('#myModal').on('hidden.bs.modal', function () {
     $("#inputCategory").val('');
