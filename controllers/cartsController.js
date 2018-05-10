@@ -1,17 +1,30 @@
 var controller = {};
 
 var models = require('../models');
-var sequelize=require('sequelize');
+var sequelize = require('sequelize');
 controller.getAll = function (callback) {
     models.Cart.findAll({
-        where:{
-            delete : false
+        where: {
+            delete: false
         }
     })
         .then(function (carts) {
             callback(carts);
         })
 };
+
+controller.getAllCartByEmail = function (email, callback) {
+    models.Cart.findAll({
+        where: {
+            delete: false,
+            CustomerEmail: email
+        }
+    })
+        .then(function (carts) {
+            callback(carts);
+        })
+};
+
 
 controller.getCartById = function (id, callback) {
     models.Cart.findOne({
@@ -24,7 +37,7 @@ controller.getCartById = function (id, callback) {
     }).then(function (cart) {
         //console.log(cart);
         callback(cart);
-    }).catch(function(error){
+    }).catch(function (error) {
         //console.log("EROOR: ", error);
         callback(error);
     })
@@ -51,28 +64,28 @@ controller.createCartDetail = function (Obj, callback) {
 
 controller.getSumbyDate = function (callback) {
     models.Cart.findAll({
-        attributes: [[sequelize.fn('date_trunc', 'day', sequelize.col('createdAt')),'date'],[sequelize.fn('sum',sequelize.col('total')),'sum']],
-        group: [sequelize.fn('date_trunc', 'day', sequelize.col('createdAt')),'date'],
+        attributes: [[sequelize.fn('date_trunc', 'day', sequelize.col('createdAt')), 'date'], [sequelize.fn('sum', sequelize.col('total')), 'sum']],
+        group: [sequelize.fn('date_trunc', 'day', sequelize.col('createdAt')), 'date'],
         where: {
-            delete : false,
+            delete: false,
         },
         raw: true
     }).then(function (carts) {
         callback(carts);
-    }).catch(function(err){
+    }).catch(function (err) {
         callback(err);
     });
 };
 
 
 controller.updateStatusCart = function (id, callback) {
-    models.Cart.update({delete : "true"}, {
+    models.Cart.update({ delete: "true" }, {
         where: {
-            id : id
+            id: id
         }
     }).then(function (cart) {
         callback(cart);
-    }).catch(function(err){
+    }).catch(function (err) {
         callback(err);
     })
 };
