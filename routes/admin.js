@@ -417,5 +417,9 @@ router.put('/danhmucsanpham/suadanhmuc', function(req,res){
     });
     
 });
+router.get('/account/logout', function (req, res) {
+	req.logout();
+	res.redirect('/');
+});
 
 module.exports = router;

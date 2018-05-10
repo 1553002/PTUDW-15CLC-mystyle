@@ -13,6 +13,7 @@ var recaptcha = new Recaptcha('6Lf-uVYUAAAAAP4_01zOSENj4aS1X_7voQh2g-cu', '6Lf-u
 
 var isAdmin=false;
 var customersController = require('../controllers/customersController');
+var cartsController = require('../controllers/cartsController');
 var handlerGeneral = require('./general');
 // var flash = require("connect-flash");
 // var cookieParser = require('cookie-parser');
@@ -23,17 +24,23 @@ var handlerGeneral = require('./general');
 // router.use(flash());
 
 
-// router.route('/account/login')
-// 	.get(function (req, res) {
-// 		let error_message = req.flash('error')[0];
-// 		res.locals.error_message = error_message;
-// 		res.render("login", {
-// 			captcha: recaptcha.render(),
-// 			number_of_items: handlerGeneral.get_quantity_of_items(req, res)
-// 		})
-// 	})
+
 router.get('/account/history', (req, res) => {
-	res.render('history', {number_of_items: handlerGeneral.get_quantity_of_items(req, res)});
+	var user_email = res.locals.user.email;
+	if (user_email != null){
+		
+		cartsController.getAllCartByEmail(user_email, (carts)=>{
+			req.breadcrumbs('Lịch sử mua hàng', '/customer/account/history');
+			res.render('history', {
+				number_of_items: handlerGeneral.get_quantity_of_items(req, res),
+				breadcrumbs: req.breadcrumbs(),
+				carts	
+			});
+
+		})
+	}else{
+		res.sendStatus(404);
+	}
 })
 
 router.get('/account/login', (req, res) => {

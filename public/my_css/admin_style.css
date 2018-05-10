@@ -669,3 +669,16 @@ span .current{
 #dataTable_length{
     float: left;
 }
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 6em;
+    width: 50%;
+}
+
+.message {
+    font-family: 'Sofia';
+    color:  #007bff;
+}
