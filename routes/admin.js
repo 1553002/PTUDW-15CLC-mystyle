@@ -33,9 +33,37 @@ router.get('/', (req, res) => {
     res.render('admin_page/admin', { layout: 'admin_layout' });
 })
 
+router.post('/get-data', (req, res)=>{
+
+    cartsController.getSumbyDate(function (carts) {
+        console.log(carts);
+        res.send((carts));
+        res.end();
+    });
+})
 router.get('/thongke', (req, res) => {
-    res.render("admin_page/thongke");
-});
+    req.breadcrumbs('Thống kê theo ngày', '/admin/thongke');
+    res.render('admin_page/thongke', {
+        breadcrumbs: req.breadcrumbs(),
+        title: 'Thống kê theo ngày'
+    });
+})
+
+router.get('/thongke', (req, res) => {
+    req.breadcrumbs('Thống kê theo ngày', '/admin/thongke');
+    res.render('admin_page/thongke', {
+        breadcrumbs: req.breadcrumbs(),
+        title: 'Thống kê theo ngày'
+    });
+})
+
+router.get('/thongkedanhmuc', (req, res) => {
+    req.breadcrumbs('Thống kê danh mục', '/admin/thongkedanhmuc');
+    res.render('admin_page/thongkedanhmuc', {
+        breadcrumbs: req.breadcrumbs(),
+        title: 'Thống kê theo danh mục'
+    });
+})
 
 router.get('/dangnhap', (req, res) => {
     res.render("admin_page/dangnhap", { layout: false });

@@ -241,7 +241,9 @@ router.post('/register', function (req, res) {
 					fullname: name,
 					gender: gender,
 					dateOB: birthday,
-					password: password
+					password: password,
+					isAdmin: false,
+					active: true
 				}
 
 				customersController.createUser(newUser, function (err) {

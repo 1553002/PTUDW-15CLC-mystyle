@@ -1,0 +1,38 @@
+<head>
+    {{#if title}}
+    <title>{{title}}</title>
+    {{/if}}
+</head>
+
+<div class="page-header">
+    <div class="container-fluid">
+        {{#if title}}
+        <h1>{{title}}</h1>
+        {{/if}}
+        <ul class="breadcrumb">
+            {{#each breadcrumbs}}
+            <li>
+                <a href={{this.url}}>{{name}}</a>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="panel">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <i class="fas fa-chart-line"></i> Thống kê theo ngày</h3>
+        </div>
+        <div class="panel-body bg-light card-body">
+            <form method="POST" id="form-product">
+                <canvas id="myChart" width="200" height="200"></canvas>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    
+</script>
