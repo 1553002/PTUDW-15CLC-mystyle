@@ -22,6 +22,19 @@ controller.getAllProductById = function (id, callback) {
         });
 };
 
+controller.getAllCategoryWithProduct = function(callback){
+    models.Category.findAll({
+        include : {
+            model : models.Product,
+            limit : 4
+        }
+    }).then((cate)=>{
+        callback(cate);
+    }).catch((err)=>{
+        callback(err);
+    })
+}
+
 controller.destroy = function (id, callback) {
     models.Category.destroy({
         where: {

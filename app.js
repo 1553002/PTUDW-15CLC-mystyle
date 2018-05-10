@@ -35,7 +35,11 @@ var hbs = expressHbs.create(
       layoutsDir: __dirname + '/views/layouts/',
       partialsDir: __dirname + '/views/partials/',
       helpers:{
-          paginate: paginateHelper.createPagination
+          test: function () { 
+            console.log('HHHHHHHHHHHHHHHHHHHH');
+            return "Lorem ipsum" },
+          //helpers: require('./public/js/helpers.js'),
+          paginate: paginateHelper.createPagination,
       }
   }
 )

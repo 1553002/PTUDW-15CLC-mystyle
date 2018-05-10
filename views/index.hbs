@@ -1,3 +1,12 @@
+<style>
+    body{
+        background: white;
+    }
+    .panel .module-heading h2.module-title{
+        width: 10%;
+        border-bottom: 2px solid black;
+    }
+</style>
 <div class="homepage-parallex">
     <div class="container">
         <div class="row">
@@ -26,7 +35,7 @@
     </div>
 </div>
 
-<div id="main" role="main">
+<div id="main" role="main" style="padding-bottom: 30px;">
     <div class="container">
         <div class="row">
             <div class="row-elment col-md-12">
@@ -65,7 +74,7 @@
                     <div class=" text-gioithieu">
                         <p>
                             <a href="/customproduct">
-                            <img src="/image/thietkeao.png">
+                                <img src="/image/thietkeao.png">
                         </p>
                         <p>Ứng dụng thiết kế áo</p>
                     </div>
@@ -75,7 +84,7 @@
                     <div class="text-gioithieu">
                         <p>
                             <a href="/product">
-                            <img src="/image/aothun.png">
+                                <img src="/image/aothun.png">
                             </a>
                         </p>
                         <p>Áo có sẵn</p>
@@ -86,7 +95,7 @@
                     <div class="text-gioithieu">
                         <p>
                             <a href="https://www.facebook.com/H%E1%BB%99i-Th%C3%A1nh-C%E1%BB%A7a-%C4%90%E1%BB%A9c-Ch%C3%BAa-Tr%E1%BB%9Di-774359376007813/">
-                            <img src="/image/facebook.png">
+                                <img src="/image/facebook.png">
                             </a>
                         </p>
                         <p>Facebook</p>
@@ -104,17 +113,40 @@
                 </div>
             </div>
 
-            <div class="col-sm-12">
-                <div class="featured-products">
-                    <h1 class="page-heading">Sản phẩm giảm giá</h1>
-                    <div class="product-main clearfix">
-                        <div class="product-homepage col-md-3">
-                            <div class="quick-view bg-black-900">
-                                <a href="/product">Xem nhanh</a>
-                            </div>
+
+            <div class="panel right-panel product-main">
+                {{#each categories}}
+                <div class="module-heading">
+                    <h2 class="module-title">
+                        {{categoryName}}
+                    </h2>
+                </div>
+                <div class="module-body">
+                    <div class="row">
+                        {{#each Products}}
+                        <div class="product-item col-md-3">
+                            <a class="product-wrapper" href="/product/{{../id}}/{{id}}" data-id="{{id}}">
+                                <div class="product-img">
+                                    <div class="img-change">
+                                        <img src={{image1}} data-alt-src={{image3}} class="bell mx-auto" col="g">
+                                        <span class="product-badge sale">-{{discount}}%</span>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <span class="product-name" href="/product">{{name}}</span>
+                                    <div class="product-price">
+                                        <span class="money money-sale">{{price}}</span>
+                                        <span class="money-text">còn</span>
+                                        <span class="money">{{discountPrice}}</span>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
+                        {{/each}}
                     </div>
                 </div>
+                {{/each}}
+
             </div>
 
         </div>
