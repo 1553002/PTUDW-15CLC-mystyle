@@ -3,7 +3,7 @@ var router = express.Router();
 var models = require('../models');
 
 var productsController = require('../controllers/productsController');
-
+var cookieimageController = require('../controllers/cookieimageController');
 /* GET home page. */
 router.get('/', function (req, res, next) {
     var cookie = req.cookies['paid-products'];
@@ -15,9 +15,16 @@ router.get('/', function (req, res, next) {
         product_list = JSON.parse(data.product_list.toString());
         number_of_items = data.totalQuantity;
         mney = data.totalMoney;
-    }
 
-    res.render('cart', { title: 'Giỏ hàng', data: product_list, number_of_items, mney });
+       
+    }
+    
+    cookieimageController.getAll(function (cookieimages) 
+    {
+        res.render('cart', { cookieimages: cookieimages, title: 'Giỏ hàng', data: product_list, number_of_items, mney });
+
+    });
+   
 });
 
 function cal_number_products_in_cart(list){

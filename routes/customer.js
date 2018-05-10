@@ -91,6 +91,12 @@ passport.authenticate('local', {
 	// var payload = check.toJSON(); 
 	// var token = jwt.sign(payload, 'SecretKeee');
 	   //res.status(300).json({message: "ok", token: 'JWT ' + token});
+
+	const token = jwt.sign({ data: user.email }, 'your_jwt_secret', {
+							expiresIn: 3600 // 1 week
+					});
+	
+	console.log(token);
 	if(isAdmin)
 	{
 		res.redirect( '/admin');
