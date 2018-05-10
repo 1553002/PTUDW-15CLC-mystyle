@@ -110,7 +110,6 @@ router.post('/account/edit', function(req, res){
 	}
 	else
 	{
-
 		customersController.getUserByEmail(req.body.email, function(err, user) {
 			if (err) { return console.log("error email") }
 	  		if (!user) {
