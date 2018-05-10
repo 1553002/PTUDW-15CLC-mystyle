@@ -43,7 +43,7 @@
                 {{#each carts}}
                 <tr>
                   <td class="text-left">
-                    <a class="detail" data-id={{id}} data-toggle="modal" href="#myModal">{{id}}</a>
+                    <a id="modal_cart_detail" data-cart-id={{id}} data-target="cartModal" data-toggle="modal" href="#myModal">{{id}}</a>
                   </td>
                   <td class="text-left">{{receiver}}</td>
                   <td class="text-left">{{receiveAddress}}</td>
@@ -71,7 +71,7 @@
 <!--Dialog thêm danh mục sản phẩm -->
 <div class="container">
   <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-large">
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title">Chi tiết đơn hàng</h4>
@@ -83,20 +83,14 @@
               <thead>
                 <tr>
                 <td class="text-left">Hình ảnh minh họa</td>
-                <td class="text-left">Số lượng</td>
+                <td class="text-left">Tên sản phẩm</td>
+                <td class="text-center">Kích cỡ</td>
+                <td class="text-center">Số lượng</td>
                 <td class="text-center">Đơn giá</td>
                 <td class="text-center">Thành tiền</td>
                 </tr>
               </thead>
               <tbody>
-                {{#each carts}}
-                <tr>
-                  <td class="text-center"><img src={{image1}} alt="" class="img-thumbnail"> </td>
-                  <td class="text-left">{{CartDetail.cartId}} </td>
-                  <td class="text-left"> {{Category.categoryName}}</td>
-                  <td class="text-right">{{price}}</td>
-                </tr>
-                {{/each}}
               </tbody>
             </table>
           </div>
@@ -105,3 +99,4 @@
     </div>
   </div>
 </div>
+

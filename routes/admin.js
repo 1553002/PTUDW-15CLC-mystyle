@@ -126,7 +126,6 @@ router.get('/sanpham/them', (req, res) => {
             modelImageUploadController.getAll((models) => {
                 //Cua ham sua => phai goi them ham lay thong tin cua san pham XXX
 
-                //console.log(models);
                 res.render('admin_page/them-san-pham', {
                     breadcrumbs: req.breadcrumbs(),
                     title: 'Chi tiết sản phẩm',
@@ -342,11 +341,24 @@ router.post('/danhmucsanpham/themdanhmuc', function (req, res) {
 
 router.get('/donhang/chitietdonhang/:id', function (req, res) {
     var cartID = req.params.id;
-    console.log(cartID);
+    var list_order_items = [];
+    cartsController.getCartById(cartID, function(cart_detail){
+        if (cart_detail){
+            list_order_items = cart_detail.CartDetails;
+            //console.log(list_order_items);
+            res.write(JSON.stringify(list_order_items));
+            res.end();
+            // console.log(cart_detail.CartDetails);
+        }else{
 
-    cartsController.getCartById(cartID, function(cart){
-        console.log(cart);
+        }
     })
+
+    
+    
+    // cartsController.getCartById(cartID, function(cart){
+    //     console.log(cart);
+    // })
 
     // cartsController.create(req.body.id, function (carts) {
     //     res.sendStatus(201);
