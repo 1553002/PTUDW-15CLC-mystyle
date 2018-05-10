@@ -151,25 +151,38 @@ $('#myModal').on('hidden.bs.modal', function () {
 
 //xem chi tiet don hang
 $('[data-target="cartModal"]').click(function(e) {
-    console.log("HERE");
+
     e.preventDefault();
     var id = $(this).data('cart-id');
     // console.log(id);
     $.get("/admin/donhang/chitietdonhang/" + id , function(data, status){
         console.log("return", data, status);
         var product_list = JSON.parse(data);
+        var string_html;
         for (index in product_list){
-            
-            $(".modal-body tbody")
-            .append('<tr>'+
+            string_html +='<tr>'+
             '<td class="text-center"><img src="'+product_list[index].image+'" class="img-thumbnail"> </td>'+
             '<td class="text-left">'+product_list[index].productName+'</td>' +
             '<td class="text-left">'+product_list[index].size+'</td>' +
             '<td class="text-right">'+product_list[index].quantity+'</td>'+
-            '</tr>');
-        }
+            '<td class="text-right">'+product_list[index].price+'</td>'+
+            '<td class="text-right">'+product_list[index].total+'</td>'+
+            '</tr>';
 
-        //<div class="modal-backdrop fade show"></div>
+            
+            // $(".modal-body tbody")
+            // .append('<tr>'+
+            // '<td class="text-center"><img src="'+product_list[index].image+'" class="img-thumbnail"> </td>'+
+            // '<td class="text-left">'+product_list[index].productName+'</td>' +
+            // '<td class="text-left">'+product_list[index].size+'</td>' +
+            // '<td class="text-right">'+product_list[index].quantity+'</td>'+
+            // '</tr>');
+        }
+        $(".modal-body tbody").html(string_html);
+        console.log(string_html);
+        $('#myModal').modal('show');
+        //$("body").append('<div class="modal-backdrop fade show"></div>');
+        
     });
 });
 
