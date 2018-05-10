@@ -904,7 +904,7 @@ background: white;
    border-color: rgb(202, 201, 201);
    position: absolute;
    right: 60px;
-   bottom: 200px;
+   bottom: 294px;
 }   
 #text_form
 {
@@ -965,13 +965,13 @@ select
    
    text-align: center;
    width: 100%;
-   height: 100%;
+   height: 66%;
    border-style:  dotted;
    border-width: 2px;
    border-color: rgb(92, 91, 91);
    margin-bottom: 10px;
    overflow: hidden;
-  position: relative;
+   position: relative;
 }
 #Save_as_png
 {
@@ -1103,4 +1103,10 @@ select
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+.selected
+{
+    border-style: dashed;
+    border-width: 1px;
+    border-color:grey; 
 }

@@ -19,7 +19,7 @@
                         <img src="" height="45" width="45" alt="avatar">
                     </p> -->
                 <p class="name">Tài khoản của</p>
-                <h6>Lê Công Cảnh</h6>
+                <h6>{{user.fullname}}</h6>
             </div>
             <div class="menu">
                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
@@ -54,7 +54,7 @@
                     <div class="form-group">
                         <label class="control-label off" for="email">Email</label>
                         <div class="input-wrap">
-                            <input type="email" disabled="" value="lccanh97@gmail.com" class="form-control" name="{{email}}" id="email" placeholder="Email">
+                            <input type="email" disabled="" value={{user.email}} class="form-control" name="{{email}}" id="email" placeholder="Email">
                         </div>
                     </div>
 
@@ -64,8 +64,11 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-md-4">
+                                        <input type="hidden" id="gender" value="{{user.gender}}"/>
                                         <label>
-                                            <input type="radio" name="gender" value="on" id="male" class="gender" checked="checked">
+                                            
+                                            <input type="radio" name="gender" value="on" id="male" class="gender" >
+                                            
                                             <span>
                                                 <i class="ico"></i>
                                             </span>
@@ -86,7 +89,7 @@
                             </div>
                         </div>
                     </div>
-
+                    <input type="hidden" id="password" value="{{user.password}}"/>
                     <span class="group-title">
                         <strong>Thay đổi mật khẩu</strong>
                     </span>
@@ -118,11 +121,13 @@
 
                     </div>
                     <div class="form-row form-row-button">
-                        <button type="submit" value="Register" name="dwfrm_profile_confirm">Cập nhật</button>
+                        <button type="submit" value="Register" name="dwfrm_profile_confirm" >Cập nhật</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-{{>footer}}
+
+
+<script src="/js/customer.js"></script>

@@ -90,7 +90,43 @@ passport.authenticate('local', {
 	console.log('Dang nhap thanh cong');
 });
 
+router.post('/account/edit', function(req, res){
 
+	if(req.body.old_pass=="")
+	{
+		customersController.updateInfo(req.body.email, req.body.fullname,req.body.gender, function (customers) {
+			res.sendStatus(200);
+			res.end();
+		});
+	}
+	else
+	{
+
+		customersController.getUserByEmail(req.body.email, function(err, user) {
+			if (err) { return console.log("error email") }
+	  		if (!user) {
+				return console.log("not found email");
+			  }
+			  
+	  		customersController.comparePassword(req.body.old_pass, user.password, function(err, isMatch) {
+				if (err) { return console.log("err password"); }
+				if(isMatch){
+
+					customersController.updateInfoWithPassword(req.body.email, req.body.fullname,req.body.gender,req.body.new_pass, function (customers) {
+						res.sendStatus(200);
+						res.end();
+					});
+		  			return console.log("match");
+				}
+				else{
+		  			return console.log("fail");
+				}
+	 		});
+		});
+	}
+
+
+});
 passport.use(new LocalStrategy({
 	usernameField: 'email',
 	passwordField: 'password',

@@ -3,12 +3,13 @@ var controller = {};
 var models = require('../models');
 
 
-controller.getAll = function (callback) {
+controller.getAll = function (email,callback) {
+   
     models.CustomProduct
         .findAll(
             {
                 where: {
-                    account: "nhan@gmail.com"
+                    account: email
                 }
                
             }
@@ -17,20 +18,29 @@ controller.getAll = function (callback) {
             callback(customproducts);
         })
 };
-controller.create = function (url,url1,url2, callback) {
+controller.create = function (email,url,url1,callback) {
     console.log("HERRRRRRRRRR");
     models.CustomProduct
         .create({
-            account:"nhan@gmail.com",
+            account:email,
             url: url,
             url1:url1,
-            url2:url2,
             createdAt: new Date(),
             updatedAt: new Date(),
    
         }).then(function (customproducts) {
             callback(customproducts);
         });
+};
+
+controller.destroy = function (id, callback) {
+    models.CustomProduct.destroy({
+        where: {
+            id: id
+        }
+    }).then(function (customproducts) {
+        callback(customproducts);
+    });
 };
 
 
