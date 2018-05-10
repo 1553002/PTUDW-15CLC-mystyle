@@ -158,11 +158,17 @@ $('#edit-account').on('submit', function (event) {
         type: 'POST',
         success: function () 
         {
-            location.reload();
+          
             
         }
+    }).done(function (result) 
+    {
+        
+    }).fail(function (err) {
+
     });
 
+    location.reload();
     
 });
 // Javascript to enable link to tab

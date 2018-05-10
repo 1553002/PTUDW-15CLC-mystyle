@@ -609,7 +609,3 @@ header .container::before{
 .input{
     padding: 5px;
 }
-
-.modal-large{
-    max-width: 1000px;
-}
