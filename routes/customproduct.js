@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 
 var customproductsController = require('../controllers/customproductsController');
-
+var cookieimageController = require('../controllers/cookieimageController');
 
 router.get('/', function (req, res) {
     try {
@@ -12,6 +12,8 @@ router.get('/', function (req, res) {
             res.render('design', {
                 customproducts: customproducts
             });
+
+
         });
     }
     catch (error) {
@@ -43,11 +45,18 @@ router.post('/order', function (req, res) {
    
 
     console.log("OK man");
+    console.log(req.body.hidden_data_quantity);
+    console.log(req.body.hidden_data_size);
+    var id =makeid();
+    cookieimageController.create(id, req.body.hidden_data, function (cookieimages) 
+    {
+
+    
     var cookie = req.cookies['paid-products'];
-        let order_quantity = "1", order_size = 'S';
+        let order_quantity = req.body.hidden_data_quantity, order_size = req.body.hidden_data_size;
         
         var product_list = [];
-
+        
         if (order_quantity===undefined || order_quantity == null){
             order_quantity = -1;
         }
@@ -59,14 +68,14 @@ router.post('/order', function (req, res) {
 
         }else{
             var item = {
-                id: 1000,
-                name : "Your Design",
-                url: req.hidden_data,
-                img: req.hidden_data,
-                price: null,
-                originalPrice : null,
+                id: id,
+                name : "Your Design"+id,
+                url:"Add_url",
+                img: null,
+                price: 250000,
+                originalPrice : 250000,
                 quantity: order_quantity,
-                total_price :"20000" ,
+                total_price :250000* order_quantity,
                 size: order_size
             }
 
@@ -106,14 +115,16 @@ router.post('/order', function (req, res) {
 
             res.cookie('paid-products', JSON.stringify(my_data), {maxAge : 1000*60*60*24*30, httpOnly: false});
         }
-        res.send("OK");
 
+        res.sendStatus(201);
+        res.end();
+        });
     
 });
 
 
 router.delete('/:id', function (req, res) {
-        customproductsController.updateDeleted(parseInt(req.params.id), function (customproducts) {
+         customproductsController.updateDeleted(parseInt(req.params.id), function (customproducts) {
         res.sendStatus(204);
         res.end();
     });
@@ -128,4 +139,14 @@ router.get('/:email', function (req, res) {
       
     });
 });*/
+
+function makeid() {
+	var text = "";
+	var possible = "0123456789";
+  
+	for (var i = 0; i < 9; i++)
+	  text += possible.charAt(Math.floor(Math.random() * possible.length));
+  
+	return text;
+}
 module.exports = router;
