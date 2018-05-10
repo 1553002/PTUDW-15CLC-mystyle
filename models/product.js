@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     m: DataTypes.INTEGER,
     l: DataTypes.INTEGER,
     xl: DataTypes.INTEGER,
-    categoryid: DataTypes.STRING,
+    CategoryId: DataTypes.STRING,
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE,
