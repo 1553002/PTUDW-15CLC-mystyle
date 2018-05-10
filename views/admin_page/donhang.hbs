@@ -51,10 +51,8 @@
                   <td class="text-left">{{deliveryDate}}</td>
                   <td class="text-left">{{total}}</td>
                   <td class="text-center">
-                    <button type="button" class="btn btn-danger" data-original-title="Xóa danh mục sản phẩm">
-                      <a href="" data-toggle="tooltip" title="Xóa danh mục này" data-original-title="Mark_delete" class="mark_delete" data-id={{id}}>
+                    <button type="button" class="btn btn-danger mark_delete" data-original-title="Xóa danh mục sản phẩm" data-id="{{id}}" title="Xóa danh mục này" data-original-title="Mark_delete" >
                       <i class="fas fa-trash-alt" style="color:white"></i>
-                      </a>
                     </button>
                   </td>
                 </tr>
@@ -91,6 +89,7 @@
                 </tr>
               </thead>
               <tbody>
+                {{!-- Chen thong tin  --}}
               </tbody>
             </table>
           </div>

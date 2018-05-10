@@ -151,7 +151,7 @@ passport.use(new LocalStrategy({
 
 				if(user.isAdmin) {isAdmin=true;}
 				else isAdmin=false;
-				if(user.active==false)
+				if(user.active == false)
 				{
 					return callback(null, false, req.flash('error_password','Tài khoản chưa kích hoạt. Vui lòng kiểm tra lại!'));
 				}
