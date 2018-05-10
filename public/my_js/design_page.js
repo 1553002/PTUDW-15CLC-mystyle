@@ -555,6 +555,7 @@ function uploadEx() {
       }
   };
 
+  
   xhr.onload = function() {
 
   };
@@ -577,6 +578,39 @@ function uploadEx() {
 
 };
 
+function SendToCart() {
+
+  
+  var dataURL = mycanvas.toDataURL("image/png");
+  var dataURL_back= mycanvas_back.toDataURL("image/png");
+  document.getElementById('hidden_data').value = dataURL;
+  document.getElementById('hidden_data_back').value = dataURL_back;
+
+  
+  var fd = new FormData(document.forms["form1"]);
+
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', '/order', true);
+
+  xhr.upload.onprogress = function(e) {
+      if (e.lengthComputable) {
+          var percentComplete = (e.loaded / e.total) * 100;
+          console.log(percentComplete + '% uploaded');
+          alert('Succesfully uploaded');
+          
+      }
+  };
+
+  
+  xhr.onload = function() {
+
+  };
+  xhr.send(fd);
+
+  
+  
+
+};
 
 function findLastID()
 {
