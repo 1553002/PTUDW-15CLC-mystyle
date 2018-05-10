@@ -108,20 +108,21 @@ router.route('/:categoryId/:productId')
 
         }else{
             var item = {
-                name : product_detail.name,
                 id: product_detail.id,
+                name : product_detail.name,
                 url: req.url,
                 img: product_detail.image1,
-                price: handlerGeneral.Convert_price_to_int(product_detail.discountAvailable ? product_detail.discountPrice : product_detail.price),
+                price: product_detail.discountAvailable ? product_detail.discountPriceNumber : product_detail.priceNumber,
+                originalPrice : product_detail.priceNumber,
                 quantity: order_quantity,
-                total_price : parseInt(order_quantity)*parseInt(price),
+                total_price : order_quantity*(product_detail.discountAvailable ? product_detail.discountPriceNumber : product_detail.priceNumber),
                 size: order_size
             }
-            
+
             var data, cur_money = 0, cur_total_quantity = 0;
             if (cookie != null && cookie != undefined){
                 data =  JSON.parse(req.cookies['paid-products'].toString());
-                
+                console.log(data);
                 //Lay nhung thong tin can thiet
                 product_list = JSON.parse(data.product_list.toString()); //Danh sach sp trong gio hang hien tai
                 cur_money = data["totalMoney"]; //Tong gia hien tai
@@ -129,31 +130,28 @@ router.route('/:categoryId/:productId')
             }
 
             var exist = false;
-            //var new_money = parseInt(order_quantity)*parseInt(item.price.replace(',',''));
 
             if (product_list.length > 0){
                 //Kiểm tra mặt hàng đã tồn tại hay chưa
                 for (index in product_list){
                     if (product_list[index].id === item.id && product_list[index].size === item.size){
-                        product_list[index].quantity = parseInt(product_list[index].quantity) + parseInt(order_quantity);
-                        product_list[index].total_price = handlerGeneral.Convert_price_to_int(product_list[index].total_price) 
-                        + item.total_price;
+                        product_list[index].quantity = product_list[index].quantity + order_quantity;
+                        product_list[index].total_price = product_list[index].total_price + (item.total_price);
                         exist = true;
                     }
                 }
             }
 
-            cur_total_quantity += parseInt(order_quantity);
+            cur_total_quantity += order_quantity;
             cur_money += item.total_price;
-
-            //Nếu sp chưa tồn tại trong đơn hàng
+            
+            // //Nếu sp chưa tồn tại trong đơn hàng
             if (!exist){
                 product_list.push(item);
             }
             
             var my_data = {totalQuantity: cur_total_quantity, totalMoney: cur_money, product_list: JSON.stringify(product_list)};
-            
-            //var expireDay = new Date(new Date().getTime()+86409000).toUTCString();
+
             res.cookie('paid-products', JSON.stringify(my_data), {maxAge : 1000*60*60*24*30, httpOnly: false});
         }
         res.send("OK");

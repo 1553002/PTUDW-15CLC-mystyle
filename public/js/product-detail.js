@@ -31,7 +31,7 @@ $(function () {
                 animating = true;
                 addToCartBtn.prop('disabled', true);
             }
-
+            console.log(window.location.pathname);
             $.ajax({
                 url: window.location.pathname,
                 type: 'POST',

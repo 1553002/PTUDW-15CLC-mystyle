@@ -79,20 +79,17 @@ router.get('/account/login', (req, res) => {
 // 	})(req, res, next);
 // });
 
-router.post('/account/login', passport.authenticate('local', {
-	failureRedirect: '/customer/account/login', failureFlash: true
-}),
-function (req, res) {
-	
+router.post('/account/login',
+passport.authenticate('local', {
+	failureRedirect: '/customer/account/login', 
+	failureFlash: true}), function (req, res) {
 	// var payload = check.toJSON(); 
 	// var token = jwt.sign(payload, 'SecretKeee');
-	
-	
 	   //res.status(300).json({message: "ok", token: 'JWT ' + token});
 	res.redirect( '/');
 	console.log('Dang nhap thanh cong');
-}
-);
+});
+
 
 passport.use(new LocalStrategy({
 	usernameField: 'email',
@@ -103,7 +100,7 @@ passport.use(new LocalStrategy({
 		customersController.getUserByEmail(email, function (err, user) {
 			if (err) { return callback(err); }
 			if (!user) {
-				return callback(null, false, req.flash('error_email','Tai khoản không tồn tại'));
+				return callback(null, false, req.flash('error_email','Tài khoản không tồn tại'));
 			}
 
 			customersController.comparePassword(password, user.password, function (err, isMatch) {
