@@ -41,7 +41,7 @@
                 {{#each carts}}
                 <tr>
                   <td class="text-left">
-                    <a class="detail" data-id={{id}} data-toggle="modal" href="#myModal">{{id}}</a>
+                    <a id="modal_cart_detail" data-cart-id={{id}} data-target="cartModal" data-toggle="modal" href="#myModal">{{id}}</a>
                   </td>
                   <td class="text-left">{{receiver}}</td>
                   <td class="text-left">{{receiveAddress}}</td>
@@ -79,14 +79,6 @@
                 </tr>
               </thead>
               <tbody>
-                {{#each carts}}
-                <tr>
-                  <td class="text-center"><img src={{image1}} alt="" class="img-thumbnail"> </td>
-                  <td class="text-left">{{CartDetail.cartId}} </td>
-                  <td class="text-left"> {{Category.categoryName}}</td>
-                  <td class="text-right">{{price}}</td>
-                </tr>
-                {{/each}}
               </tbody>
             </table>
           </div>

@@ -1,16 +1,6 @@
 var index_of_upload_image;
 
 $(function () {
-    // var num_of_loops = 4;
-
-    // for (var i = 0; i < num_of_loops; i++){
-    //     $("#i-product-images").append('<div class="col-md-3" id="product_image_'+(i+1)+'" data-tag="select-image"></div>');
-    //     $("#i-product-images #product_image_"+(i+1)).html('<div class="image-view" id="imgTag_'+(i+1)+'"> <img  src="/image/405038_1_500x500.jpg" atl="Hình mẫu"></div>'+
-    //     '<input type="text" name="product_image['+(i+1)+'][image]" value="/upload/405038_1_500x500.jpg" style="display:none;">'+
-    //     '<button class="btn btn-primary" data-toggle="modal" data-target="#filemanager" data-whatever="@mdo">Chọn ảnh</button>'+
-    //     '<button class="btn btn-warming" style="display: none;">Lưu ảnh</button>');
-    // }
-
     //Xu ly su kien nut "Chon anh" duoc click
     $("[data-tag=select-image] button.btn ").on('click', function (event) {
         event.preventDefault();
@@ -28,24 +18,6 @@ $(function () {
         console.log(controller());
     })
 
-    // $("[data-tag=select-image]").each(function(){
-    //     console.log( $(this).children("button.btn:first"));
-    //     $(this).children("button.btn:first").on('click', function(){
-    //         alert();
-    //     })
-    //     // $(this).children("label.btn").children(1).on('change', function(){
-    //     //     var selectedImage = event.target.files[0];
-    //     //     selectedImageArray.push(selectedImage);
-
-    //     // var classTmp = $(this).parent().siblings(0);
-
-    //     // var reader = new FileReader();
-    //     //     reader.onload = function(e){
-    //     //         $(classTmp.children('img')).attr('src', e.target.result);
-    //     //     }
-    //     //     reader.readAsDataURL(selectedImage);
-    //     // });
-    // });
 });
 
 $('.delete').on('click', function (event) {
@@ -126,6 +98,11 @@ $("#set-category button").click(()=>{
     $("#set-category").submit();
 })
 
+$("#add-category-btn").click(()=>{
+    $("#set-category").attr('action', '/admin/danhmucsanpham/themdanhmuc');
+    $("#set-category").attr('method', 'POST');
+})
+
 //thêm danh mục
 $("#set-category").submit(function (e) {
     var category = $('#inputCategory').val();
@@ -153,12 +130,6 @@ $("#set-category").submit(function (e) {
     return false;
 });
 
-
-$("#add-category-btn").click(()=>{
-    $("#set-category").attr('action', '/admin/danhmucsanpham/themdanhmuc');
-    $("#set-category").attr('method', 'POST');
-})
-
 //Xử lý sự kiện button edit click
 $('.edit').click(function() {
     var id = $(this).data('id');
@@ -172,30 +143,35 @@ $('.edit').click(function() {
     $("#set-category").attr('product_id', id);
 });
 
-//xem chi tiet don hang
-$('.detail').click(function() {
-    var id = $(this).data('id');
 
-    $.ajax({
-        url: '/admin/donhang/chitietdonhang',
-        data: {
-            id: id
-        },
-        contentType: "application/json; charset=utf-8",
-        type: 'GET',
-        success: function(respone){
-            console.log(respone);
-        }
-    });
-    e.preventDefault();
-});
 
 $('#myModal').on('hidden.bs.modal', function () {
     $("#inputCategory").val('');
 })
 
+//xem chi tiet don hang
+$('[data-target="cartModal"]').click(function(e) {
+    console.log("HERE");
+    e.preventDefault();
+    var id = $(this).data('cart-id');
+    // console.log(id);
+    $.get("/admin/donhang/chitietdonhang/" + id , function(data, status){
+        console.log("return", data, status);
+        var product_list = JSON.parse(data);
+        for (index in product_list){
+            
+            $(".modal-body tbody")
+            .append('<tr>'+
+            '<td class="text-center"><img src="'+product_list[index].image+'" class="img-thumbnail"> </td>'+
+            '<td class="text-left">'+product_list[index].productName+'</td>' +
+            '<td class="text-left">'+product_list[index].size+'</td>' +
+            '<td class="text-right">'+product_list[index].quantity+'</td>'+
+            '</tr>');
+        }
 
-
+        //<div class="modal-backdrop fade show"></div>
+    });
+});
 
 
 //Tao id cho danh mục
