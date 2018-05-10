@@ -1,0 +1,33 @@
+<link href="/my_css/checkout.css" rel="stylesheet">
+
+<div class="container">
+
+    <div class="process-min clearfix">
+        <div class="ui-step ui-step-normal">
+            <ol class="col4">
+                <li>
+                    <span class="state">Địa chỉ giao hàng</span>
+                </li>
+                <li class="state">
+                    <span class="state" style="background-position-y: -20px;">Thanh toán &amp; Đặt mua</span>
+                </li>
+                <li class="current">
+                    <span class="state" style="background-position-y: -120px;">Hoàn tất</span>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class = "panel-body">
+        <div class="row border success col-md-6">
+            <div class = "content">
+                <h3>Cảm ơn bạn đã đặt hàng tại Mystyle!</h3>
+                <p>Mã số đơn hàng của bạn: </p>
+                <div class="well well-sm">
+                    {{ orderId }}                       
+                </div>
+                <p>Bạn có thể xem lại <a href="#">đơn hàng của tôi</a></p>
+            </div>
+        </div>
+    </div>
+</div>

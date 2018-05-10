@@ -7,7 +7,7 @@ var onepay = require('./onepay-handlers');
 
 var handlerGeneral = require('./general');
 var cur_total_quantity = 0, cur_money = 0 , product_list = [];
-
+var cartsController = require('../controllers/cartsController');
 // Use the session middleware
 // router.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
 
@@ -20,22 +20,15 @@ router.get('/shipping-detail', ensureAuthenticated, (req, res) => {
     res.render('checkout/shipping-detail');
 })
 
-router.get('/success', (req, res) => {
-    res.render('checkout/success');
-})
 
 router.get('/payment', (req, res)=>{
-    // var data = JSON.parse(req.cookies['paid-products'].toString());
-    // var product_list = JSON.parse(data.product_list.toString());
-    // var cur_total_quantity = parseInt(data.totalQuantity);
-    // var cur_money = parseInt(data.totalMoney);
+
     get_cart_detail_from_cookie(req, res);
 
     res.render('checkout/payment', {
         shipping_detail: req.session.shipping_detail,
         product_list : product_list,
-        totalMoney : cur_money,
-        totalQuantity: cur_total_quantity
+        totalMoney : cur_money
     });
 })
 
@@ -55,22 +48,29 @@ router.post('/', (req, res) => {
     else {
         req.session.shipping_detail = shipping_detail;
         res.redirect('/checkout/payment');
-        //res.render('checkout/payment', {layout: 'checkout_layout', shipping_detail});
     }
 })
 
 
+/**
+ * Xử lý sự kiện chọn phương thức thanh toán
+ */
+
 
 router.post("/payment", (req, res)=>{
+	var id = makeid();
+
     get_cart_detail_from_cookie(req, res);
-    var cart = {
+	
+	var cart = {
         "items": product_list,
         'total': cur_money,
         "tax" : "0",
         "shipping": "0",
         "handling_fee": "0",
         "currency": "VND"
-    };
+	};
+	
     const userAgent = req.headers['user-agent'];
 	const params = Object.assign({}, req.body);
 
@@ -102,9 +102,9 @@ router.post("/payment", (req, res)=>{
 		deliveryProvince: params.billingStateProvince || '',
 		customerEmail: params.email,
 		customerPhone: params.phoneNumber,
-		orderId: `node-${now.toISOString()}`,
+		orderId: id,
 		// returnUrl: ,
-		transactionId: `node-${now.toISOString()}`, // same as orderId (we don't have retry mechanism)
+		transactionId: id, // same as orderId (we don't have retry mechanism)
 		customerId: params.email,
 	};
 
@@ -231,20 +231,10 @@ router.get('/payment/:gateway/callback', (req, res) => {
 		// 	res.send(err);
 		// });
 		asyncFunc.then(() => {
-			console.log("YOU HERE");
-			res.render('checkout/result', {
-				title: `MyStyle Payment via ${gateway.toUpperCase()}`,
-				isSucceed: res.locals.isSucceed,
-				email: res.locals.email,
-				orderId: res.locals.orderId,
-				price: res.locals.price,
-				message: res.locals.message,
-				billingStreet: res.locals.billingStreet,
-				billingCountry: res.locals.billingCountry,
-				billingCity: res.locals.billingCity,
-				billingStateProvince: res.locals.billingStateProvince,
-				billingPostalCode: res.locals.billingPostalCode,
-			});
+			if (res.locals.isSucceed){
+				//res.clearCookie('paid-products');
+				Create_cart(res.locals.orderId, gateway, product_list, req, res)
+			}
 		});
 	} else {
 		res.send('No callback found');
@@ -288,7 +278,6 @@ function Convert_currency(amount, convert_from, convert_to){
 		result = amount;
 	}
 
-	console.log(result);
 	return result;
 }
 
@@ -296,6 +285,75 @@ function Convert_currency_for_items(list, convert_from, convert_to){
 	for (index in list){
 		list[index].price
 	}
+}
+
+function makeid() {
+	var text = "";
+	var possible = "0123456789";
+  
+	for (var i = 0; i < 9; i++)
+	  text += possible.charAt(Math.floor(Math.random() * possible.length));
+  
+	return text;
+}
+
+function Create_cart(cart_id, payment_method, product_list ,req, res){
+
+	var shipping_detail = req.session.shipping_detail;
+	var delivery_date = new Date();
+	delivery_date.setDate(delivery_date.getDate() + 10);
+	var payment_type;
+
+	switch (payment_method){
+		case 'paypal':{
+			payment_type = 'Thẻ quốc tế';
+			break;
+		}
+		case 'onepaydom':{
+			payment_type = 'Thẻ nội địa';
+			break;
+		}
+		case 'cod':{
+			payment_type = 'Thanh toán khi nhận hàng';
+			break;
+		}
+	}
+
+	var cart = {
+		id : cart_id,
+		receiver : shipping_detail.full_name,
+		paymentType : payment_type,
+		deliveryDate : delivery_date,
+		transactStatus : 'Xử lý',
+		receiverAddress : shipping_detail.address,
+		total: cur_money,
+		CustomerEmail: 'lccanh97@gmail.com'
+	}
+
+	cartsController.createCart(cart, function(cart){
+		for (index in product_list){
+			let Obj = {
+				productName : product_list[index].name,
+				size :  product_list[index].size,
+				image :  product_list[index].img,
+				quantity :  product_list[index].quantity,
+				price :  product_list[index].price,
+				total :  product_list[index].total_price,
+				CartId : cart_id
+			}
+
+			cartsController.createCartDetail(Obj, function(cart_detail){	
+				res.render('checkout/result', {
+					title: `MyStyle Payment via ${payment_method.toUpperCase()}`,
+					isSucceed: res.locals.isSucceed,
+					orderId: res.locals.orderId,
+					price: res.locals.price,
+					message: res.locals.message,
+				});
+			})
+		}
+
+	})
 }
 
 module.exports = router;

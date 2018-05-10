@@ -155,9 +155,12 @@
 }
 
 .total2 span{
-    float: right;
     color: red;
     font-size: 20px;
+}
+
+.total2 span + span{
+    float: right;
 }
 
 .checkout{
@@ -195,19 +198,19 @@
     padding: 5em 15px 0;
 }
 
-div div h3{
+/* div div h3{
     margin-top: 1em;
     margin-bottom: 10px;
     color: red;
-}
+} */
 
-div div div p {
+/* div div div p {
     margin: 8px;
 }
 
 div div div p a {
     color: blue;
-}
+} */
 
 .panel-body .success .content{
     margin: 1em;

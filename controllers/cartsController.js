@@ -31,11 +31,26 @@ controller.getCartById = function(id, callback){
             }
         
     }).then(function(cart){
-        console.log(cart);
         callback(cart);
     })
 };
 
+controller.createCart = function (Obj, callback) {
+    models.Cart
+        .create(Obj).then(function () {
+            callback();
+        }).catch((error)=>{
+            callback(error);
+        });
+};
 
+controller.createCartDetail = function (Obj, callback){
+    models.CartDetail
+    .create(Obj).then(function (){
+        callback();
+    }).catch((error)=>{
+        callback(error);
+    })
+}
 
 module.exports = controller;
