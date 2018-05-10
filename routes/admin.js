@@ -169,6 +169,15 @@ router.get('/sanpham/them', (req, res) => {
                     categories: categories,
                     suppliers: suppliers,
                     modelImages: models,
+                    helpers: {
+                        ifeq: function (a, b, options) {
+                            if (a === b) {
+                                return options.fn(this);
+                            }
+                            console.log(b);
+                            return options.inverse(this);
+                        },
+                    }
 
                 });
             })
@@ -194,7 +203,6 @@ router.get('/sanpham/sua/:id', (req, res) => {
                 productsController.getProductDetailById(req.params.id, function (productDetail) {
 
                     console.log(req.params.id);
-
                     res.render('admin_page/them-san-pham', {
                         breadcrumbs: req.breadcrumbs(),
                         title: 'Chi tiết sản phẩm',
@@ -203,7 +211,17 @@ router.get('/sanpham/sua/:id', (req, res) => {
                         modelImages: models,
                         productDetail: productDetail,
                         productId: req.params.id,
-                        sua: '/sua'
+                        sua: '/sua',
+                        helpers: {
+                            ifeq: function (a, b, options) {
+                                if (a === b) {
+                                    console.log("hai dua = nhau");
+                                    return options.fn(this);
+                                }
+                                console.log(b);
+                                return options.inverse(this);
+                            },
+                        }
                     });
                 });
             })
@@ -318,38 +336,65 @@ router.post('/sanpham', function (req, res) {
     var discount_exp = req.body['product_discount[0][date]'];
     console.log(discount_exp);
 
+    var product_price_number = parseInt(product_price.replace(',',''));
+
+    
     //Note: chưa xử lý TH người dùng ko nhập discount_percent
     function calDiscountPrice(gia_goc, muc_giam_gia) {
         //Xoa bo toan bo dau ','
-        gia_goc = gia_goc.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '');
-        gia_goc = parseInt(gia_goc);
         muc_giam_gia = parseInt(muc_giam_gia);
         return (gia_goc * muc_giam_gia) / 100;
     }
 
+    if (discount_status == true){
+        var discountPrice = calDiscountPrice(product_price_number, discount_percent);
+        var Product = {
+            name: product_name,
+            CategoryId: product_category,
+            SupplierId: product_supplier,
+            price: product_price,
+            priceNumber : product_price_number,
+            s: product_sizeS,
+            l: product_sizeL,
+            m: product_sizeM,
+            xl: product_sizeXL,
+            image1: image1,
+            image2: image2,
+            image3: image3,
+            image4: image4,
+            discountPrice : discountPrice,
+            discountPriceNumber : discountPrice,
+            discountAvailable: discount_status,
+            discount: discount_percent,
+            salloffExpDate: discount_exp,
+            unit: 'cái',
+            available: 'true'
+        };
+    }else{
+        var Product = {
+            name: product_name,
+            CategoryId: product_category,
+            SupplierId: product_supplier,
+            price: product_price,
+            priceNumber : product_price_number,
+            s: product_sizeS,
+            l: product_sizeL,
+            m: product_sizeM,
+            xl: product_sizeXL,
+            image1: image1,
+            image2: image2,
+            image3: image3,
+            image4: image4,
+            discountAvailable: false,
+            discount: 0,
+            unit: 'cái',
+            available: 'true'
+        };
+    }
 
-    var discountPrice = calDiscountPrice(product_price, discount_percent);
+    
 
-    var Product = {
-        name: product_name,
-        CategoryId: product_category,
-        SupplierId: product_supplier,
-        price: product_price,
-        s: product_sizeS,
-        l: product_sizeL,
-        m: product_sizeM,
-        xl: product_sizeXL,
-        image1: image1,
-        image2: image2,
-        image3: image3,
-        image4: image4,
-        discountPrice: discountPrice,
-        discountAvailable: discount_status,
-        discount: discount_percent,
-        salloffExpDate: discount_exp,
-        unit: 'cái',
-        available: 'true'
-    };
+    
 
     productsController.create(Product, function (callback) {
         console.log(callback);

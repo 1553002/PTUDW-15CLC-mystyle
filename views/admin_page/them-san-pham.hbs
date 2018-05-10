@@ -54,7 +54,11 @@
                     <div class="col-10">
                         <select size="1" class="form-control" name="product_description[1][category]" id="input-product-category">
                             {{#each categories}}
-                                <option value="{{id}}">{{categoryName}}</option>
+                                {{#ifeq ../productDetail.CategoryId id}}
+                                    <option value="{{id}}" selected>{{categoryName}}</option>
+                                {{else}}
+                                    <option value="{{id}}">{{categoryName}}</option>
+                                {{/ifeq}}
                             {{/each}}
                         </select>
                     </div>
