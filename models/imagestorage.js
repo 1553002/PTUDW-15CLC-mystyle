@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     delete : DataTypes.BOOLEAN,
-    ofUser : DataTypes.BOOLEAN,
+    ofuser : DataTypes.BOOLEAN,
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE,
