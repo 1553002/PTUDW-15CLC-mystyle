@@ -8,6 +8,7 @@
     <div class="panel panel-right default-margin-top">
         <div class="panel-module">
             <div class="module-body">
+                {{#if data}}
                 <table class="table">
                     <thead>
                         <tr>
@@ -40,7 +41,16 @@
                                 </dl>
                             </td>
                             <td>
-                                {{quantity}}
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-touchspin-first" type="button">-</button>
+                                    </div>
+                                    <input type="tel" min="1" value={{quantity}} style="width:5px;" id="pd_quantity" class="form-control">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-touchspin-secondary" type="button">+</button>
+                                    </div>
+                                </div>
+
                             </td>
                             <td class="pd-price">
                                 <p class="price">{{price}}&nbsp;₫</p>
@@ -66,7 +76,7 @@
                                         <span class="pd-price-total ui-cost notranslate">{{mney}}&nbsp;₫</span>
 
                                         <div class="form-row form-row-button">
-                                            <a href="/checkout/shipping-detail" type="button" class="btn" value="Tiến hành đặt hàng">Tiến hành đặt hàng</a> 
+                                            <a href="/checkout/shipping-detail" type="button" class="btn" value="Tiến hành đặt hàng">Tiến hành đặt hàng</a>
                                         </div>
                                     </div>
                                 </div>
@@ -74,6 +84,13 @@
                         </tr>
                     </tfoot>
                 </table>
+                {{else}}
+                    <div class="empty-cart text-center">
+                        <img src="/image/logo.svg" style = "height: 100px;"alt="Không có sản phẩm nào trong giỏ hàng của bạn.">
+                        <p class="message text-center">Không có sản phẩm nào trong giỏ hàng của bạn.</p>
+                        <a href="/" >Tiếp tục mua sắm</a>   
+                    </div>
+                {{/if}}
             </div>
         </div>
     </div>

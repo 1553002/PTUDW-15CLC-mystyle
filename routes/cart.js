@@ -80,6 +80,7 @@ router.post('/delete', function (req, res) {
 
     //res.clearCookie('paid-products');
     var my_data = {totalQuantity: cur_total_quantity, totalMoney: cur_money, product_list: JSON.stringify(product_list)};
+
    
     res.cookie('paid-products', JSON.stringify(my_data), {maxAge : 1000*60*60*24*30, httpOnly: false});
     res.send("CLEAR COOKIE");

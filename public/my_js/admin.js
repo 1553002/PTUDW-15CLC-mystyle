@@ -218,6 +218,7 @@ $('#myFile').on('change', function (evt) {
     var id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     console.log(id);
     var filename = "mystyle-model-" + id + ".png";
+    
     formData.append('nameFile', filename);
     formData.append('myFile', file);
 

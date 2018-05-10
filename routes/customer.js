@@ -100,7 +100,6 @@ passport.authenticate('local', {
 });
 
 router.post('/account/edit', function(req, res){
-
 	if(req.body.old_pass=="")
 	{
 		customersController.updateInfo(req.body.email, req.body.fullname,req.body.gender, function (customers) {
@@ -151,7 +150,7 @@ passport.use(new LocalStrategy({
 
 				if(user.isAdmin) {isAdmin=true;}
 				else isAdmin=false;
-				if(user.active==false)
+				if(user.active == false)
 				{
 					return callback(null, false, req.flash('error_password','Tài khoản chưa kích hoạt. Vui lòng kiểm tra lại!'));
 				}
@@ -241,7 +240,9 @@ router.post('/register', function (req, res) {
 					fullname: name,
 					gender: gender,
 					dateOB: birthday,
-					password: password
+					password: password,
+					isAdmin: false,
+					active: true
 				}
 
 				customersController.createUser(newUser, function (err) {
@@ -262,7 +263,6 @@ router.post('/register', function (req, res) {
 
 router.get('/account/logout', function (req, res) {
 	req.logout();
-	req.flash('success_message', 'You are logged out');
 	res.redirect('/');
 });
 
@@ -270,14 +270,17 @@ router.get('/account/edit', ensureAuthenticated, (req, res) => {
 	var user_email = req.session.passport.user;
 
 	models.Customer.findById(user_email, { password: 0 }).then(function (user) {
-		res.render('account_edit', { name: user.fullname, email: user.email, gender: user.gender });
+		res.render('account_edit', { 
+			name: user.fullname, 
+			email: user.email, 
+			gender: user.gender,
+			number_of_items: handlerGeneral.get_quantity_of_items(req, res) });
 	}).catch(function (err) {
 
 	});
 });
 
 function ensureAuthenticated(req, res, next) {
-	//console.log(req);
 	if (req.isAuthenticated()) {
 		next();
 	} else {

@@ -120,6 +120,8 @@ router.route('/:categoryId/:productId')
                 size: order_size
             }
 
+            console.log(item);
+
             var data, cur_money = 0, cur_total_quantity = 0;
             if (cookie != null && cookie != undefined){
                 data =  JSON.parse(req.cookies['paid-products'].toString());
@@ -152,7 +154,7 @@ router.route('/:categoryId/:productId')
             }
             
             var my_data = {totalQuantity: cur_total_quantity, totalMoney: cur_money, product_list: JSON.stringify(product_list)};
-
+            console.log(my_data);
             res.cookie('paid-products', JSON.stringify(my_data), {maxAge : 1000*60*60*24*30, httpOnly: false});
         }
         res.send("OK");
