@@ -32,6 +32,9 @@ var handlerGeneral = require('./general');
 // 			number_of_items: handlerGeneral.get_quantity_of_items(req, res)
 // 		})
 // 	})
+router.get('/account/history', (req, res) => {
+	res.render('history', {number_of_items: handlerGeneral.get_quantity_of_items(req, res)});
+})
 
 router.get('/account/login', (req, res) => {
 	let error_email = req.flash('error_email')[0];
