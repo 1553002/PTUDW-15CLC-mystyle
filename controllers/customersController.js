@@ -65,4 +65,36 @@ controller.update = function (email, status, admin, callback) {
 };
 
 
+controller.updateInfo = function (email, fullname,gender, callback) {
+    models.Customer.update({
+        fullname: fullname,
+        gender:gender,
+    }, {
+        where: {
+            email: email
+        }
+    }).then(function (customers) {
+        callback(customers);
+    });
+};
+
+controller.updateInfoWithPassword = function (email, fullname,gender,new_pass, callback) {
+    bcrypt.genSalt(10, function (err, salt) {
+        bcrypt.hash(new_pass, salt, function (err, hash) {
+            new_pass = hash;
+
+            models.Customer.update({
+                    fullname: fullname,
+                    gender:gender,
+                    password:new_pass
+                }, {
+                    where: {
+                        email: email
+                    }
+                }).then(function (customers) {
+                    callback(customers);
+                });
+        });
+    });
+};
 module.exports = controller;

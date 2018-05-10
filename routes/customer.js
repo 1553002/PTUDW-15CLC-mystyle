@@ -11,6 +11,7 @@ const JWTStrategy = passportJWT.Strategy;
 var Recaptcha = require('express-recaptcha').Recaptcha;
 var recaptcha = new Recaptcha('6Lf-uVYUAAAAAP4_01zOSENj4aS1X_7voQh2g-cu', '6Lf-uVYUAAAAAN3zZ2ikXDlaaZfXcVh5aWPVAWhh');
 
+var isAdmin=false;
 var customersController = require('../controllers/customersController');
 var handlerGeneral = require('./general');
 // var flash = require("connect-flash");
@@ -82,15 +83,59 @@ router.get('/account/login', (req, res) => {
 router.post('/account/login',
 passport.authenticate('local', {
 	failureRedirect: '/customer/account/login', 
-	failureFlash: true}), function (req, res) {
+	failureFlash: true}), function (req, res) 
+	{
 	// var payload = check.toJSON(); 
 	// var token = jwt.sign(payload, 'SecretKeee');
 	   //res.status(300).json({message: "ok", token: 'JWT ' + token});
-	res.redirect( '/');
+	if(isAdmin)
+	{
+		res.redirect( '/admin');
+	}
+	else{
+		res.redirect( '/');
+	}
+	
 	console.log('Dang nhap thanh cong');
 });
 
+router.post('/account/edit', function(req, res){
 
+	if(req.body.old_pass=="")
+	{
+		customersController.updateInfo(req.body.email, req.body.fullname,req.body.gender, function (customers) {
+			res.sendStatus(200);
+			res.end();
+		});
+	}
+	else
+	{
+
+		customersController.getUserByEmail(req.body.email, function(err, user) {
+			if (err) { return console.log("error email") }
+	  		if (!user) {
+				return console.log("not found email");
+			  }
+			  
+	  		customersController.comparePassword(req.body.old_pass, user.password, function(err, isMatch) {
+				if (err) { return console.log("err password"); }
+				if(isMatch){
+
+					customersController.updateInfoWithPassword(req.body.email, req.body.fullname,req.body.gender,req.body.new_pass, function (customers) {
+						res.sendStatus(200);
+						res.end();
+					});
+		  			return console.log("match");
+				}
+				else{
+		  			return console.log("fail");
+				}
+	 		});
+		});
+	}
+
+
+});
 passport.use(new LocalStrategy({
 	usernameField: 'email',
 	passwordField: 'password',
@@ -104,6 +149,14 @@ passport.use(new LocalStrategy({
 			}
 
 			customersController.comparePassword(password, user.password, function (err, isMatch) {
+
+				if(user.isAdmin) {isAdmin=true;}
+				else isAdmin=false;
+				if(user.active==false)
+				{
+					return callback(null, false, req.flash('error_password','Tài khoản chưa kích hoạt. Vui lòng kiểm tra lại!'));
+				}
+
 				if (err) { return callback(err); }
 				if (isMatch) {
 					//return callback(null, user, { message: 'You have successfully logged in!!' });
