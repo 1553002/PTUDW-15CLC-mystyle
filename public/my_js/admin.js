@@ -32,7 +32,7 @@ $(function () {
                     data: {
                         labels: date,
                         datasets: [{
-                            label: "Data",
+                            label: "Doanh thu",
                             borderColor: "#80b6f4",
                             pointBorderColor: "#80b6f4",
                             pointBackgroundColor: "#80b6f4",
