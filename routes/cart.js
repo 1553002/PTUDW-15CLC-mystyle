@@ -81,4 +81,34 @@ router.post('/delete', function (req, res) {
     res.cookie('paid-products', JSON.stringify(my_data), {maxAge : 1000*60*60*24*30, httpOnly: false});
     res.send("CLEAR COOKIE");
 })
+
+router.put('/edit', function (req, res) {
+    var id = req.body.data.id, size = req.body.data.size, change_quantity = req.body.data.number;
+
+    var data = JSON.parse(req.cookies['paid-products'].toString());
+    var product_list = JSON.parse(data.product_list.toString());
+    var cur_total_quantity = parseInt(data.totalQuantity);
+    var cur_money = parseInt(data.totalMoney);
+    
+    for (index in product_list) {
+        if (product_list[index]['id'] == req.body.data.id && product_list[index]['size'] == req.body.data.size) {
+            //Giam luong tien tong
+            cur_total_quantity -= product_list[index].quantity;
+            cur_money -= parseInt(product_list[index].total_price);
+            //Cap nhat luong tien cho sp hien tai
+            product_list[index].quantity = parseInt(change_quantity);
+            product_list[index].total_price = parseInt(change_quantity)*parseInt(product_list[index].price);
+            //Tang luong tien tong
+            cur_total_quantity += product_list[index].quantity;
+            cur_money += product_list[index].total_price;
+        }
+    }
+
+    //res.clearCookie('paid-products');
+    var my_data = {totalQuantity: cur_total_quantity, totalMoney: cur_money, product_list: JSON.stringify(product_list)};
+
+    res.cookie('paid-products', JSON.stringify(my_data), {maxAge : 1000*60*60*24*30, httpOnly: false});
+    res.send("CLEAR COOKIE");
+})
+
 module.exports = router;

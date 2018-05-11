@@ -27,11 +27,11 @@
 
                         {{/each}}
                         {{#each data}}
-                        <tr class="item-product">
+                        <tr class="item-product" id="{{id}}">
                             <td class="pd-info-detail">
                                 <dl>
                                     <dt class="pd-pic">
-                                        <img id="{{id}}" src="{{img}}">
+                                        <img class="{{id}}" src="{{img}}">
                                     </dt>
                                     <dd class="pd-link">
                                         <a href="{{url}}" class="lnk-pd-name">{{name}}</a>
@@ -45,16 +45,17 @@
                                 </dl>
                             </td>
                             <td>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <button class="btn btn-touchspin-first" type="button">-</button>
-                                    </div>
-                                    <input type="tel" min="1" value={{quantity}} style="width:5px;" id="pd_quantity" class="form-control">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-touchspin-secondary" type="button">+</button>
+                                <div class="number-input">
+                                    <div class="input-group" style="width:100px;">
+                                        <div class="input-group-prepend">
+                                            <button class="btn btn-touchspin-first" type="button" data-id="{{id}}">-</button>
+                                        </div>
+                                        <input type="tel" min="1" max="10" value="{{quantity}}" class="form-control pd_quantity">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-touchspin-secondary" type="button" data-id="{{id}}">+</button>
+                                        </div>
                                     </div>
                                 </div>
-
                             </td>
                             <td class="pd-price">
                                 <p class="price">{{price}}&nbsp;₫</p>
@@ -87,15 +88,76 @@
                     </tfoot>
                 </table>
                 {{else}}
-                    <div class="empty-cart text-center">
-                        <img src="/image/logo.svg" style = "height: 100px;"alt="Không có sản phẩm nào trong giỏ hàng của bạn.">
-                        <p class="message text-center">Không có sản phẩm nào trong giỏ hàng của bạn.</p>
-                        <a href="/" >Tiếp tục mua sắm</a>   
-                    </div>
+                <div class="empty-cart text-center">
+                    <img src="/image/logo.svg" style="height: 100px;" alt="Không có sản phẩm nào trong giỏ hàng của bạn.">
+                    <p class="message text-center">Không có sản phẩm nào trong giỏ hàng của bạn.</p>
+                    <a href="/">Tiếp tục mua sắm</a>
+                </div>
                 {{/if}}
             </div>
         </div>
     </div>
 </div>
 
-<script type="text/javascript" src="/js/product-detail.js"></script>
+{{!--
+<script type="text/javascript" src="/js/product-detail.js"></script> --}}
+<script>
+    window.onload = function()
+    {
+
+        var x = document.getElementsByClassName("Add_img");
+        for (index in x)
+        {
+            if(x[index].title)
+            {
+                
+                document.getElementsByClassName(x[index].title)[0].src=x[index].value;
+            }
+        }
+   
+    }
+    $(".number-input .btn-touchspin-first").click(function () {
+        let product_id = $(event.target).data("id");
+        let cur_quantity = $("#" + product_id + " .pd_quantity").val();
+        if (cur_quantity > 1)
+            $("#" + product_id + " .pd_quantity").val(--cur_quantity);
+    });
+
+    $(".number-input .btn-touchspin-secondary").click(function () {
+        let product_id = $(event.target).data("id");
+        let cur_quantity = $("#" + product_id + " .pd_quantity").val();
+        if (cur_quantity < 10)
+            $("#" + product_id + " .pd_quantity").val(++cur_quantity);
+    });
+
+    $(".number-input button").click(function (event) {
+        let product_id = $(event.target).data("id");
+        let cur_quantity = $("#" + product_id + " .pd_quantity").val();
+        let size = $("#" + product_id + " .pd-attribute span").html();
+        console.log(cur_quantity);
+        $.ajax({
+            type: 'PUT',
+            url: window.location.pathname + '/edit',
+            contentType: "application/json",
+            data: JSON.stringify({ data: { "id": product_id, "size": size, "number": cur_quantity } })
+        }).done(function () {
+            location.reload();
+        })
+    })
+
+    $(".btn-item-delete").click(function (event) {
+        event.preventDefault();
+
+        $.ajax({
+            url: window.location.pathname + '/delete',
+            type: 'POST',
+            contentType: "application/json",
+            data: JSON.stringify({ data: { "id": $(this).data('pd-id'), "size": $(this).data('pd-size') } })
+        }).done(function (result) {
+            location.reload();
+        }).fail(function (err) {
+
+        })
+
+    })
+</script>
