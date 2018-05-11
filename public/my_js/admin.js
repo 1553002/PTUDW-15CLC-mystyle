@@ -14,9 +14,9 @@ $(function () {
     });
 
 
-    $(".modal").hasClass("show", function () {
-        console.log(controller());
-    })
+    // $(".modal").hasClass("show", function () {
+    //     console.log(controller());
+    // })
 
     if (window.location.pathname == '/admin/thongke') {
         $.ajax({
