@@ -31,7 +31,7 @@
                             <td class="pd-info-detail">
                                 <dl>
                                     <dt class="pd-pic">
-                                        <img id="{{id}}" src="{{img}}">
+                                        <img class="{{id}}" src="{{img}}">
                                     </dt>
                                     <dd class="pd-link">
                                         <a href="{{url}}" class="lnk-pd-name">{{name}}</a>
@@ -99,8 +99,27 @@
     </div>
 </div>
 
+<<<<<<< HEAD
+{{!--
+<script type="text/javascript" src="/js/product-detail.js"></script> --}}
+=======
 
+>>>>>>> 1f1dff2316e562bb63a63560a661407e2f1b26a1
 <script>
+    window.onload = function()
+    {
+
+        var x = document.getElementsByClassName("Add_img");
+        for (index in x)
+        {
+            if(x[index].title)
+            {
+                
+                document.getElementsByClassName(x[index].title)[0].src=x[index].value;
+            }
+        }
+   
+    }
     $(".number-input .btn-touchspin-first").click(function () {
         let product_id = $(event.target).data("id");
         let size = $(event.target).data("size");
@@ -150,4 +169,7 @@
 
     })
 </script>
+<<<<<<< HEAD
+=======
 
+>>>>>>> 1f1dff2316e562bb63a63560a661407e2f1b26a1
