@@ -77,11 +77,47 @@ controller.getSumbyDate = function (callback) {
     });
 };
 
+controller.getSumbyCategory = function (callback) {
+    models.CartDetail.findAll({
+        attributes: ['categoryid',[sequelize.fn('sum', sequelize.col('total')), 'sum']],
+        group: ['categoryid'],
+        where: {
+            delete: false
+        },
+        raw: true
+    }).then(function (carts) {
+        console.log(carts);
+        callback(carts);
+    }).catch(function (err) {
+        callback(err);
+    });
+};
+
+controller.getAllCartDetail= function (callback) {
+    models.CartDetail.findAll().then(function (carts) {
+        console.log(carts);
+        callback(carts);
+    }).catch(function (err) {
+        callback(err);
+    });
+};
 
 controller.updateStatusCart = function (id, callback) {
     models.Cart.update({ delete: "true" }, {
         where: {
             id: id
+        }
+    }).then(function (cart) {
+        callback(cart);
+    }).catch(function (err) {
+        callback(err);
+    })
+};
+
+controller.updateStatusCartDetail = function (id, callback) {
+    models.CartDetail.update({ delete: "true" }, {
+        where: {
+            CartId: id
         }
     }).then(function (cart) {
         callback(cart);

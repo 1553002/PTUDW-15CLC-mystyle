@@ -12,7 +12,7 @@ var cartsController = require('../controllers/cartsController');
 // Use the session middleware
 // router.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
 
-router.get("/*", (req, res, next) => {
+router.get("/*", ensureAuthenticated, (req, res, next) => {
 	req.app.locals.layout = 'checkout_layout'; // set your layout here
 	next();
 })
@@ -23,7 +23,6 @@ router.get('/shipping-detail', (req, res) => {
 
 
 router.get('/payment', (req, res) => {
-
 	get_cart_detail_from_cookie(req, res);
 	res.render('checkout/payment', {
 		shipping_detail: req.session.shipping_detail,
@@ -115,6 +114,7 @@ router.post("/payment", (req, res) => {
 	switch (params.paymentMethod) {
 		case 'cod':
 			Create_cart(id, 'cod', product_list, req, res);
+			res.clearCookie('paid-products');
 			break;
 		case 'onepayDomestic':
 			asyncCheckout = onepay.checkoutOnePayDomestic(req, res);
@@ -214,19 +214,17 @@ router.get('/payment/:gateway/callback', (req, res) => {
 
 	if (asyncFunc) {
 		asyncFunc.then(() => {
-			res.render('checkout/result', {
-				title: `MyStyle Payment via ${gateway.toUpperCase()}`,
-				isSucceed: res.locals.isSucceed,
-				orderId: res.locals.orderId,
-			});
-			console.log("SUCCESS");
-			// if (res.locals.isSucceed){
-
-
-			// 	//res.clearCookie('paid-products');
-			// 	//Create_cart(res.locals.orderId, gateway, product_list, req, res);
-			// 	console.log("Da them thanh cong");
-			// }
+			// res.render('checkout/result', {
+			// 	title: `MyStyle Payment via ${gateway.toUpperCase()}`,
+			// 	isSucceed: res.locals.isSucceed,
+			// 	orderId: res.locals.orderId,
+			// });
+			// console.log("SUCCESS");
+			if (res.locals.isSucceed){
+				Create_cart(res.locals.orderId, gateway, product_list, req, res);
+				res.clearCookie('paid-products');
+				console.log("Da them thanh cong");
+			}
 		});
 	} else {
 		res.send('No callback found');
@@ -329,7 +327,7 @@ function Create_cart(cart_id, payment_method, product_list, req, res) {
 				quantity: product_list[index].quantity,
 				price: product_list[index].price,
 				total: product_list[index].total_price,
-				delete: false,
+				delete: 'false',
 				CartId: cart_id
 			}
 
@@ -341,7 +339,8 @@ function Create_cart(cart_id, payment_method, product_list, req, res) {
 		}
 		res.render('checkout/result', {
 			title: `MyStyle Payment via ${payment_method.toUpperCase()}`,
-			orderId: res.locals.orderId,
+			layout: false,
+			orderId: cart_id,
 		});
 	})
 }

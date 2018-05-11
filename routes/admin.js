@@ -21,7 +21,7 @@ router.use(breadcrumbs.setHome({
     url: '/admin'
 }));
 
-router.all('/*', function (req, res, next) {
+router.all('/*', ensureAuthenticated,function (req, res, next) {
     //Kiem tra da dang nhap hay chua
     //var isLogin = req.session.passport.user;
 
@@ -34,13 +34,13 @@ router.get('/', (req, res) => {
 })
 
 router.post('/get-data', (req, res)=>{
-
     cartsController.getSumbyDate(function (carts) {
         console.log(carts);
         res.send((carts));
         res.end();
     });
 })
+
 router.get('/thongke', (req, res) => {
     req.breadcrumbs('Thống kê theo ngày', '/admin/thongke');
     res.render('admin_page/thongke', {
@@ -49,12 +49,14 @@ router.get('/thongke', (req, res) => {
     });
 })
 
-router.get('/thongke', (req, res) => {
-    req.breadcrumbs('Thống kê theo ngày', '/admin/thongke');
-    res.render('admin_page/thongke', {
-        breadcrumbs: req.breadcrumbs(),
-        title: 'Thống kê theo ngày'
-    });
+router.post('/get-data-category', (req, res)=>{
+    cartsController.getSumbyCategory((carts)=>{
+        res.send((carts));
+        res.end();
+    })
+    // cartsController.getAllCartDetail((carts)=>{
+
+    // })
 })
 
 router.get('/thongkedanhmuc', (req, res) => {
@@ -64,6 +66,7 @@ router.get('/thongkedanhmuc', (req, res) => {
         title: 'Thống kê theo danh mục'
     });
 })
+
 
 router.get('/dangnhap', (req, res) => {
     res.render("admin_page/dangnhap", { layout: false });
@@ -127,12 +130,15 @@ router.get('/donhang', (req, res) => {
 })
 
 router.put('/donhang/:id', (req, res)=>{
-    console.log("Hello");
     let id = req.params.id;
 
     cartsController.updateStatusCart(id, (cart)=>{
         if (cart)
-            res.sendStatus(200).end();
+        {
+            cartsController.updateStatusCartDetail(id, (cartDetail)=>{
+                res.sendStatus(200).end();
+            })
+        }
     })
 })
 
@@ -467,4 +473,17 @@ router.get('/account/logout', function (req, res) {
 	res.redirect('/');
 });
 
+
+function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated())
+    {
+        if (res.locals.user.isAdmin == true){
+            next();
+        }else{
+            res.redirect('/');
+        }
+    }else {
+		res.redirect('/customer/account/login');
+	}
+}
 module.exports = router;

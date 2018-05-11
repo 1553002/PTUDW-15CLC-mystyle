@@ -19,7 +19,6 @@ $(function () {
     })
 
     if (window.location.pathname == '/admin/thongke') {
-        console.log('AAB');
         $.ajax({
             url: '/admin/get-data',
             type: 'post',
@@ -33,7 +32,68 @@ $(function () {
                     data: {
                         labels: date,
                         datasets: [{
-                            label: "Data",
+                            label: "Doanh thu",
+                            borderColor: "#80b6f4",
+                            pointBorderColor: "#80b6f4",
+                            pointBackgroundColor: "#80b6f4",
+                            pointHoverBackgroundColor: "#80b6f4",
+                            pointHoverBorderColor: "#80b6f4",
+                            pointBorderWidth: 10,
+                            pointHoverRadius: 10,
+                            pointHoverBorderWidth: 1,
+                            pointRadius: 3,
+                            fill: false,
+                            borderWidth: 4,
+                            data: total
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    fontColor: "rgba(0,0,0,0.5)",
+                                    fontStyle: "bold",
+                                    beginAtZero: false,
+                                    maxTicksLimit: 5,
+                                    padding: 20
+                                },
+                                gridLines: {
+                                    drawTicks: false,
+                                    display: true
+                                }
+                            }],
+                            xAxes: [{
+                                gridLines: {
+                                    zeroLineColor: "transparent"
+                                },
+                                ticks: {
+                                    padding: 20,
+                                    fontColor: "rgba(0,0,0,0.5)",
+                                    fontStyle: "bold"
+                                }
+                            }]
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    if (window.location.pathname == '/admin/thongkedanhmuc') {
+        $.ajax({
+            url: '/admin/get-data-category',
+            type: 'post',
+            success: function (response) {
+                let data = response;
+                var total = data.map(function (a) { return a.sum; });
+                var category = data.map(function (a) { return a.categoryid; });
+                console.log(data, total, category);
+                var myChart = new Chart($("#myChart"), {
+                    type: 'line',
+                    data: {
+                        labels: category,
+                        datasets: [{
+                            label: "Doanh thu",
                             borderColor: "#80b6f4",
                             pointBorderColor: "#80b6f4",
                             pointBackgroundColor: "#80b6f4",
