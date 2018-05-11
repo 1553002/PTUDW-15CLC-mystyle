@@ -13,10 +13,9 @@ var recaptcha = new Recaptcha('6Lf-uVYUAAAAAP4_01zOSENj4aS1X_7voQh2g-cu', '6Lf-u
 
 var isAdmin=false;
 var customersController = require('../controllers/customersController');
-var cartsController = require('../controllers/cartsController');
 var handlerGeneral = require('./general');
 
-var token="", numberAccount=0, nameToken="login_token", isFirst=true, isPut=false;
+var token="", numberAccount=0, nameToken="login_token", isFirst=true, isPut=true;
 // var flash = require("connect-flash");
 // var cookieParser = require('cookie-parser');
 // var session = require('express-session');
@@ -26,23 +25,17 @@ var token="", numberAccount=0, nameToken="login_token", isFirst=true, isPut=fals
 // router.use(flash());
 
 
-
+// router.route('/account/login')
+// 	.get(function (req, res) {
+// 		let error_message = req.flash('error')[0];
+// 		res.locals.error_message = error_message;
+// 		res.render("login", {
+// 			captcha: recaptcha.render(),
+// 			number_of_items: handlerGeneral.get_quantity_of_items(req, res)
+// 		})
+// 	})
 router.get('/account/history', (req, res) => {
-	var user_email = res.locals.user.email;
-	if (user_email != null){
-		
-		cartsController.getAllCartByEmail(user_email, (carts)=>{
-			req.breadcrumbs('Lịch sử mua hàng', '/customer/account/history');
-			res.render('history', {
-				number_of_items: handlerGeneral.get_quantity_of_items(req, res),
-				breadcrumbs: req.breadcrumbs(),
-				carts	
-			});
-
-		})
-	}else{
-		res.sendStatus(404);
-	}
+	res.render('history', {number_of_items: handlerGeneral.get_quantity_of_items(req, res)});
 })
 
 router.get('/account/login', (req, res) => {
@@ -55,21 +48,39 @@ router.get('/account/login', (req, res) => {
 	}else if (error_password != null && error_password!=undefined){
 		res.locals.error_password = error_password;
 	}
+	var emaillist="";
+	var cookie = req.cookies['numberAccount'];
+	if(cookie!= null)
+	{
+		
+		data = JSON.parse(req.cookies['numberAccount'].toString());
+						
+		console.log(data);
+		numberAccount=parseInt(data);
+		 
+		var i=0;
+		while(i<numberAccount)
+			{
+				
+				if(req.cookies['login_token'+i]!=null)
+				{
+					
+					curdata = JSON.parse(req.cookies['login_token'+i].toString());
+					decode= jwt.verify(curdata, 'your_jwt_secret');
+					emaillist=emaillist+decode.data+" "
+					console.log(emaillist);
+				}
 
-	var cookie = req.cookies['login_token'];
-    var data, decode="";
-	
-    if (cookie != null) {
-        data = JSON.parse(req.cookies['login_token'].toString());
+						
 
-		decode= jwt.verify(data, 'your_jwt_secret');
-
-		console.log(decode.data);
-    }
+				i=i+1;
+			}
+							
+	}
 	res.render("login", {
 		captcha: recaptcha.render(),
 		number_of_items: handlerGeneral.get_quantity_of_items(req, res),
-		email:decode.data
+		emaillist: emaillist
 	})
 })
 
@@ -192,7 +203,7 @@ passport.use(new LocalStrategy({
 				if (err) { return callback(err); }
 				if (isMatch) {
 					 token = jwt.sign({ data: user.email }, 'your_jwt_secret', {
-						expiresIn: 3600 // 1 week
+						expiresIn: 30*24*60*60*1000 // 1 week
 					});
 					//console.log(token);
 

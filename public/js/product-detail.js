@@ -3,19 +3,7 @@ var productCustomization = $('.detail-wrap');
 var cart = $('#bag-shopping-cart');
 var Arrays = new Array();
 var cur_quantity, order_quantity = 0;
-window.onload = function()
-{
 
-    var x = document.getElementsByClassName("Add_img");
-    for (index in x)
-    {
-        if(x[index].title)
-        {
-            document.getElementById(x[index].title).src=x[index].value;
-        }
-    }
-   
-}
 $(function () {
     number_of_item_in_stock = $("#form-select-attributes #availability-number").text();
     var animating = false;
